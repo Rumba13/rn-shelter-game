@@ -1,2 +1,2 @@
 # rn-shelter-game
-It's not commercial copy of shelter on react-native
+It's non-commercial copy of shelter on react-native
