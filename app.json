@@ -2,6 +2,7 @@
   "expo": {
     "name": "rn-shelter-game",
     "slug": "rn-shelter-game",
+    "entryPoint": "src/app/index",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -17,9 +18,9 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#ff0000"
       }
+
     },
     "web": {
       "bundler": "metro",
