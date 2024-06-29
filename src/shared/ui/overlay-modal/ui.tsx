@@ -1,15 +1,18 @@
-import {Text, TouchableWithoutFeedback, View, Modal} from "react-native";
+import {Text, TouchableWithoutFeedback, View, Modal, ImageBackground, ViewStyle} from "react-native";
+import {Background} from "@react-navigation/elements";
 
 type PropsType = {
     isModalOpened: boolean,
     setIsModalOpened: (bool: boolean) => void,
     children: React.ReactNode,
+    styles?: ViewStyle,
 }
-
-export function OverlayModal({isModalOpened, setIsModalOpened, children}: PropsType) {
+//TODO Add blur to overlay
+//TODO change animation speed with react-native-modal
+export function OverlayModal({isModalOpened, setIsModalOpened, children,styles}: PropsType) {
     return (
         <Modal visible={isModalOpened} onRequestClose={() => setIsModalOpened(false)}
-               transparent={true} animationType={"slide"} style={s.modal}>
+               transparent={true} animationType={"fade"} style={{...s.modal, ...styles}} >
             <TouchableWithoutFeedback onPress={() => setIsModalOpened(false)}>
                 <View style={s.modalOverlay}>
                     <TouchableWithoutFeedback onPress={e => e.stopPropagation()}>
@@ -26,11 +29,12 @@ const s: any = {
         maxWidth: 100,
         maxHeight: 100,
     },
-
     modalOverlay: {
         height: "100%",
         width: "100%",
-        position: "relative",
-        zIndex: -1
+        backgroundColor: "rgba(0, 0, 0, 0.5)",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
     },
 }

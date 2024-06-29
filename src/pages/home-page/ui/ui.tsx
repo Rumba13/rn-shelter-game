@@ -1,10 +1,12 @@
 import {
     Alert,
     Image,
-    ImageBackground,
+    ImageBackground, Modal, TouchableWithoutFeedback,
     View
 } from "react-native";
 import {ImageButton} from "@/src/shared/ui/image-button/ui";
+import {OverlayModal} from "@/src/shared/ui/overlay-modal/ui";
+import {InfoButton} from "@/src/pages/home-page/ui/info-button/ui";
 
 export function HomePage() {
     return (
@@ -30,7 +32,9 @@ export function HomePage() {
                                  shadowImage={require("../../../../assets/images/mainscreen/button_shadow_2.png")}
                                  height={130} width={"100%"} style={{marginTop: 10}}
                                  onPress={() => Alert.alert("Купи мне трюфель!")}/>
+
                 </ImageBackground>
+                <InfoButton/>
             </View>
         </View>
     );
