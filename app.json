@@ -19,8 +19,8 @@
     "android": {
       "adaptiveIcon": {
         "backgroundColor": "#ff0000"
-      }
-
+      },
+      "package": "com.senderium.rnsheltergame"
     },
     "web": {
       "bundler": "metro",
@@ -32,6 +32,14 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "8a41940a-ce51-4db0-840d-3d1a62cbad86"
+      }
     }
   }
 }

@@ -1,13 +1,17 @@
-import {Button, Image, ImageBackground, StatusBar, Text, View} from "react-native";
+import {
+    Alert,
+    Image,
+    ImageBackground,
+    View
+} from "react-native";
 import {ImageButton} from "@/src/shared/ui/image-button/ui";
-import {contain} from "@hapi/hoek";
 
 export function HomePage() {
     return (
         <View style={s.homePage}>
             <View style={s.mainContent}>
                 <Image style={s.logo} source={require("../../../../assets/images/mainscreen/logo.png")}/>
-                <ImageBackground style={s.buttons} resizeMode="contain"
+                <ImageBackground style={s.buttons} resizeMode="stretch"
                                  source={require("../../../../assets/images/mainscreen/black_box_main_menu.png")}>
 
                     <ImageButton buttonImage={require("../../../../assets/images/mainscreen/connect_button.png")}
@@ -24,7 +28,8 @@ export function HomePage() {
 
                     <ImageButton buttonImage={require("../../../../assets/images/mainscreen/premium_button3.png")}
                                  shadowImage={require("../../../../assets/images/mainscreen/button_shadow_2.png")}
-                                 height={130} width={"100%"} style={{marginTop: 10}}/>
+                                 height={130} width={"100%"} style={{marginTop: 10}}
+                                 onPress={() => Alert.alert("Купи мне трюфель!")}/>
                 </ImageBackground>
             </View>
         </View>
@@ -34,8 +39,9 @@ export function HomePage() {
 const s: any = {
     homePage: {
         height: "100%",
-        marginLeft: 40,
-        marginRight: 40,
+        maxWidth: 280,
+        marginLeft: "auto",
+        marginRight: "auto",
     },
     logo: {
         width: 240,
@@ -53,9 +59,12 @@ const s: any = {
         display: "flex",
         flexWrap: "wrap",
         flexDirection: "row",
-        justifyContent: "space-around",
+        justifyContent: "space-between",
+        height: "auto",
         alignItems: "end",
-        paddingTop:15,
-        paddingBottom:10,
+        paddingTop: 10,
+        paddingRight: 2,
+        paddingLeft: 7,
+        paddingBottom: 1,
     }
 }

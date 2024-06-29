@@ -1,6 +1,6 @@
 import {
     Alert,
-    Button,
+    Button, GestureResponderEvent,
     Image,
     ImageBackground,
     LayoutAnimation,
@@ -18,9 +18,10 @@ type PropsType = {
     height: number,
     width: number | string,
     style?: any,
+    onPress?: (event: GestureResponderEvent) => void
 }
 
-export function ImageButton({buttonImage, shadowImage, height, width, style}: PropsType) {
+export function ImageButton({buttonImage, shadowImage, height, width, style, onPress}: PropsType) {
     const [isButtonPressed, setIsButtonPressed] = useState<boolean>(false)
 
 
@@ -45,10 +46,6 @@ export function ImageButton({buttonImage, shadowImage, height, width, style}: Pr
 
         setIsButtonPressed(false);
     }
-    const buttonOnPress = () => {
-
-
-    }
 
     return (
         <View style={{...s.buttonContainer, ...style, maxHeight: height, width}}>
@@ -58,7 +55,7 @@ export function ImageButton({buttonImage, shadowImage, height, width, style}: Pr
                        resizeMode={"contain"}/>
             </ImageBackground>
 
-            <TouchableWithoutFeedback style={s.buttonWrapper} onPress={buttonOnPress} onPressIn={buttonOnPressIn}
+            <TouchableWithoutFeedback style={s.buttonWrapper} onPress={onPress} onPressIn={buttonOnPressIn}
                                       onPressOut={buttonOnPressOut}>
                 <View style={s.button}></View>
             </TouchableWithoutFeedback>
@@ -74,8 +71,8 @@ const s: any = {
     },
     buttonImage: {
         maxWidth: "100%",
-        bottom: 6,
-        right: 5,
+        bottom: 5,
+        right: 3,
         position: "relative",
         maxHeight: "100%",
     },

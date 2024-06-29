@@ -1,36 +1,33 @@
-import {Dimensions, ImageBackground, ImageBackgroundProps, SafeAreaView, StatusBar, View} from "react-native";
-import {Component} from "react";
+import {Alert, Dimensions, ImageBackground, StatusBar, View} from "react-native";
+import {useEffect} from "react";
+import {useModal} from "@/src/shared/lib/use-modal";
 
 type PropsType = {
     children: React.ReactNode
 }
 
-export class AppLayout extends Component<PropsType> {
+export function AppLayout(props: PropsType) {
 
-    componentDidMount() {
+    let {children} = props;
 
+    useEffect(() => {
         setTimeout(() => {
             StatusBar.setTranslucent(true); //TODO find component that overriding the properties
             StatusBar.setBackgroundColor("#c3b5a8")
         }, 100)
-    }
+    })
 
+    return (
+        <View style={s.root}>
+            <ImageBackground source={require('../../../../assets/images/mainscreen/background.png')}
+                             style={s.background}
+                             resizeMode={"cover"}
+            >
 
-    render() {
-        let {children} = this.props;
-
-        return (
-            <View style={s.root}>
-                <ImageBackground source={require('../../../../assets/images/mainscreen/background.png')}
-                                 style={s.background}
-                                 resizeMode={"cover"}
-                >
-
-                    {children}
-                </ImageBackground>
-            </View>
-        )
-    }
+                {children}
+            </ImageBackground>
+        </View>
+    )
 }
 
 const s = {
