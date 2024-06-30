@@ -15,7 +15,7 @@ import {useEffect, useState} from "react";
 type PropsType = {
     buttonImage: any,
     shadowImage: any,
-    height: number,
+    height: number | string,
     width: number | string,
     style?: any,
     onPress?: (event: GestureResponderEvent) => void

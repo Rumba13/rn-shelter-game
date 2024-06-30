@@ -5,7 +5,6 @@ import {
     View
 } from "react-native";
 import {ImageButton} from "@/src/shared/ui/image-button/ui";
-import {OverlayModal} from "@/src/shared/ui/overlay-modal/ui";
 import {InfoButton} from "@/src/pages/home-page/ui/info-button/ui";
 
 export function HomePage() {
@@ -18,7 +17,7 @@ export function HomePage() {
 
                     <ImageButton buttonImage={require("../../../../assets/images/mainscreen/connect_button.png")}
                                  shadowImage={require("../../../../assets/images/mainscreen/button_shadow_2.png")}
-                                 height={130} width={"100%"} style={{marginBottom: 10}}/>
+                                 height={130} width={"100%"} style={{marginBottom: 5}}/>
 
                     <ImageButton buttonImage={require("../../../../assets/images/mainscreen/howtoplay_button.png")}
                                  shadowImage={require("../../../../assets/images/mainscreen/button_shadow_1.png")}
@@ -30,11 +29,23 @@ export function HomePage() {
 
                     <ImageButton buttonImage={require("../../../../assets/images/mainscreen/premium_button3.png")}
                                  shadowImage={require("../../../../assets/images/mainscreen/button_shadow_2.png")}
-                                 height={130} width={"100%"} style={{marginTop: 10}}
+                                 height={130} width={"100%"} style={{marginTop: 5}}
                                  onPress={() => Alert.alert("Купи мне трюфель!")}/>
 
                 </ImageBackground>
-                <InfoButton/>
+                <View style={{
+                    flexDirection: "row",
+                    alignItems: "center",
+                    maxHeight: 80,
+                    marginTop: 10,
+                    width: "100%",
+                }}>
+
+                    <InfoButton/>
+                    <ImageButton buttonImage={require("../../../../assets/images/mainscreen/zakazat_igru.png")}
+                                 shadowImage={require("../../../../assets/images/mainscreen/zakazat_igru_shadow.png")}
+                                 height={"auto"} width={210} style={{marginLeft: 10}}/>
+                </View>
             </View>
         </View>
     );
@@ -55,6 +66,7 @@ const s: any = {
         marginBottom: 15
     },
     mainContent: {
+        display: "flex",
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",

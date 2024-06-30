@@ -13,7 +13,7 @@ import {useModal} from "@/src/shared/lib/use-modal";
 import {ImageButton} from "@/src/shared/ui/image-button/ui";
 import ScrollView = Animated.ScrollView;
 import {useFonts} from "expo-font";
-
+//TODO refactor
 //TODO make working scroll
 export function InfoButton() {
     const {isModalOpened, setIsModalOpened, toggleModal} = useModal()
@@ -42,7 +42,8 @@ export function InfoButton() {
                         <SafeAreaView style={s.privacyPolicy}>
                             <ScrollView>
 
-                                <Text style={{fontSize:15, fontFamily:"SpaceMono", lineHeight:18}}>1. С 29 июня запретить продажу трюфеля физическим лицам. 2. Приравнять курс
+                                <Text style={{fontSize: 15, fontFamily: "SpaceMono", lineHeight: 18}}>1. С 29 июня
+                                    запретить продажу трюфеля физическим лицам. 2. Приравнять курс
                                     трюфеля к золоту(в соотношении 1 трюфель = 0.98762 грамма чистого золота) </Text>
                             </ScrollView>
 
@@ -67,7 +68,6 @@ const s: any = {
     infoButtonIcon: {
         maxWidth: 60,
         maxHeight: 60,
-        margin: 7
     },
     modalContent: {
         width: 320,
