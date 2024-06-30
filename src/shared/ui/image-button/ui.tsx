@@ -15,8 +15,8 @@ import {useEffect, useState} from "react";
 type PropsType = {
     buttonImage: any,
     shadowImage: any,
-    height: number | string,
-    width: number | string,
+    height?: number | string,
+    width?: number | string,
     style?: any,
     onPress?: (event: GestureResponderEvent) => void
 }
@@ -64,7 +64,9 @@ export function ImageButton({buttonImage, shadowImage, height, width, style, onP
 }
 
 const s: any = {
-    buttonContainer: {},
+    buttonContainer: {
+
+    },
     buttonShadow: {
         maxWidth: "100%",
         maxHeight: "100%",
