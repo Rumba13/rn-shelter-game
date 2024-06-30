@@ -1,13 +1,18 @@
 import {
     Alert,
     Image,
-    ImageBackground, Modal, TouchableWithoutFeedback,
+    ImageBackground,
     View
 } from "react-native";
+import React from "react";
 import {ImageButton} from "@/src/shared/ui/image-button/ui";
 import {InfoButton} from "@/src/pages/home-page/ui/info-button/ui";
 
-export function HomePage() {
+type PropsType = {
+    navigation: any
+}
+
+export const HomePage = ({navigation}: PropsType) => {
     return (
         <View style={s.homePage}>
             <View style={s.mainContent}>
@@ -25,7 +30,8 @@ export function HomePage() {
 
                     <ImageButton buttonImage={require("../../../../assets/images/mainscreen/create_button.png")}
                                  shadowImage={require("../../../../assets/images/mainscreen/button_shadow_1.png")}
-                                 height={130} width={130}/>
+                                 height={130} width={130} onPress={() => navigation.navigate("create-game-page")
+                    }/>
 
                     <ImageButton buttonImage={require("../../../../assets/images/mainscreen/premium_button3.png")}
                                  shadowImage={require("../../../../assets/images/mainscreen/button_shadow_2.png")}
