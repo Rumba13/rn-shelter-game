@@ -1,49 +1,68 @@
-import {Dimensions, Image, ImageBackground, StyleSheet, Text, View} from "react-native";
+import {Image, ImageBackground, Text, View} from "react-native";
+import {Footer} from "@/src/pages/create-game-page/ui/footer/ui";
 import {ImageButton} from "@/src/shared/ui/image-button/ui";
+import {useFonts} from "expo-font";
 
 export function CreateGamePage() {
+    const [fontsLoaded] = useFonts({
+        "RobotoSlab": require("@/assets/fonts/RobotoSlab-Bold.ttf")
+    })
+
+
     return <View style={s.createGamePageWrapper}>
         <Image style={s.pageTitle} resizeMode={"contain"}
                source={require("../../../../assets/images/gamecreationscreen/create.png")}/>
         <ImageBackground source={require("../../../../assets/images/gamecreationscreen/frame_back.png")}
-                         resizeMode={"center"} style={s.mainContentBackground}>
-            <View style={s.mainContent}>
-                <View style={s.mainContentHeader}>
-
+                         resizeMode={"contain"} style={s.mainContentBackground}>
+            <View style={s.mainContentWrapper}>
+                <View style={s.mainContent}>
+                    <View style={s.contentHeader}>
+                        <View style={s.headerImageWrapper}>
+                            <Image style={s.headerImage}
+                                   source={require("@/assets/images/gamecreationscreen/igroki.png")}/>
+                            <Text style={s.playersCount}>4</Text>
+                        </View>
+                        <Text style={s.headerTitle}>Выберите {"\n"}количество {"\n"}даунов(4)</Text>
+                    </View>
                 </View>
             </View>
         </ImageBackground>
-        <View style={s.footer}>
-            <View style={s.createGameButtonWrapper}>
-                <Image style={s.createGameButtonDetail} resizeMode={"contain"}
-                       source={require("@/assets/images/gamecreationscreen/next_dec.png")}/>
-                <ImageButton buttonImage={require("@/assets/images/gamecreationscreen/next_button.png")}
-                             shadowImage={require("@/assets/images/gamecreationscreen/next_button_shadow.png")}
-                             style={s.createGameButton} height={80}/>
-            </View>
-            <Image style={s.footerDetail} resizeMode={"contain"}
-                   source={require("@/assets/images/gamecreationscreen/cloud.png")}/>
-        </View>
+        <Footer/>
     </View>
 }
 
 const s: any = {
-    createGameButtonDetail: {
+    headerImageWrapper: {
+        position: "relative",
+        width: 100,
+        height: 100,
+        marginRight:15
+    },
+    playersCount: {
         position: "absolute",
-        width: 65,
-        height: "100%",
-        left: 0,
-        top: 18,
+        fontSize:47,
+        left: 32,
+        top: 0,
+        color:"#21272e",
+        fontFamily:"RobotoSlab",
+        fontWeight:700
     },
-    footerDetail: {
+    contentHeader: {
+        display: "flex",
+        flexDirection: "row",
+    },
+    headerTitle: {
+        fontSize: 17,
+        lineHeight: 25,
+        color:"#21272e",
+        fontFamily: "RobotoSlab"
+    },
+    headerImage: {
         width: "100%",
-        flexBasis: 85,
+        height: "100%"
     },
-    createGameButtonWrapper: {
-        position: "relative",
-    },
+    createGameButtonWrapper: {},
     createGamePageWrapper: {
-        position: "relative",
         maxWidth: "100%",
         height: "100%",
         display: "flex",
@@ -52,27 +71,29 @@ const s: any = {
     },
     pageTitle: {
         maxWidth: "90%",
-        marginTop: 20,
-        flexBasis: "auto"
-    },
-    mainContent: {
-        // minHeight: "100%",
-        // width: "100%",
-        // marginHorizontal: 100,
-        // backgroundColor: 'blue',
+        marginTop: 50,
+        marginBottom: 33,
+        maxHeight: 80,
         flexBasis: "auto",
-        backgroundColor: "red"
-    },
-    mainContentBackground: {},
-    mainContentHeader: {},
-    createGameButton: {
         alignSelf: "center"
     },
-    footer: {
-        display: "flex",
-        flexBasis: "auto",
-        marginHorizontal: 20,
+    mainContentWrapper: {
         position: "relative",
-        height: "auto"
+        width: "100%",
+        height: 470,
+
     },
+    mainContentBackground: {
+        marginBottom: 25
+    },
+    mainContent: {
+        position: "absolute",
+        right: "17.5%",
+        top: "2%",
+        width: "65%",
+        height: "96%",
+        backgroundColor: "red",
+        padding: 15
+    },
+
 }
