@@ -3,6 +3,7 @@ import {createNativeStackNavigator} from "@react-navigation/native-stack";
 import {HomePage} from "@/src/pages//home-page";
 import {AppLayout} from "@/src/layouts/app-layout";
 import {Text, View} from "react-native"
+import {CreateGamePage} from "@/src/pages/create-game-page";
 
 const Stack = createNativeStackNavigator()
 
@@ -12,7 +13,7 @@ export default function App() {
         return <AppLayout><HomePage navigation={navigation}/></AppLayout>;
     }
     const CreateGamePageRoute = ({navigation}: any) => {
-        return <AppLayout><Text>Eva</Text></AppLayout>
+        return <AppLayout><CreateGamePage/></AppLayout>
     }
  //Change navigate animation
     return (
