@@ -1,9 +1,17 @@
-import {Image, ImageBackground, Text, View} from "react-native";
+import {Image, ImageBackground, Text, TouchableWithoutFeedback, View} from "react-native";
 import {Footer} from "@/src/pages/create-game-page/ui/footer/ui";
-import {ImageButton} from "@/src/shared/ui/image-button/ui";
 import {useFonts} from "expo-font";
+import {Range} from "@/src/shared/ui/range/ui";
+import {ImageButton} from "@/src/shared/ui/image-button/ui";
+import {OverlayModal} from "@/src/shared/ui/overlay-modal/ui";
+import {useState} from "react";
 
+// @ts-ignore
+//TODO refactoring
+//TODO fix font issues
 export function CreateGamePage() {
+    const [isModalOpened, setIsModalOpened] = useState<boolean>(false);
+
     const [fontsLoaded] = useFonts({
         "RobotoSlab": require("@/assets/fonts/RobotoSlab-Bold.ttf")
     })
@@ -17,12 +25,31 @@ export function CreateGamePage() {
             <View style={s.mainContentWrapper}>
                 <View style={s.mainContent}>
                     <View style={s.contentHeader}>
-                        <View style={s.headerImageWrapper}>
-                            <Image style={s.headerImage}
-                                   source={require("@/assets/images/gamecreationscreen/igroki.png")}/>
-                            <Text style={s.playersCount}>4</Text>
+                        <View style={{flexDirection: "row", marginBottom: 15}}>
+
+                            <View style={s.headerImageWrapper}>
+                                <Image style={s.headerImage}
+                                       source={require("@/assets/images/gamecreationscreen/igroki.png")}/>
+                                <Text style={s.playersCount}>4</Text>
+                            </View>
+                            <Text style={s.headerTitle}>Выберите {"\n"}количество {"\n"}даунов(4)</Text>
                         </View>
-                        <Text style={s.headerTitle}>Выберите {"\n"}количество {"\n"}даунов(4)</Text>
+
+                        <View>
+                            <Range onPressIn={() => setIsModalOpened(true)}/>
+
+                            <OverlayModal isModalOpened={isModalOpened} setIsModalOpened={setIsModalOpened}>
+                                <View style={s.modal}>
+                                    <ImageButton onPress={() => setIsModalOpened(false)} style={s.modalClose}
+                                                 buttonImage={require("@/assets/images/popup/close.png")}
+                                                 shadowImage={require("@/assets/images/popup/close_shadow.png")}/>
+                                    <Text style={s.modalTitle}>ВРЕМЕНИ НА РАЗРАБОТКУ НЕТ</Text>
+                                    <Text>Ты же понимаешь насколько нецелесообразно было тратить время на разработку
+                                        ренжи игроков, учитывая что нас всегда четверо и мы ей никогда не
+                                        пользовались?</Text>
+                                </View>
+                            </OverlayModal>
+                        </View>
                     </View>
                 </View>
             </View>
@@ -32,30 +59,51 @@ export function CreateGamePage() {
 }
 
 const s: any = {
+    modal: {
+        position: "absolute",
+        margin: 20,
+        backgroundColor: "white",
+        padding: 20,
+        paddingRight: 30,
+        borderRadius: 15
+    },
+    modalTitle: {
+        fontSize: 18,
+        marginBottom: 10
+    },
+    modalClose: {
+        position: "absolute",
+        right: -10,
+        top: 10,
+        width: 30,
+        height: 30,
+    },
     headerImageWrapper: {
         position: "relative",
         width: 100,
         height: 100,
-        marginRight:15
+        marginRight: 10
     },
     playersCount: {
         position: "absolute",
-        fontSize:47,
+        fontSize: 47,
         left: 32,
         top: 0,
-        color:"#21272e",
-        fontFamily:"RobotoSlab",
-        fontWeight:700
+        color: "#21272e",
+        fontFamily: "RobotoSlab",
+        fontWeight: 600
     },
     contentHeader: {
         display: "flex",
-        flexDirection: "row",
+        flexDirection: "column",
     },
     headerTitle: {
-        fontSize: 17,
+        fontSize: 16,
         lineHeight: 25,
-        color:"#21272e",
-        fontFamily: "RobotoSlab"
+        color: "#21272e",
+        fontFamily: "RobotoSlab",
+        fontWeight: 600,
+        letterSpacing: 1.5
     },
     headerImage: {
         width: "100%",
@@ -93,7 +141,9 @@ const s: any = {
         width: "65%",
         height: "96%",
         backgroundColor: "red",
-        padding: 15
+        padding: 15,
+        flexDirection: "column"
+
     },
 
 }
