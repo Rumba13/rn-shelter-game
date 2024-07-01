@@ -1,11 +1,8 @@
 import {
-    Alert,
     Button, GestureResponderEvent,
     Image,
     ImageBackground,
     LayoutAnimation,
-    SafeAreaView,
-    Text,
     TouchableWithoutFeedback,
     View
 } from "react-native";

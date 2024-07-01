@@ -5,6 +5,7 @@ import {Range} from "@/src/shared/ui/range/ui";
 import {ImageButton} from "@/src/shared/ui/image-button/ui";
 import {OverlayModal} from "@/src/shared/ui/overlay-modal/ui";
 import {useState} from "react";
+import {CheckBox} from "@/src/shared/ui/check-box/ui";
 
 // @ts-ignore
 //TODO refactoring
@@ -15,7 +16,6 @@ export function CreateGamePage() {
     const [fontsLoaded] = useFonts({
         "RobotoSlab": require("@/assets/fonts/RobotoSlab-Bold.ttf")
     })
-
 
     return <View style={s.createGamePageWrapper}>
         <Image style={s.pageTitle} resizeMode={"contain"}
@@ -50,7 +50,9 @@ export function CreateGamePage() {
                                 </View>
                             </OverlayModal>
                         </View>
+                        <Text style={s.headerSubTitle}>Рекомендуемый IQ: 20-93</Text>
                     </View>
+                    <CheckBox/>
                 </View>
             </View>
         </ImageBackground>
@@ -59,6 +61,11 @@ export function CreateGamePage() {
 }
 
 const s: any = {
+    headerSubTitle: {
+        textAlign: "center",
+        marginTop: 15,
+        color: "#6f586c"
+    },
     modal: {
         position: "absolute",
         margin: 20,
@@ -140,10 +147,8 @@ const s: any = {
         top: "2%",
         width: "65%",
         height: "96%",
-        backgroundColor: "red",
         padding: 15,
-        flexDirection: "column"
-
+        flexDirection: "column",
     },
 
 }
