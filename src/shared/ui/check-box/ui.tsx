@@ -13,7 +13,7 @@ import A from "react-native-reanimated"
 
 export function CheckBox() {
     const [isToggled, setIsToggled] = useState<boolean>(false);
-    const translateXAnim = useRef(new Animated.Value(47)).current;
+    const translateXAnim = useRef(new Animated.Value(0)).current;
 
     const toggleOn = () => {
         Animated.timing(translateXAnim, {

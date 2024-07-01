@@ -13,13 +13,22 @@ import {useModal} from "@/src/shared/lib/use-modal";
 import {ImageButton} from "@/src/shared/ui/image-button/ui";
 import ScrollView = Animated.ScrollView;
 import {useFonts} from "expo-font";
+import {useEffect} from "react";
 //TODO refactor
 //TODO make working scroll
 export function InfoButton() {
     const {isModalOpened, setIsModalOpened, toggleModal} = useModal()
     const [fontsLoaded] = useFonts({
         "SpaceMono": require("../../../../../assets/fonts/SpaceMono-Regular.ttf")
-    })
+    });
+
+    useEffect(() => {
+    }, [fontsLoaded]);
+
+    if (!fontsLoaded) {
+        return <Text>Loading...</Text>;
+    }
+
     return (
         <View>
             <TouchableWithoutFeedback onPress={toggleModal}>

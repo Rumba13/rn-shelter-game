@@ -1,21 +1,32 @@
-import {Image, ImageBackground, Text, TouchableWithoutFeedback, View} from "react-native";
+import {Alert, Image, ImageBackground, Text, TouchableWithoutFeedback, View} from "react-native";
 import {Footer} from "@/src/pages/create-game-page/ui/footer/ui";
 import {useFonts} from "expo-font";
 import {Range} from "@/src/shared/ui/range/ui";
 import {ImageButton} from "@/src/shared/ui/image-button/ui";
 import {OverlayModal} from "@/src/shared/ui/overlay-modal/ui";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {CheckBox} from "@/src/shared/ui/check-box/ui";
-
+import {Header} from "./header/ui"
 // @ts-ignore
 //TODO refactoring
 //TODO fix font issues
 export function CreateGamePage() {
-    const [isModalOpened, setIsModalOpened] = useState<boolean>(false);
 
-    const [fontsLoaded] = useFonts({
+    const [fontsLoaded,fontsError] = useFonts({
         "RobotoSlab": require("@/assets/fonts/RobotoSlab-Bold.ttf")
     })
+
+    useEffect(() =>{
+
+    }, [fontsLoaded])
+
+    if(fontsError){
+        Alert.alert("No fonts!");
+    }
+
+    if(!fontsLoaded) {
+        return <Text>Loading...</Text>;
+    }
 
     return <View style={s.createGamePageWrapper}>
         <Image style={s.pageTitle} resizeMode={"contain"}
@@ -24,35 +35,22 @@ export function CreateGamePage() {
                          resizeMode={"contain"} style={s.mainContentBackground}>
             <View style={s.mainContentWrapper}>
                 <View style={s.mainContent}>
-                    <View style={s.contentHeader}>
-                        <View style={{flexDirection: "row", marginBottom: 15}}>
+                    <ImageBackground resizeMode={"cover"}
+                                     source={require("@/assets/images/gamecreationscreen/create_back.png")}>
+                        <View style={{padding: 10}}>
 
-                            <View style={s.headerImageWrapper}>
-                                <Image style={s.headerImage}
-                                       source={require("@/assets/images/gamecreationscreen/igroki.png")}/>
-                                <Text style={s.playersCount}>4</Text>
+                            <Header/>
+                            <View style={s.separatorWrapper}>
+
+                                <Image style={s.headerSeparator} resizeMode={"contain"}
+                                       source={require("@/assets/images/gamecreationscreen/razdelenije_premium.png")}/>
+                                <TouchableWithoutFeedback onPress={() => Alert.alert("Я такая толстая!")}>
+                                    <Image borderRadius={20} style={s.separatorImage} resizeMode={"cover"}
+                                           source={require("@/assets/images/Image1.png")}/>
+                                </TouchableWithoutFeedback>
                             </View>
-                            <Text style={s.headerTitle}>Выберите {"\n"}количество {"\n"}даунов(4)</Text>
                         </View>
-
-                        <View>
-                            <Range onPressIn={() => setIsModalOpened(true)}/>
-
-                            <OverlayModal isModalOpened={isModalOpened} setIsModalOpened={setIsModalOpened}>
-                                <View style={s.modal}>
-                                    <ImageButton onPress={() => setIsModalOpened(false)} style={s.modalClose}
-                                                 buttonImage={require("@/assets/images/popup/close.png")}
-                                                 shadowImage={require("@/assets/images/popup/close_shadow.png")}/>
-                                    <Text style={s.modalTitle}>ВРЕМЕНИ НА РАЗРАБОТКУ НЕТ</Text>
-                                    <Text>Ты же понимаешь насколько нецелесообразно было тратить время на разработку
-                                        ренжи игроков, учитывая что нас всегда четверо и мы ей никогда не
-                                        пользовались?</Text>
-                                </View>
-                            </OverlayModal>
-                        </View>
-                        <Text style={s.headerSubTitle}>Рекомендуемый IQ: 20-93</Text>
-                    </View>
-                    <CheckBox/>
+                    </ImageBackground>
                 </View>
             </View>
         </ImageBackground>
@@ -61,60 +59,20 @@ export function CreateGamePage() {
 }
 
 const s: any = {
-    headerSubTitle: {
-        textAlign: "center",
-        marginTop: 15,
-        color: "#6f586c"
-    },
-    modal: {
-        position: "absolute",
-        margin: 20,
-        backgroundColor: "white",
-        padding: 20,
-        paddingRight: 30,
-        borderRadius: 15
-    },
-    modalTitle: {
-        fontSize: 18,
-        marginBottom: 10
-    },
-    modalClose: {
-        position: "absolute",
-        right: -10,
-        top: 10,
-        width: 30,
-        height: 30,
-    },
-    headerImageWrapper: {
+    separatorWrapper: {
         position: "relative",
-        width: 100,
-        height: 100,
-        marginRight: 10
     },
-    playersCount: {
+    separatorImage: {
+        maxWidth: "100%",
         position: "absolute",
-        fontSize: 47,
-        left: 32,
-        top: 0,
-        color: "#21272e",
-        fontFamily: "RobotoSlab",
-        fontWeight: 600
+        top: -5,
+        height: 70,
+        left: "34.5%",
+        width: 70,
+        borderRadius: 20
     },
-    contentHeader: {
-        display: "flex",
-        flexDirection: "column",
-    },
-    headerTitle: {
-        fontSize: 16,
-        lineHeight: 25,
-        color: "#21272e",
-        fontFamily: "RobotoSlab",
-        fontWeight: 600,
-        letterSpacing: 1.5
-    },
-    headerImage: {
-        width: "100%",
-        height: "100%"
+    headerSeparator: {
+        maxWidth: "100%",
     },
     createGameButtonWrapper: {},
     createGamePageWrapper: {
@@ -147,8 +105,8 @@ const s: any = {
         top: "2%",
         width: "65%",
         height: "96%",
-        padding: 15,
         flexDirection: "column",
+
     },
 
 }

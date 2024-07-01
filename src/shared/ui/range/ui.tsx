@@ -1,8 +1,10 @@
 import {Alert, GestureResponderEvent, Image, Text, TouchableWithoutFeedback, View} from "react-native";
 
 type PropsType = {
-    onPressIn:(event: GestureResponderEvent) => void
+    onPressIn: (event: GestureResponderEvent) => void
 }
+
+//TODO when closing modal with range in it, sliderTrack stand in front of sliderPicker
 
 export function Range({onPressIn}: PropsType) {
 
@@ -31,7 +33,8 @@ const s: any = {
         height: 36
     },
     sliderTrack: {
-        maxWidth: "100%"
+        maxWidth: "100%",
+        zIndex: 1,
     },
 
 }
