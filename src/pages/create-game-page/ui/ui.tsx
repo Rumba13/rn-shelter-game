@@ -1,85 +1,129 @@
-import {Alert, Image, ImageBackground, Text, TouchableWithoutFeedback, View} from "react-native";
-import {Footer} from "@/src/pages/create-game-page/ui/footer/ui";
-import {useFonts} from "expo-font";
-import {Range} from "@/src/shared/ui/range/ui";
-import {ImageButton} from "@/src/shared/ui/image-button/ui";
-import {OverlayModal} from "@/src/shared/ui/overlay-modal/ui";
-import {useEffect, useState} from "react";
-import {CheckBox} from "@/src/shared/ui/check-box/ui";
-import {Header} from "./header/ui"
-import {Separator} from "@/src/pages/create-game-page/ui/separator/ui";
-import {GameOptionCheckbox} from "@/src/pages/create-game-page/ui/game-option-checkbox/ui";
-// @ts-ignore
+import { Button, Image, ImageBackground, SafeAreaView, ScrollView, Text, View } from 'react-native'
+import { Footer } from '@/src/pages/create-game-page/ui/footer/ui'
+import { useFonts } from 'expo-font'
+import { useEffect, useState } from 'react'
+import { Header } from './header/ui'
+import { Separator } from '@/src/pages/create-game-page/ui/separator/ui'
+import { GameOptionCheckbox } from '@/src/pages/create-game-page/ui/game-option-checkbox/ui'
+import { GameOptionSelect } from '@/src/pages/create-game-page/ui/game-option-select/ui'
+import { SexualOrientation } from '@/src/shared/lib/types/game-creation-option/sexual-orientation'
+import { gameCreationOptionsModel } from '@/src/pages/create-game-page/model/create-game-options'
+import { GameOptionRange } from '@/src/pages/create-game-page/ui/game-option-range/ui'
+import { difficultyValueToTitle } from '@/src/pages/create-game-page/ui/difficulty-value-to-title'
+import { observer } from 'mobx-react'
+import { sexualOrientationValueToTitle } from '@/src/pages/create-game-page/ui/sexual-orientation-value-to-title'
+import { characterBalanceValueToTitle } from '@/src/pages/create-game-page/ui/character-balance-value-to-title'
+import Collapsible from 'react-native-collapsible'
 //TODO refactoring
 //TODO fix font issues
-export function CreateGamePage() {
+export const CreateGamePage = observer(() => {
+  const [fontsLoaded, fontsError] = useFonts({
+    RobotoSlab: require('@/assets/fonts/RobotoSlab-Bold.ttf'),
+  })
 
-    const [fontsLoaded, fontsError] = useFonts({
-        "RobotoSlab": require("@/assets/fonts/RobotoSlab-Bold.ttf")
-    })
+  const options = gameCreationOptionsModel.options
 
-    useEffect(() => {
+  useEffect(() => {
+  }, [fontsLoaded, options.difficulty])
 
-    }, [fontsLoaded])
+  if (!fontsLoaded) {
+    return <Text>Loading...</Text>
+  }
 
-    if (!fontsLoaded) {
-        return <Text>Loading...</Text>;
-    }
-
-    return <View style={s.createGamePageWrapper}>
-        <Image style={s.pageTitle} resizeMode={"contain"}
-               source={require("../../../../assets/images/gamecreationscreen/create.png")}/>
-        <ImageBackground source={require("../../../../assets/images/gamecreationscreen/frame_back.png")}
-                         resizeMode={"contain"} style={s.mainContentBackground}>
-            <View style={s.mainContentWrapper}>
-                <View style={s.mainContent}>
-                    <ImageBackground resizeMode={"cover"}
-                                     source={require("@/assets/images/gamecreationscreen/create_back.png")}>
-                        <Header/>
-                        <Separator/>
-
-                    </ImageBackground>
-                </View>
-            </View>
-        </ImageBackground>
-        <Footer/>
+  return (
+    <View style={s.createGamePageWrapper}>
+      <Image
+        style={s.pageTitle}
+        resizeMode={'contain'}
+        source={require('../../../../assets/images/gamecreationscreen/create.png')}
+      />
+      <ImageBackground
+        source={require('../../../../assets/images/gamecreationscreen/frame_back.png')}
+        resizeMode={'contain'}
+        style={s.mainContentBackground}>
+        <View style={s.mainContentWrapper}>
+          <SafeAreaView style={s.mainContent}>
+            <ScrollView>
+              <ImageBackground
+                resizeMode={'repeat'}
+                source={require('@/assets/images/gamecreationscreen/create_back.png')}>
+                <Header />
+                <Separator />
+                <GameOptionCheckbox
+                  title={`Проклятые деревенщины`}
+                  descriptionHeight={100}
+                  description={"Параметр определяет будут ли задействованы деревенщины"}
+                  onValueChange={isEnable =>
+                    gameCreationOptionsModel.setOptions(options => (options.hillbillyMode = isEnable))
+                  }
+                />
+                <GameOptionSelect
+                  descriptionHeight={100}
+                  description={"Параметр определяет кто пидр, кто не пидр и всё такое"}
+                  title={'Сексуальная Ориентация'}
+                  items={[SexualOrientation.Random, SexualOrientation.AllStraight, SexualOrientation.AllGays, SexualOrientation.Disable].map(value => ({
+                    value,
+                    key: value,
+                    label: sexualOrientationValueToTitle(value),
+                  }))}
+                  onValueChange={orientation =>
+                    gameCreationOptionsModel.setOptions(options => (options.sexualOrientation = orientation))
+                  }
+                />
+                <GameOptionRange title={'Уровень сложности'}
+                                 defaultValue={4}
+                                 description={"Параметр определяет насколько персонажи полезны и безопасны в среднем"}
+                                 descriptionHeight={100}
+                                 selectedTitle={difficultyValueToTitle(gameCreationOptionsModel.options.difficulty)}
+                                 onValueChanged={difficulty => gameCreationOptionsModel.setOptions(options => options.difficulty = difficulty)}
+                                 min={1} max={8} />
+                <GameOptionRange title={'Баланс Персонажей'}
+                                 descriptionHeight={100}
+                                 description={"Параметр определяет насколько различается полезность персонажей"}
+                                 onValueChanged={characterBalance => gameCreationOptionsModel.setOptions(options => options.balance = characterBalance)}
+                                 selectedTitle={characterBalanceValueToTitle(options.balance)} min={1} max={8}
+                                 defaultValue={options.balance} />
+              </ImageBackground>
+            </ScrollView>
+          </SafeAreaView>
+        </View>
+      </ImageBackground>
+      <Footer />
     </View>
-}
+  )
+})
 
 const s: any = {
-    createGameButtonWrapper: {},
-    createGamePageWrapper: {
-        maxWidth: "100%",
-        height: "100%",
-        display: "flex",
-        flex: 1,
-        flexDirection: "column",
-    },
-    pageTitle: {
-        maxWidth: "90%",
-        marginTop: 50,
-        marginBottom: 33,
-        maxHeight: 80,
-        flexBasis: "auto",
-        alignSelf: "center"
-    },
-    mainContentWrapper: {
-        position: "relative",
-        width: "100%",
-        height: 470,
-
-    },
-    mainContentBackground: {
-        marginBottom: 25
-    },
-    mainContent: {
-        position: "absolute",
-        right: "17.5%",
-        top: "2%",
-        width: "65%",
-        height: "96%",
-        flexDirection: "column",
-
-    },
-
+  createGameButtonWrapper: {},
+  createGamePageWrapper: {
+    maxWidth: '100%',
+    height: '100%',
+    display: 'flex',
+    flex: 1,
+    flexDirection: 'column',
+  },
+  pageTitle: {
+    maxWidth: '90%',
+    marginTop: 50,
+    marginBottom: 33,
+    maxHeight: 80,
+    flexBasis: 'auto',
+    alignSelf: 'center',
+  },
+  mainContentWrapper: {
+    position: 'relative',
+    width: '100%',
+    height: 470,
+  },
+  mainContentBackground: {
+    marginBottom: 25,
+  },
+  mainContent: {
+    position: 'absolute',
+    right: '17.5%',
+    top: '2%',
+    width: '65%',
+    height: '96%',
+    flexDirection: 'column',
+  },
 }
