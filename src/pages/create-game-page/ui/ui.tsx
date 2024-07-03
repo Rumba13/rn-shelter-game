@@ -7,6 +7,7 @@ import {OverlayModal} from "@/src/shared/ui/overlay-modal/ui";
 import {useEffect, useState} from "react";
 import {CheckBox} from "@/src/shared/ui/check-box/ui";
 import {Header} from "./header/ui"
+import {Separator} from "@/src/pages/create-game-page/ui/separator/ui";
 // @ts-ignore
 //TODO refactoring
 //TODO fix font issues
@@ -40,15 +41,7 @@ export function CreateGamePage() {
                         <View style={{padding: 10}}>
 
                             <Header/>
-                            <View style={s.separatorWrapper}>
-
-                                <Image style={s.headerSeparator} resizeMode={"contain"}
-                                       source={require("@/assets/images/gamecreationscreen/razdelenije_premium.png")}/>
-                                <TouchableWithoutFeedback onPress={() => Alert.alert("Я такая толстая!")}>
-                                    <Image borderRadius={20} style={s.separatorImage} resizeMode={"cover"}
-                                           source={require("@/assets/images/Image1.png")}/>
-                                </TouchableWithoutFeedback>
-                            </View>
+                            <Separator/>
                         </View>
                     </ImageBackground>
                 </View>
@@ -59,21 +52,6 @@ export function CreateGamePage() {
 }
 
 const s: any = {
-    separatorWrapper: {
-        position: "relative",
-    },
-    separatorImage: {
-        maxWidth: "100%",
-        position: "absolute",
-        top: -5,
-        height: 70,
-        left: "34.5%",
-        width: 70,
-        borderRadius: 20
-    },
-    headerSeparator: {
-        maxWidth: "100%",
-    },
     createGameButtonWrapper: {},
     createGamePageWrapper: {
         maxWidth: "100%",
