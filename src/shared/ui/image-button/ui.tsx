@@ -15,10 +15,16 @@ type PropsType = {
     height?: number | string,
     width?: number | string,
     style?: any,
-    onPress?: (event: GestureResponderEvent) => void
+    onPress?: (event: GestureResponderEvent) => void,
+    options?: {
+        xOffsetOnPress?: number,
+        yOffsetOnPress?: number,
+        xOffset?: number,
+        yOffset?: number,
+    }
 }
 
-export function ImageButton({buttonImage, shadowImage, height, width, style, onPress}: PropsType) {
+export function ImageButton({buttonImage, shadowImage, height, width, style, onPress, options}: PropsType) {
     const [isButtonPressed, setIsButtonPressed] = useState<boolean>(false)
 
 
@@ -48,7 +54,17 @@ export function ImageButton({buttonImage, shadowImage, height, width, style, onP
         <View style={{...s.buttonContainer, ...style, maxHeight: height, width}}>
             < ImageBackground source={shadowImage} style={s.buttonShadow} resizeMode={"contain"}>
                 <Image source={buttonImage}
-                       style={{...s.buttonImage, ...isButtonPressed ? s.buttonImage__pressed : {}}}
+                       style={{
+                           ...s.buttonImage,
+                           ...{
+                               bottom: options?.yOffset ?? 3,
+                               right: options?.xOffset ?? 3
+                           },
+                           ...isButtonPressed ? {
+                               bottom: options?.yOffsetOnPress ?? 3,
+                               right: options?.xOffsetOnPress ?? 3
+                           } : {}
+                       }}
                        resizeMode={"contain"}/>
             </ImageBackground>
 
@@ -61,9 +77,7 @@ export function ImageButton({buttonImage, shadowImage, height, width, style, onP
 }
 
 const s: any = {
-    buttonContainer: {
-
-    },
+    buttonContainer: {},
     buttonShadow: {
         maxWidth: "100%",
         maxHeight: "100%",
@@ -76,9 +90,6 @@ const s: any = {
         maxHeight: "100%",
     },
     buttonImage__pressed: {
-        bottom: 3,
-        right: 3,
-
     },
     button: {
         position: "absolute",

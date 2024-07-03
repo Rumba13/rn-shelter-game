@@ -8,24 +8,21 @@ import {useEffect, useState} from "react";
 import {CheckBox} from "@/src/shared/ui/check-box/ui";
 import {Header} from "./header/ui"
 import {Separator} from "@/src/pages/create-game-page/ui/separator/ui";
+import {GameOptionCheckbox} from "@/src/pages/create-game-page/ui/game-option-checkbox/ui";
 // @ts-ignore
 //TODO refactoring
 //TODO fix font issues
 export function CreateGamePage() {
 
-    const [fontsLoaded,fontsError] = useFonts({
+    const [fontsLoaded, fontsError] = useFonts({
         "RobotoSlab": require("@/assets/fonts/RobotoSlab-Bold.ttf")
     })
 
-    useEffect(() =>{
+    useEffect(() => {
 
     }, [fontsLoaded])
 
-    if(fontsError){
-        Alert.alert("No fonts!");
-    }
-
-    if(!fontsLoaded) {
+    if (!fontsLoaded) {
         return <Text>Loading...</Text>;
     }
 
@@ -38,11 +35,9 @@ export function CreateGamePage() {
                 <View style={s.mainContent}>
                     <ImageBackground resizeMode={"cover"}
                                      source={require("@/assets/images/gamecreationscreen/create_back.png")}>
-                        <View style={{padding: 10}}>
+                        <Header/>
+                        <Separator/>
 
-                            <Header/>
-                            <Separator/>
-                        </View>
                     </ImageBackground>
                 </View>
             </View>

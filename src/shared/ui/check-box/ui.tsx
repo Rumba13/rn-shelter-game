@@ -9,11 +9,20 @@ import {
     View
 } from "react-native";
 import {useEffect, useRef, useState} from "react";
-import A from "react-native-reanimated"
+import {useFonts} from "expo-font";
 
-export function CheckBox() {
-    const [isToggled, setIsToggled] = useState<boolean>(false);
+type PropsType = {
+    style: any,
+    isToggled: boolean,
+    setIsToggled: (bool: boolean) => void,
+}
+
+export function CheckBox({style, setIsToggled, isToggled}: PropsType) {
     const translateXAnim = useRef(new Animated.Value(0)).current;
+
+    const [fontsLoaded] = useFonts({
+        "RobotoSlabSemiBold": require("@/assets/fonts/RobotoSlab-SemiBold.ttf")
+    })
 
     const toggleOn = () => {
         Animated.timing(translateXAnim, {
@@ -35,10 +44,14 @@ export function CheckBox() {
     }
     useEffect(() => {
 
-    }, [translateXAnim])
+    }, [translateXAnim, fontsLoaded])
+
+    if (!fontsLoaded) {
+        return <Text>Loading...</Text>
+    }
 
     return (
-        <Animated.View style={s.checkBox}>
+        <Animated.View style={{...s.checkBox, ...style}}>
             <TouchableWithoutFeedback onPress={() => {
                 setIsToggled(!isToggled)
                 if (isToggled) {
@@ -53,7 +66,7 @@ export function CheckBox() {
 
                         <Animated.Image style={{
                             ...s.checkBoxImage,
-                            transform:  [{translateY: -26}, {translateX: translateXAnim}]
+                            transform: [{translateY: -26}, {translateX: translateXAnim}]
                         }} resizeMode={"contain"}
                                         source={require("@/assets/images/gamecreationscreen/perekluchatel_knopka.png")}/>
 
@@ -69,12 +82,13 @@ const s: any = {
     checkBox: {
         display: "flex",
         flexDirection: "row",
-        width: 155,
+        maxWidth: 170,
     },
     checkBoxChecker: {
         position: "relative",
         flex: 2,
-        height: 45
+        height: 45,
+        maxWidth: 100
     },
     checkBoxImage: {
         position: "absolute",
@@ -88,5 +102,6 @@ const s: any = {
         textAlign: "center",
         alignSelf: "center",
         marginLeft: 5,
+        fontFamily: "RobotoSlabSemiBold"
     }
 }

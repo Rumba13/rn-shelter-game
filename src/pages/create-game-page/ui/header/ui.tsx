@@ -77,6 +77,7 @@ const s: any = {
     contentHeader: {
         display: "flex",
         flexDirection: "column",
+        padding: 10,
     },
     headerTitle: {
         fontSize: 16,

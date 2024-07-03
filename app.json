@@ -31,7 +31,7 @@
       [
         "expo-font",
         {
-          "fonts": ["./assets/fonts/SpaceMono-Regular.ttf", "./assets/fonts/RobotoSlab-Bold.ttf"]
+          "fonts": ["./assets/fonts/SpaceMono-Regular.ttf", "./assets/fonts/RobotoSlab-Bold.ttf", "./assets/fonts/RobotoSlab-SemiBold.ttf"]
         }
       ],
       "expo-router"

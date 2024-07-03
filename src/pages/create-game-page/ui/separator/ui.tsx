@@ -16,6 +16,7 @@ export function Separator() {
 const s: any = {
     separatorWrapper: {
         position: "relative",
+        paddingBottom:25
     },
     separatorImage: {
         maxWidth: "100%",
