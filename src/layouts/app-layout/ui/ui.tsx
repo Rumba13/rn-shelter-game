@@ -21,7 +21,7 @@ export function AppLayout(props: PropsType) {
       <ImageBackground
         source={require('../../../../assets/images/mainscreen/background.png')}
         style={s.background}
-        resizeMode={'cover'}>
+        resizeMode={'stretch'}>
         {children}
       </ImageBackground>
     </View>
