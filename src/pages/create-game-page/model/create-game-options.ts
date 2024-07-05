@@ -1,6 +1,6 @@
 import { makeAutoObservable, runInAction } from 'mobx'
-import { GameCreationOptions } from '@/src/shared/lib/types/game-creation-options'
 import { SexualOrientation } from '@/src/shared/lib/types/game-creation-option/sexual-orientation'
+import { GameCreationOptions } from '@/src/shared/lib/types/game-creation-settings'
 
 class CreateGameOptions {
   //@ts-ignore

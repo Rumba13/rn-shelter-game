@@ -25,6 +25,15 @@ import {
   apocalypseCategoriesToApocalypseNames,
 } from '@/src/entities/apocalypse/model/apocalypse-categories-to-apocalypse-names'
 import { apocalypseNameToApocalypse } from '@/src/entities/apocalypse/model/apocalypse-name-to-apocalypse'
+import {
+  characteristicCardCategories,
+  characteristicCards,
+} from '@/src/entities/characteristic-card/model/characteristic-card'
+import {
+  renderCharacteristicCardSelectedText,
+} from '@/src/pages/create-game-page/ui/render-characteristic-card-selected-text'
+import { CharacteristicCardCategories } from '@/src/shared/lib/types/characteristic-card-categories'
+import { characteristicCardNameToCard } from '@/src/entities/characteristic-card/model/characteristic-card-name-to-card'
 //TODO refactoring
 //TODO fix font issues
 export const CreateGamePage = observer(() => {
@@ -139,6 +148,18 @@ export const CreateGamePage = observer(() => {
                                                         options.apocalypses = apocalypsesNames.map(apocalypseName => apocalypseNameToApocalypse(apocalypseName))
                                                       })}
                                                       subKey={'children'} />
+                <GameOptionList<CharacteristicCardCategories> title={'Список используемых карточек'}
+                                                              descriptionHeight={100}
+                                                              description={'Выберите из списка, с какими карточками вы хотите играть'}
+                                                              renderSelectedText={renderCharacteristicCardSelectedText}
+                                                              items={characteristicCardCategories} uniqueKey={'name'}
+                                                              displayKey={'name'} selectText={'Выбрать карточки'}
+                                                              subKey={'children'}
+                                                              searchPlaceholderText={'Искать карточки'}
+                                                              onValueChange={characteristicCardsNames => gameCreationOptionsModel.setOptions(options => {
+                                                                options.cardsKit = characteristicCardsNames.map(cardName => characteristicCardNameToCard(cardName))
+                                                              })} />
+
               </ImageBackground>
             </ScrollView>
           </SafeAreaView>

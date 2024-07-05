@@ -69,8 +69,11 @@ export function GameOptionList<ItemsType>({
         renderSelectText={renderSelectedText}
         selectedText={''}
         animateDropDowns
+        readOnlyHeadings
         selectChildren
         highlightChildren
+        expandDropDowns
+        showDropDowns
         subKey={subKey}
         showChips={false}
         confirmText={'Окей'}

@@ -14,7 +14,7 @@ const apocalypsesDefaultKit: Apocalypse[] = [
 ]
 const apocalypsesBorovEditionKit: Apocalypse[] = [
   {
-    name: 'DimaAge',
+    name: 'Эпоха Димы',
     description: '',
   },
 ]

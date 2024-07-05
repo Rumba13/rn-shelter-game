@@ -1,4 +1,4 @@
-import { Apocalypse } from '@/src/shared/lib/types/apocalypses'
+import { Apocalypse } from '@/src/shared/lib/types/apocalypse'
 
 export type ApocalypseCategories = {
   name: string,
