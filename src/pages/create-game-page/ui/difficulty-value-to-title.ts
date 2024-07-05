@@ -13,4 +13,3 @@ export function difficultyValueToTitle(value: number): string {
   //@ts-ignore
   return difficultyMap[value]
 }
-

@@ -13,4 +13,3 @@ export function characterBalanceValueToTitle(value: number): string {
   //@ts-ignore
   return characterBalanceMap[value]
 }
-

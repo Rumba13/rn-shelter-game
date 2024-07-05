@@ -10,19 +10,18 @@ import { GameOptionBase } from '@/src/pages/create-game-page/ui/game-option-base
 type PropsType = {
   title: string
   items: PickerSelectProps['items']
-  onValueChange: PickerSelectProps['onValueChange'],
-  descriptionHeight: number,
-  description:string
+  onValueChange: PickerSelectProps['onValueChange']
+  descriptionHeight: number
+  description: string
 }
 
-export function GameOptionSelect({ title, items, onValueChange, descriptionHeight,description }: PropsType) {
+export function GameOptionSelect({ title, items, onValueChange, descriptionHeight, description }: PropsType) {
   const [isOptionEnabled, setIsOptionEnabled] = useState<boolean>(false)
   const [fontsLoaded, fontsError] = useFonts({
     RobotoSlabSemiBold: require('@/assets/fonts/RobotoSlab-SemiBold.ttf'),
   })
 
-  useEffect(() => {
-  }, [fontsLoaded])
+  useEffect(() => {}, [fontsLoaded])
 
   if (!fontsLoaded) {
     return <View></View>
@@ -33,4 +32,3 @@ export function GameOptionSelect({ title, items, onValueChange, descriptionHeigh
     </GameOptionBase>
   )
 }
-

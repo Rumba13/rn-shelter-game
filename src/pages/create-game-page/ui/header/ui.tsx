@@ -25,10 +25,13 @@ export const Header = observer(() => {
       </View>
 
       <View>
-        <Range min={4} max={22} defaultValue={4}
-               onValueChanged={(playersCount: number) =>
-                 gameCreationOptionsModel.setOptions(options => (options.playersCount = playersCount))
-               }
+        <Range
+          min={4}
+          max={22}
+          defaultValue={4}
+          onValueChanged={(playersCount: number) =>
+            gameCreationOptionsModel.setOptions(options => (options.playersCount = playersCount))
+          }
         />
       </View>
       <Text style={s.headerSubTitle}>Рекомендуемый IQ: 20-93</Text>

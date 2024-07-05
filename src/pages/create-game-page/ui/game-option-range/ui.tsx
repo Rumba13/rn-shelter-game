@@ -12,22 +12,30 @@ import { GameOptionBase } from '@/src/pages/create-game-page/ui/game-option-base
 
 type PropsType = {
   title: string
-  onValueChanged: (value: number) => void,
+  onValueChanged: (value: number) => void
   selectedTitle: string
-  min: number,
-  max: number,
-  defaultValue: number,
+  min: number
+  max: number
+  defaultValue: number
   descriptionHeight: number
-  description:string
+  description: string
 }
 
-export function GameOptionRange({ title, onValueChanged, max, min, selectedTitle, defaultValue, descriptionHeight,description }: PropsType) {
+export function GameOptionRange({
+  title,
+  onValueChanged,
+  max,
+  min,
+  selectedTitle,
+  defaultValue,
+  descriptionHeight,
+  description,
+}: PropsType) {
   const [fontsLoaded] = useFonts({
     RobotoSlabSemiBold: require('@/assets/fonts/RobotoSlab-SemiBold.ttf'),
   })
 
-  useEffect(() => {
-  }, [fontsLoaded])
+  useEffect(() => {}, [fontsLoaded])
 
   if (!fontsLoaded) {
     return <View></View>
@@ -36,15 +44,22 @@ export function GameOptionRange({ title, onValueChanged, max, min, selectedTitle
   return (
     <GameOptionBase title={title} descriptionHeight={descriptionHeight} description={description}>
       <View style={s.selectedTitleWrapper}>
-        <ImageBackground source={require('@/assets/images/gamecreationscreen/create_text_frame.png')}
-                         resizeMode={'stretch'}>
+        <ImageBackground
+          source={require('@/assets/images/gamecreationscreen/create_text_frame.png')}
+          resizeMode={'stretch'}>
           <Text style={s.selectedTitle}>{selectedTitle}</Text>
         </ImageBackground>
       </View>
-      <Range onValueChanged={onValueChanged} defaultValue={defaultValue} max={max} min={min} options={{
-        trackImage: require('@/assets/images/gamecreationscreen/picker_line_2_gradient.png'),
-        pickerImage: require('@/assets/images/gamecreationscreen/picker1.png'),
-      }} />
+      <Range
+        onValueChanged={onValueChanged}
+        defaultValue={defaultValue}
+        max={max}
+        min={min}
+        options={{
+          trackImage: require('@/assets/images/gamecreationscreen/picker_line_2_gradient.png'),
+          pickerImage: require('@/assets/images/gamecreationscreen/picker1.png'),
+        }}
+      />
     </GameOptionBase>
   )
 }

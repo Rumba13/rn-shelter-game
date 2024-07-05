@@ -9,4 +9,3 @@ export function sexualOrientationValueToTitle(value: number): string {
   //@ts-ignore
   return sexualOrientationMap[value]
 }
-
