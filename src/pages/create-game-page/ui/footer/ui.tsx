@@ -3,7 +3,11 @@ import { ImageButton } from '@/src/shared/ui/image-button/ui'
 import { useFonts } from 'expo-font'
 import { gameCreationOptionsModel } from '@/src/pages/create-game-page/model/create-game-options'
 
-export function Footer() {
+type PropsType = {
+  navigation: any
+}
+
+export function Footer({ navigation }: PropsType) {
   return (
     <View style={s.footer}>
       <View style={s.createGameButtonWrapper}>
@@ -18,8 +22,7 @@ export function Footer() {
           style={s.createGameButton}
           height={80}
           onPress={() => {
-            Alert.alert(gameCreationOptionsModel._writeOptions())
-            console.log(gameCreationOptionsModel._writeOptions())
+            navigation.navigate('select-player-page');
           }}
         />
       </View>

@@ -36,7 +36,12 @@ import { CharacteristicCardCategories } from '@/src/shared/lib/types/characteris
 import { characteristicCardNameToCard } from '@/src/entities/characteristic-card/model/characteristic-card-name-to-card'
 //TODO refactoring
 //TODO fix font issues
-export const CreateGamePage = observer(() => {
+
+type PropsType = {
+  navigation: any
+}
+
+export const CreateGamePage = observer(({ navigation }: PropsType) => {
   const [fontsLoaded, fontsError] = useFonts({
     RobotoSlab: require('@/assets/fonts/RobotoSlab-Bold.ttf'),
   })
@@ -165,7 +170,7 @@ export const CreateGamePage = observer(() => {
           </SafeAreaView>
         </View>
       </ImageBackground>
-      <Footer />
+      <Footer navigation={navigation} />
     </View>
   )
 })
