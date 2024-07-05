@@ -1,7 +1,7 @@
-import { Button, Image, ImageBackground, SafeAreaView, ScrollView, Text, View } from 'react-native'
+import { Image, ImageBackground, SafeAreaView, ScrollView, Text, View } from 'react-native'
 import { Footer } from '@/src/pages/create-game-page/ui/footer/ui'
 import { useFonts } from 'expo-font'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { Header } from './header/ui'
 import { Separator } from '@/src/pages/create-game-page/ui/separator/ui'
 import { GameOptionCheckbox } from '@/src/pages/create-game-page/ui/game-option-checkbox/ui'
@@ -13,7 +13,18 @@ import { difficultyValueToTitle } from '@/src/pages/create-game-page/ui/difficul
 import { observer } from 'mobx-react'
 import { sexualOrientationValueToTitle } from '@/src/pages/create-game-page/ui/sexual-orientation-value-to-title'
 import { characterBalanceValueToTitle } from '@/src/pages/create-game-page/ui/character-balance-value-to-title'
-import Collapsible from 'react-native-collapsible'
+import { GameOptionList } from '@/src/pages/create-game-page/ui/game-option-list/ui'
+import { renderBunkerSelectedText } from '@/src/pages/create-game-page/ui/render-bunker-selected-text'
+import { shelterCategoriesToShelterNames, sheltersCategories } from '@/src/entities/shelter'
+import { ShelterCategoryList } from '@/src/shared/lib/types/shelter-category-list'
+import { shelterNameToShelter } from '@/src/entities/shelter/model/shelter-name-to-shelter'
+import { apocalypsesCategories } from '@/src/entities/apocalypse'
+import { ApocalypseCategories } from '@/src/shared/lib/types/apocalypse-categories'
+import { renderApocalypseSelectedText } from '@/src/pages/create-game-page/ui/render-apocalypse-selected-text'
+import {
+  apocalypseCategoriesToApocalypseNames,
+} from '@/src/entities/apocalypse/model/apocalypse-categories-to-apocalypse-names'
+import { apocalypseNameToApocalypse } from '@/src/entities/apocalypse/model/apocalypse-name-to-apocalypse'
 //TODO refactoring
 //TODO fix font issues
 export const CreateGamePage = observer(() => {
@@ -52,16 +63,21 @@ export const CreateGamePage = observer(() => {
                 <GameOptionCheckbox
                   title={`Проклятые деревенщины`}
                   descriptionHeight={100}
-                  description={"Параметр определяет будут ли задействованы деревенщины"}
+                  description={'Параметр определяет будут ли задействованы деревенщины'}
                   onValueChange={isEnable =>
                     gameCreationOptionsModel.setOptions(options => (options.hillbillyMode = isEnable))
                   }
                 />
                 <GameOptionSelect
                   descriptionHeight={100}
-                  description={"Параметр определяет кто пидр, кто не пидр и всё такое"}
+                  description={'Параметр определяет кто пидр, кто не пидр и всё такое'}
                   title={'Сексуальная Ориентация'}
-                  items={[SexualOrientation.Random, SexualOrientation.AllStraight, SexualOrientation.AllGays, SexualOrientation.Disable].map(value => ({
+                  items={[
+                    SexualOrientation.Random,
+                    SexualOrientation.AllStraight,
+                    SexualOrientation.AllGays,
+                    SexualOrientation.Disable,
+                  ].map(value => ({
                     value,
                     key: value,
                     label: sexualOrientationValueToTitle(value),
@@ -70,19 +86,59 @@ export const CreateGamePage = observer(() => {
                     gameCreationOptionsModel.setOptions(options => (options.sexualOrientation = orientation))
                   }
                 />
-                <GameOptionRange title={'Уровень сложности'}
-                                 defaultValue={4}
-                                 description={"Параметр определяет насколько персонажи полезны и безопасны в среднем"}
-                                 descriptionHeight={100}
-                                 selectedTitle={difficultyValueToTitle(gameCreationOptionsModel.options.difficulty)}
-                                 onValueChanged={difficulty => gameCreationOptionsModel.setOptions(options => options.difficulty = difficulty)}
-                                 min={1} max={8} />
-                <GameOptionRange title={'Баланс Персонажей'}
-                                 descriptionHeight={100}
-                                 description={"Параметр определяет насколько различается полезность персонажей"}
-                                 onValueChanged={characterBalance => gameCreationOptionsModel.setOptions(options => options.balance = characterBalance)}
-                                 selectedTitle={characterBalanceValueToTitle(options.balance)} min={1} max={8}
-                                 defaultValue={options.balance} />
+                <GameOptionRange
+                  title={'Уровень сложности'}
+                  defaultValue={4}
+                  description={'Параметр определяет насколько персонажи полезны и безопасны в среднем'}
+                  descriptionHeight={100}
+                  selectedTitle={difficultyValueToTitle(gameCreationOptionsModel.options.difficulty)}
+                  onValueChanged={difficulty =>
+                    gameCreationOptionsModel.setOptions(options => (options.difficulty = difficulty))
+                  }
+                  min={1}
+                  max={8}
+                />
+                <GameOptionRange
+                  title={'Баланс Персонажей'}
+                  descriptionHeight={100}
+                  description={'Параметр определяет насколько различается полезность персонажей'}
+                  onValueChanged={characterBalance =>
+                    gameCreationOptionsModel.setOptions(options => (options.balance = characterBalance))
+                  }
+                  selectedTitle={characterBalanceValueToTitle(options.balance)}
+                  min={1}
+                  max={8}
+                  defaultValue={options.balance}
+                />
+
+                <GameOptionList<ShelterCategoryList>
+                  title={'Список бункеров'}
+                  descriptionHeight={100}
+                  description={'Выберите из списка, с какими бункерами вы хотите играть'}
+                  renderSelectedText={renderBunkerSelectedText}
+                  items={sheltersCategories}
+                  uniqueKey={'name'}
+                  subKey={'children'}
+                  displayKey={'name'}
+                  selectText={'Выбрать бункер'}
+                  searchPlaceholderText={'Искать Бункеры'}
+                  onValueChange={shelterNames =>
+                    gameCreationOptionsModel.setOptions(options => {
+                      options.shelters = shelterNames.map(shelterName => shelterNameToShelter(shelterName))
+                    })
+                  }
+                />
+                <GameOptionList<ApocalypseCategories> title={'Список апокалипсисов'} descriptionHeight={100}
+                                                      description={'Выберите из списка, с какими апокалипсисами вы хотите играть'}
+                                                      renderSelectedText={renderApocalypseSelectedText}
+                                                      items={apocalypsesCategories}
+                                                      uniqueKey={'name'}
+                                                      displayKey={'name'} selectText={'Выбрать Апокалипсис'}
+                                                      searchPlaceholderText={'Искать Апокалипсисы'}
+                                                      onValueChange={apocalypsesNames => gameCreationOptionsModel.setOptions(options => {
+                                                        options.apocalypses = apocalypsesNames.map(apocalypseName => apocalypseNameToApocalypse(apocalypseName))
+                                                      })}
+                                                      subKey={'children'} />
               </ImageBackground>
             </ScrollView>
           </SafeAreaView>

@@ -1,4 +1,4 @@
-import { Alert, Dimensions, ImageBackground, StatusBar, View } from 'react-native'
+import { Alert, Dimensions, ImageBackground, StatusBar, StyleSheet, View } from 'react-native'
 import { useEffect } from 'react'
 import { useModal } from '@/src/shared/lib/use-modal'
 
@@ -28,7 +28,7 @@ export function AppLayout(props: PropsType) {
   )
 }
 
-const s = {
+const s = StyleSheet.create({
   background: {
     height: '100%',
     width: '100%',
@@ -37,7 +37,7 @@ const s = {
     height: Dimensions.get('window').height,
     width: Dimensions.get('window').width,
   },
-}
+})
 
 //borderWidth:3,
 //borderColor: "#000000",

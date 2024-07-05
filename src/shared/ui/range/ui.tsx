@@ -6,13 +6,13 @@ import { Label } from '@/src/shared/ui/range/label'
 import { useEffect, useState } from 'react'
 
 type PropsType = {
-  onValueChanged: (value: number) => void,
-  min: number,
-  max: number,
+  onValueChanged: (value: number) => void
+  min: number
+  max: number
   defaultValue: number
   options?: {
-    trackImage?: any,
-    pickerImage?: any,
+    trackImage?: any
+    pickerImage?: any
   }
 }
 
@@ -21,13 +21,11 @@ type PropsType = {
 export const Range = observer(({ onValueChanged, options, max, min, defaultValue }: PropsType) => {
   const [minimalValue, setMinimalValue] = useState<number>(defaultValue)
 
-  if(typeof defaultValue !== "number") {
+  if (typeof defaultValue !== 'number') {
     throw new Error("Range Component Error. Default value isn't number")
   }
 
-  useEffect(() => {
-
-  }, [min])
+  useEffect(() => {}, [min])
 
   function _onValueChanged(value: number) {
     setMinimalValue(min)
@@ -56,7 +54,7 @@ export const Range = observer(({ onValueChanged, options, max, min, defaultValue
         />
       )}
       renderRailSelected={() => void 0}
-      renderLabel={(value) => <Label value={value} />}
+      renderLabel={value => <Label value={value} />}
       renderNotch={() => void 0}
       onValueChanged={_onValueChanged}
     />

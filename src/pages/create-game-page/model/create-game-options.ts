@@ -9,7 +9,10 @@ class CreateGameOptions {
     hillbillyMode: false,
     playersCount: 4,
     difficulty: 4,
-    balance:4,
+    balance: 4,
+    shelters: [],
+    apocalypses: [],
+    cardsKit: [],
   }
 
   public setOptions(callBack: (options: GameCreationOptions) => any) {

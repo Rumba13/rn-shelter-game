@@ -1,4 +1,4 @@
 export type Apocalypse = {
-  title: string
+  name: string
   description: string
 }

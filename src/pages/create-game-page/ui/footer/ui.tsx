@@ -17,7 +17,10 @@ export function Footer() {
           shadowImage={require('@/assets/images/gamecreationscreen/next_button_shadow.png')}
           style={s.createGameButton}
           height={80}
-          onPress={() => Alert.alert(gameCreationOptionsModel._writeOptions())}
+          onPress={() => {
+            Alert.alert(gameCreationOptionsModel._writeOptions())
+            console.log(gameCreationOptionsModel._writeOptions())
+          }}
         />
       </View>
       <Image
