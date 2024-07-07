@@ -1,5 +1,5 @@
 import { Image, ImageBackground, SafeAreaView, ScrollView, Text, View } from 'react-native'
-import { Footer } from '@/src/pages/create-game-page/ui/footer/ui'
+import { Footer } from '@/src/shared/ui/footer/ui'
 import { useFonts } from 'expo-font'
 import { useEffect } from 'react'
 import { Header } from './header/ui'
@@ -7,7 +7,7 @@ import { Separator } from '@/src/pages/create-game-page/ui/separator/ui'
 import { GameOptionCheckbox } from '@/src/pages/create-game-page/ui/game-option-checkbox/ui'
 import { GameOptionSelect } from '@/src/pages/create-game-page/ui/game-option-select/ui'
 import { SexualOrientation } from '@/src/shared/lib/types/game-creation-option/sexual-orientation'
-import { gameCreationOptionsModel } from '@/src/pages/create-game-page/model/create-game-options'
+import { gameCreationOptionsModel } from '@/src/entities/game/model/create-game-options'
 import { GameOptionRange } from '@/src/pages/create-game-page/ui/game-option-range/ui'
 import { difficultyValueToTitle } from '@/src/pages/create-game-page/ui/difficulty-value-to-title'
 import { observer } from 'mobx-react'
@@ -21,17 +21,13 @@ import { shelterNameToShelter } from '@/src/entities/shelter/model/shelter-name-
 import { apocalypsesCategories } from '@/src/entities/apocalypse'
 import { ApocalypseCategories } from '@/src/shared/lib/types/apocalypse-categories'
 import { renderApocalypseSelectedText } from '@/src/pages/create-game-page/ui/render-apocalypse-selected-text'
-import {
-  apocalypseCategoriesToApocalypseNames,
-} from '@/src/entities/apocalypse/model/apocalypse-categories-to-apocalypse-names'
+import { apocalypseCategoriesToApocalypseNames } from '@/src/entities/apocalypse/model/apocalypse-categories-to-apocalypse-names'
 import { apocalypseNameToApocalypse } from '@/src/entities/apocalypse/model/apocalypse-name-to-apocalypse'
 import {
   characteristicCardCategories,
   characteristicCards,
 } from '@/src/entities/characteristic-card/model/characteristic-card'
-import {
-  renderCharacteristicCardSelectedText,
-} from '@/src/pages/create-game-page/ui/render-characteristic-card-selected-text'
+import { renderCharacteristicCardSelectedText } from '@/src/pages/create-game-page/ui/render-characteristic-card-selected-text'
 import { CharacteristicCardCategories } from '@/src/shared/lib/types/characteristic-card-categories'
 import { characteristicCardNameToCard } from '@/src/entities/characteristic-card/model/characteristic-card-name-to-card'
 //TODO refactoring
@@ -48,8 +44,7 @@ export const CreateGamePage = observer(({ navigation }: PropsType) => {
 
   const options = gameCreationOptionsModel.options
 
-  useEffect(() => {
-  }, [fontsLoaded, options.difficulty])
+  useEffect(() => {}, [fontsLoaded, options.difficulty])
 
   if (!fontsLoaded) {
     return <Text>Loading...</Text>
@@ -142,35 +137,51 @@ export const CreateGamePage = observer(({ navigation }: PropsType) => {
                     })
                   }
                 />
-                <GameOptionList<ApocalypseCategories> title={'Список апокалипсисов'} descriptionHeight={100}
-                                                      description={'Выберите из списка, с какими апокалипсисами вы хотите играть'}
-                                                      renderSelectedText={renderApocalypseSelectedText}
-                                                      items={apocalypsesCategories}
-                                                      uniqueKey={'name'}
-                                                      displayKey={'name'} selectText={'Выбрать Апокалипсис'}
-                                                      searchPlaceholderText={'Искать Апокалипсисы'}
-                                                      onValueChange={apocalypsesNames => gameCreationOptionsModel.setOptions(options => {
-                                                        options.apocalypses = apocalypsesNames.map(apocalypseName => apocalypseNameToApocalypse(apocalypseName))
-                                                      })}
-                                                      subKey={'children'} />
-                <GameOptionList<CharacteristicCardCategories> title={'Список используемых карточек'}
-                                                              descriptionHeight={100}
-                                                              description={'Выберите из списка, с какими карточками вы хотите играть'}
-                                                              renderSelectedText={renderCharacteristicCardSelectedText}
-                                                              items={characteristicCardCategories} uniqueKey={'name'}
-                                                              displayKey={'name'} selectText={'Выбрать карточки'}
-                                                              subKey={'children'}
-                                                              searchPlaceholderText={'Искать карточки'}
-                                                              onValueChange={characteristicCardsNames => gameCreationOptionsModel.setOptions(options => {
-                                                                options.cardsKit = characteristicCardsNames.map(cardName => characteristicCardNameToCard(cardName))
-                                                              })} />
-
+                <GameOptionList<ApocalypseCategories>
+                  title={'Список апокалипсисов'}
+                  descriptionHeight={100}
+                  description={'Выберите из списка, с какими апокалипсисами вы хотите играть'}
+                  renderSelectedText={renderApocalypseSelectedText}
+                  items={apocalypsesCategories}
+                  uniqueKey={'name'}
+                  displayKey={'name'}
+                  selectText={'Выбрать Апокалипсис'}
+                  searchPlaceholderText={'Искать Апокалипсисы'}
+                  onValueChange={apocalypsesNames =>
+                    gameCreationOptionsModel.setOptions(options => {
+                      options.apocalypses = apocalypsesNames.map(apocalypseName =>
+                        apocalypseNameToApocalypse(apocalypseName),
+                      )
+                    })
+                  }
+                  subKey={'children'}
+                />
+                <GameOptionList<CharacteristicCardCategories>
+                  title={'Список используемых карточек'}
+                  descriptionHeight={100}
+                  description={'Выберите из списка, с какими карточками вы хотите играть'}
+                  renderSelectedText={renderCharacteristicCardSelectedText}
+                  items={characteristicCardCategories}
+                  uniqueKey={'name'}
+                  displayKey={'name'}
+                  selectText={'Выбрать карточки'}
+                  subKey={'children'}
+                  searchPlaceholderText={'Искать карточки'}
+                  onValueChange={characteristicCardsNames =>
+                    gameCreationOptionsModel.setOptions(options => {
+                      options.cardsKit = characteristicCardsNames.map(cardName =>
+                        characteristicCardNameToCard(cardName),
+                      )
+                    })
+                  }
+                />
               </ImageBackground>
             </ScrollView>
           </SafeAreaView>
         </View>
       </ImageBackground>
-      <Footer navigation={navigation} />
+
+      <Footer navigation={navigation} styles={{ marginHorizontal: 50 }} />
     </View>
   )
 })

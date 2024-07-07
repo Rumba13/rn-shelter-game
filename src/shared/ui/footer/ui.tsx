@@ -1,15 +1,16 @@
-import { Alert, Image, View } from 'react-native'
+import { Alert, Image, StyleProp, View, ViewStyle } from 'react-native'
 import { ImageButton } from '@/src/shared/ui/image-button/ui'
 import { useFonts } from 'expo-font'
-import { gameCreationOptionsModel } from '@/src/pages/create-game-page/model/create-game-options'
+import { gameCreationOptionsModel } from '@/src/entities/game/model/create-game-options'
 
 type PropsType = {
   navigation: any
+  styles?: StyleProp<ViewStyle>
 }
 
-export function Footer({ navigation }: PropsType) {
+export function Footer({ navigation, styles }: PropsType) {
   return (
-    <View style={s.footer}>
+    <View style={[s.footer, styles]}>
       <View style={s.createGameButtonWrapper}>
         <Image
           style={s.createGameButtonDetail}
@@ -20,15 +21,15 @@ export function Footer({ navigation }: PropsType) {
           buttonImage={require('@/assets/images/gamecreationscreen/next_button.png')}
           shadowImage={require('@/assets/images/gamecreationscreen/next_button_shadow.png')}
           style={s.createGameButton}
-          height={80}
+          height={65}
           onPress={() => {
-            navigation.navigate('select-player-page');
+            navigation.navigate('select-player-page')
           }}
         />
       </View>
       <Image
         style={s.footerDetail}
-        resizeMode={'cover'}
+        resizeMode={'contain'}
         source={require('@/assets/images/gamecreationscreen/cloud.png')}
       />
     </View>
@@ -39,22 +40,31 @@ const s: any = {
   footer: {
     display: 'flex',
     flexBasis: 'auto',
-    marginHorizontal: 20,
     height: 'auto',
     position: 'relative',
+    maxWidth: '100%',
+    bottom: 7,
   },
   footerDetail: {
     width: '100%',
     flexBasis: 80,
     position: 'relative',
-    bottom: 30,
+    bottom: 0,
   },
-  createGameButton: {},
+  createGameButton: {
+    position: 'relative',
+    left: 0,
+    top: 0,
+  },
+  createGameButtonWrapper: {
+    position: 'relative',
+    top: 27,
+  },
   createGameButtonDetail: {
     position: 'absolute',
-    width: 65,
+    width: 55,
     height: '100%',
     left: 0,
-    top: 18,
+    top: 13,
   },
 }

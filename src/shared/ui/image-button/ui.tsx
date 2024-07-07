@@ -4,6 +4,9 @@ import {
   Image,
   ImageBackground,
   LayoutAnimation,
+  StyleProp,
+  Text,
+  TextStyle,
   TouchableWithoutFeedback,
   View,
 } from 'react-native'
@@ -22,9 +25,21 @@ type PropsType = {
     xOffset?: number
     yOffset?: number
   }
+  title?: string
+  styleTitle?: StyleProp<TextStyle>
 }
 
-export function ImageButton({ buttonImage, shadowImage, height, width, style, onPress, options }: PropsType) {
+export function ImageButton({
+  buttonImage,
+  shadowImage,
+  height,
+  width,
+  style,
+  onPress,
+  options,
+  title,
+  styleTitle,
+}: PropsType) {
   const [isButtonPressed, setIsButtonPressed] = useState<boolean>(false)
 
   const buttonOnPressIn = () => {
@@ -52,23 +67,26 @@ export function ImageButton({ buttonImage, shadowImage, height, width, style, on
   return (
     <View style={{ ...s.buttonContainer, ...style, maxHeight: height, width }}>
       <ImageBackground source={shadowImage} style={s.buttonShadow} resizeMode={'contain'}>
-        <Image
-          source={buttonImage}
-          style={{
-            ...s.buttonImage,
-            ...{
-              bottom: options?.yOffset ?? 5,
-              right: options?.xOffset ?? 3,
-            },
-            ...(isButtonPressed
-              ? {
-                  bottom: options?.yOffsetOnPress ?? 3,
-                  right: options?.xOffSetOnPress ?? 3,
-                }
-              : {}),
-          }}
-          resizeMode={'contain'}
-        />
+        <View style={{ maxHeight: '100%' }}>
+          <ImageBackground
+            source={buttonImage}
+            style={{
+              ...s.buttonImage,
+              ...{
+                bottom: options?.yOffset ?? 5,
+                right: options?.xOffset ?? 3,
+              },
+              ...(isButtonPressed
+                ? {
+                    bottom: options?.yOffsetOnPress ?? 3,
+                    right: options?.xOffSetOnPress ?? 3,
+                  }
+                : {}),
+            }}
+            resizeMode={'contain'}>
+            <Text style={styleTitle}>{title}</Text>
+          </ImageBackground>
+        </View>
       </ImageBackground>
 
       <TouchableWithoutFeedback
@@ -92,6 +110,7 @@ const s: any = {
     maxWidth: '100%',
     position: 'relative',
     maxHeight: '100%',
+    minHeight: '100%',
   },
   buttonImage__pressed: {},
   button: {

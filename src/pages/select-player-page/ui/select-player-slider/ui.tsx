@@ -1,0 +1,92 @@
+import { View, Text, StyleSheet, Image, ImageBackground, Dimensions, Animated } from 'react-native'
+import Carousel from 'react-native-reanimated-carousel/src/Carousel'
+import { gameCreationOptionsModel } from '@/src/entities/game'
+import { useFonts } from 'expo-font'
+import { useEffect, useState } from 'react'
+
+type PropsType = {}
+
+export function SelectPlayerSlider({}: PropsType) {
+  const [selectedSlideIndex, setSelectedSlideIndex] = useState<number>(0)
+  const [fontsLoaded, fontsError] = useFonts({
+    RobotoSlab: require('@/assets/fonts/RobotoSlab-Bold.ttf'),
+    RobotoSlabSemiBold: require('@/assets/fonts/RobotoSlab-SemiBold.ttf'),
+  })
+
+  useEffect(() => {
+  }, [fontsLoaded])
+
+
+  const players = [...new Array(gameCreationOptionsModel.options.playersCount).keys()].map(item => item + 1)
+  const observer = <Image style={s.sliderObserver} resizeMode={'contain'}
+                          source={require('@/assets/images/playerselectionscreen/main/eye_icon.png')} />
+  const sliderItems = [observer, ...players]
+
+  return (
+
+    <View style={s.sliderWrapper}>
+      <ImageBackground resizeMode={'contain'}
+                       source={require('@/assets/images/playerselectionscreen/main/vibor_igroka.png')}>
+        <View style={{ width: '100%', height: '100%' }}>
+          <Carousel style={s.slider} data={sliderItems} loop width={200} mode={'parallax'}
+                    scrollAnimationDuration={200}
+                    maxScrollDistancePerSwipe={300} overscrollEnabled
+                    modeConfig={{ parallaxAdjacentItemScale: 0.55 }} defaultIndex={selectedSlideIndex}
+                    onSnapToItem={(index) => {
+                      setSelectedSlideIndex(index)
+                    }}
+                    renderItem={({ index, item }) => {
+                      const isSlideSelected = index === selectedSlideIndex
+
+                      if (index === 0) {
+                        return <View style={{
+                          ...s.sliderItem,
+                          opacity: isSlideSelected ? 1 : 0.6,
+                        }}>{item}</View>
+                      } else {
+                        return <View style={s.sliderItem}><Text
+                          style={{
+                            ...s.sliderItemText,
+                            opacity: isSlideSelected ? 1 : 0.6,
+                          }}>{item}</Text></View>
+                      }
+                    }} />
+        </View>
+      </ImageBackground>
+    </View>
+  )
+}
+
+const s = StyleSheet.create({
+  sliderWrapper: {
+    flex: 1,
+  },
+  sliderObserver: {
+    maxWidth: '100%',
+    width: 100,
+    alignSelf: 'center',
+  },
+  slider: {
+    width: '100%',
+    height: '100%',
+    display: 'flex',
+    position: 'relative',
+    alignItems: 'center',
+    alignContent: 'center',
+    justifyContent: 'center',
+  },
+  sliderItem: {
+    display: 'flex',
+    height: '100%',
+    alignContent: 'center',
+    justifyContent: 'center',
+  },
+  sliderItemText: {
+    textAlign: 'center',
+    fontSize: 90,
+    fontFamily: 'RobotoSlab',
+    alignSelf: 'center',
+    justifyContent: 'center',
+    color: '#1a2633',
+  },
+})

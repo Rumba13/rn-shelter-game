@@ -5,7 +5,7 @@ import { ShelterCategoryList } from '@/src/shared/lib/types/shelter-category-lis
 
 export function renderBunkerSelectedText({ selectedItems }: SectionedMultiSelectProps<ShelterCategoryList>) {
   if (selectedItems?.length === 0) {
-    return <Text >Выбери Бункеры </Text>
+    return <Text>Выбери Бункеры </Text>
   } else if (selectedItems && Number(selectedItems.length) === 1) {
     return <Text>{selectedItems[0]}</Text>
   } else {

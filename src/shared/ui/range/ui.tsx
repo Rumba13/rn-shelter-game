@@ -1,7 +1,7 @@
 import { Alert, GestureResponderEvent, Image, Text, TouchableWithoutFeedback, View } from 'react-native'
 import Slider from 'rn-range-slider'
 import { observer } from 'mobx-react'
-import { gameCreationOptionsModel } from '@/src/pages/create-game-page/model/create-game-options'
+import { gameCreationOptionsModel } from '@/src/entities/game/model/create-game-options'
 import { Label } from '@/src/shared/ui/range/label'
 import { useEffect, useState } from 'react'
 

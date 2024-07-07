@@ -23,34 +23,36 @@ type PropsType<ItemsType> = {
 }
 
 export function GameOptionList<ItemsType>({
-                                            title,
-                                            descriptionHeight,
-                                            description,
-                                            renderSelectedText,
-                                            items,
-                                            selectText,
-                                            searchPlaceholderText,
-                                            uniqueKey,
-                                            displayKey,
-                                            onValueChange,
-                                            subKey,
-                                          }: PropsType<ItemsType>) {
+  title,
+  descriptionHeight,
+  description,
+  renderSelectedText,
+  items,
+  selectText,
+  searchPlaceholderText,
+  uniqueKey,
+  displayKey,
+  onValueChange,
+  subKey,
+}: PropsType<ItemsType>) {
   const [selectedItems, setSelectedItems] = useState<string[]>([])
   const [isFontsLoaded] = useFonts({
     RobotoSlabSemiBold: require('@/assets/fonts/RobotoSlab-SemiBold.ttf'),
   })
 
-  useEffect(() => {
-
-  }, [isFontsLoaded])
+  useEffect(() => {}, [isFontsLoaded])
 
   function sortOffCategoriesNames(_sheltersNames: string[]) {
     const sheltersNames: string[] = []
     _sheltersNames.forEach(listItemName => {
-      if (items.find(item => { //TODO fix ts-ignore Ха-ха будто на эту хуйню ебанную всем не похуй?
-        //@ts-ignore
-        return item.children.find(shelter => shelter.name === listItemName)
-      })) sheltersNames.push(listItemName)
+      if (
+        items.find(item => {
+          //TODO fix ts-ignore Ха-ха будто на эту хуйню ебанную всем не похуй?
+          //@ts-ignore
+          return item.children.find(shelter => shelter.name === listItemName)
+        })
+      )
+        sheltersNames.push(listItemName)
     })
 
     return sheltersNames
@@ -84,7 +86,6 @@ export function GameOptionList<ItemsType>({
         styles={StyleSheet.create({
           button: { backgroundColor: '#c3b5a8' },
           itemText: { fontFamily: 'RobotoSlabSemiBold', fontSize: 15, letterSpacing: 0.7 },
-
         })}
       />
     </GameOptionBase>

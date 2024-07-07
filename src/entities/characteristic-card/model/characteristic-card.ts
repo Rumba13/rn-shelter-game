@@ -19,4 +19,3 @@ export const characteristicCardCategories: CharacteristicCardCategories[] = [
   { name: 'Карточки Стандартного Издания', children: [...characteristicCardsStandartEdition] },
   { name: 'Карточки Издания "Боров"', children: [...characteristicCardsBorovEdition] },
 ]
-

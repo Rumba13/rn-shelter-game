@@ -4,7 +4,7 @@ import { OverlayModal } from '@/src/shared/ui/overlay-modal/ui'
 import { ImageButton } from '@/src/shared/ui/image-button/ui'
 import { useState } from 'react'
 import Slider from 'rn-range-slider'
-import { gameCreationOptionsModel } from '@/src/pages/create-game-page/model/create-game-options'
+import { gameCreationOptionsModel } from '@/src/entities/game/model/create-game-options'
 import { observer } from 'mobx-react'
 
 export const Header = observer(() => {
