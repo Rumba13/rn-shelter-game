@@ -15,13 +15,12 @@ import { sexualOrientationValueToTitle } from '@/src/pages/create-game-page/ui/s
 import { characterBalanceValueToTitle } from '@/src/pages/create-game-page/ui/character-balance-value-to-title'
 import { GameOptionList } from '@/src/pages/create-game-page/ui/game-option-list/ui'
 import { renderBunkerSelectedText } from '@/src/pages/create-game-page/ui/render-bunker-selected-text'
-import { shelterCategoriesToShelterNames, sheltersCategories } from '@/src/entities/shelter'
+import { sheltersCategories } from '@/src/entities/shelter'
 import { ShelterCategoryList } from '@/src/shared/lib/types/shelter-category-list'
 import { shelterNameToShelter } from '@/src/entities/shelter/model/shelter-name-to-shelter'
 import { apocalypsesCategories } from '@/src/entities/apocalypse'
 import { ApocalypseCategories } from '@/src/shared/lib/types/apocalypse-categories'
 import { renderApocalypseSelectedText } from '@/src/pages/create-game-page/ui/render-apocalypse-selected-text'
-import { apocalypseCategoriesToApocalypseNames } from '@/src/entities/apocalypse/model/apocalypse-categories-to-apocalypse-names'
 import { apocalypseNameToApocalypse } from '@/src/entities/apocalypse/model/apocalypse-name-to-apocalypse'
 import {
   characteristicCardCategories,

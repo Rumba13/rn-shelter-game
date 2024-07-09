@@ -1,14 +1,9 @@
+import {
+ CardType,
+} from '../../../../../../Users/Царь Дорог/Desktop/rn-shelter-game-parse-entities/src/types/card-type';
+
 export type CharacteristicCard = {
-  name: string
-  type:
-    | 'bio'
-    | 'health'
-    | 'hobby'
-    | 'phobia'
-    | 'character'
-    | 'additional-information'
-    | 'knowledge'
-    | 'luggage'
-    | 'action-card'
-    | 'condition-card'
+ name: string
+ type: CardType
+ price: number
 }
