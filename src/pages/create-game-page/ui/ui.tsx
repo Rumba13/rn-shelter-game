@@ -29,9 +29,7 @@ import {
 import { renderCharacteristicCardSelectedText } from '@/src/pages/create-game-page/ui/render-characteristic-card-selected-text';
 import { CharacteristicCardsList } from '@/src/shared/lib/types/characteristic-cards-list';
 import { characteristicCardNameToCard } from '@/src/entities/characteristic-card/model/characteristic-card-name-to-card';
-import {
-  characteristicBalanceValueToTitle
-} from '@/src/pages/create-game-page/ui/characteristic-balance-value-to-title';
+import { characteristicBalanceValueToTitle } from '@/src/pages/create-game-page/ui/characteristic-balance-value-to-title';
 //TODO refactoring
 //TODO fix font issues
 

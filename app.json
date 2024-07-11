@@ -20,7 +20,10 @@
       "adaptiveIcon": {
         "backgroundColor": "#ff0000"
       },
-      "package": "com.senderium.rnsheltergame"
+      "package": "com.senderium.rnsheltergame",
+      "permissions": [
+        "android.permission"
+      ]
     },
     "web": {
       "bundler": "metro",
@@ -36,6 +39,14 @@
             "./assets/fonts/RobotoSlab-Bold.ttf",
             "./assets/fonts/RobotoSlab-SemiBold.ttf"
           ]
+        }
+      ],
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Allow $(PRODUCT_NAME) to access your camera",
+          "microphonePermission": "Allow $(PRODUCT_NAME) to access your microphone",
+          "recordAudioAndroid": false
         }
       ],
       "expo-router"

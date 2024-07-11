@@ -8,7 +8,10 @@ export function characteristicBalanceToShuffleTimes(balance: number): number {
     '4': 80,
   };
 
-  if (balance > gameSettingsStore.settingsLimits.characteristicBalance.max) throw new Error(`Characteristic balance is more than ${gameSettingsStore.settingsLimits.characteristicBalance.max}`);
+  if (balance > gameSettingsStore.settingsLimits.characteristicBalance.max)
+    throw new Error(
+      `Characteristic balance is more than ${gameSettingsStore.settingsLimits.characteristicBalance.max}`,
+    );
 
   //@ts-ignore
   return balanceToShuffleTimesMap[balance.toString()];

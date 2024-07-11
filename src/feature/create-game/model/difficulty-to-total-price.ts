@@ -13,6 +13,6 @@ export function difficultyToTotalPrice(difficulty: number): number {
   };
 
   if (difficulty > gameSettingsStore.settingsLimits.difficulty.max) throw new Error('Difficulty is more than 8');
-//@ts-ignore
+  //@ts-ignore
   return difficultyToTotalPriceMap[difficulty];
 }

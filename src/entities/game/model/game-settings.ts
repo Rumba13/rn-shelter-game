@@ -40,7 +40,6 @@ class GameSettingsStore {
       max: 80,
       min: 10,
     },
-
   };
 
   public setSettings(callBack: (settings: GameSettings) => any) {

@@ -2,16 +2,30 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator, NativeStackNavigationOptions } from '@react-navigation/native-stack';
 import { HomePage } from '@/src/pages//home-page';
 import { AppLayout } from '@/src/layouts/app-layout';
-import { ScrollView, Text, View } from 'react-native';
+import { Alert, Button, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { CreateGamePage } from '@/src/pages/create-game-page';
 import { SelectPlayerPage } from '@/src/pages/select-player-page';
 import { createGame } from '@/src/feature/create-game/model/create-game';
 import { gameSettingsStore } from '@/src/entities/game';
+import { Camera, CameraView, useCameraPermissions } from 'expo-camera';
+import { useEffect } from 'react';
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   const stackScreenOptions: NativeStackNavigationOptions = { headerShown: false, animation: 'fade_from_bottom' };
+  const [permission, requestPermission] = useCameraPermissions();
+
+  useEffect(() => {
+
+  }, [permission]);
+
+  if (!permission?.granted) {
+    return <AppLayout>
+      <Text>asdad</Text>
+      <Button title={'Per'} onPress={requestPermission} />
+    </AppLayout>;
+  }
 
   const HomePageRoute = ({ navigation }: any) => {
     return (
@@ -40,6 +54,12 @@ export default function App() {
     return (
       <AppLayout>
         <ScrollView>
+          <CameraView barcodeScannerSettings={{ barcodeTypes: ['qr'] }} facing={'back'}
+                      style={{ height: 200, width: 200, flex: 1 }} onBarcodeScanned={(scanningResult) => {
+            Alert.alert(scanningResult.data);
+          }}>
+
+          </CameraView>
           <Text>
             {game.players.map(player => (
               <View key={player.profession}>

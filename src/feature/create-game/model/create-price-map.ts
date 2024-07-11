@@ -32,7 +32,10 @@ export class CreatePriceMap {
     const fromIndex = cardTypes[this.pseudoRandomGenerator.generateInRange(0, cardTypes.length)];
     const toIndex = cardTypes[this.pseudoRandomGenerator.generateInRange(0, cardTypes.length)];
 
-    if (priceMap[fromIndex] === gameSettingsStore.settingsLimits.card.minPrice || priceMap[toIndex] === gameSettingsStore.settingsLimits.card.maxPrice) {
+    if (
+      priceMap[fromIndex] === gameSettingsStore.settingsLimits.card.minPrice ||
+      priceMap[toIndex] === gameSettingsStore.settingsLimits.card.maxPrice
+    ) {
       return;
     }
 

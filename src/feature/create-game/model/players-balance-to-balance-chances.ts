@@ -47,7 +47,6 @@ export function playersBalanceToBalanceChances(playerBalance: number): BalanceCh
     },
   };
 
-
   if (playerBalance > gameSettingsStore.settingsLimits.balance.max)
     throw new Error(`Players balance more than ${gameSettingsStore.settingsLimits.balance.max}`);
 

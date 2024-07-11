@@ -11,11 +11,11 @@ import { sortedCardsStore } from '@/src/entities/characteristic-card/model/sorte
 import { CreatePriceMap } from '@/src/feature/create-game/model/create-price-map';
 import { difficultyToTotalPrice } from '@/src/feature/create-game/model/difficulty-to-total-price';
 import { gameSettingsStore } from '@/src/entities/game';
-import {
-  characteristicBalanceToShuffleTimes,
-} from '@/src/feature/create-game/model/characteristic-balance-to-shuffle-times';
+import { characteristicBalanceToShuffleTimes } from '@/src/feature/create-game/model/characteristic-balance-to-shuffle-times';
 import { BalanceChances } from '@/src/shared/lib/types/balance-chances';
 import { playersBalanceToBalanceChances } from '@/src/feature/create-game/model/players-balance-to-balance-chances';
+import { SexualOrientation } from '@/src/shared/lib/types/sexual-orientation';
+import { genders } from '@/src/entities/gender/model/genders';
 
 class CreateGame {
   private readonly pseudoRandomGenerator: PseudoRandomGenerator;
@@ -54,8 +54,63 @@ class CreateGame {
     this.createPriceMap = new CreatePriceMap(this.pseudoRandomGenerator, this.seed);
   }
 
-  private createPlayer(price: number, characteristicBalance: number): Player {
-    const priceMap: { [k in CardType]: number } = this.createPriceMap.createPriceMapShuffle(price, characteristicBalanceToShuffleTimes(characteristicBalance));
+  private changeBioCharacteristicGender(bioCharacteristicCard: Card, sexualOrientationOption: SexualOrientation): Card {
+    if (sexualOrientationOption === SexualOrientation.Random) {
+      return bioCharacteristicCard;
+    }
+
+    type BioCharacteristics = {
+      sex: string;
+      age: string;
+      gender: string;
+    };
+
+    const bioCharacteristics: BioCharacteristics | undefined = <BioCharacteristics>(
+      bioCharacteristicCard.name.match(/(?<sex>^.+?)\/ (?<age>.+?)\/ (?<gender>.+?$)/)?.groups
+    );
+
+    if (!bioCharacteristics) throw new Error('Cannot parse bio characteristic');
+
+    if (sexualOrientationOption === SexualOrientation.AllGays) {
+      //:)
+      const gayGenders = genders.filter(gender => gender !== 'straight' && gender !== 'pregnancy');
+      const gayGender = gayGenders[Math.trunc(this.pseudoRandomGenerator.generateInRange(0, gayGenders.length))];
+
+      switch (gayGender) {
+        case 'homosexual':
+          bioCharacteristics.gender = bioCharacteristics.sex.includes('Муж') ? 'гомосексуальный' : 'гомосексуальная';
+          break;
+        case 'pansexual':
+          bioCharacteristics.gender = bioCharacteristics.sex.includes('Муж') ? 'пансексуальный' : 'пансексуальная';
+          break;
+
+        case 'bisexual':
+          bioCharacteristics.gender = bioCharacteristics.sex.includes('Муж') ? 'бисексуальный' : 'бисексуальная';
+          break;
+
+        case 'asexual':
+          bioCharacteristics.gender = bioCharacteristics.sex.includes('Муж') ? 'асексуальный' : 'асексуальная';
+          break;
+      }
+    } else if (sexualOrientationOption === SexualOrientation.AllStraight) {
+      if (!(bioCharacteristics.gender.includes('гетеро') && bioCharacteristics.gender.includes('Береме'))) {
+        bioCharacteristics.gender = bioCharacteristics.sex.includes('Муж') ? 'Гетеросексуальный' : 'Гетеросексуальная';
+      }
+    } else if (sexualOrientationOption === SexualOrientation.Disable) {
+      bioCharacteristics.gender = '';
+    }
+
+    return {
+      ...bioCharacteristicCard,
+      name: `${bioCharacteristics.sex} ${bioCharacteristics.age} ${bioCharacteristics.gender}`,
+    };
+  }
+
+  private createPlayer(price: number, characteristicBalance: number, sexualOrientation: SexualOrientation): Player {
+    const priceMap: { [k in CardType]: number } = this.createPriceMap.createPriceMapShuffle(
+      price,
+      characteristicBalanceToShuffleTimes(characteristicBalance),
+    );
     const sortedCards = sortedCardsStore.sortedCards;
     const { character, health, luggage, hobby, knowledge, phobia, bio } = sortedCards;
 
@@ -67,7 +122,10 @@ class CreateGame {
         priceMap['additional-information'],
       ),
       health: this.findCardWithPrice(health, priceMap.health),
-      bioCharacteristics: this.findCardWithPrice(bio, priceMap.bio),
+      bioCharacteristics: this.changeBioCharacteristicGender(
+        this.findCardWithPrice(bio, priceMap.bio),
+        sexualOrientation,
+      ),
       character: this.findCardWithPrice(character, priceMap.character),
       hobby: this.findCardWithPrice(hobby, priceMap.hobby),
       luggage: this.findCardWithPrice(luggage, priceMap.luggage),
@@ -100,18 +158,30 @@ class CreateGame {
     const balanceChances: BalanceChances = playersBalanceToBalanceChances(playersBalance);
     const randomNumber: number = Math.trunc(this.pseudoRandomGenerator.generateInRange(1, 101));
     console.log('number: ' + randomNumber);
-    if (randomNumber <= balanceChances.chanceOfIgnore) { //Ignore balance
+    if (randomNumber <= balanceChances.chanceOfIgnore) {
+      //Ignore balance
       return oldPrice;
-    } else if (randomNumber <= balanceChances.chanceOfIgnore + balanceChances.chanceOfPriceIncrease) { //increase
+    } else if (randomNumber <= balanceChances.chanceOfIgnore + balanceChances.chanceOfPriceIncrease) {
+      //increase
       const newPrice = oldPrice + (balanceChances.priceValueShift ?? 10);
-      return newPrice > gameSettingsStore.settingsLimits.playerPrice.max ? gameSettingsStore.settingsLimits.playerPrice.max : newPrice;
+      return newPrice > gameSettingsStore.settingsLimits.playerPrice.max
+        ? gameSettingsStore.settingsLimits.playerPrice.max
+        : newPrice;
     } else {
       const newPrice = oldPrice - (balanceChances.priceValueShift ?? 10);
-      return newPrice < gameSettingsStore.settingsLimits.playerPrice.min ? gameSettingsStore.settingsLimits.playerPrice.min : newPrice;
+      return newPrice < gameSettingsStore.settingsLimits.playerPrice.min
+        ? gameSettingsStore.settingsLimits.playerPrice.min
+        : newPrice;
     }
   }
 
-  private createPlayers(playersCount: number, difficulty: number, characteristicBalance: number, playersBalance: number): Player[] {
+  private createPlayers(
+    playersCount: number,
+    difficulty: number,
+    characteristicBalance: number,
+    playersBalance: number,
+    sexualOrientation: SexualOrientation,
+  ): Player[] {
     const players: Player[] = [];
     this.pseudoRandomGenerator.resetSeed();
 
@@ -119,7 +189,7 @@ class CreateGame {
       const playerPrice = this.balancePlayerPrice(playersBalance, difficultyToTotalPrice(difficulty));
       console.log(playerPrice);
 
-      players.push(this.createPlayer(playerPrice, characteristicBalance));
+      players.push(this.createPlayer(playerPrice, characteristicBalance, sexualOrientation));
     }
 
     this.usedProfessions = professions.slice(); //TODO refactor
@@ -132,7 +202,13 @@ class CreateGame {
     return {
       apocalypse: this.selectRandomApocalypse(gameSettings.apocalypses),
       shelter: this.selectRandomShelter(gameSettings.shelters),
-      players: this.createPlayers(gameSettings.playersCount, gameSettings.difficulty, gameSettings.characteristicBalance, gameSettings.balance),
+      players: this.createPlayers(
+        gameSettings.playersCount,
+        gameSettings.difficulty,
+        gameSettings.characteristicBalance,
+        gameSettings.balance,
+        gameSettings.sexualOrientation,
+      ),
       ending: 'Вы проебали!',
     };
   }
