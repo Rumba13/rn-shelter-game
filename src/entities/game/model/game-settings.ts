@@ -3,7 +3,6 @@ import { SexualOrientation } from '@/src/shared/lib/types/sexual-orientation';
 import { GameSettings } from '@/src/shared/lib/types/game-settings';
 
 class GameSettingsStore {
-  //@ts-ignore
   public settings: GameSettings = {
     sexualOrientation: SexualOrientation.Random,
     hillbillyMode: false,
@@ -13,6 +12,7 @@ class GameSettingsStore {
     shelters: [],
     apocalypses: [],
     cardsKit: [],
+    characteristicBalance: 2,
   };
   public settingsLimits = {
     difficulty: {
@@ -29,8 +29,18 @@ class GameSettingsStore {
     },
     card: {
       maxPrice: 8,
-      minPrice: 1
-    }
+      minPrice: 1,
+    },
+    characteristicBalance: {
+      max: 4,
+      min: 1,
+    },
+    playerCardsCount: 10,
+    playerPrice: {
+      max: 80,
+      min: 10,
+    },
+
   };
 
   public setSettings(callBack: (settings: GameSettings) => any) {

@@ -11,6 +11,7 @@ export type GameSettings = {
   cardsKit: Card[];
   apocalypses: Apocalypse[];
   shelters: Shelter[];
+  characteristicBalance: number
 
   //Special options
   hillbillyMode: boolean;
