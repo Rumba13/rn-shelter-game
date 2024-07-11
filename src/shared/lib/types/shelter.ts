@@ -7,4 +7,5 @@ export type Shelter = {
   spaceInSquareMeters: number;
   stayTimeInMonths: number;
   difficulty: number;
+  id: number;
 };

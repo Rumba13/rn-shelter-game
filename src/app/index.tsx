@@ -5,10 +5,12 @@ import { AppLayout } from '@/src/layouts/app-layout';
 import { Alert, Button, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { CreateGamePage } from '@/src/pages/create-game-page';
 import { SelectPlayerPage } from '@/src/pages/select-player-page';
-import { createGame } from '@/src/feature/create-game/model/create-game';
+import { createGameStore } from '@/src/feature/create-game/model/create-game';
 import { gameSettingsStore } from '@/src/entities/game';
 import { Camera, CameraView, useCameraPermissions } from 'expo-camera';
 import { useEffect } from 'react';
+import { ConnectedToGamePage } from '@/src/pages/connect-to-game-page';
+import { gameStore } from '@/src/entities/game/model/game';
 
 const Stack = createNativeStackNavigator();
 
@@ -17,14 +19,15 @@ export default function App() {
   const [permission, requestPermission] = useCameraPermissions();
 
   useEffect(() => {
-
   }, [permission]);
 
   if (!permission?.granted) {
-    return <AppLayout>
-      <Text>asdad</Text>
-      <Button title={'Per'} onPress={requestPermission} />
-    </AppLayout>;
+    return (
+      <AppLayout>
+        <Text>asdad</Text>
+        <Button title={'Per'} onPress={requestPermission} />
+      </AppLayout>
+    );
   }
 
   const HomePageRoute = ({ navigation }: any) => {
@@ -48,19 +51,22 @@ export default function App() {
       </AppLayout>
     );
   };
+  const ConnectToGamePageRoute = ({ navigation }: any) => {
+    return (
+      <AppLayout>
+        <ConnectedToGamePage navigation={navigation} />
+      </AppLayout>
+    );
+  };
   const DevPageRoute = ({ navigation }: any) => {
-    const game = createGame.createGame(gameSettingsStore.settings);
+    const game = gameStore.getGame();
 
     return (
       <AppLayout>
         <ScrollView>
-          <CameraView barcodeScannerSettings={{ barcodeTypes: ['qr'] }} facing={'back'}
-                      style={{ height: 200, width: 200, flex: 1 }} onBarcodeScanned={(scanningResult) => {
-            Alert.alert(scanningResult.data);
-          }}>
-
-          </CameraView>
           <Text>
+            {game.shelter.name}
+            {game.apocalypse.name}
             {game.players.map(player => (
               <View key={player.profession}>
                 <Text>------------------- {player.profession}</Text>
@@ -109,6 +115,7 @@ export default function App() {
         <Stack.Screen name={'create-game-page'} options={stackScreenOptions} component={CreateGamePageRoute} />
         <Stack.Screen name={'select-player-page'} options={stackScreenOptions} component={SelectPlayerPageRoute} />
         <Stack.Screen name={'dev-page'} options={stackScreenOptions} component={DevPageRoute} />
+        <Stack.Screen name={'connect-to-game-page'} options={stackScreenOptions} component={ConnectToGamePageRoute} />
       </Stack.Navigator>
     </NavigationContainer>
   );

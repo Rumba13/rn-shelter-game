@@ -22,6 +22,7 @@ export const HomePage = ({ navigation }: PropsType) => {
             height={130}
             width={'100%'}
             style={{ marginBottom: 5 }}
+            onPress={() => navigation.navigate('connect-to-game-page')}
           />
 
           <ImageButton

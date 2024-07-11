@@ -18,7 +18,7 @@ import { renderBunkerSelectedText } from '@/src/pages/create-game-page/ui/render
 import { sheltersCategories } from '@/src/entities/shelter';
 import { ShelterCategoryList } from '@/src/shared/lib/types/shelter-category-list';
 import { shelterNameToShelter } from '@/src/entities/shelter/model/shelter-name-to-shelter';
-import { apocalypsesCategories } from '@/src/entities/apocalypse';
+import { apocalypses, apocalypsesCategories } from '@/src/entities/apocalypse';
 import { ApocalypseCategories } from '@/src/shared/lib/types/apocalypse-categories';
 import { renderApocalypseSelectedText } from '@/src/pages/create-game-page/ui/render-apocalypse-selected-text';
 import { apocalypseNameToApocalypse } from '@/src/entities/apocalypse/model/apocalypse-name-to-apocalypse';
@@ -30,6 +30,8 @@ import { renderCharacteristicCardSelectedText } from '@/src/pages/create-game-pa
 import { CharacteristicCardsList } from '@/src/shared/lib/types/characteristic-cards-list';
 import { characteristicCardNameToCard } from '@/src/entities/characteristic-card/model/characteristic-card-name-to-card';
 import { characteristicBalanceValueToTitle } from '@/src/pages/create-game-page/ui/characteristic-balance-value-to-title';
+import { createGameStore } from '@/src/feature/create-game/model/create-game';
+import { gameStore } from '@/src/entities/game/model/game';
 //TODO refactoring
 //TODO fix font issues
 
@@ -142,6 +144,7 @@ export const CreateGamePage = observer(({ navigation }: PropsType) => {
                   subKey={'children'}
                   displayKey={'name'}
                   selectText={'Выбрать бункер'}
+                  selectedByDefault={["Тора Бора"]}
                   searchPlaceholderText={'Искать Бункеры'}
                   onValueChange={shelterNames =>
                     gameSettingsStore.setSettings(options => {
@@ -157,6 +160,7 @@ export const CreateGamePage = observer(({ navigation }: PropsType) => {
                   items={apocalypsesCategories}
                   uniqueKey={'name'}
                   displayKey={'name'}
+                  selectedByDefault={["Гигантские Змеи"]}
                   selectText={'Выбрать Апокалипсис'}
                   searchPlaceholderText={'Искать Апокалипсисы'}
                   onValueChange={apocalypsesNames =>
@@ -194,7 +198,13 @@ export const CreateGamePage = observer(({ navigation }: PropsType) => {
         </View>
       </ImageBackground>
 
-      <Footer onNextButtonPress={() => navigation.navigate('select-player-page')} styles={{ marginHorizontal: 50 }} />
+      <Footer
+        onNextButtonPress={() => {
+          gameStore.setGame(createGameStore.createGame(gameSettingsStore.settings));
+          navigation.navigate('select-player-page');
+        }}
+        styles={{ marginHorizontal: 50 }}
+      />
     </View>
   );
 });

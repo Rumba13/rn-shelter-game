@@ -1,0 +1,244 @@
+{
+  "apocalypse": {
+    "name": "Гигантские Змеи",
+    "description": "Новая технология по ускорению размножения и роста домашних птиц позволила совершить прорыв в сельском хозяйстве. Из-за халатности сотрудников птицефермы технология была  применена также и на змей, что привело к их быстрому размножению и увеличению в размерах. В скором времени угроза гигантских рептилий стала самой большой опасностью для всего человечества."
+  },
+  "shelter": {
+    "name": "Dutchman",
+    "stayTimeI nMonths": 9,
+    "location": "Пустыня",
+    "spaceInSquareMeters": 250,
+    "difficulty": 3,
+    "description": "Полузаброшенный бункер, никогда не использовавшийся по назначению. Система вентиляции бункера сильно шумит.",
+    "rooms": [
+      "Библиотека (вход завале н)",
+      "Кухня (в идеальном состоянии)",
+      "Оранжерея (дверь заперта)",
+      "Мед. кабинет (вход завален)"
+    ],
+    "resources": ["Консервированные овощи и фрукты", "Кондиционер"]
+  },
+  "players": [
+    {
+      "isKicked": false,
+      "profession": "Бизнесмен",
+      "additionalInformation": {
+        "type": "additional-information",
+        "name": "Глубоко верующий",
+        "price": 5
+      },
+      "health": {
+        "type": "health",
+        "name": "Наркотическая зависимость",
+        "price": 4
+      },
+      "bioCharacteristics": {
+        "type": "bio",
+        "name": "Мужчина/ 45 лет/ асексуальный",
+        "price": 4
+      },
+      "character": {
+        "type": "character",
+        "name": "Самовлюблённый",
+        "price": 4
+      },
+      "hobby": {
+        "type": "hobby",
+        "name": "Нудизм",
+        "price": 4
+      },
+      "luggage": {
+        "type": "luggage",
+        "name": "Комплект раций",
+        "price": 6
+      },
+      "knowledge": {
+        "type": "knowledge",
+        "name": "В бунк ере есть комната с картой местности",
+        "price": 6
+      },
+      "phobia": {
+        "type": "phobia",
+        "name": "Библиофобия – боязнь библиотек",
+        "price": 4
+      },
+      "actionCard": {
+        "type": "action-card",
+        "name": "Выбранный игрок не вскрывает характеристику на следующем ходу",
+        "price": 4
+      },
+      "conditionCard": {
+        "type": "condition-card",
+        "name": "Если вы проходите в бункер команда получает дополнительный запас продовольствия (озвучивается в конце игры)",
+        "price": 4
+      },
+      "notes": ""
+    },
+    {
+      "isKicked": false,
+      "profession": "Программист",
+      "additionalInformation": {
+        "type": "additional-information",
+        "name": "Может сделать алкоголь из чего угодно",
+        "price": 7
+      },
+      "health": {
+        "type": "health",
+        "name": "Псориаз",
+        "price": 5
+      },
+      "bioCharacteristics": {
+        "type": "bio",
+        "name": "Мужчина/ 3 6 лет/ пансексуальный",
+        "price": 6
+      },
+      "character": {
+        "type": "character",
+        "name": "Тактик",
+        "price": 6
+      },
+      "hobby": {
+        "type": "hobby",
+        "name": "Рыбалка",
+        "price": 5
+      },
+      "luggage": {
+        "type": "luggage",
+        "name": "Химические средства от крупных вредителей",
+        "price ": 5
+      },
+      "knowledge": {
+        "type": "knowledge",
+        "name": "Координаты медицинского бункера с сертифицированными врачами",
+        "price": 5
+      },
+      "phobia": {
+        "type": "phobia",
+        "name": "Гилофобия — боязнь леса, заблудиться в лесу",
+        "price": 5
+      },
+      "actionCard": {
+        "type": " action-card",
+        "name": "Уничтожьте багаж любого игрока (раскрытый)",
+        "price": 5
+      },
+      "conditionCard": {
+        "type": "condition-card",
+        "name": "Если игрок меняется с вами характеристикой, вы не можете быть выгнаны до него (работает 1 раз)",
+        "price": 6
+      },
+      "notes": ""
+    },
+    {
+      "isKicked": false,
+      "profession": "Стриптизёр",
+      "additionalInformation": {
+        "type": "additional-information",
+        "name": "Продавал наркотики",
+        "price": 5
+      },
+      "health": {
+        "type": "health",
+        "name": "Повышенное давление",
+        "price": 5
+      },
+      "bioCharacteristics": {
+        "type": "bio",
+        "name": "Женщина/ 68 лет/ гетеросексуальная",
+        "price": 4
+      },
+      "character": {
+        "type": "character",
+        "name": "Добрый",
+        "price": 6
+      },
+      "hobby": {
+        "type": "hobby",
+        "name": "Охота",
+        "price": 5
+      },
+      "luggage": {
+        "name": "Бомба(взрыв через 10 ч асов)",
+        "type": "luggage",
+        "price": 2
+      },
+      "knowledge": {
+        "name": "Знает мать одного из игроков",
+        "type": "knowledge",
+        "price": 4
+      },
+      "phobia": {
+        "type": "phobia",
+        "name": "Танатофобия — паническая боязнь смерти",
+        "price": 4
+      },
+      "actionCard": {
+        "type": "action- card",
+        "name": "Уменьшите возраст выбранного игрока на 10 (минимальный возраст 18)",
+        "price": 5
+      },
+      "conditionCard": {
+        "type": "condition-card",
+        "name": "Если две ваши характеристики были раскрыты картами действия или условия, за вас нельзя п роголосовать до конца игры",
+        "price": 5
+      },
+      "notes": ""
+    },
+    {
+      "isKicked": false,
+      "profession": "Бомж",
+      "additionalInformation": {
+        "type": "additional-information",
+        "name": "Состоит в клубе \"Навыки выживания\" 3 года",
+        "price": 7
+      },
+      "health": {
+        "type": "health",
+        "name": "Псориаз",
+        "price": 5
+      },
+      "bioCharacteristics": {
+        "type": "bio",
+        "name": "Женщина/ 31 год/ асексуальная",
+        "price": 5
+      },
+      "character": {
+        "type": "character",
+        "name": "Отважный",
+        "price": 6
+      },
+      "hobby": {
+        "type": "hobby",
+        "name": "Сбор грибов",
+        "price": 5
+      },
+      "luggage": {
+        "type": "luggage",
+        "name": "Химические средства от крупных вредителей",
+        "price": 5
+      },
+      "knowledge": {
+        "type": "knowledge",
+        "name": "Координаты склада с оружием",
+        "price": 6
+      },
+      "phobia": {
+        "type": "phobia",
+        "name": "Гилофобия — боязнь леса, заблудиться в лесу",
+        "price": 5
+      },
+      "actionCard": {
+        "type": "action-card",
+        "name": "Уменьшите возраст выбранного игрока на 10 (минимальный возраст 18)",
+        "price": 5
+      },
+      "conditionCard": {
+        "type": "condition-card",
+        "name": "Если вас выгнали на первом голосовании, вы выбираете того, кто выйдет из бункера вместо вас и остаётесь в бункере (вас всё ещё можно выгнать позже)",
+        "price": 6
+      },
+      "notes": ""
+    }
+  ],
+  "ending": "Вы проебали!"
+}

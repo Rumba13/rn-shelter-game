@@ -1,5 +1,5 @@
 import { GameSettings } from '@/src/shared/lib/types/game-settings';
-import { Game } from '@/src/shared/lib/types/game';
+import { GameType } from '@/src/shared/lib/types/game';
 import { Apocalypse } from '@/src/shared/lib/types/apocalypse';
 import { Shelter } from '@/src/shared/lib/types/shelter';
 import { Player } from '@/src/shared/lib/types/player';
@@ -17,7 +17,7 @@ import { playersBalanceToBalanceChances } from '@/src/feature/create-game/model/
 import { SexualOrientation } from '@/src/shared/lib/types/sexual-orientation';
 import { genders } from '@/src/entities/gender/model/genders';
 
-class CreateGame {
+class CreateGameStore {
   private readonly pseudoRandomGenerator: PseudoRandomGenerator;
   private createPriceMap: CreatePriceMap;
   private readonly _seedMax = 20000;
@@ -157,7 +157,6 @@ class CreateGame {
   private balancePlayerPrice(playersBalance: number, oldPrice: number): number {
     const balanceChances: BalanceChances = playersBalanceToBalanceChances(playersBalance);
     const randomNumber: number = Math.trunc(this.pseudoRandomGenerator.generateInRange(1, 101));
-    console.log('number: ' + randomNumber);
     if (randomNumber <= balanceChances.chanceOfIgnore) {
       //Ignore balance
       return oldPrice;
@@ -187,16 +186,16 @@ class CreateGame {
 
     for (let i = 1; i <= playersCount; i++) {
       const playerPrice = this.balancePlayerPrice(playersBalance, difficultyToTotalPrice(difficulty));
-      console.log(playerPrice);
 
       players.push(this.createPlayer(playerPrice, characteristicBalance, sexualOrientation));
     }
 
     this.usedProfessions = professions.slice(); //TODO refactor
+
     return players;
   }
 
-  public createGame(gameSettings: GameSettings): Game {
+  public createGame(gameSettings: GameSettings): GameType {
     sortedCardsStore.setCardsKit(gameSettings.cardsKit);
 
     return {
@@ -214,4 +213,4 @@ class CreateGame {
   }
 }
 
-export const createGame = new CreateGame();
+export const createGameStore = new CreateGameStore();

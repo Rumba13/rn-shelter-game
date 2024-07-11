@@ -1,6 +1,7 @@
 import { makeAutoObservable, runInAction } from 'mobx';
 import { SexualOrientation } from '@/src/shared/lib/types/sexual-orientation';
 import { GameSettings } from '@/src/shared/lib/types/game-settings';
+import { shelters } from '@/src/entities/shelter/model/shelters';
 
 class GameSettingsStore {
   public settings: GameSettings = {

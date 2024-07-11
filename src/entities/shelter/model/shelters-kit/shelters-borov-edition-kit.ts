@@ -1,4 +1,7 @@
 import { Shelter } from '@/src/shared/lib/types/shelter';
+import { sheltersStandartEditionKit } from '@/src/entities/shelter/model/shelters-kit/shelters-standart-edition-kit';
+
+const previousKitId = (sheltersStandartEditionKit.at(-1)?.id || 0);
 
 export const sheltersBorovEditionKit: Shelter[] = [
   {
@@ -10,6 +13,7 @@ export const sheltersBorovEditionKit: Shelter[] = [
     spaceInSquareMeters: 20,
     stayTimeInMonths: 1,
     difficulty: 8,
+    id: previousKitId + 1,
   },
   {
     name: 'ЗИП',
@@ -26,5 +30,6 @@ export const sheltersBorovEditionKit: Shelter[] = [
     spaceInSquareMeters: 5000,
     stayTimeInMonths: 12 * 8,
     difficulty: 1,
+    id: previousKitId + 2,
   },
 ];

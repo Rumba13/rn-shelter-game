@@ -5,6 +5,7 @@ import { ImageButton } from '@/src/shared/ui/image-button/ui';
 import { Footer } from '@/src/shared/ui/footer/ui';
 import { SelectPlayerSlider } from '@/src/pages/select-player-page/ui/select-player-slider/ui';
 import QRCode from 'react-native-qrcode-svg';
+import { gameStore } from '@/src/entities/game';
 
 type PropsType = {
   navigation: any;
@@ -17,8 +18,8 @@ export function SelectPlayerPage({ navigation }: PropsType) {
     RobotoSlabSemiBold: require('@/assets/fonts/RobotoSlab-SemiBold.ttf'),
   });
   const translateYAnim = useRef(new Animated.Value(-200)).current;
-
-  useEffect(() => {}, [fontsLoaded, translateYAnim]);
+  useEffect(() => {
+  }, [fontsLoaded, translateYAnim]);
 
   const showTicket = () => {
     Animated.timing(translateYAnim, {
@@ -48,11 +49,7 @@ export function SelectPlayerPage({ navigation }: PropsType) {
           source={require('@/assets/images/playerselectionscreen/ticket/ticket(gay_people).png')}
         />
         <View style={s.QRCodeWrapper}>
-          <QRCode
-            value={'Ева очень любила сочный хуй Димы, но больше всего любила есть'}
-            size={QRCodeSize}
-            backgroundColor={'transparent'}
-          />
+          <QRCode value={gameStore.createGameCode()} size={QRCodeSize} backgroundColor={'transparent'} />
         </View>
         <ImageButton
           width={100}
@@ -78,7 +75,7 @@ export function SelectPlayerPage({ navigation }: PropsType) {
       <Text style={s.selectPlayerPageSubTitle}>Два дауна не могут иметь один и тот же номер</Text>
       <SelectPlayerSlider />
 
-      <Footer onNextButtonPress={() => navigation.navigate('dev-page')} styles={{ position: 'relative', bottom: -7 }} />
+      <Footer onNextButtonPress={() => navigation.navigate('dev-page')} />
     </Animated.View>
   );
 }

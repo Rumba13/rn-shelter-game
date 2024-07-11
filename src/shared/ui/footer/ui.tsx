@@ -2,7 +2,7 @@ import { Alert, Image, StyleProp, View, ViewStyle } from 'react-native';
 import { ImageButton } from '@/src/shared/ui/image-button/ui';
 import { useFonts } from 'expo-font';
 import { gameSettingsStore } from '@/src/entities/game/model/game-settings';
-import { createGame } from '@/src/feature/create-game/model/create-game';
+import { createGameStore } from '@/src/feature/create-game/model/create-game';
 
 type PropsType = {
   styles?: StyleProp<ViewStyle>;
@@ -28,6 +28,7 @@ export function Footer({ styles, onNextButtonPress }: PropsType) {
           }}
         />
       </View>
+
       <Image
         style={s.footerDetail}
         resizeMode={'contain'}
@@ -41,16 +42,14 @@ const s: any = {
   footer: {
     display: 'flex',
     flexBasis: 'auto',
-    height: 'auto',
     position: 'relative',
+    flexShrink: 1,
     maxWidth: '100%',
-    bottom: 7,
   },
   footerDetail: {
     width: '100%',
-    flexBasis: 80,
+    height: 68,
     position: 'relative',
-    bottom: 0,
   },
   createGameButton: {
     position: 'relative',
