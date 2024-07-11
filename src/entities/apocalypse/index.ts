@@ -1,1 +1,1 @@
-export { apocalypses, apocalypsesCategories } from './model/apocalypses'
+export { apocalypses, apocalypsesCategories } from './model/apocalypses';

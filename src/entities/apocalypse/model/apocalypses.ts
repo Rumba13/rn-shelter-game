@@ -1,46 +1,17 @@
-import { Apocalypse } from '@/src/shared/lib/types/apocalypse'
-import { ApocalypseCategories } from '@/src/shared/lib/types/apocalypse-categories'
+import { Apocalypse } from '@/src/shared/lib/types/apocalypse';
+import { ApocalypseCategories } from '@/src/shared/lib/types/apocalypse-categories';
+import { apocalypsesStandartEditionKit } from '@/src/entities/apocalypse/model/apocalypses-kits/apocalypses-standart-edition-kit';
+import { apocalypsesBorovEditionKit } from '@/src/entities/apocalypse/model/apocalypses-kits/apocalypses-borov-edition-kit';
 
-const apocalypsesDefaultKit: Apocalypse[] = [
-  {
-    name: 'Ледниковый период',
-    description:
-      'В целях борьбы с глобальным потеплением правительства нескольких стран договорились построить искусственные охладители в своих водах. По завершению постройки стало ясно, что проект был ошибкой. Температура воды и воздуха упала слишком низко, и теперь человечеству приходиться иметь дело с новым ледниковым периодом',
-  },
-  {
-    name: 'Паразит-Пришелец',
-    description:
-      'Люди и животные по всему миру подверглись заражению инопланетными паразитами. Исследования показали, что, проникая в тело, паразитические организм стремится захватить мозг и присвоить тело носителя. Заражённые особи начинают охоту на себе подобных.',
-  },
-]
-const apocalypsesBorovEditionKit: Apocalypse[] = [
-  {
-    name: 'Эпоха Димы',
-    description: '',
-  },
-]
-
-export const apocalypses: Apocalypse[] = [
-  ...apocalypsesDefaultKit,
-  ...apocalypsesBorovEditionKit,
-  //
-  // {
-  //   name: '',
-  //   description: '',
-  // },
-  // {
-  //   name: '',
-  //   description: '',
-  // },
-]
+export const apocalypses: Apocalypse[] = [...apocalypsesStandartEditionKit, ...apocalypsesBorovEditionKit];
 
 export const apocalypsesCategories: ApocalypseCategories[] = [
   {
     name: 'Апокалипсисы Стандартного Издания',
-    children: [...apocalypsesDefaultKit],
+    children: [...apocalypsesStandartEditionKit],
   },
   {
     name: 'Апокалипсисы Издания "Боров"',
     children: [...apocalypsesBorovEditionKit],
   },
-]
+];

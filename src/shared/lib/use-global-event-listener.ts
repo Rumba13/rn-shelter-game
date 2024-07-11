@@ -1,7 +1,7 @@
-type ListenerEventsType = 'PointerUp'
+type ListenerEventsType = 'PointerUp';
 
 export function useGlobalEventListener(event: ListenerEventsType) {
-  const globalListener = () => {}
+  const globalListener = () => {};
 
-  return { globalListener }
+  return { globalListener };
 }

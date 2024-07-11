@@ -1,1 +1,1 @@
-export { sheltersCategories } from './model/shelters'
+export { sheltersCategories } from './model/shelters';

@@ -1,20 +1,20 @@
-import { Alert, Dimensions, ImageBackground, StatusBar, StyleSheet, View } from 'react-native'
-import { useEffect } from 'react'
-import { useModal } from '@/src/shared/lib/use-modal'
+import { Alert, Dimensions, ImageBackground, StatusBar, StyleSheet, View } from 'react-native';
+import { useEffect } from 'react';
+import { useModal } from '@/src/shared/lib/use-modal';
 
 type PropsType = {
-  children: React.ReactNode
-}
+  children: React.ReactNode;
+};
 
 export function AppLayout(props: PropsType) {
-  let { children } = props
+  let { children } = props;
 
   useEffect(() => {
     setTimeout(() => {
-      StatusBar.setTranslucent(true) //TODO find component that overriding the properties
-      StatusBar.setBackgroundColor('#c3b5a8')
-    }, 100)
-  })
+      StatusBar.setTranslucent(true); //TODO find component that overriding the properties
+      StatusBar.setBackgroundColor('#c3b5a8');
+    }, 100);
+  });
 
   return (
     <View style={s.root}>
@@ -25,7 +25,7 @@ export function AppLayout(props: PropsType) {
         {children}
       </ImageBackground>
     </View>
-  )
+  );
 }
 
 const s = StyleSheet.create({
@@ -37,7 +37,7 @@ const s = StyleSheet.create({
     height: Dimensions.get('window').height,
     width: Dimensions.get('window').width,
   },
-})
+});
 
 //borderWidth:3,
 //borderColor: "#000000",

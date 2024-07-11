@@ -7,26 +7,26 @@ import {
   StatusBar,
   SafeAreaView,
   Animated,
-} from 'react-native'
-import { OverlayModal } from '@/src/shared/ui/overlay-modal/ui'
+} from 'react-native';
+import { OverlayModal } from '@/src/shared/ui/overlay-modal/ui';
 
-import { useModal } from '@/src/shared/lib/use-modal'
-import { ImageButton } from '@/src/shared/ui/image-button/ui'
-import ScrollView = Animated.ScrollView
-import { useFonts } from 'expo-font'
-import { useEffect } from 'react'
+import { useModal } from '@/src/shared/lib/use-modal';
+import { ImageButton } from '@/src/shared/ui/image-button/ui';
+import ScrollView = Animated.ScrollView;
+import { useFonts } from 'expo-font';
+import { useEffect } from 'react';
 //TODO refactor
 //TODO make working scroll
 export function InfoButton() {
-  const { isModalOpened, setIsModalOpened, toggleModal } = useModal()
+  const { isModalOpened, setIsModalOpened, toggleModal } = useModal();
   const [fontsLoaded] = useFonts({
     SpaceMono: require('../../../../../assets/fonts/SpaceMono-Regular.ttf'),
-  })
+  });
 
-  useEffect(() => {}, [fontsLoaded])
+  useEffect(() => {}, [fontsLoaded]);
 
   if (!fontsLoaded) {
-    return <Text>Loading...</Text>
+    return <Text>Loading...</Text>;
   }
 
   return (
@@ -75,7 +75,7 @@ export function InfoButton() {
         </View>
       </OverlayModal>
     </View>
-  )
+  );
 }
 
 const s: any = {
@@ -103,4 +103,4 @@ const s: any = {
     height: 328,
     borderRadius: 3,
   },
-}
+};

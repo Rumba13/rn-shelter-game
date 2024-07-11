@@ -1,20 +1,20 @@
-import React from 'react'
+import React from 'react';
 
 export function useModal(isOpenByDefault: boolean = false) {
-  const [isOpened, setIsOpened] = React.useState<boolean>(isOpenByDefault)
+  const [isOpened, setIsOpened] = React.useState<boolean>(isOpenByDefault);
 
   const _globalEventListener = () => {
-    setIsOpened(false)
-  }
+    setIsOpened(false);
+  };
 
   const toggleModal = () => {
-    setIsOpened(!isOpened)
-  }
+    setIsOpened(!isOpened);
+  };
 
   return {
     toggleModal,
     setIsModalOpened: setIsOpened,
     isModalOpened: isOpened,
     _onPointerUpGlobalListener: _globalEventListener,
-  }
+  };
 }

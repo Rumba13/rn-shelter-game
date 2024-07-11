@@ -1,26 +1,26 @@
-import { Image, ImageBackground, Text, View } from 'react-native'
-import { ImageButton } from '@/src/shared/ui/image-button/ui'
-import { useFonts } from 'expo-font'
-import { useEffect, useState } from 'react'
-import Collapsible from 'react-native-collapsible'
+import { Image, ImageBackground, Text, View } from 'react-native';
+import { ImageButton } from '@/src/shared/ui/image-button/ui';
+import { useFonts } from 'expo-font';
+import { useEffect, useState } from 'react';
+import Collapsible from 'react-native-collapsible';
 
 type PropsType = {
-  children: any
-  title: string
-  descriptionHeight: number
-  description: string
-}
+  children: any;
+  title: string;
+  descriptionHeight: number;
+  description: string;
+};
 //TODO fix background flash when toggle collapsible
 export function GameOptionBase({ title, children, descriptionHeight, description }: PropsType) {
-  const [isCollapsed, setIsCollapsed] = useState<boolean>(true)
+  const [isCollapsed, setIsCollapsed] = useState<boolean>(true);
   const [fontsLoaded] = useFonts({
     RobotoSlabSemiBold: require('@/assets/fonts/RobotoSlab-SemiBold.ttf'),
-  })
+  });
 
-  useEffect(() => {}, [fontsLoaded])
+  useEffect(() => {}, [fontsLoaded]);
 
   if (!fontsLoaded) {
-    return <View></View>
+    return <View></View>;
   }
 
   return (
@@ -52,10 +52,10 @@ export function GameOptionBase({ title, children, descriptionHeight, description
       </View>
       <Image style={s.separator} source={require('@/assets/images/gamecreationscreen/razdelenije.png')} />
     </View>
-  )
+  );
 }
 
-const helpButtonSize = 35
+const helpButtonSize = 35;
 
 const s: any = {
   gameOption: {
@@ -92,4 +92,4 @@ const s: any = {
     maxWidth: '100%',
     height: 6,
   },
-}
+};

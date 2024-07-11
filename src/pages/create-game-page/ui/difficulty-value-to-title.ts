@@ -8,8 +8,8 @@ export function difficultyValueToTitle(value: number): string {
     6: 'Катастрофа',
     7: 'ПИЗДЕЦ',
     8: '🔥ЗИП в час пик🔥',
-  }
+  };
 
   //@ts-ignore
-  return difficultyMap[value]
+  return difficultyMap[value];
 }

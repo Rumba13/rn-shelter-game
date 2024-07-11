@@ -1,11 +1,11 @@
-import { Alert, Image, ImageBackground, View } from 'react-native'
-import React from 'react'
-import { ImageButton } from '@/src/shared/ui/image-button/ui'
-import { InfoButton } from '@/src/pages/home-page/ui/info-button/ui'
+import { Alert, Image, ImageBackground, View } from 'react-native';
+import React from 'react';
+import { ImageButton } from '@/src/shared/ui/image-button/ui';
+import { InfoButton } from '@/src/pages/home-page/ui/info-button/ui';
 
 type PropsType = {
-  navigation: any
-}
+  navigation: any;
+};
 
 export const HomePage = ({ navigation }: PropsType) => {
   return (
@@ -67,8 +67,8 @@ export const HomePage = ({ navigation }: PropsType) => {
         </View>
       </View>
     </View>
-  )
-}
+  );
+};
 
 const s: any = {
   homePage: {
@@ -102,4 +102,4 @@ const s: any = {
     paddingLeft: 7,
     paddingBottom: 1,
   },
-}
+};

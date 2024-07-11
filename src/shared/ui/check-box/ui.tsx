@@ -7,23 +7,23 @@ import {
   Text,
   TouchableWithoutFeedback,
   View,
-} from 'react-native'
-import { useEffect, useRef, useState } from 'react'
-import { useFonts } from 'expo-font'
-import { Grayscale } from 'react-native-color-matrix-image-filters'
+} from 'react-native';
+import { useEffect, useRef, useState } from 'react';
+import { useFonts } from 'expo-font';
+import { Grayscale } from 'react-native-color-matrix-image-filters';
 
 type PropsType = {
-  style: any
-  isToggled: boolean
-  setIsToggled: (bool: boolean) => void
-}
+  style: any;
+  isToggled: boolean;
+  setIsToggled: (bool: boolean) => void;
+};
 
 export function CheckBox({ style, setIsToggled, isToggled }: PropsType) {
-  const translateXAnim = useRef(new Animated.Value(0)).current
+  const translateXAnim = useRef(new Animated.Value(0)).current;
 
   const [fontsLoaded] = useFonts({
     RobotoSlabSemiBold: require('@/assets/fonts/RobotoSlab-SemiBold.ttf'),
-  })
+  });
 
   const toggleOn = () => {
     Animated.timing(translateXAnim, {
@@ -31,31 +31,31 @@ export function CheckBox({ style, setIsToggled, isToggled }: PropsType) {
       duration: 200,
       useNativeDriver: false,
       isInteraction: true,
-    }).start()
-  }
+    }).start();
+  };
   const toggleOff = () => {
     Animated.timing(translateXAnim, {
       toValue: 0,
       duration: 200,
       useNativeDriver: false,
       isInteraction: true,
-    }).start()
-  }
-  useEffect(() => {}, [translateXAnim, fontsLoaded])
+    }).start();
+  };
+  useEffect(() => {}, [translateXAnim, fontsLoaded]);
 
   if (!fontsLoaded) {
-    return <Text>Loading...</Text>
+    return <Text>Loading...</Text>;
   }
 
   return (
     <Animated.View style={{ ...s.checkBox, ...style }}>
       <TouchableWithoutFeedback
         onPress={() => {
-          setIsToggled(!isToggled)
+          setIsToggled(!isToggled);
           if (isToggled) {
-            toggleOff()
+            toggleOff();
           } else {
-            toggleOn()
+            toggleOn();
           }
         }}>
         <Animated.View style={s.checkBoxChecker}>
@@ -76,7 +76,7 @@ export function CheckBox({ style, setIsToggled, isToggled }: PropsType) {
       </TouchableWithoutFeedback>
       <Text style={s.checkBoxTitle}>{isToggled ? 'Вкл.' : 'Выкл.'}</Text>
     </Animated.View>
-  )
+  );
 }
 
 const s: any = {
@@ -105,4 +105,4 @@ const s: any = {
     marginLeft: 5,
     fontFamily: 'RobotoSlabSemiBold',
   },
-}
+};

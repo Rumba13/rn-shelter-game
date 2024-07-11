@@ -1,25 +1,25 @@
-import { View, Text, Image, Alert, ImageBackground, SafeAreaView, ScrollView } from 'react-native'
-import { useEffect, useState } from 'react'
-import { CheckBox } from '@/src/shared/ui/check-box/ui'
-import { ImageButton } from '@/src/shared/ui/image-button/ui'
-import { useFonts } from 'expo-font'
-import RNPickerSelect from 'react-native-picker-select'
-import { PickerSelectProps } from 'react-native-picker-select'
-import { Range } from '@/src/shared/ui/range/ui'
-import { observer } from 'mobx-react'
-import { gameCreationOptionsModel } from '@/src/entities/game/model/create-game-options'
-import { GameOptionBase } from '@/src/pages/create-game-page/ui/game-option-base/ui'
+import { View, Text, Image, Alert, ImageBackground, SafeAreaView, ScrollView } from 'react-native';
+import { useEffect, useState } from 'react';
+import { CheckBox } from '@/src/shared/ui/check-box/ui';
+import { ImageButton } from '@/src/shared/ui/image-button/ui';
+import { useFonts } from 'expo-font';
+import RNPickerSelect from 'react-native-picker-select';
+import { PickerSelectProps } from 'react-native-picker-select';
+import { Range } from '@/src/shared/ui/range/ui';
+import { observer } from 'mobx-react';
+import { gameCreationOptionsModel } from '@/src/entities/game/model/game-settings';
+import { GameOptionBase } from '@/src/pages/create-game-page/ui/game-option-base/ui';
 
 type PropsType = {
-  title: string
-  onValueChanged: (value: number) => void
-  selectedTitle: string
-  min: number
-  max: number
-  defaultValue: number
-  descriptionHeight: number
-  description: string
-}
+  title: string;
+  onValueChanged: (value: number) => void;
+  selectedTitle: string;
+  min: number;
+  max: number;
+  defaultValue: number;
+  descriptionHeight: number;
+  description: string;
+};
 
 export function GameOptionRange({
   title,
@@ -33,12 +33,12 @@ export function GameOptionRange({
 }: PropsType) {
   const [fontsLoaded] = useFonts({
     RobotoSlabSemiBold: require('@/assets/fonts/RobotoSlab-SemiBold.ttf'),
-  })
+  });
 
-  useEffect(() => {}, [fontsLoaded])
+  useEffect(() => {}, [fontsLoaded]);
 
   if (!fontsLoaded) {
-    return <View></View>
+    return <View></View>;
   }
 
   return (
@@ -61,7 +61,7 @@ export function GameOptionRange({
         }}
       />
     </GameOptionBase>
-  )
+  );
 }
 
 const s: any = {
@@ -80,4 +80,4 @@ const s: any = {
     paddingVertical: 8,
     lineHeight: 20,
   },
-}
+};

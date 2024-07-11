@@ -1,14 +1,14 @@
-import { Image, Text, View } from 'react-native'
-import { Range } from '@/src/shared/ui/range/ui'
-import { OverlayModal } from '@/src/shared/ui/overlay-modal/ui'
-import { ImageButton } from '@/src/shared/ui/image-button/ui'
-import { useState } from 'react'
-import Slider from 'rn-range-slider'
-import { gameCreationOptionsModel } from '@/src/entities/game/model/create-game-options'
-import { observer } from 'mobx-react'
+import { Image, Text, View } from 'react-native';
+import { Range } from '@/src/shared/ui/range/ui';
+import { OverlayModal } from '@/src/shared/ui/overlay-modal/ui';
+import { ImageButton } from '@/src/shared/ui/image-button/ui';
+import { useState } from 'react';
+import Slider from 'rn-range-slider';
+import { gameCreationOptionsModel } from '@/src/entities/game/model/game-settings';
+import { observer } from 'mobx-react';
 
 export const Header = observer(() => {
-  const { playersCount } = gameCreationOptionsModel.options
+  const { playersCount } = gameCreationOptionsModel.settings;
 
   return (
     <View style={s.contentHeader}>
@@ -30,14 +30,14 @@ export const Header = observer(() => {
           max={22}
           defaultValue={4}
           onValueChanged={(playersCount: number) =>
-            gameCreationOptionsModel.setOptions(options => (options.playersCount = playersCount))
+            gameCreationOptionsModel.setSettings(options => (options.playersCount = playersCount))
           }
         />
       </View>
       <Text style={s.headerSubTitle}>Рекомендуемый IQ: 20-93</Text>
     </View>
-  )
-})
+  );
+});
 
 const s: any = {
   modal: {
@@ -104,4 +104,4 @@ const s: any = {
     color: '#6f586c',
     fontWeight: 600,
   },
-}
+};

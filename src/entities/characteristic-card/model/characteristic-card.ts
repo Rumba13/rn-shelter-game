@@ -1,21 +1,11 @@
-import { CharacteristicCard } from '@/src/shared/lib/types/characteristic-card'
-import { CharacteristicCardCategories } from '@/src/shared/lib/types/characteristic-card-categories'
+import { Card } from '@/src/shared/lib/types/card';
+import { CharacteristicCardsList } from '@/src/shared/lib/types/characteristic-cards-list';
+import { cardsStandartEdition } from '@/src/entities/characteristic-card/model/cards-kits/cards-standart-edition';
+import { cardsBorovEdition } from '@/src/entities/characteristic-card/model/cards-kits/cards-borov-edition';
+import { CardType } from '@/src/shared/lib/types/card-type';
 
-const characteristicCardsStandartEdition: CharacteristicCard[] = [
-  { name: 'Тупой', type: 'character' },
-  { name: 'Похож на еву', type: 'bio' },
-  { name: 'Дегройд', type: 'health' },
-]
-const characteristicCardsBorovEdition: CharacteristicCard[] = [
-  { name: 'Увы', type: 'character' },
-  { name: 'ывфы', type: 'bio' },
-  { name: 'ывв', type: 'health' },
-]
-export const characteristicCards: CharacteristicCard[] = [
-  ...characteristicCardsStandartEdition,
-  ...characteristicCardsBorovEdition,
-]
-export const characteristicCardCategories: CharacteristicCardCategories[] = [
-  { name: 'Карточки Стандартного Издания', children: [...characteristicCardsStandartEdition] },
-  { name: 'Карточки Издания "Боров"', children: [...characteristicCardsBorovEdition] },
-]
+export const characteristicCards: Card[] = [...cardsStandartEdition, ...cardsBorovEdition];
+export const characteristicCardsList: CharacteristicCardsList[] = [
+  { name: 'Карточки Стандартного Издания', children: [...cardsStandartEdition] },
+  { name: 'Карточки Издания "Боров"', children: [...cardsBorovEdition] },
+];

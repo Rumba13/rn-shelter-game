@@ -1,4 +1,4 @@
-import { Alert, Image, TouchableWithoutFeedback, View } from 'react-native'
+import { Alert, Image, TouchableWithoutFeedback, View } from 'react-native';
 
 export function Separator() {
   return (
@@ -17,7 +17,7 @@ export function Separator() {
         />
       </TouchableWithoutFeedback>
     </View>
-  )
+  );
 }
 
 const s: any = {
@@ -37,4 +37,4 @@ const s: any = {
   separatorDetail: {
     maxWidth: '100%',
   },
-}
+};

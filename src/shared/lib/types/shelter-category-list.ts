@@ -1,6 +1,6 @@
-import { Shelter } from '@/src/shared/lib/types/shelter'
+import { Shelter } from '@/src/shared/lib/types/shelter';
 
 export type ShelterCategoryList = {
-  name: string
-  children?: Shelter[]
-}
+  name: string;
+  children?: Shelter[];
+};

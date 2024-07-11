@@ -9,25 +9,25 @@ import {
   TextStyle,
   TouchableWithoutFeedback,
   View,
-} from 'react-native'
-import { useEffect, useState } from 'react'
+} from 'react-native';
+import { useEffect, useState } from 'react';
 
 type PropsType = {
-  buttonImage: any
-  shadowImage: any
-  height?: number | string
-  width?: number | string
-  style?: any
-  onPress?: (event: GestureResponderEvent) => void
+  buttonImage: any;
+  shadowImage: any;
+  height?: number | string;
+  width?: number | string;
+  style?: any;
+  onPress?: (event: GestureResponderEvent) => void;
   options?: {
-    xOffSetOnPress?: number
-    yOffsetOnPress?: number
-    xOffset?: number
-    yOffset?: number
-  }
-  title?: string
-  styleTitle?: StyleProp<TextStyle>
-}
+    xOffSetOnPress?: number;
+    yOffsetOnPress?: number;
+    xOffset?: number;
+    yOffset?: number;
+  };
+  title?: string;
+  styleTitle?: StyleProp<TextStyle>;
+};
 
 export function ImageButton({
   buttonImage,
@@ -40,7 +40,7 @@ export function ImageButton({
   title,
   styleTitle,
 }: PropsType) {
-  const [isButtonPressed, setIsButtonPressed] = useState<boolean>(false)
+  const [isButtonPressed, setIsButtonPressed] = useState<boolean>(false);
 
   const buttonOnPressIn = () => {
     LayoutAnimation.configureNext({
@@ -49,9 +49,9 @@ export function ImageButton({
       delete: { type: 'linear', property: 'opacity' },
 
       duration: 55,
-    })
-    setIsButtonPressed(true)
-  }
+    });
+    setIsButtonPressed(true);
+  };
   const buttonOnPressOut = () => {
     LayoutAnimation.configureNext({
       create: { type: 'linear', property: 'opacity' },
@@ -59,10 +59,10 @@ export function ImageButton({
       delete: { type: 'linear', property: 'opacity' },
 
       duration: 55,
-    })
+    });
 
-    setIsButtonPressed(false)
-  }
+    setIsButtonPressed(false);
+  };
 
   return (
     <View style={{ ...s.buttonContainer, ...style, maxHeight: height, width }}>
@@ -97,7 +97,7 @@ export function ImageButton({
         <View style={s.button}></View>
       </TouchableWithoutFeedback>
     </View>
-  )
+  );
 }
 
 const s: any = {
@@ -124,4 +124,4 @@ const s: any = {
     minHeight: '100%',
   },
   buttonWrapper: {},
-}
+};

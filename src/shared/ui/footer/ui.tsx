@@ -1,14 +1,15 @@
-import { Alert, Image, StyleProp, View, ViewStyle } from 'react-native'
-import { ImageButton } from '@/src/shared/ui/image-button/ui'
-import { useFonts } from 'expo-font'
-import { gameCreationOptionsModel } from '@/src/entities/game/model/create-game-options'
+import { Alert, Image, StyleProp, View, ViewStyle } from 'react-native';
+import { ImageButton } from '@/src/shared/ui/image-button/ui';
+import { useFonts } from 'expo-font';
+import { gameCreationOptionsModel } from '@/src/entities/game/model/game-settings';
+import { createGame } from '@/src/feature/create-game/model/create-game';
 
 type PropsType = {
-  navigation: any
-  styles?: StyleProp<ViewStyle>
-}
+  styles?: StyleProp<ViewStyle>;
+  onNextButtonPress: () => void;
+};
 
-export function Footer({ navigation, styles }: PropsType) {
+export function Footer({ styles, onNextButtonPress }: PropsType) {
   return (
     <View style={[s.footer, styles]}>
       <View style={s.createGameButtonWrapper}>
@@ -23,7 +24,7 @@ export function Footer({ navigation, styles }: PropsType) {
           style={s.createGameButton}
           height={65}
           onPress={() => {
-            navigation.navigate('select-player-page')
+            onNextButtonPress();
           }}
         />
       </View>
@@ -33,7 +34,7 @@ export function Footer({ navigation, styles }: PropsType) {
         source={require('@/assets/images/gamecreationscreen/cloud.png')}
       />
     </View>
-  )
+  );
 }
 
 const s: any = {
@@ -67,4 +68,4 @@ const s: any = {
     left: 0,
     top: 13,
   },
-}
+};

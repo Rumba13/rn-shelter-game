@@ -1,35 +1,35 @@
-import { Alert, GestureResponderEvent, Image, Text, TouchableWithoutFeedback, View } from 'react-native'
-import Slider from 'rn-range-slider'
-import { observer } from 'mobx-react'
-import { gameCreationOptionsModel } from '@/src/entities/game/model/create-game-options'
-import { Label } from '@/src/shared/ui/range/label'
-import { useEffect, useState } from 'react'
+import { Alert, GestureResponderEvent, Image, Text, TouchableWithoutFeedback, View } from 'react-native';
+import Slider from 'rn-range-slider';
+import { observer } from 'mobx-react';
+import { gameCreationOptionsModel } from '@/src/entities/game/model/game-settings';
+import { Label } from '@/src/shared/ui/range/label';
+import { useEffect, useState } from 'react';
 
 type PropsType = {
-  onValueChanged: (value: number) => void
-  min: number
-  max: number
-  defaultValue: number
+  onValueChanged: (value: number) => void;
+  min: number;
+  max: number;
+  defaultValue: number;
   options?: {
-    trackImage?: any
-    pickerImage?: any
-  }
-}
+    trackImage?: any;
+    pickerImage?: any;
+  };
+};
 
 //TODO when closing modal with range in it, sliderTrack stand in front of sliderPicker
 
 export const Range = observer(({ onValueChanged, options, max, min, defaultValue }: PropsType) => {
-  const [minimalValue, setMinimalValue] = useState<number>(defaultValue)
+  const [minimalValue, setMinimalValue] = useState<number>(defaultValue);
 
   if (typeof defaultValue !== 'number') {
-    throw new Error("Range Component Error. Default value isn't number")
+    throw new Error("Range Component Error. Default value isn't number");
   }
 
-  useEffect(() => {}, [min])
+  useEffect(() => {}, [min]);
 
   function _onValueChanged(value: number) {
-    setMinimalValue(min)
-    onValueChanged(value)
+    setMinimalValue(min);
+    onValueChanged(value);
   }
 
   return (
@@ -72,8 +72,8 @@ export const Range = observer(({ onValueChanged, options, max, min, defaultValue
     //     />
     //   </View>
     // </TouchableWithoutFeedback>
-  )
-})
+  );
+});
 
 const s: any = {
   slider: {
@@ -90,4 +90,4 @@ const s: any = {
     maxWidth: '100%',
     zIndex: -1,
   },
-}
+};

@@ -8,8 +8,8 @@ export function characterBalanceValueToTitle(value: number): string {
     6: 'Как повезёт:)',
     7: 'Дима и Ева',
     8: 'Цари и нищие',
-  }
+  };
 
   //@ts-ignore
-  return characterBalanceMap[value]
+  return characterBalanceMap[value];
 }

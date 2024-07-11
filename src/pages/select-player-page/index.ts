@@ -1,1 +1,1 @@
-export { SelectPlayerPage } from './ui/ui'
+export { SelectPlayerPage } from './ui/ui';

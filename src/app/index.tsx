@@ -1,37 +1,66 @@
-import { NavigationContainer } from '@react-navigation/native'
-import { createNativeStackNavigator, NativeStackNavigationOptions } from '@react-navigation/native-stack'
-import { HomePage } from '@/src/pages//home-page'
-import { AppLayout } from '@/src/layouts/app-layout'
-import { Text, View } from 'react-native'
-import { CreateGamePage } from '@/src/pages/create-game-page'
-import { SelectPlayerPage } from '@/src/pages/select-player-page'
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator, NativeStackNavigationOptions } from '@react-navigation/native-stack';
+import { HomePage } from '@/src/pages//home-page';
+import { AppLayout } from '@/src/layouts/app-layout';
+import { ScrollView, Text, View } from 'react-native';
+import { CreateGamePage } from '@/src/pages/create-game-page';
+import { SelectPlayerPage } from '@/src/pages/select-player-page';
+import { createGame } from '@/src/feature/create-game/model/create-game';
+import { gameCreationOptionsModel } from '@/src/entities/game';
 
-const Stack = createNativeStackNavigator()
+const Stack = createNativeStackNavigator();
 
 export default function App() {
-  const stackScreenOptions: NativeStackNavigationOptions = { headerShown: false, animation: 'fade_from_bottom' }
+  const stackScreenOptions: NativeStackNavigationOptions = { headerShown: false, animation: 'fade_from_bottom' };
 
   const HomePageRoute = ({ navigation }: any) => {
     return (
       <AppLayout>
         <HomePage navigation={navigation} />
       </AppLayout>
-    )
-  }
+    );
+  };
   const CreateGamePageRoute = ({ navigation }: any) => {
     return (
       <AppLayout>
         <CreateGamePage navigation={navigation} />
       </AppLayout>
-    )
-  }
+    );
+  };
   const SelectPlayerPageRoute = ({ navigation }: any) => {
     return (
       <AppLayout>
-        <SelectPlayerPage />
+        <SelectPlayerPage navigation={navigation} />
       </AppLayout>
-    )
-  }
+    );
+  };
+  const DevPageRoute = ({ navigation }: any) => {
+    const game = createGame.createGame(gameCreationOptionsModel.settings);
+
+    return (
+      <AppLayout>
+        <ScrollView>
+          <Text>
+            {game.players.map(player => (
+              <View key={player.profession}>
+                <Text>------------------- {player.profession}</Text>
+                <Text>Био {player.bioCharacteristics?.price}: {player.bioCharacteristics?.name}</Text>
+                <Text>Здоровье {player.health?.price}: {player.health?.name}</Text>
+                <Text>Багаж {player.luggage?.price}: {player.luggage?.name}</Text>
+                <Text>Карта условия {player.conditionCard?.price}: {player.conditionCard?.name}</Text>
+                <Text>Характер {player.character?.price}: {player.character?.name}</Text>
+                <Text>Информация {player.additionalInformation?.price}: {player.additionalInformation?.name}</Text>
+                <Text>Хобби {player.hobby?.price}: {player.hobby?.name}</Text>
+                <Text>Фобия {player.phobia?.price}: {player.phobia?.name}</Text>
+                <Text>Карта действия {player.actionCard?.price}: {player.actionCard?.name}</Text>
+                <Text>Знания {player.knowledge?.price}: {player.knowledge?.name}</Text>
+              </View>
+            ))}
+          </Text>
+        </ScrollView>
+      </AppLayout>
+    );
+  };
   //Change navigate animation
   return (
     <NavigationContainer independent>
@@ -39,7 +68,8 @@ export default function App() {
         <Stack.Screen name={'home-page'} options={stackScreenOptions} component={HomePageRoute} />
         <Stack.Screen name={'create-game-page'} options={stackScreenOptions} component={CreateGamePageRoute} />
         <Stack.Screen name={'select-player-page'} options={stackScreenOptions} component={SelectPlayerPageRoute} />
+        <Stack.Screen name={'dev-page'} options={stackScreenOptions} component={DevPageRoute} />
       </Stack.Navigator>
     </NavigationContainer>
-  )
+  );
 }

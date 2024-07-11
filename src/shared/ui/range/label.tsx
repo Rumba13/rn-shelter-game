@@ -1,15 +1,15 @@
-import { View, Text } from 'react-native'
+import { View, Text } from 'react-native';
 
 type PropsType = {
-  value: number
-}
+  value: number;
+};
 
 export function Label({ value }: PropsType) {
   return (
     <View style={s.labelWrapper}>
       <Text style={s.label}>{value}</Text>
     </View>
-  )
+  );
 }
 
 const s: any = {
@@ -24,4 +24,4 @@ const s: any = {
     top: 3,
   },
   label: {},
-}
+};

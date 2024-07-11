@@ -1,38 +1,39 @@
-import { View, Text, StyleSheet, Image, ImageBackground, Dimensions, Animated } from 'react-native'
-import { useFonts } from 'expo-font'
-import { useEffect, useRef, useState } from 'react'
-import { ImageButton } from '@/src/shared/ui/image-button/ui'
-import { Footer } from '@/src/shared/ui/footer/ui'
-import { SelectPlayerSlider } from '@/src/pages/select-player-page/ui/select-player-slider/ui'
-import QRCode from 'react-native-qrcode-svg'
+import { View, Text, StyleSheet, Image, ImageBackground, Dimensions, Animated } from 'react-native';
+import { useFonts } from 'expo-font';
+import { useEffect, useRef, useState } from 'react';
+import { ImageButton } from '@/src/shared/ui/image-button/ui';
+import { Footer } from '@/src/shared/ui/footer/ui';
+import { SelectPlayerSlider } from '@/src/pages/select-player-page/ui/select-player-slider/ui';
+import QRCode from 'react-native-qrcode-svg';
 
-type PropsType = {}
+type PropsType = {
+  navigation: any;
+};
 
-export function SelectPlayerPage({}: PropsType) {
-  const [isTicketShowed, setIsTicketShowed] = useState<boolean>(false)
+export function SelectPlayerPage({ navigation }: PropsType) {
+  const [isTicketShowed, setIsTicketShowed] = useState<boolean>(false);
   const [fontsLoaded, fontsError] = useFonts({
     RobotoSlab: require('@/assets/fonts/RobotoSlab-Bold.ttf'),
     RobotoSlabSemiBold: require('@/assets/fonts/RobotoSlab-SemiBold.ttf'),
-  })
-  const translateYAnim = useRef(new Animated.Value(-200)).current
+  });
+  const translateYAnim = useRef(new Animated.Value(-200)).current;
 
-  useEffect(() => {
-  }, [fontsLoaded, translateYAnim])
+  useEffect(() => {}, [fontsLoaded, translateYAnim]);
 
   const showTicket = () => {
     Animated.timing(translateYAnim, {
       toValue: 270,
       duration: 400,
       useNativeDriver: false,
-    }).start()
-  }
+    }).start();
+  };
   const hideTicket = () => {
     Animated.timing(translateYAnim, {
       toValue: -200,
       duration: 400,
       useNativeDriver: false,
-    }).start()
-  }
+    }).start();
+  };
 
   return (
     <Animated.View style={s.selectPlayerPage}>
@@ -47,8 +48,11 @@ export function SelectPlayerPage({}: PropsType) {
           source={require('@/assets/images/playerselectionscreen/ticket/ticket(gay_people).png')}
         />
         <View style={s.QRCodeWrapper}>
-          <QRCode value={'Ева очень любила сочный хуй Димы, но больше всего любила есть'} size={QRCodeSize}
-                  backgroundColor={'transparent'} />
+          <QRCode
+            value={'Ева очень любила сочный хуй Димы, но больше всего любила есть'}
+            size={QRCodeSize}
+            backgroundColor={'transparent'}
+          />
         </View>
         <ImageButton
           width={100}
@@ -56,9 +60,9 @@ export function SelectPlayerPage({}: PropsType) {
           buttonImage={require('@/assets/images/playerselectionscreen/ticket/arrow_ticket.png')}
           shadowImage={require('@/assets/images/playerselectionscreen/ticket/arrow_ticket(shadow).png')}
           onPress={() => {
-            setIsTicketShowed(!isTicketShowed)
-            if (isTicketShowed) showTicket()
-            else hideTicket()
+            setIsTicketShowed(!isTicketShowed);
+            if (isTicketShowed) showTicket();
+            else hideTicket();
           }}
           options={{ yOffset: 3, xOffset: 2, yOffsetOnPress: 1, xOffSetOnPress: 1 }}
         />
@@ -74,21 +78,15 @@ export function SelectPlayerPage({}: PropsType) {
       <Text style={s.selectPlayerPageSubTitle}>Два дауна не могут иметь один и тот же номер</Text>
       <SelectPlayerSlider />
 
-      <Footer
-        navigation={{
-          navigate: () => {
-          },
-        }}
-        styles={{ position: 'relative', bottom: -7 }}
-      />
+      <Footer onNextButtonPress={() => navigation.navigate('dev-page')} styles={{ position: 'relative', bottom: -7 }} />
     </Animated.View>
-  )
+  );
 }
 
-const maxContentWidth = 290
-const ticketWrapperWidth = maxContentWidth + 60
-const ticketButtonWidth = 100
-const QRCodeSize = 145
+const maxContentWidth = 290;
+const ticketWrapperWidth = maxContentWidth + 60;
+const ticketButtonWidth = 100;
+const QRCodeSize = 145;
 const s = StyleSheet.create({
   ticketWrapper: {
     position: 'absolute',
@@ -147,5 +145,4 @@ const s = StyleSheet.create({
     maxWidth: '100%',
     height: 26,
   },
-
-})
+});
