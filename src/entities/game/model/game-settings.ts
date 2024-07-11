@@ -14,6 +14,24 @@ class GameSettingsStore {
     apocalypses: [],
     cardsKit: [],
   };
+  public settingsLimits = {
+    difficulty: {
+      max: 8,
+      min: 1,
+    },
+    balance: {
+      max: 8,
+      min: 1,
+    },
+    playersCount: {
+      max: 22,
+      min: 4,
+    },
+    card: {
+      maxPrice: 8,
+      minPrice: 1
+    }
+  };
 
   public setSettings(callBack: (settings: GameSettings) => any) {
     runInAction(() => callBack(this.settings));
@@ -28,4 +46,4 @@ class GameSettingsStore {
   }
 }
 
-export const gameCreationOptionsModel = new GameSettingsStore();
+export const gameSettingsStore = new GameSettingsStore();

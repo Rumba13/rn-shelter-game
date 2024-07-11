@@ -6,7 +6,7 @@ import { ScrollView, Text, View } from 'react-native';
 import { CreateGamePage } from '@/src/pages/create-game-page';
 import { SelectPlayerPage } from '@/src/pages/select-player-page';
 import { createGame } from '@/src/feature/create-game/model/create-game';
-import { gameCreationOptionsModel } from '@/src/entities/game';
+import { gameSettingsStore } from '@/src/entities/game';
 
 const Stack = createNativeStackNavigator();
 
@@ -35,7 +35,7 @@ export default function App() {
     );
   };
   const DevPageRoute = ({ navigation }: any) => {
-    const game = createGame.createGame(gameCreationOptionsModel.settings);
+    const game = createGame.createGame(gameSettingsStore.settings);
 
     return (
       <AppLayout>

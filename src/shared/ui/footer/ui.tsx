@@ -1,7 +1,7 @@
 import { Alert, Image, StyleProp, View, ViewStyle } from 'react-native';
 import { ImageButton } from '@/src/shared/ui/image-button/ui';
 import { useFonts } from 'expo-font';
-import { gameCreationOptionsModel } from '@/src/entities/game/model/game-settings';
+import { gameSettingsStore } from '@/src/entities/game/model/game-settings';
 import { createGame } from '@/src/feature/create-game/model/create-game';
 
 type PropsType = {

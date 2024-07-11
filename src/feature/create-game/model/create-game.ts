@@ -1,4 +1,3 @@
-import { makeAutoObservable } from 'mobx';
 import { GameSettings } from '@/src/shared/lib/types/game-settings';
 import { Game } from '@/src/shared/lib/types/game';
 import { Apocalypse } from '@/src/shared/lib/types/apocalypse';
@@ -10,14 +9,16 @@ import { CardType } from '@/src/shared/lib/types/card-type';
 import { PseudoRandomGenerator } from '@/src/shared/lib/pseudo-random-generator';
 import { sortedCardsStore } from '@/src/entities/characteristic-card/model/sorted-cards';
 import { CreatePriceMap } from '@/src/feature/create-game/model/create-price-map';
+import { difficultyToTotalPrice } from '@/src/feature/create-game/model/difficulty-to-total-price';
+import { gameSettingsStore } from '@/src/entities/game';
 
 class CreateGame {
-  private pseudoRandomGenerator: PseudoRandomGenerator;
+  private readonly pseudoRandomGenerator: PseudoRandomGenerator;
   private createPriceMap: CreatePriceMap;
   private readonly _seedMax = 20000;
   private readonly _seedMin = 1;
   private readonly seed: number;
-  private usedProfessions: string[] = professions;
+  private usedProfessions: string[] = professions.slice();
 
   private createGameSeed(min: number, max: number) {
     return Math.floor(Math.random() * (max - min + 1) + min);
@@ -46,8 +47,6 @@ class CreateGame {
     this.seed = this.createGameSeed(this._seedMin, this._seedMax);
     this.pseudoRandomGenerator = new PseudoRandomGenerator(this.seed);
     this.createPriceMap = new CreatePriceMap(this.pseudoRandomGenerator, this.seed);
-
-    makeAutoObservable(this);
   }
 
   private createPlayer(price: number): Player {
@@ -79,27 +78,26 @@ class CreateGame {
     const cardsWithCurrentPrice = cards.filter(card => card.price === price);
 
     if (cardsWithCurrentPrice[0] === undefined) {
-      if (price === 1) {
+      if (price === gameSettingsStore.settingsLimits.card.minPrice) {
         throw new Error(`Cannot find any card. Real price: ${_exactPrice}, cardType: ${cards[0].type} `);
       }
 
       return this.findCardWithPrice(cards, price - 1, _exactPrice);
     }
 
-    const foundedCard = cardsWithCurrentPrice[Math.trunc(this.pseudoRandomGenerator.generateInRange(0, cardsWithCurrentPrice.length))];
+    const foundedCard =
+      cardsWithCurrentPrice[Math.trunc(this.pseudoRandomGenerator.generateInRange(0, cardsWithCurrentPrice.length))];
     foundedCard.price = _exactPrice;
     return foundedCard;
   }
 
-  private createPlayers(playersCount: number): Player[] {
+  private createPlayers(playersCount: number, difficulty: number): Player[] {
     const players: Player[] = [];
-
     this.pseudoRandomGenerator.resetSeed();
     for (let i = 1; i <= playersCount; i++) {
-      players.push(this.createPlayer(43));
+      players.push(this.createPlayer(difficultyToTotalPrice(difficulty)));
     }
-    this.usedProfessions = professions; //TODO refactor
-
+    this.usedProfessions = professions.slice(); //TODO refactor
     return players;
   }
 
@@ -109,7 +107,7 @@ class CreateGame {
     return {
       apocalypse: this.selectRandomApocalypse(gameSettings.apocalypses),
       shelter: this.selectRandomShelter(gameSettings.shelters),
-      players: this.createPlayers(gameSettings.playersCount),
+      players: this.createPlayers(gameSettings.playersCount, gameSettings.difficulty),
       ending: 'Вы проебали!',
     };
   }

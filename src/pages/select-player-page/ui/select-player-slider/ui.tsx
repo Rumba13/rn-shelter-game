@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet, Image, ImageBackground, Dimensions, Animated } from 'react-native';
 import Carousel from 'react-native-reanimated-carousel/src/Carousel';
-import { gameCreationOptionsModel } from '@/src/entities/game';
+import { gameSettingsStore } from '@/src/entities/game';
 import { useFonts } from 'expo-font';
 import { useEffect, useState } from 'react';
 import { ImageButton } from '@/src/shared/ui/image-button/ui';
@@ -16,7 +16,7 @@ export function SelectPlayerSlider({}: PropsType) {
 
   useEffect(() => {}, [fontsLoaded]);
 
-  const players = [...new Array(gameCreationOptionsModel.settings.playersCount).keys()].map(item => item + 1);
+  const players = [...new Array(gameSettingsStore.settings.playersCount).keys()].map(item => item + 1);
   const observer = (
     <Image
       style={s.sliderObserver}

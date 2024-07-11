@@ -1,1 +1,1 @@
-export { gameCreationOptionsModel } from './model/game-settings';
+export { gameSettingsStore } from './model/game-settings';

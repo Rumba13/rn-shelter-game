@@ -7,7 +7,7 @@ import { Separator } from '@/src/pages/create-game-page/ui/separator/ui';
 import { GameOptionCheckbox } from '@/src/pages/create-game-page/ui/game-option-checkbox/ui';
 import { GameOptionSelect } from '@/src/pages/create-game-page/ui/game-option-select/ui';
 import { SexualOrientation } from '@/src/shared/lib/types/sexual-orientation';
-import { gameCreationOptionsModel } from '@/src/entities/game/model/game-settings';
+import { gameSettingsStore } from '@/src/entities/game/model/game-settings';
 import { GameOptionRange } from '@/src/pages/create-game-page/ui/game-option-range/ui';
 import { difficultyValueToTitle } from '@/src/pages/create-game-page/ui/difficulty-value-to-title';
 import { observer } from 'mobx-react';
@@ -41,9 +41,9 @@ export const CreateGamePage = observer(({ navigation }: PropsType) => {
     RobotoSlab: require('@/assets/fonts/RobotoSlab-Bold.ttf'),
   });
 
-  const options = gameCreationOptionsModel.settings;
+  const settings = gameSettingsStore.settings;
 
-  useEffect(() => {}, [fontsLoaded, options.difficulty]);
+  useEffect(() => {}, [fontsLoaded, settings.difficulty]);
 
   if (!fontsLoaded) {
     return <Text>Loading...</Text>;
@@ -73,7 +73,7 @@ export const CreateGamePage = observer(({ navigation }: PropsType) => {
                   descriptionHeight={100}
                   description={'Параметр определяет будут ли задействованы деревенщины'}
                   onValueChange={isEnable =>
-                    gameCreationOptionsModel.setSettings(options => (options.hillbillyMode = isEnable))
+                    gameSettingsStore.setSettings(options => (options.hillbillyMode = isEnable))
                   }
                 />
                 <GameOptionSelect
@@ -91,32 +91,32 @@ export const CreateGamePage = observer(({ navigation }: PropsType) => {
                     label: sexualOrientationValueToTitle(value),
                   }))}
                   onValueChange={orientation =>
-                    gameCreationOptionsModel.setSettings(options => (options.sexualOrientation = orientation))
+                    gameSettingsStore.setSettings(options => (options.sexualOrientation = orientation))
                   }
                 />
                 <GameOptionRange
                   title={'Уровень сложности'}
-                  defaultValue={4}
+                  defaultValue={settings.difficulty}
                   description={'Параметр определяет насколько персонажи полезны и безопасны в среднем'}
                   descriptionHeight={100}
-                  selectedTitle={difficultyValueToTitle(gameCreationOptionsModel.settings.difficulty)}
+                  selectedTitle={difficultyValueToTitle(gameSettingsStore.settings.difficulty)}
                   onValueChanged={difficulty =>
-                    gameCreationOptionsModel.setSettings(options => (options.difficulty = difficulty))
+                    gameSettingsStore.setSettings(options => (options.difficulty = difficulty))
                   }
-                  min={1}
-                  max={8}
+                  min={gameSettingsStore.settingsLimits.difficulty.min}
+                  max={gameSettingsStore.settingsLimits.difficulty.max}
                 />
                 <GameOptionRange
                   title={'Баланс Персонажей'}
                   descriptionHeight={100}
                   description={'Параметр определяет насколько различается полезность персонажей'}
                   onValueChanged={characterBalance =>
-                    gameCreationOptionsModel.setSettings(options => (options.balance = characterBalance))
+                    gameSettingsStore.setSettings(options => (options.balance = characterBalance))
                   }
-                  selectedTitle={characterBalanceValueToTitle(options.balance)}
-                  min={1}
-                  max={8}
-                  defaultValue={options.balance}
+                  selectedTitle={characterBalanceValueToTitle(settings.balance)}
+                  min={gameSettingsStore.settingsLimits.balance.min}
+                  max={gameSettingsStore.settingsLimits.balance.max}
+                  defaultValue={settings.balance}
                 />
 
                 <GameOptionList<ShelterCategoryList>
@@ -131,7 +131,7 @@ export const CreateGamePage = observer(({ navigation }: PropsType) => {
                   selectText={'Выбрать бункер'}
                   searchPlaceholderText={'Искать Бункеры'}
                   onValueChange={shelterNames =>
-                    gameCreationOptionsModel.setSettings(options => {
+                    gameSettingsStore.setSettings(options => {
                       options.shelters = shelterNames.map(shelterName => shelterNameToShelter(shelterName));
                     })
                   }
@@ -147,7 +147,7 @@ export const CreateGamePage = observer(({ navigation }: PropsType) => {
                   selectText={'Выбрать Апокалипсис'}
                   searchPlaceholderText={'Искать Апокалипсисы'}
                   onValueChange={apocalypsesNames =>
-                    gameCreationOptionsModel.setSettings(options => {
+                    gameSettingsStore.setSettings(options => {
                       options.apocalypses = apocalypsesNames.map(apocalypseName =>
                         apocalypseNameToApocalypse(apocalypseName),
                       );
@@ -168,7 +168,7 @@ export const CreateGamePage = observer(({ navigation }: PropsType) => {
                   selectedByDefault={characteristicCards.map(card => card.name)}
                   searchPlaceholderText={'Искать карточки'}
                   onValueChange={characteristicCardsNames =>
-                    gameCreationOptionsModel.setSettings(options => {
+                    gameSettingsStore.setSettings(options => {
                       options.cardsKit = characteristicCardsNames.map(cardName =>
                         characteristicCardNameToCard(cardName),
                       );

@@ -7,7 +7,7 @@ import RNPickerSelect from 'react-native-picker-select';
 import { PickerSelectProps } from 'react-native-picker-select';
 import { Range } from '@/src/shared/ui/range/ui';
 import { observer } from 'mobx-react';
-import { gameCreationOptionsModel } from '@/src/entities/game/model/game-settings';
+import { gameSettingsStore } from '@/src/entities/game/model/game-settings';
 import { GameOptionBase } from '@/src/pages/create-game-page/ui/game-option-base/ui';
 
 type PropsType = {

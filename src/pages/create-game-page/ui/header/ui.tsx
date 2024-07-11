@@ -4,11 +4,11 @@ import { OverlayModal } from '@/src/shared/ui/overlay-modal/ui';
 import { ImageButton } from '@/src/shared/ui/image-button/ui';
 import { useState } from 'react';
 import Slider from 'rn-range-slider';
-import { gameCreationOptionsModel } from '@/src/entities/game/model/game-settings';
+import { gameSettingsStore } from '@/src/entities/game/model/game-settings';
 import { observer } from 'mobx-react';
 
 export const Header = observer(() => {
-  const { playersCount } = gameCreationOptionsModel.settings;
+  const { playersCount } = gameSettingsStore.settings;
 
   return (
     <View style={s.contentHeader}>
@@ -30,7 +30,7 @@ export const Header = observer(() => {
           max={22}
           defaultValue={4}
           onValueChanged={(playersCount: number) =>
-            gameCreationOptionsModel.setSettings(options => (options.playersCount = playersCount))
+            gameSettingsStore.setSettings(options => (options.playersCount = playersCount))
           }
         />
       </View>

@@ -1,6 +1,7 @@
 import { CardType } from '@/src/shared/lib/types/card-type';
 import { PseudoRandomGenerator } from '@/src/shared/lib/pseudo-random-generator';
 import { makeAutoObservable } from 'mobx';
+import { gameSettingsStore } from '@/src/entities/game';
 
 export type PriceMap = { [k in CardType]: number };
 
@@ -23,7 +24,6 @@ export class CreatePriceMap {
   private readonly characteristicCount: number = 10;
 
   constructor(pseudoRandomGenerator: PseudoRandomGenerator, seed: number) {
-    makeAutoObservable(this);
     this.pseudoRandomGenerator = pseudoRandomGenerator;
     this.seed = seed;
   }
@@ -32,7 +32,7 @@ export class CreatePriceMap {
     const fromIndex = cardTypes[this.pseudoRandomGenerator.generateInRange(0, cardTypes.length)];
     const toIndex = cardTypes[this.pseudoRandomGenerator.generateInRange(0, cardTypes.length)];
 
-    if (priceMap[fromIndex] === 1 || priceMap[toIndex] === 8) {
+    if (priceMap[fromIndex] === gameSettingsStore.settingsLimits.card.minPrice || priceMap[toIndex] === gameSettingsStore.settingsLimits.card.maxPrice) {
       return;
     }
 
@@ -72,7 +72,6 @@ export class CreatePriceMap {
       'condition-card': mediumPrice,
     };
 
-
     if (rest !== 0) {
       //spread rest :)
 
@@ -80,7 +79,7 @@ export class CreatePriceMap {
         const randomPriceMapKey =
           cardTypes[Math.trunc(this.pseudoRandomGenerator.generateInRange(0, cardTypes.length))];
 
-        if (priceMap[randomPriceMapKey] < 8) {
+        if (priceMap[randomPriceMapKey] < gameSettingsStore.settingsLimits.card.maxPrice) {
           priceMap[randomPriceMapKey]++;
         } else {
           i--;
