@@ -27,8 +27,7 @@ class SortedCardsStore {
       'character': this.cardsKit.filter(card => card.type === 'character'),
       'additional-information': this.cardsKit.filter(card => card.type === 'additional-information'),
     };
-  };
-
+  }
 }
 
 export const sortedCardsStore = new SortedCardsStore();

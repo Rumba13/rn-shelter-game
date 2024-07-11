@@ -2,7 +2,7 @@ import { CardType } from '@/src/shared/lib/types/card-type';
 import { PseudoRandomGenerator } from '@/src/shared/lib/pseudo-random-generator';
 import { makeAutoObservable } from 'mobx';
 
-export type PriceMap = { [k in CardType]: number }
+export type PriceMap = { [k in CardType]: number };
 
 const cardTypes: CardType[] = [
   'bio',
@@ -22,10 +22,10 @@ export class CreatePriceMap {
   private readonly seed: number;
   private readonly characteristicCount: number = 10;
 
-  constructor(seed: number) {
+  constructor(pseudoRandomGenerator: PseudoRandomGenerator, seed: number) {
     makeAutoObservable(this);
+    this.pseudoRandomGenerator = pseudoRandomGenerator;
     this.seed = seed;
-    this.pseudoRandomGenerator = new PseudoRandomGenerator(seed);
   }
 
   private _shuffle(priceMap: PriceMap): void {
@@ -38,6 +38,21 @@ export class CreatePriceMap {
 
     priceMap[fromIndex]--;
     priceMap[toIndex]++;
+  }
+
+  public mockPriceMap(totalPrice: number = 40): PriceMap {
+    return {
+      'bio': 4,
+      'health': 4,
+      'hobby': 4,
+      'phobia': 4,
+      'character': 4,
+      'additional-information': 4,
+      'knowledge': 4,
+      'luggage': 4,
+      'action-card': 4,
+      'condition-card': 4,
+    };
   }
 
   public createPriceMapShuffle(totalPrice: number, maxShuffleTimes: number = 30): PriceMap {
@@ -57,10 +72,13 @@ export class CreatePriceMap {
       'condition-card': mediumPrice,
     };
 
-    if (rest !== 0) { //spread rest :)
+
+    if (rest !== 0) {
+      //spread rest :)
 
       for (let i = 0; i < rest; i++) {
-        const randomPriceMapKey = cardTypes[Math.trunc(this.pseudoRandomGenerator.generateInRange(0, cardTypes.length))];
+        const randomPriceMapKey =
+          cardTypes[Math.trunc(this.pseudoRandomGenerator.generateInRange(0, cardTypes.length))];
 
         if (priceMap[randomPriceMapKey] < 8) {
           priceMap[randomPriceMapKey]++;

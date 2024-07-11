@@ -44,16 +44,36 @@ export default function App() {
             {game.players.map(player => (
               <View key={player.profession}>
                 <Text>------------------- {player.profession}</Text>
-                <Text>Био {player.bioCharacteristics?.price}: {player.bioCharacteristics?.name}</Text>
-                <Text>Здоровье {player.health?.price}: {player.health?.name}</Text>
-                <Text>Багаж {player.luggage?.price}: {player.luggage?.name}</Text>
-                <Text>Карта условия {player.conditionCard?.price}: {player.conditionCard?.name}</Text>
-                <Text>Характер {player.character?.price}: {player.character?.name}</Text>
-                <Text>Информация {player.additionalInformation?.price}: {player.additionalInformation?.name}</Text>
-                <Text>Хобби {player.hobby?.price}: {player.hobby?.name}</Text>
-                <Text>Фобия {player.phobia?.price}: {player.phobia?.name}</Text>
-                <Text>Карта действия {player.actionCard?.price}: {player.actionCard?.name}</Text>
-                <Text>Знания {player.knowledge?.price}: {player.knowledge?.name}</Text>
+                <Text>
+                  Био {player.bioCharacteristics?.price}: {player.bioCharacteristics?.name}
+                </Text>
+                <Text>
+                  Здоровье {player.health?.price}: {player.health?.name}
+                </Text>
+                <Text>
+                  Багаж {player.luggage?.price}: {player.luggage?.name}
+                </Text>
+                <Text>
+                  Карта условия {player.conditionCard?.price}: {player.conditionCard?.name}
+                </Text>
+                <Text>
+                  Характер {player.character?.price}: {player.character?.name}
+                </Text>
+                <Text>
+                  Информация {player.additionalInformation?.price}: {player.additionalInformation?.name}
+                </Text>
+                <Text>
+                  Хобби {player.hobby?.price}: {player.hobby?.name}
+                </Text>
+                <Text>
+                  Фобия {player.phobia?.price}: {player.phobia?.name}
+                </Text>
+                <Text>
+                  Карта действия {player.actionCard?.price}: {player.actionCard?.name}
+                </Text>
+                <Text>
+                  Знания {player.knowledge?.price}: {player.knowledge?.name}
+                </Text>
               </View>
             ))}
           </Text>

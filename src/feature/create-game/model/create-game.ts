@@ -9,7 +9,6 @@ import { professions } from '@/src/entities/profession';
 import { CardType } from '@/src/shared/lib/types/card-type';
 import { PseudoRandomGenerator } from '@/src/shared/lib/pseudo-random-generator';
 import { sortedCardsStore } from '@/src/entities/characteristic-card/model/sorted-cards';
-import { gameCreationOptionsModel } from '@/src/entities/game';
 import { CreatePriceMap } from '@/src/feature/create-game/model/create-price-map';
 
 class CreateGame {
@@ -18,17 +17,9 @@ class CreateGame {
   private readonly _seedMax = 20000;
   private readonly _seedMin = 1;
   private readonly seed: number;
+  private usedProfessions: string[] = professions;
 
-  private professions: string[] = professions;
-
-  constructor() {
-    this.seed = this.randomInInterval(this._seedMin, this._seedMax);
-    this.pseudoRandomGenerator = new PseudoRandomGenerator(this.seed);
-    this.createPriceMap = new CreatePriceMap(this.seed);
-    makeAutoObservable(this);
-  }
-
-  private randomInInterval(min: number, max: number) {
+  private createGameSeed(min: number, max: number) {
     return Math.floor(Math.random() * (max - min + 1) + min);
   }
 
@@ -44,19 +35,29 @@ class CreateGame {
     return shelters[selectedShelterIndex];
   }
 
+  private selectRandomProfession(): string {
+    const professionIndex = Math.trunc(this.pseudoRandomGenerator.generateInRange(1, this.usedProfessions.length));
+    const profession = this.usedProfessions[professionIndex];
+    this.usedProfessions.splice(professionIndex, 1);
+    return profession;
+  }
+
+  constructor() {
+    this.seed = this.createGameSeed(this._seedMin, this._seedMax);
+    this.pseudoRandomGenerator = new PseudoRandomGenerator(this.seed);
+    this.createPriceMap = new CreatePriceMap(this.pseudoRandomGenerator, this.seed);
+
+    makeAutoObservable(this);
+  }
+
   private createPlayer(price: number): Player {
-    const professionIndex = Math.trunc(this.pseudoRandomGenerator.generateInRange(1, this.professions.length));
-    const profession = this.professions[professionIndex];
-    this.professions.splice(professionIndex, 1);
-
     const priceMap: { [k in CardType]: number } = this.createPriceMap.createPriceMapShuffle(price);
-    sortedCardsStore.setCardsKit(gameCreationOptionsModel.settings.cardsKit);
     const sortedCards = sortedCardsStore.sortedCards;
-
     const { character, health, luggage, hobby, knowledge, phobia, bio } = sortedCards;
-    const player: Player = {
+
+    return {
       isKicked: false,
-      profession,
+      profession: this.selectRandomProfession(),
       additionalInformation: this.findCardWithPrice(
         sortedCards['additional-information'],
         priceMap['additional-information'],
@@ -72,49 +73,43 @@ class CreateGame {
       conditionCard: this.findCardWithPrice(sortedCards['condition-card'], priceMap['condition-card']),
       notes: '',
     };
-
-    return player;
   }
 
-  private findCardWithPrice(cards: Card[], price: number): Card {
-    const pretendedCards = cards.filter(card => card.price === price);
+  private findCardWithPrice(cards: Card[], price: number, _exactPrice: number = price): Card {
+    const cardsWithCurrentPrice = cards.filter(card => card.price === price);
 
-    if (pretendedCards[0] === undefined) {
-
+    if (cardsWithCurrentPrice[0] === undefined) {
       if (price === 1) {
-        throw new Error('Cannot find any card');
+        throw new Error(`Cannot find any card. Real price: ${_exactPrice}, cardType: ${cards[0].type} `);
       }
-      console.log('Recursion with price ' + price);
 
-      return this.findCardWithPrice(cards, price - 1);
-
+      return this.findCardWithPrice(cards, price - 1, _exactPrice);
     }
-    return pretendedCards[Math.trunc(this.pseudoRandomGenerator.generateInRange(0, pretendedCards.length))];
+
+    const foundedCard = cardsWithCurrentPrice[Math.trunc(this.pseudoRandomGenerator.generateInRange(0, cardsWithCurrentPrice.length))];
+    foundedCard.price = _exactPrice;
+    return foundedCard;
   }
 
   private createPlayers(playersCount: number): Player[] {
     const players: Player[] = [];
 
-    this.pseudoRandomGenerator.setSeed(this.seed);
-    this.pseudoRandomGenerator.generateInRange(1, 1000);
+    this.pseudoRandomGenerator.resetSeed();
     for (let i = 1; i <= playersCount; i++) {
       players.push(this.createPlayer(43));
     }
-    this.professions = professions; //TODO refactor
+    this.usedProfessions = professions; //TODO refactor
 
     return players;
   }
 
   public createGame(gameSettings: GameSettings): Game {
     sortedCardsStore.setCardsKit(gameSettings.cardsKit);
-    const apocalypse = this.selectRandomApocalypse(gameSettings.apocalypses);
-    const shelter = this.selectRandomShelter(gameSettings.shelters);
-    const players: Player[] = this.createPlayers(gameSettings.playersCount);
 
     return {
-      apocalypse,
-      shelter,
-      players,
+      apocalypse: this.selectRandomApocalypse(gameSettings.apocalypses),
+      shelter: this.selectRandomShelter(gameSettings.shelters),
+      players: this.createPlayers(gameSettings.playersCount),
       ending: 'Вы проебали!',
     };
   }
