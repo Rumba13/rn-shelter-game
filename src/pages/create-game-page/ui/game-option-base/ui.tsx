@@ -1,8 +1,8 @@
-import { Image, ImageBackground, Text, View } from 'react-native';
-import { ImageButton } from '@/src/shared/ui/image-button/ui';
+import { Image, Text, View } from 'react-native';
 import { useFonts } from 'expo-font';
 import { useEffect, useState } from 'react';
 import Collapsible from 'react-native-collapsible';
+import { ImageButton } from '@/src/shared/ui/image-button/ui';
 
 type PropsType = {
   children: any;
@@ -10,42 +10,42 @@ type PropsType = {
   descriptionHeight: number;
   description: string;
 };
+
 //TODO fix background flash when toggle collapsible
-export function GameOptionBase({ title, children, descriptionHeight, description }: PropsType) {
+export function GameOptionBase({ title, children, description }: PropsType) {
   const [isCollapsed, setIsCollapsed] = useState<boolean>(true);
   const [fontsLoaded] = useFonts({
     RobotoSlabSemiBold: require('@/assets/fonts/RobotoSlab-SemiBold.ttf'),
   });
 
-  useEffect(() => {}, [fontsLoaded]);
+  useEffect(() => {
+  }, [fontsLoaded]);
 
-  if (!fontsLoaded) {
-    return <View></View>;
-  }
 
   return (
     <View style={s.gameOption}>
       <View style={{ margin: 10 }}>
+        <ImageButton
+          onPress={() => setIsCollapsed(!isCollapsed)}
+          style={s.optionHelpButton}
+          options={{
+            xOffset: 2,
+            yOffset: 2,
+            xOffSetOnPress: 1,
+            yOffsetOnPress: 1,
+          }}
+          buttonImage={require('@/assets/images/core/vopros_icon.png')}
+          shadowImage={require('@/assets/images/gameconnectionscreen/info_icon_shadow.png')}
+        />
         <View>
           <Text style={s.gameOptionTitle}>{title}</Text>
-          <ImageButton
-            onPress={() => setIsCollapsed(!isCollapsed)}
-            style={s.optionHelpButton}
-            options={{
-              xOffset: 2,
-              yOffset: 2,
-              xOffSetOnPress: 1,
-              yOffsetOnPress: 1,
-            }}
-            buttonImage={require('@/assets/images/core/vopros_icon.png')}
-            shadowImage={require('@/assets/images/gameconnectionscreen/info_icon_shadow.png')}
-          />
-        </View>
 
+        </View>
         {children}
 
-        <Collapsible style={{ ...s.collapsible, height: descriptionHeight }} collapsed={isCollapsed} duration={350}>
-          <View>
+        <Collapsible key={String(isCollapsed)} style={{ ...s.collapsible }} duration={700}
+                     collapsed={isCollapsed}>
+          <View style={{ flex: 1, height: 'auto' }}>
             <Text style={s.gameOptionDescription}>{description}</Text>
           </View>
         </Collapsible>
@@ -66,11 +66,13 @@ const s: any = {
     backgroundColor: 'rgba(255,255,255,0.31)',
     borderRadius: 10,
     padding: 10,
+    flex: 1,
   },
   optionHelpButton: {
     position: 'absolute',
-    maxWidth: helpButtonSize,
+    minWidth: helpButtonSize,
     height: helpButtonSize,
+    zIndex: 1000,
     right: 0,
     top: 0,
   },

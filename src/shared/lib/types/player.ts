@@ -1,8 +1,9 @@
 import { Card } from '@/src/shared/lib/types/card';
+import { Profession } from '@/src/shared/lib/types/profession';
 
 export type Player = {
   isKicked: Boolean;
-  profession: string;
+  profession: Profession;
   bioCharacteristics: Card;
   health: Card;
   hobby: Card;

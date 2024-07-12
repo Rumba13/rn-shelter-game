@@ -1,8 +1,8 @@
 import { makeAutoObservable } from 'mobx';
 import { GameType } from '@/src/shared/lib/types/game';
 import {
-  characteristicCardsShortNames,
-} from '@/src/entities/characteristic-card/model/characteristic-cards-short-names';
+  playerPropsShortNames,
+} from '@/src/entities/characteristic-card/model/player-props-short-names';
 
 class GameStore {
   public game: GameType | undefined = undefined;
@@ -21,7 +21,7 @@ class GameStore {
     return this.game;
   }
 
-  public createGameCode(): string {
+  public createGameCode(): string { //TODO move to features
     const game = this.getGame();
 
     return JSON.stringify({
@@ -29,17 +29,17 @@ class GameStore {
       apocalypseId: game.apocalypse.id,
       endingId: 1,
       players: game.players.map(player => ({
-        profession: player.profession,
-        [characteristicCardsShortNames.bio]: player.bioCharacteristics.id,
-        [characteristicCardsShortNames.health]: player.health.id,
-        [characteristicCardsShortNames.character]: player.character.id,
-        [characteristicCardsShortNames.hobby]: player.hobby.id,
-        [characteristicCardsShortNames.phobia]: player.phobia.id,
-        [characteristicCardsShortNames['additional-information']]: player.additionalInformation.id,
-        [characteristicCardsShortNames.knowledge]: player.knowledge.id,
-        [characteristicCardsShortNames.luggage]: player.luggage.id,
-        [characteristicCardsShortNames['condition-card']]: player.conditionCard.id,
-        [characteristicCardsShortNames['action-card']]: player.actionCard.id,
+        [playerPropsShortNames.profession]: player.profession.id,
+        [playerPropsShortNames.bio]: player.bioCharacteristics.id,
+        [playerPropsShortNames.health]: player.health.id,
+        [playerPropsShortNames.character]: player.character.id,
+        [playerPropsShortNames.hobby]: player.hobby.id,
+        [playerPropsShortNames.phobia]: player.phobia.id,
+        [playerPropsShortNames['additional-information']]: player.additionalInformation.id,
+        [playerPropsShortNames.knowledge]: player.knowledge.id,
+        [playerPropsShortNames.luggage]: player.luggage.id,
+        [playerPropsShortNames['condition-card']]: player.conditionCard.id,
+        [playerPropsShortNames['action-card']]: player.actionCard.id,
       })),
     });
   }

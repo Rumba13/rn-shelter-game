@@ -25,6 +25,10 @@ export function CheckBox({ style, setIsToggled, isToggled }: PropsType) {
     RobotoSlabSemiBold: require('@/assets/fonts/RobotoSlab-SemiBold.ttf'),
   });
 
+  useEffect(() => {
+
+  }, [fontsLoaded]);
+
   const toggleOn = () => {
     Animated.timing(translateXAnim, {
       toValue: 47,

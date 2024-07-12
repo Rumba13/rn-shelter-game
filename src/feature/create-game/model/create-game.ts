@@ -11,11 +11,14 @@ import { sortedCardsStore } from '@/src/entities/characteristic-card/model/sorte
 import { CreatePriceMap } from '@/src/feature/create-game/model/create-price-map';
 import { difficultyToTotalPrice } from '@/src/feature/create-game/model/difficulty-to-total-price';
 import { gameSettingsStore } from '@/src/entities/game';
-import { characteristicBalanceToShuffleTimes } from '@/src/feature/create-game/model/characteristic-balance-to-shuffle-times';
+import {
+  characteristicBalanceToShuffleTimes,
+} from '@/src/feature/create-game/model/characteristic-balance-to-shuffle-times';
 import { BalanceChances } from '@/src/shared/lib/types/balance-chances';
 import { playersBalanceToBalanceChances } from '@/src/feature/create-game/model/players-balance-to-balance-chances';
 import { SexualOrientation } from '@/src/shared/lib/types/sexual-orientation';
 import { genders } from '@/src/entities/gender/model/genders';
+import { Profession } from '@/src/shared/lib/types/profession';
 
 class CreateGameStore {
   private readonly pseudoRandomGenerator: PseudoRandomGenerator;
@@ -23,7 +26,7 @@ class CreateGameStore {
   private readonly _seedMax = 20000;
   private readonly _seedMin = 1;
   private readonly seed: number;
-  private usedProfessions: string[] = professions.slice();
+  private usedProfessions: Profession[] = professions.slice();
 
   private createGameSeed(min: number, max: number) {
     return Math.floor(Math.random() * (max - min + 1) + min);
@@ -41,7 +44,7 @@ class CreateGameStore {
     return shelters[selectedShelterIndex];
   }
 
-  private selectRandomProfession(): string {
+  private selectRandomProfession(): Profession {
     const professionIndex = Math.trunc(this.pseudoRandomGenerator.generateInRange(1, this.usedProfessions.length));
     const profession = this.usedProfessions[professionIndex];
     this.usedProfessions.splice(professionIndex, 1);
@@ -111,14 +114,15 @@ class CreateGameStore {
       price,
       characteristicBalanceToShuffleTimes(characteristicBalance),
     );
-    const sortedCards = sortedCardsStore.sortedCards;
-    const { character, health, luggage, hobby, knowledge, phobia, bio } = sortedCards;
+
+    const { character, health, luggage, hobby, knowledge, phobia, bio } = sortedCardsStore.sortedCards;
+
 
     return {
       isKicked: false,
       profession: this.selectRandomProfession(),
       additionalInformation: this.findCardWithPrice(
-        sortedCards['additional-information'],
+        sortedCardsStore.sortedCards['additional-information'],
         priceMap['additional-information'],
       ),
       health: this.findCardWithPrice(health, priceMap.health),
@@ -131,21 +135,26 @@ class CreateGameStore {
       luggage: this.findCardWithPrice(luggage, priceMap.luggage),
       knowledge: this.findCardWithPrice(knowledge, priceMap.knowledge),
       phobia: this.findCardWithPrice(phobia, priceMap.phobia),
-      actionCard: this.findCardWithPrice(sortedCards['action-card'], priceMap['action-card']),
-      conditionCard: this.findCardWithPrice(sortedCards['condition-card'], priceMap['condition-card']),
+      actionCard: this.findCardWithPrice(sortedCardsStore.sortedCards['action-card'], priceMap['action-card']),
+      conditionCard: this.findCardWithPrice(sortedCardsStore.sortedCards['condition-card'], priceMap['condition-card']),
       notes: '',
     };
   }
 
-  private findCardWithPrice(cards: Card[], price: number, _exactPrice: number = price): Card {
+  public findCardWithPrice(cards: Card[], price: number, _exactPrice: number = price): Card {
     const cardsWithCurrentPrice = cards.filter(card => card.price === price);
 
     if (cardsWithCurrentPrice[0] === undefined) {
       if (price === gameSettingsStore.settingsLimits.card.minPrice) {
-        throw new Error(`Cannot find any card. Real price: ${_exactPrice}, cardType: ${cards[0].type} `);
+        throw new Error(`Cannot find any card. Real price: ${_exactPrice}, Current price: ${price} cardType: ${cards[0].type} `);
       }
 
       return this.findCardWithPrice(cards, price - 1, _exactPrice);
+    }
+    if (cardsWithCurrentPrice.length === 1) {
+      const foundedCard = cardsWithCurrentPrice[0];
+      foundedCard.price = _exactPrice;
+      return foundedCard;
     }
 
     const foundedCard =
@@ -186,7 +195,6 @@ class CreateGameStore {
 
     for (let i = 1; i <= playersCount; i++) {
       const playerPrice = this.balancePlayerPrice(playersBalance, difficultyToTotalPrice(difficulty));
-
       players.push(this.createPlayer(playerPrice, characteristicBalance, sexualOrientation));
     }
 

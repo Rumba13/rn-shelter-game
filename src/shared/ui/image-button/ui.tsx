@@ -101,7 +101,8 @@ export function ImageButton({
 }
 
 const s: any = {
-  buttonContainer: {},
+  buttonContainer: {
+  },
   buttonShadow: {
     maxWidth: '100%',
     maxHeight: '100%',

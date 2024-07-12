@@ -4,13 +4,14 @@ import { apocalypses } from '@/src/entities/apocalypse';
 import { GameType } from '@/src/shared/lib/types/game';
 import { Player } from '@/src/shared/lib/types/player';
 import {
-  characteristicCardsShortNames,
-} from '@/src/entities/characteristic-card/model/characteristic-cards-short-names';
+  playerPropsShortNames,
+} from '@/src/entities/characteristic-card/model/player-props-short-names';
 import { sortedCardsStore } from '@/src/entities/characteristic-card/model/sorted-cards';
 import {
   characteristicCards,
 } from '@/src/entities/characteristic-card/model/characteristic-card';
 import { gameStore } from '@/src/entities/game';
+import { professions } from '@/src/entities/profession';
 
 class ConnectToGameStore {
   constructor() {
@@ -27,22 +28,21 @@ class ConnectToGameStore {
     const players: Player[] = <Player[]>gameLoadingData.players.map(player => {
 
       return {
-        bioCharacteristics: characteristicCards.find(card => card.id === player[characteristicCardsShortNames.bio]),
-        character: characteristicCards.find(card => card.id === player[characteristicCardsShortNames.character]),
-        health: characteristicCards.find(card => card.id === player[characteristicCardsShortNames.health]),
-        phobia: characteristicCards.find(card => card.id === player[characteristicCardsShortNames.phobia]),
-        actionCard: characteristicCards.find(card => card.id === player[characteristicCardsShortNames['action-card']]),
-        conditionCard: characteristicCards.find(card => card.id === player[characteristicCardsShortNames['condition-card']]),
-        additionalInformation: characteristicCards.find(card => card.id === player[characteristicCardsShortNames['additional-information']]),
-        luggage: characteristicCards.find(card => card.id === player[characteristicCardsShortNames.luggage]),
-        knowledge: characteristicCards.find(card => card.id === player[characteristicCardsShortNames.knowledge]),
-        hobby: characteristicCards.find(card => card.id === player[characteristicCardsShortNames.hobby]),
+        bioCharacteristics: characteristicCards.find(card => card.id === player[playerPropsShortNames.bio]),
+        character: characteristicCards.find(card => card.id === player[playerPropsShortNames.character]),
+        health: characteristicCards.find(card => card.id === player[playerPropsShortNames.health]),
+        phobia: characteristicCards.find(card => card.id === player[playerPropsShortNames.phobia]),
+        actionCard: characteristicCards.find(card => card.id === player[playerPropsShortNames['action-card']]),
+        conditionCard: characteristicCards.find(card => card.id === player[playerPropsShortNames['condition-card']]),
+        additionalInformation: characteristicCards.find(card => card.id === player[playerPropsShortNames['additional-information']]),
+        luggage: characteristicCards.find(card => card.id === player[playerPropsShortNames.luggage]),
+        knowledge: characteristicCards.find(card => card.id === player[playerPropsShortNames.knowledge]),
+        hobby: characteristicCards.find(card => card.id === player[playerPropsShortNames.hobby]),
         notes: '',
         isKicked: false,
-        profession: player.profession,
+        profession: professions.find(profession => profession.id === player[playerPropsShortNames.profession]),
       };
     });
-    console.log(players);
 
     const game: GameType = {
       shelter,

@@ -1,13 +1,7 @@
 import { View, Text, Image, Alert, ImageBackground, SafeAreaView, ScrollView } from 'react-native';
 import { useEffect, useState } from 'react';
-import { CheckBox } from '@/src/shared/ui/check-box/ui';
-import { ImageButton } from '@/src/shared/ui/image-button/ui';
 import { useFonts } from 'expo-font';
-import RNPickerSelect from 'react-native-picker-select';
-import { PickerSelectProps } from 'react-native-picker-select';
 import { Range } from '@/src/shared/ui/range/ui';
-import { observer } from 'mobx-react';
-import { gameSettingsStore } from '@/src/entities/game/model/game-settings';
 import { GameOptionBase } from '@/src/pages/create-game-page/ui/game-option-base/ui';
 
 type PropsType = {

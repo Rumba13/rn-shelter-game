@@ -26,10 +26,16 @@ import {
   characteristicCards,
   characteristicCardsList,
 } from '@/src/entities/characteristic-card/model/characteristic-card';
-import { renderCharacteristicCardSelectedText } from '@/src/pages/create-game-page/ui/render-characteristic-card-selected-text';
+import {
+  renderCharacteristicCardSelectedText,
+} from '@/src/pages/create-game-page/ui/render-characteristic-card-selected-text';
 import { CharacteristicCardsList } from '@/src/shared/lib/types/characteristic-cards-list';
-import { characteristicCardNameToCard } from '@/src/entities/characteristic-card/model/characteristic-card-name-to-card';
-import { characteristicBalanceValueToTitle } from '@/src/pages/create-game-page/ui/characteristic-balance-value-to-title';
+import {
+  characteristicCardNameToCard,
+} from '@/src/entities/characteristic-card/model/characteristic-card-name-to-card';
+import {
+  characteristicBalanceValueToTitle,
+} from '@/src/pages/create-game-page/ui/characteristic-balance-value-to-title';
 import { createGameStore } from '@/src/feature/create-game/model/create-game';
 import { gameStore } from '@/src/entities/game/model/game';
 //TODO refactoring
@@ -46,7 +52,8 @@ export const CreateGamePage = observer(({ navigation }: PropsType) => {
 
   const settings = gameSettingsStore.settings;
 
-  useEffect(() => {}, [fontsLoaded, settings.difficulty]);
+  useEffect(() => {
+  }, [fontsLoaded, settings.difficulty]);
 
   if (!fontsLoaded) {
     return <Text>Loading...</Text>;
@@ -65,7 +72,7 @@ export const CreateGamePage = observer(({ navigation }: PropsType) => {
         style={s.mainContentBackground}>
         <View style={s.mainContentWrapper}>
           <SafeAreaView style={s.mainContent}>
-            <ScrollView>
+            <ScrollView decelerationRate={0.985}>
               <ImageBackground
                 resizeMode={'repeat'}
                 source={require('@/assets/images/gamecreationscreen/create_back.png')}>
@@ -144,7 +151,7 @@ export const CreateGamePage = observer(({ navigation }: PropsType) => {
                   subKey={'children'}
                   displayKey={'name'}
                   selectText={'Выбрать бункер'}
-                  selectedByDefault={["Тора Бора"]}
+                  selectedByDefault={['Тора Бора']}
                   searchPlaceholderText={'Искать Бункеры'}
                   onValueChange={shelterNames =>
                     gameSettingsStore.setSettings(options => {
@@ -160,7 +167,7 @@ export const CreateGamePage = observer(({ navigation }: PropsType) => {
                   items={apocalypsesCategories}
                   uniqueKey={'name'}
                   displayKey={'name'}
-                  selectedByDefault={["Гигантские Змеи"]}
+                  selectedByDefault={['Гигантские Змеи']}
                   selectText={'Выбрать Апокалипсис'}
                   searchPlaceholderText={'Искать Апокалипсисы'}
                   onValueChange={apocalypsesNames =>
@@ -200,8 +207,8 @@ export const CreateGamePage = observer(({ navigation }: PropsType) => {
 
       <Footer
         onNextButtonPress={() => {
-          gameStore.setGame(createGameStore.createGame(gameSettingsStore.settings));
           navigation.navigate('select-player-page');
+          gameStore.setGame(createGameStore.createGame(gameSettingsStore.settings));
         }}
         styles={{ marginHorizontal: 50 }}
       />
@@ -242,4 +249,4 @@ const s: any = {
     height: '96%',
     flexDirection: 'column',
   },
-};
+}

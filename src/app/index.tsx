@@ -16,19 +16,6 @@ const Stack = createNativeStackNavigator();
 
 export default function App() {
   const stackScreenOptions: NativeStackNavigationOptions = { headerShown: false, animation: 'fade_from_bottom' };
-  const [permission, requestPermission] = useCameraPermissions();
-
-  useEffect(() => {
-  }, [permission]);
-
-  if (!permission?.granted) {
-    return (
-      <AppLayout>
-        <Text>asdad</Text>
-        <Button title={'Per'} onPress={requestPermission} />
-      </AppLayout>
-    );
-  }
 
   const HomePageRoute = ({ navigation }: any) => {
     return (
@@ -68,8 +55,8 @@ export default function App() {
             {game.shelter.name}
             {game.apocalypse.name}
             {game.players.map(player => (
-              <View key={player.profession}>
-                <Text>------------------- {player.profession}</Text>
+              <View key={player.profession.id}>
+                <Text>------------------- {player.profession.name}</Text>
                 <Text>
                   Био {player.bioCharacteristics?.price}: {player.bioCharacteristics?.name}
                 </Text>

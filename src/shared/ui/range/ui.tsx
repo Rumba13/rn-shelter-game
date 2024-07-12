@@ -21,11 +21,8 @@ type PropsType = {
 export const Range = observer(({ onValueChanged, options, max, min, defaultValue }: PropsType) => {
   const [minimalValue, setMinimalValue] = useState<number>(defaultValue);
 
-  if (typeof defaultValue !== 'number') {
-    throw new Error("Range Component Error. Default value isn't number");
-  }
-
-  useEffect(() => {}, [min]);
+  useEffect(() => {
+  }, [min]);
 
   function _onValueChanged(value: number) {
     setMinimalValue(min);
@@ -40,13 +37,16 @@ export const Range = observer(({ onValueChanged, options, max, min, defaultValue
       max={max}
       step={1}
       renderThumb={() => (
-        <Image
-          style={s.sliderPicker}
-          resizeMode={'contain'}
-          source={options?.pickerImage ?? require('@/assets/images/gamecreationscreen/picker.png')}
-        />
+        <View style={{ height: sliderPickerSize + 10, width: sliderPickerSize + 10, alignItems:"center", justifyContent:"center" }}>
+          <Image
+            style={s.sliderPicker}
+            resizeMode={'contain'}
+            source={options?.pickerImage ?? require('@/assets/images/gamecreationscreen/picker.png')}
+          />
+        </View>
       )}
       renderRail={() => (
+
         <Image
           style={s.sliderTrack}
           resizeMode={'contain'}
@@ -54,8 +54,6 @@ export const Range = observer(({ onValueChanged, options, max, min, defaultValue
         />
       )}
       renderRailSelected={() => void 0}
-      renderLabel={value => <Label value={value} />}
-      renderNotch={() => void 0}
       onValueChanged={_onValueChanged}
     />
     // <TouchableWithoutFeedback onPressIn={onPressIn}>
@@ -74,7 +72,7 @@ export const Range = observer(({ onValueChanged, options, max, min, defaultValue
     // </TouchableWithoutFeedback>
   );
 });
-
+const sliderPickerSize = 36;
 const s: any = {
   slider: {
     position: 'relative',
@@ -83,8 +81,8 @@ const s: any = {
   },
   sliderPicker: {
     zIndex: 2,
-    width: 36,
-    height: 36,
+    width: sliderPickerSize,
+    height: sliderPickerSize,
   },
   sliderTrack: {
     maxWidth: '100%',
