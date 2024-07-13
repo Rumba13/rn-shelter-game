@@ -206,18 +206,24 @@ class CreateGameStore {
   public createGame(gameSettings: GameSettings): GameType {
     sortedCardsStore.setCardsKit(gameSettings.cardsKit);
 
-    return {
-      apocalypse: this.selectRandomApocalypse(gameSettings.apocalypses),
-      shelter: this.selectRandomShelter(gameSettings.shelters),
-      players: this.createPlayers(
-        gameSettings.playersCount,
-        gameSettings.difficulty,
-        gameSettings.characteristicBalance,
-        gameSettings.balance,
-        gameSettings.sexualOrientation,
-      ),
-      ending: 'Вы проебали!',
-    };
+    try {
+      return {
+        apocalypse: this.selectRandomApocalypse(gameSettings.apocalypses),
+        shelter: this.selectRandomShelter(gameSettings.shelters),
+        players: this.createPlayers(
+          gameSettings.playersCount,
+          gameSettings.difficulty,
+          gameSettings.characteristicBalance,
+          gameSettings.balance,
+          gameSettings.sexualOrientation,
+        ),
+        ending: 'Вы проебали!',
+      };
+
+    } catch (err) {
+      console.log(err);
+      throw new Error('При генерации игры произошла ошибка, скорее всего она связанна с тем, что вы, ослы ебанные, создали такиииих ублюдских персонажей, что у меня даже характеристик таких блядь нету');
+    }
   }
 }
 

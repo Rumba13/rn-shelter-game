@@ -1,7 +1,7 @@
 import { Image, ImageBackground, SafeAreaView, ScrollView, Text, View } from 'react-native';
 import { Footer } from '@/src/shared/ui/footer/ui';
 import { useFonts } from 'expo-font';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Header } from './header/ui';
 import { Separator } from '@/src/pages/create-game-page/ui/separator/ui';
 import { GameOptionCheckbox } from '@/src/pages/create-game-page/ui/game-option-checkbox/ui';
@@ -38,6 +38,7 @@ import {
 } from '@/src/pages/create-game-page/ui/characteristic-balance-value-to-title';
 import { createGameStore } from '@/src/feature/create-game/model/create-game';
 import { gameStore } from '@/src/entities/game/model/game';
+import { OverlayModal } from '@/src/shared/ui/overlay-modal/ui';
 //TODO refactoring
 //TODO fix font issues
 
@@ -46,6 +47,8 @@ type PropsType = {
 };
 
 export const CreateGamePage = observer(({ navigation }: PropsType) => {
+  const [isErrorModalOpened, setIsErrorModalOpened] = useState<boolean>(false);
+  const [errorDescription, setErrorDescription] = useState<string | null>(null);
   const [fontsLoaded, fontsError] = useFonts({
     RobotoSlab: require('@/assets/fonts/RobotoSlab-Bold.ttf'),
   });
@@ -205,10 +208,23 @@ export const CreateGamePage = observer(({ navigation }: PropsType) => {
         </View>
       </ImageBackground>
 
+      <OverlayModal isModalOpened={isErrorModalOpened} setIsModalOpened={setIsErrorModalOpened}
+                    overlayStyle={{ backgroundColor: 'rgba(255,0,0, 0.5)' }}>
+        <View style={s.errorModalContent}>
+          <Text style={s.errorModalTitle}>ААААААА ОЩИБКА</Text>
+          <Text style={s.errorModalError}>{errorDescription}</Text>
+        </View>
+      </OverlayModal>
+
       <Footer
         onNextButtonPress={() => {
-          navigation.navigate('select-player-page');
-          gameStore.setGame(createGameStore.createGame(gameSettingsStore.settings));
+          try {
+            gameStore.setGame(createGameStore.createGame(gameSettingsStore.settings));
+            navigation.navigate('select-player-page');
+          } catch (err) {
+            setIsErrorModalOpened(true);
+            setErrorDescription(String(err));
+          }
         }}
         styles={{ marginHorizontal: 50 }}
       />
@@ -217,6 +233,26 @@ export const CreateGamePage = observer(({ navigation }: PropsType) => {
 });
 
 const s: any = {
+  errorModalTitle: {
+    position: 'absolute',
+    top: -36,
+    fontSize: 26,
+    width: '100%',
+    textAlign: 'center',
+  },
+  errorModalContent: {
+    backgroundColor: 'white',
+    maxWidth: '100%',
+    margin: 20,
+    padding: 10,
+    borderRadius: 10,
+  },
+  errorModalError: {
+    fontSize: 16,
+    lineHeight: 20,
+    letterSpacing: 1.2,
+    fontFamily: 'RobotoSlab',
+  },
   createGameButtonWrapper: {},
   createGamePageWrapper: {
     maxWidth: '100%',
@@ -249,4 +285,4 @@ const s: any = {
     height: '96%',
     flexDirection: 'column',
   },
-}
+};
