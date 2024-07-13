@@ -14,7 +14,8 @@ export function SelectPlayerSlider({}: PropsType) {
     RobotoSlabSemiBold: require('@/assets/fonts/RobotoSlab-SemiBold.ttf'),
   });
 
-  useEffect(() => {}, [fontsLoaded]);
+  useEffect(() => {
+  }, [fontsLoaded]);
 
   const players = [...new Array(gameSettingsStore.settings.playersCount).keys()].map(item => item + 1);
   const observer = (
@@ -99,7 +100,9 @@ export function SelectPlayerSlider({}: PropsType) {
 
 const s = StyleSheet.create({
   sliderWrapper: {
-    flex: 1,
+    height: 185,
+    marginTop: 18,
+    marginBottom: 23,
   },
   shareButton: {
     display: 'flex',

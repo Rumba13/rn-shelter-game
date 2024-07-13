@@ -64,17 +64,20 @@ export function SelectPlayerPage({ navigation }: PropsType) {
           options={{ yOffset: 3, xOffset: 2, yOffsetOnPress: 1, xOffSetOnPress: 1 }}
         />
       </Animated.View>
-      <Text style={s.selectPlayerPageTitle}>Выбери номер своего персонажа</Text>
-      <View style={s.separatorWrapper}>
-        <Image
-          style={s.separator}
-          resizeMode={'contain'}
-          source={require('@/assets/images/playerselectionscreen/main/decal_vibor_igroka.png')}
-        />
-      </View>
-      <Text style={s.selectPlayerPageSubTitle}>Два дауна не могут иметь один и тот же номер</Text>
-      <SelectPlayerSlider />
+      <View style={{ flex: 1 }}>
 
+        <Text style={s.selectPlayerPageTitle}>Выбери номер своего персонажа</Text>
+        <View style={s.separatorWrapper}>
+          <Image
+            style={s.separator}
+            resizeMode={'contain'}
+            source={require('@/assets/images/playerselectionscreen/main/decal_vibor_igroka.png')}
+          />
+        </View>
+        <Text style={s.selectPlayerPageSubTitle}>Два дауна не могут иметь один и тот же номер</Text>
+        <SelectPlayerSlider />
+
+      </View>
       <Footer onNextButtonPress={() => navigation.navigate('dev-page')} />
     </Animated.View>
   );
