@@ -1,5 +1,7 @@
 import { Profession } from '@/src/shared/lib/types/profession';
 
+const previousKitLastId: number = 0;
+
 export const professionBorovEdition: Profession[] = [
   {
     name: 'Бомж',
@@ -67,4 +69,4 @@ export const professionBorovEdition: Profession[] = [
   {
     name: 'Сатору Годжо',
   },
-].map((profession, index) => ({ ...profession, id: index + 1 }));
+].map((profession, index) => ({ ...profession, id: previousKitLastId + index + 1 }));

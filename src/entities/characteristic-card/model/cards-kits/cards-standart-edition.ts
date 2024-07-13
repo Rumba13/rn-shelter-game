@@ -1,6 +1,6 @@
 import { Card } from '@/src/shared/lib/types/card';
 
-export const cardsStandartEdition: Card[] = [
+export const cardsStandartEdition: Card[] = <Card[]>[
   {
     type: 'luggage',
     name: '1 миллион долларов',
@@ -10,7 +10,7 @@ export const cardsStandartEdition: Card[] = [
   {
     type: 'luggage',
     name: '10 комплектов термобелья',
-    price: 5, 
+    price: 5,
     id: 2,
   },
   {
@@ -2013,7 +2013,7 @@ export const cardsStandartEdition: Card[] = [
   },
   {
     type: 'knowledge',
-    name: "Около бункера находится 'IKEA'",
+    name: 'Около бункера находится \'IKEA\'',
     price: 5,
     id: 336,
   },
@@ -3049,4 +3049,4 @@ export const cardsStandartEdition: Card[] = [
     price: 5,
     id: 508,
   },
-];
+].map((card, index) => ({ ...card, id: index + 1 }));

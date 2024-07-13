@@ -55,4 +55,4 @@ export const apocalypsesStandartEditionKit: Apocalypse[] = [
       'Улицы городов начал заполнять токсичный газ, вдохнув который, человек мгновенно умирает. До тех пор, пока газ не нейтрализуется, жить на поверхности невозможно.',
     id: 9,
   },
-];
+].map(((apocalypse, index) => ({ ...apocalypse, id: index + 1 })));
