@@ -90,7 +90,7 @@ export function GameOptionList<ItemsType>({
         onConfirm={() => onValueChange(selectedItems)}
         styles={StyleSheet.create({
           button: { backgroundColor: '#c3b5a8' },
-          itemText: { fontFamily: 'RobotoSlabSemiBold', fontSize: 15, letterSpacing: 0.7 },
+          itemText: { fontFamily: 'RobotoSlabSemiBold', fontSize: 16, letterSpacing: 0.7 },
         })}
       />
     </GameOptionBase>

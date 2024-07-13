@@ -58,7 +58,7 @@ const s = StyleSheet.create({
   qrTitle: {
     textAlign: 'center',
     paddingTop: 10,
-    fontSize: 18,
+    fontSize: 20,
     letterSpacing: 1.5,
     color: '#232322',
     fontFamily: 'RobotoSlabSemiBold',

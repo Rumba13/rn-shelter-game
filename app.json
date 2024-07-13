@@ -14,14 +14,17 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.senderium.rnsheltergame"
     },
     "android": {
       "adaptiveIcon": {
         "backgroundColor": "#ff0000"
       },
       "package": "com.senderium.rnsheltergame",
-      "permissions": ["android.permission"]
+      "permissions": [
+        "android.permission"
+      ]
     },
     "web": {
       "bundler": "metro",

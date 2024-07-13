@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Image, ImageBackground, Dimensions, Animated } from 'react-native';
+import { View, Text, StyleSheet, Image, ImageBackground, Dimensions, Animated, Alert } from 'react-native';
 import { useFonts } from 'expo-font';
 import { useEffect, useRef, useState } from 'react';
 import { ImageButton } from '@/src/shared/ui/image-button/ui';
@@ -66,7 +66,7 @@ export function SelectPlayerPage({ navigation }: PropsType) {
       </Animated.View>
       <View style={{ flex: 1 }}>
 
-        <Text style={s.selectPlayerPageTitle}>Выбери номер своего персонажа</Text>
+        <Text style={s.selectPlayerPageTitle} maxFontSizeMultiplier={1.1}>Выбери номер своего персонажа</Text>
         <View style={s.separatorWrapper}>
           <Image
             style={s.separator}
@@ -74,7 +74,8 @@ export function SelectPlayerPage({ navigation }: PropsType) {
             source={require('@/assets/images/playerselectionscreen/main/decal_vibor_igroka.png')}
           />
         </View>
-        <Text style={s.selectPlayerPageSubTitle}>Два дауна не могут иметь один и тот же номер</Text>
+        <Text style={s.selectPlayerPageSubTitle} maxFontSizeMultiplier={1.25}>Два дауна не могут иметь один и тот же
+          номер</Text>
         <SelectPlayerSlider />
 
       </View>
@@ -82,6 +83,7 @@ export function SelectPlayerPage({ navigation }: PropsType) {
     </Animated.View>
   );
 }
+
 
 const maxContentWidth = 290;
 const ticketWrapperWidth = maxContentWidth + 60;
@@ -99,13 +101,14 @@ const s = StyleSheet.create({
   },
   QRCodeWrapper: {
     position: 'absolute',
-    top: 101,
+    backgroundColor: 'red',
     left: '50%',
-    transform: [{ translateX: -(QRCodeSize / 2) }],
+    top: 0,
+    transform: [{ translateX: -(QRCodeSize / 2) }, { translateY: (QRCodeSize) / 2 + 30}],
   },
   ticket: {
     maxWidth: '100%',
-    height: Dimensions.get('window').height - 80,
+    height: 715, //TODO remove fixed height
   },
   ticketButton: {
     position: 'absolute',
@@ -126,7 +129,7 @@ const s = StyleSheet.create({
   },
   selectPlayerPageTitle: {
     marginBottom: 10,
-    fontSize: 24,
+    fontSize: 26,
     textAlign: 'center',
     fontFamily: 'RobotoSlab',
     letterSpacing: 1,
@@ -134,7 +137,7 @@ const s = StyleSheet.create({
   selectPlayerPageSubTitle: {
     marginTop: 10,
     textAlign: 'center',
-    fontSize: 16,
+    fontSize: 18,
     color: '#664e64',
     letterSpacing: 1.4,
     fontFamily: 'RobotoSlabSemiBold',

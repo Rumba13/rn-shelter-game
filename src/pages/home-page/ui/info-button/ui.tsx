@@ -23,7 +23,8 @@ export function InfoButton() {
     SpaceMono: require('../../../../../assets/fonts/SpaceMono-Regular.ttf'),
   });
 
-  useEffect(() => {}, [fontsLoaded]);
+  useEffect(() => {
+  }, [fontsLoaded]);
 
   if (!fontsLoaded) {
     return <Text>Loading...</Text>;
@@ -51,8 +52,6 @@ export function InfoButton() {
             <ImageButton
               buttonImage={require('../../../../../assets/images/popup/close.png')}
               shadowImage={require('../../../../../assets/images/popup/close_shadow.png')}
-              height={40}
-              width={40}
               onPress={() => setIsModalOpened(false)}
               style={s.closeButton}
             />
@@ -62,7 +61,7 @@ export function InfoButton() {
               <ScrollView>
                 <Text
                   style={{
-                    fontSize: 15,
+                    fontSize: 16,
                     fontFamily: 'SpaceMono',
                     lineHeight: 18,
                   }}>
@@ -83,6 +82,8 @@ const s: any = {
     position: 'absolute',
     right: 0,
     top: 0,
+    minWidth:35,
+    minHeight:35,
     marginTop: 30,
     marginRight: 25,
   },

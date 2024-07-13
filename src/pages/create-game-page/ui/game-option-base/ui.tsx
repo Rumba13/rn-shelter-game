@@ -83,7 +83,7 @@ const s: any = {
     lineHeight: 18,
   },
   gameOptionTitle: {
-    fontSize: 18,
+    fontSize: 20,
     color: '#232322',
     fontWeight: 600,
     fontFamily: 'RobotoSlabSemiBold',

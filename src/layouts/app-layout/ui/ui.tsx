@@ -36,6 +36,8 @@ const s = StyleSheet.create({
   root: {
     height: Dimensions.get('window').height,
     width: Dimensions.get('window').width,
+    margin: 0,
+    padding: 0,
   },
 });
 

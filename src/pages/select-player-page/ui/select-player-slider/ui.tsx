@@ -88,7 +88,7 @@ export function SelectPlayerSlider({}: PropsType) {
         styleTitle={{
           textAlign: 'center',
           lineHeight: 40,
-          fontSize: 17,
+          fontSize: 19,
           fontFamily: 'RobotoSlabSemiBold',
           letterSpacing: 1.2,
           color: '#1a2634',
@@ -131,7 +131,7 @@ const s = StyleSheet.create({
   },
   sliderItemText: {
     textAlign: 'center',
-    fontSize: 90,
+    fontSize: 99,
     fontFamily: 'RobotoSlab',
     alignSelf: 'center',
     justifyContent: 'center',

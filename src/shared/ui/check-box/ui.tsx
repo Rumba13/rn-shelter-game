@@ -103,7 +103,7 @@ const s: any = {
   },
   checkBoxTitle: {
     flex: 1,
-    fontSize: 16,
+    fontSize: 18,
     textAlign: 'center',
     alignSelf: 'center',
     marginLeft: 5,

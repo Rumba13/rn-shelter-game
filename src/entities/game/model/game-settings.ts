@@ -47,6 +47,10 @@ class GameSettingsStore {
     runInAction(() => callBack(this.settings));
   }
 
+  public setDifficulty(difficulty: number) {
+    this.settings.difficulty = difficulty;
+  }
+
   public _writeOptions() {
     return JSON.stringify(this.settings);
   }

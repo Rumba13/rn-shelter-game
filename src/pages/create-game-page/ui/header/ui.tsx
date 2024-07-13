@@ -49,7 +49,7 @@ const s: any = {
     borderRadius: 15,
   },
   modalTitle: {
-    fontSize: 18,
+    fontSize: 20,
     marginBottom: 10,
   },
   modalClose: {
@@ -73,7 +73,7 @@ const s: any = {
   },
   playersCount: {
     position: 'absolute',
-    fontSize: 47,
+    fontSize: 49,
     top: 0,
     color: '#21272e',
     fontFamily: 'RobotoSlab',
@@ -86,7 +86,7 @@ const s: any = {
     padding: 10,
   },
   headerTitle: {
-    fontSize: 16,
+    fontSize: 18,
     lineHeight: 25,
     color: '#21272e',
     fontFamily: 'RobotoSlab',

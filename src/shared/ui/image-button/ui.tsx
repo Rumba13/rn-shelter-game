@@ -27,6 +27,7 @@ type PropsType = {
   };
   title?: string;
   styleTitle?: StyleProp<TextStyle>;
+  maxFontSizeMultiplier?:number
 };
 
 export function ImageButton({
@@ -38,6 +39,7 @@ export function ImageButton({
   onPress,
   options,
   title,
+                              maxFontSizeMultiplier,
   styleTitle,
 }: PropsType) {
   const [isButtonPressed, setIsButtonPressed] = useState<boolean>(false);
@@ -84,7 +86,7 @@ export function ImageButton({
                 : {}),
             }}
             resizeMode={'contain'}>
-            <Text style={styleTitle}>{title}</Text>
+            <Text style={styleTitle} maxFontSizeMultiplier={maxFontSizeMultiplier}>{title}</Text>
           </ImageBackground>
         </View>
       </ImageBackground>

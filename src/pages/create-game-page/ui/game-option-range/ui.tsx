@@ -66,7 +66,7 @@ const s: any = {
     maxHeight: 40,
   },
   selectedTitle: {
-    fontSize: 17,
+    fontSize: 19,
     textAlign: 'center',
     color: '#98795d',
     fontFamily: 'RobotoSlabSemiBold',
