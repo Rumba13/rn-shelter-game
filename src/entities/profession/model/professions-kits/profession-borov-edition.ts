@@ -52,7 +52,7 @@ export const professionBorovEdition: Profession[] = [
     name: 'Негр',
   },
   {
-    name: 'Доставшик Пиццы',
+    name: 'Доставщик Пиццы',
   },
   {
     name: 'Могильщик',

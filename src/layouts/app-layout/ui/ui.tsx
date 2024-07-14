@@ -1,20 +1,29 @@
 import { Alert, Dimensions, ImageBackground, StatusBar, StyleSheet, View } from 'react-native';
 import { useEffect } from 'react';
 import { useModal } from '@/src/shared/lib/use-modal';
+import { useFonts } from 'expo-font';
 
 type PropsType = {
   children: React.ReactNode;
 };
 
-export function AppLayout(props: PropsType) {
-  let { children } = props;
+export function AppLayout({ children }: PropsType) {
+  const [fontsLoaded, fontsError] = useFonts({
+    RobotoSlab: require('@/assets/fonts/RobotoSlab-Bold.ttf'),
+    RobotoSlabSemiBold: require('@/assets/fonts/RobotoSlab-SemiBold.ttf'),
+  });
+
 
   useEffect(() => {
     setTimeout(() => {
       StatusBar.setTranslucent(true); //TODO find component that overriding the properties
       StatusBar.setBackgroundColor('#c3b5a8');
     }, 100);
-  });
+  }, [fontsLoaded, fontsError]);
+
+  if (!fontsLoaded && !fontsError) {
+    return null;
+  }
 
   return (
     <View style={s.root}>

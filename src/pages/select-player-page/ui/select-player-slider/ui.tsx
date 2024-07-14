@@ -5,10 +5,12 @@ import { useFonts } from 'expo-font';
 import { useEffect, useState } from 'react';
 import { ImageButton } from '@/src/shared/ui/image-button/ui';
 
-type PropsType = {};
+type PropsType = {
+  selectedPlayerIndex: number,
+  setSelectedPlayerIndex: (playerIndex: number) => void
+};
 
-export function SelectPlayerSlider({}: PropsType) {
-  const [selectedSlideIndex, setSelectedSlideIndex] = useState<number>(0);
+export function SelectPlayerSlider({ selectedPlayerIndex, setSelectedPlayerIndex }: PropsType) {
   const [fontsLoaded, fontsError] = useFonts({
     RobotoSlab: require('@/assets/fonts/RobotoSlab-Bold.ttf'),
     RobotoSlabSemiBold: require('@/assets/fonts/RobotoSlab-SemiBold.ttf'),
@@ -44,12 +46,12 @@ export function SelectPlayerSlider({}: PropsType) {
               maxScrollDistancePerSwipe={300}
               overscrollEnabled
               modeConfig={{ parallaxAdjacentItemScale: 0.55 }}
-              defaultIndex={selectedSlideIndex}
+              defaultIndex={selectedPlayerIndex}
               onSnapToItem={index => {
-                setSelectedSlideIndex(index);
+                setSelectedPlayerIndex(index);
               }}
               renderItem={({ index, item }) => {
-                const isSlideSelected = index === selectedSlideIndex;
+                const isSlideSelected = index === selectedPlayerIndex;
 
                 if (index === 0) {
                   return (
@@ -84,7 +86,7 @@ export function SelectPlayerSlider({}: PropsType) {
         buttonImage={require('@/assets/images/playerselectionscreen/main/podelitsa_pers_knopka.png')}
         shadowImage={require('@/assets/images/playerselectionscreen/main/podelitsa_pers_knopka_shadow.png')}
         options={{ yOffset: 4, xOffset: 2, yOffsetOnPress: 1, xOffSetOnPress: 1 }}
-        title={selectedSlideIndex === 0 ? 'Поделиться игрой' : 'Поделиться персонажем'}
+        title={selectedPlayerIndex === 0 ? 'Поделиться игрой' : 'Поделиться персонажем'}
         styleTitle={{
           textAlign: 'center',
           lineHeight: 40,
