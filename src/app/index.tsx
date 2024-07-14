@@ -1,6 +1,6 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator, NativeStackNavigationOptions } from '@react-navigation/native-stack';
-import { HomePage } from '@/src/pages//home-page';
+import { HomePage } from '@/src/pages/home-page';
 import { AppLayout } from '@/src/layouts/app-layout';
 import { Alert, Button, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { CreateGamePage } from '@/src/pages/create-game-page';
@@ -8,6 +8,7 @@ import { SelectPlayerPage } from '@/src/pages/select-player-page';
 import { ConnectedToGamePage } from '@/src/pages/connect-to-game-page';
 import { gameStore } from '@/src/entities/game/model/game';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { GamePage } from '@/src/pages/game-page';
 
 
 //@ts-ignore
@@ -38,6 +39,13 @@ export default function App() {
       </AppLayout>
     );
   };
+  const ConnectToGamePageRoute = ({ navigation }: any) => {
+    return (
+      <AppLayout>
+        <ConnectedToGamePage navigation={navigation} />
+      </AppLayout>
+    );
+  };
   const SelectPlayerPageRoute = ({ navigation }: any) => {
     return (
       <AppLayout>
@@ -45,10 +53,10 @@ export default function App() {
       </AppLayout>
     );
   };
-  const ConnectToGamePageRoute = ({ navigation }: any) => {
+  const GamePageRoute = ({ navigation }: any) => {
     return (
       <AppLayout>
-        <ConnectedToGamePage navigation={navigation} />
+        <GamePage />
       </AppLayout>
     );
   };
@@ -110,6 +118,7 @@ export default function App() {
           <Stack.Screen name={'create-game-page'} options={stackScreenOptions} component={CreateGamePageRoute} />
           <Stack.Screen name={'select-player-page'} options={stackScreenOptions} component={SelectPlayerPageRoute} />
           <Stack.Screen name={'dev-page'} options={stackScreenOptions} component={DevPageRoute} />
+          <Stack.Screen name={'game-page'} options={stackScreenOptions} component={GamePageRoute} />
           <Stack.Screen name={'connect-to-game-page'} options={stackScreenOptions} component={ConnectToGamePageRoute} />
         </Stack.Navigator>
       </NavigationContainer>

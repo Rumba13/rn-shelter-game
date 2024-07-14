@@ -16,6 +16,10 @@ class GameStore {
     this.gameCode = gameCode;
   }
 
+  public setCurrentPlayerNumber(playerNumber:number) {
+    this.getGame().currentPlayerNumber = playerNumber
+  }
+
   public getGame() {
     if (this.game === undefined) throw new Error('Game is undefined');
     return this.game;

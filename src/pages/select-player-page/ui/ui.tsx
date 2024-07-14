@@ -12,6 +12,7 @@ type PropsType = {
 };
 
 export function SelectPlayerPage({ navigation }: PropsType) {
+  const [selectedPlayerIndex, setSelectedPlayerIndex] = useState<number>(0);
   const [isTicketShowed, setIsTicketShowed] = useState<boolean>(false);
   const [fontsLoaded, fontsError] = useFonts({
     RobotoSlab: require('@/assets/fonts/RobotoSlab-Bold.ttf'),
@@ -76,14 +77,16 @@ export function SelectPlayerPage({ navigation }: PropsType) {
         </View>
         <Text style={s.selectPlayerPageSubTitle} maxFontSizeMultiplier={1.25}>Два дауна не могут иметь один и тот же
           номер</Text>
-        <SelectPlayerSlider />
+        <SelectPlayerSlider selectedPlayerIndex={selectedPlayerIndex} setSelectedPlayerIndex={setSelectedPlayerIndex} />
 
       </View>
-      <Footer onNextButtonPress={() => navigation.navigate('dev-page')} />
+      <Footer onNextButtonPress={() => {
+        gameStore.setCurrentPlayerNumber(selectedPlayerIndex);
+        navigation.navigate('game-page');
+      }} />
     </Animated.View>
   );
 }
-
 
 const maxContentWidth = 290;
 const ticketWrapperWidth = maxContentWidth + 60;
@@ -101,10 +104,9 @@ const s = StyleSheet.create({
   },
   QRCodeWrapper: {
     position: 'absolute',
-    backgroundColor: 'red',
     left: '50%',
     top: 0,
-    transform: [{ translateX: -(QRCodeSize / 2) }, { translateY: (QRCodeSize) / 2 + 30}],
+    transform: [{ translateX: -(QRCodeSize / 2) }, { translateY: (QRCodeSize) / 2 + 30 }],
   },
   ticket: {
     maxWidth: '100%',
