@@ -14,12 +14,10 @@ type PropsType = {
 export function SelectPlayerPage({ navigation }: PropsType) {
   const [selectedPlayerIndex, setSelectedPlayerIndex] = useState<number>(0);
   const [isTicketShowed, setIsTicketShowed] = useState<boolean>(false);
-  const [fontsLoaded, fontsError] = useFonts({
-    RobotoSlab: require('@/assets/fonts/RobotoSlab-Bold.ttf'),
-    RobotoSlabSemiBold: require('@/assets/fonts/RobotoSlab-SemiBold.ttf'),
-  });
+
   const translateYAnim = useRef(new Animated.Value(-200)).current;
-  useEffect(() => {}, [fontsLoaded, translateYAnim]);
+  useEffect(() => {
+  }, [translateYAnim]);
 
   const showTicket = () => {
     Animated.timing(translateYAnim, {
@@ -58,8 +56,7 @@ export function SelectPlayerPage({ navigation }: PropsType) {
           shadowImage={require('@/assets/images/playerselectionscreen/ticket/arrow_ticket(shadow).png')}
           onPress={() => {
             setIsTicketShowed(!isTicketShowed);
-            if (isTicketShowed) showTicket();
-            else hideTicket();
+            isTicketShowed ? hideTicket() : showTicket();
           }}
           options={{ yOffset: 3, xOffset: 2, yOffsetOnPress: 1, xOffSetOnPress: 1 }}
         />
