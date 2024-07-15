@@ -17,10 +17,6 @@ import { ICarouselInstance } from 'react-native-reanimated-carousel';
 type PropsType = {};
 
 export function GamePage({}: PropsType) {
-  const [fontsLoaded, fontsError] = useFonts({
-    RobotoSlab: require('@/assets/fonts/RobotoSlab-Bold.ttf'),
-    RobotoSlabSemiBold: require('@/assets/fonts/RobotoSlab-SemiBold.ttf'),
-  });
   const selectPlayerSliderRef = React.createRef<ICarouselInstance>();
   const selectPlayersThumbsRef = React.createRef<ScrollView>();
 
@@ -30,10 +26,6 @@ export function GamePage({}: PropsType) {
     game.currentPlayerNumber === 0 ? 0 : game.currentPlayerNumber - 1,
   );
   const [thumbsScrollPositionX, setThumbsScrollPositionX] = useState(0);
-
-  if (!fontsLoaded) return <View></View>;
-
-  useEffect(() => {}, [fontsLoaded]);
 
   return (
     <View style={s.gamePage}>
@@ -53,7 +45,7 @@ export function GamePage({}: PropsType) {
           onSnapToItem={index => {
             const currentItemOnScreen = Math.round(thumbsScrollPositionX / selectPlayerThumbsWidth);
 
-            if (currentItemOnScreen <= index - 4) {
+            if (currentItemOnScreen <= index - 4) { //auto scroll
               selectPlayersThumbsRef.current?.scrollTo({
                 x: thumbsScrollPositionX + selectPlayerThumbsWidth * 4,
                 animated: true,
@@ -67,10 +59,10 @@ export function GamePage({}: PropsType) {
 
             setSelectedPlayerIndex(index);
           }}
-          modeConfig={{}}
           renderItem={item => {
             return (
               <PlayerDetails
+                key={item.index}
                 isObserver={game.currentPlayerNumber === 0}
                 isCurrentPlayer={game.currentPlayerNumber === item.index + 1}
                 style={{ marginLeft: 18 }}
@@ -95,6 +87,7 @@ export function GamePage({}: PropsType) {
               const isThumbSelected = selectedPlayerIndex === index;
               return (
                 <View
+                  key={index}
                   style={{
                     ...s.selectPlayerThumb,
                     ...(isThumbSelected ? {} : void 0),
