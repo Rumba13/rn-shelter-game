@@ -8,7 +8,6 @@ import {
   ScrollView,
 } from 'react-native';
 import { gameStore } from '@/src/entities/game';
-import { useFonts } from 'expo-font';
 import React, { useEffect, useRef, useState } from 'react';
 import { PlayerDetails } from './player/ui';
 import Carousel from 'react-native-reanimated-carousel';

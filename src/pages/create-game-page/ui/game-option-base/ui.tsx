@@ -1,5 +1,4 @@
 import { Image, Text, View } from 'react-native';
-import { useFonts } from 'expo-font';
 import { useEffect, useState } from 'react';
 import Collapsible from 'react-native-collapsible';
 import { ImageButton } from '@/src/shared/ui/image-button/ui';
@@ -14,11 +13,6 @@ type PropsType = {
 //TODO fix background flash when toggle collapsible
 export function GameOptionBase({ title, children, description }: PropsType) {
   const [isCollapsed, setIsCollapsed] = useState<boolean>(true);
-  const [fontsLoaded] = useFonts({
-    RobotoSlabSemiBold: require('@/assets/fonts/RobotoSlab-SemiBold.ttf'),
-  });
-
-  useEffect(() => {}, [fontsLoaded]);
 
   return (
     <View style={s.gameOption}>

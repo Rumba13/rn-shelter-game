@@ -1,6 +1,5 @@
 import { Alert, Dimensions, ImageBackground, StatusBar, StyleSheet, View } from 'react-native';
 import { useEffect } from 'react';
-import { useModal } from '@/src/shared/lib/use-modal';
 import { useFonts } from 'expo-font';
 
 type PropsType = {

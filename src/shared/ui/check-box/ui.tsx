@@ -9,7 +9,6 @@ import {
   View,
 } from 'react-native';
 import { useEffect, useRef, useState } from 'react';
-import { useFonts } from 'expo-font';
 import { Grayscale } from 'react-native-color-matrix-image-filters';
 
 type PropsType = {
@@ -20,12 +19,6 @@ type PropsType = {
 
 export function CheckBox({ style, setIsToggled, isToggled }: PropsType) {
   const translateXAnim = useRef(new Animated.Value(0)).current;
-
-  const [fontsLoaded] = useFonts({
-    RobotoSlabSemiBold: require('@/assets/fonts/RobotoSlab-SemiBold.ttf'),
-  });
-
-  useEffect(() => {}, [fontsLoaded]);
 
   const toggleOn = () => {
     Animated.timing(translateXAnim, {
@@ -43,11 +36,8 @@ export function CheckBox({ style, setIsToggled, isToggled }: PropsType) {
       isInteraction: true,
     }).start();
   };
-  useEffect(() => {}, [translateXAnim, fontsLoaded]);
+  useEffect(() => {}, [translateXAnim]);
 
-  if (!fontsLoaded) {
-    return <Text>Loading...</Text>;
-  }
 
   return (
     <Animated.View style={{ ...s.checkBox, ...style }}>

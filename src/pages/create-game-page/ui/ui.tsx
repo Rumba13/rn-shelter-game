@@ -1,6 +1,5 @@
 import { Alert, Image, ImageBackground, SafeAreaView, ScrollView, Text, View } from 'react-native';
 import { Footer } from '@/src/shared/ui/footer/ui';
-import { useFonts } from 'expo-font';
 import { useEffect, useState } from 'react';
 import { Header } from './header/ui';
 import { Separator } from '@/src/pages/create-game-page/ui/separator/ui';
@@ -50,18 +49,9 @@ type PropsType = {
 export const CreateGamePage = observer(({ navigation }: PropsType) => {
   const [isErrorModalOpened, setIsErrorModalOpened] = useState<boolean>(false);
   const [errorDescription, setErrorDescription] = useState<string | null>(null);
-  const [fontsLoaded, fontsError] = useFonts({
-    RobotoSlab: require('@/assets/fonts/RobotoSlab-Bold.ttf'),
-  });
+
 
   const settings = gameSettingsStore.settings;
-
-  useEffect(() => {
-  }, [fontsLoaded, settings.difficulty]);
-
-  if (!fontsLoaded) {
-    return <Text>Loading...</Text>;
-  }
 
   return (
     <View style={s.createGamePageWrapper}>

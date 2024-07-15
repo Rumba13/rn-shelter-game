@@ -5,9 +5,6 @@ import { SectionedMultiSelectProps } from 'react-native-sectioned-multi-select';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { StyleSheet } from 'react-native';
-import { useFonts } from 'expo-font';
-import { Shelter } from '@/src/shared/lib/types/shelter';
-import { Item } from 'react-native-picker-select';
 
 type PropsType<ItemsType> = {
   title: string;
@@ -39,13 +36,10 @@ export function GameOptionList<ItemsType>({
   subKey,
 }: PropsType<ItemsType>) {
   const [selectedItems, setSelectedItems] = useState<string[]>(selectedByDefault);
-  const [isFontsLoaded] = useFonts({
-    RobotoSlabSemiBold: require('@/assets/fonts/RobotoSlab-SemiBold.ttf'),
-  });
 
   useEffect(() => {
     onValueChange(selectedByDefault);
-  }, [isFontsLoaded]);
+  }, [ ]);
 
   function sortOffCategoriesNames(_sheltersNames: string[]) {
     const sheltersNames: string[] = [];

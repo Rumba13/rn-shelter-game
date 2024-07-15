@@ -1,5 +1,4 @@
 import { View, Text, StyleSheet, Image, ImageBackground, Dimensions, Animated, Alert } from 'react-native';
-import { useFonts } from 'expo-font';
 import { useEffect, useRef, useState } from 'react';
 import { ImageButton } from '@/src/shared/ui/image-button/ui';
 import { Footer } from '@/src/shared/ui/footer/ui';

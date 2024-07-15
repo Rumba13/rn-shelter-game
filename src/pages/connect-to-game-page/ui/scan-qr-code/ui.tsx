@@ -3,7 +3,6 @@ import { CameraView, PermissionStatus, useCameraPermissions } from 'expo-camera'
 import { connectToGameStore } from '@/src/feature/connect-to-game';
 import { useEffect, useState } from 'react';
 import { ImageButton } from '@/src/shared/ui/image-button/ui';
-import { useFonts } from 'expo-font';
 
 type PropsType = {
   navigation: any;
@@ -12,12 +11,6 @@ type PropsType = {
 export function ScanQRCode({ navigation }: PropsType) {
   const [permission, requestPermission] = useCameraPermissions();
   const [isCameraOpen, setIsCameraOpen] = useState<boolean>(false);
-  const [fontsLoaded] = useFonts({
-    RobotoSlab: require('@/assets/fonts/RobotoSlab-Bold.ttf'),
-    RobotoSlabSemiBold: require('@/assets/fonts/RobotoSlab-SemiBold.ttf'),
-  });
-
-  useEffect(() => {}, [permission, fontsLoaded]);
 
   if (!permission) {
     return <View></View>;

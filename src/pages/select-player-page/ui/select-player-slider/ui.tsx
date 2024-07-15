@@ -1,7 +1,6 @@
 import { View, Text, StyleSheet, Image, ImageBackground, Dimensions, Animated } from 'react-native';
 import Carousel from 'react-native-reanimated-carousel/src/Carousel';
 import { gameSettingsStore } from '@/src/entities/game';
-import { useFonts } from 'expo-font';
 import { useEffect, useState } from 'react';
 import { ImageButton } from '@/src/shared/ui/image-button/ui';
 
@@ -11,13 +10,6 @@ type PropsType = {
 };
 
 export function SelectPlayerSlider({ selectedPlayerIndex, setSelectedPlayerIndex }: PropsType) {
-  const [fontsLoaded, fontsError] = useFonts({
-    RobotoSlab: require('@/assets/fonts/RobotoSlab-Bold.ttf'),
-    RobotoSlabSemiBold: require('@/assets/fonts/RobotoSlab-SemiBold.ttf'),
-  });
-
-  useEffect(() => {}, [fontsLoaded]);
-
   const players = [...new Array(gameSettingsStore.settings.playersCount).keys()].map(item => item + 1);
   const observer = (
     <Image

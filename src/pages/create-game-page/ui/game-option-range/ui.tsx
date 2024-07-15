@@ -1,6 +1,5 @@
 import { View, Text, Image, Alert, ImageBackground, SafeAreaView, ScrollView } from 'react-native';
-import { useEffect, useState } from 'react';
-import { useFonts } from 'expo-font';
+
 import { Range } from '@/src/shared/ui/range/ui';
 import { GameOptionBase } from '@/src/pages/create-game-page/ui/game-option-base/ui';
 
@@ -25,15 +24,6 @@ export function GameOptionRange({
   descriptionHeight,
   description,
 }: PropsType) {
-  const [fontsLoaded] = useFonts({
-    RobotoSlabSemiBold: require('@/assets/fonts/RobotoSlab-SemiBold.ttf'),
-  });
-
-  useEffect(() => {}, [fontsLoaded]);
-
-  if (!fontsLoaded) {
-    return <View></View>;
-  }
 
   return (
     <GameOptionBase title={title} descriptionHeight={descriptionHeight} description={description}>
