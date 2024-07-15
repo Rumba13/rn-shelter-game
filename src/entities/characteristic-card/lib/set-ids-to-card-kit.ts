@@ -2,9 +2,9 @@ import { CardKit } from '@/src/shared/lib/types/card-kit';
 import { CardType } from '@/src/shared/lib/types/card-type';
 
 type ReturnType = {
-  cardsKit: CardKit,
-  nextKitId: number
-}
+  cardsKit: CardKit;
+  nextKitId: number;
+};
 
 export function setIdsToCardKit(cardsKit: Object, nextId = 1): ReturnType {
   let currentId = nextId;

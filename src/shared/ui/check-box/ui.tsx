@@ -38,7 +38,6 @@ export function CheckBox({ style, setIsToggled, isToggled }: PropsType) {
   };
   useEffect(() => {}, [translateXAnim]);
 
-
   return (
     <Animated.View style={{ ...s.checkBox, ...style }}>
       <TouchableWithoutFeedback

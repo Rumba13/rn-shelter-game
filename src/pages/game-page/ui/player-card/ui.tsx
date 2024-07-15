@@ -1,35 +1,94 @@
-import { Image, ImageBackground, SafeAreaView, StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
+import {
+  Image,
+  ImageBackground,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  TouchableWithoutFeedback,
+  View,
+  Animated,
+} from 'react-native';
 import { Card } from '@/src/shared/lib/types/card';
 import { cardTypeToCardTitleMap } from '@/src/pages/game-page/ui/player-card/card-type-to-card-title-map';
 import { cardTypeToCardIconMap } from '@/src/pages/game-page/ui/player-card/card-type-to-card-icon-map';
 import { cardTypeToCardBackgroundMap } from '@/src/pages/game-page/ui/player-card/card-type-to-card-background-map';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { observer } from 'mobx-react';
+import { CardDisplayStatus } from '@/src/shared/lib/types/card-display-status';
 
 type PropsType = {
   card: Card;
-  isCardShowed: boolean;
+  cardDisplayStatus: CardDisplayStatus;
+  canBePinned: boolean
   onPress: () => void;
 };
 
-export const PlayerCard = observer(({ card, isCardShowed, onPress }: PropsType) => {
+export const PlayerCard = observer(({ card, cardDisplayStatus, onPress, canBePinned }: PropsType) => {
   const isBigCard = card.type === 'action-card' || card.type === 'condition-card';
 
   const [currentFontSize, setCurrentFontSize] = useState<number>(15);
+  const translateYAnim = useRef(new Animated.Value(-40)).current;
+  const opacityAnim = useRef(new Animated.Value(0)).current;
+  const isCardShowed = cardDisplayStatus === CardDisplayStatus.Showed;
+  const isCardPinned = cardDisplayStatus === CardDisplayStatus.Pinned;
+
+  const animationDuration = 100;
+  const showPin = () => {
+    Animated.timing(translateYAnim, {
+      toValue: 0,
+      duration: animationDuration,
+      useNativeDriver: false,
+    }).start();
+    Animated.timing(opacityAnim, {
+      toValue: 1,
+      duration: animationDuration,
+      useNativeDriver: false,
+    }).start();
+  };
+  const hidePin = () => {
+    Animated.timing(translateYAnim, {
+      toValue: -40,
+      duration: animationDuration,
+      useNativeDriver: false,
+    }).start();
+    Animated.timing(opacityAnim, {
+      toValue: 0,
+      duration: animationDuration,
+      useNativeDriver: false,
+    }).start();
+  };
+
+  useEffect(() => {
+
+  }, [opacityAnim, translateYAnim]);
+
 
   if (isBigCard) {
     return (
-      <TouchableWithoutFeedback onPress={onPress} style={{ height: '100%', width: '100%' }}>
+      <TouchableWithoutFeedback onPress={() => {
+        if (canBePinned) {
+          isCardPinned
+            ? hidePin()
+            : showPin();
+        }
+        onPress();
+      }} style={{ height: '100%', width: '100%' }}>
         <View style={s.playerCardContainer}>
           <Text style={s.playerCardTitle}>{cardTypeToCardTitleMap[card.type]}</Text>
           <ImageBackground
             source={
-              isCardShowed
+              isCardShowed || isCardPinned
                 ? cardTypeToCardBackgroundMap[card.type]
                 : require('@/assets/images/gamescreen/phobia_bg.png')
             }
-            resizeMode={isCardShowed ? 'contain' : 'repeat'}>
+            resizeMode={isCardShowed || isCardPinned ? 'contain' : 'repeat'}>
             <View style={{ ...s.playerCard, height: 240 }}>
+
+              <Animated.Image
+                style={{ ...s.pinnedImage, transform: [{ translateY: translateYAnim }], opacity: opacityAnim }}
+                resizeMode={'contain'}
+                source={require('@/assets/images/gamescreen/Pin.png')} />
+
               <Text
                 style={{
                   ...s.playerCardDescription,
@@ -44,19 +103,17 @@ export const PlayerCard = observer(({ card, isCardShowed, onPress }: PropsType) 
                 adjustsFontSizeToFit
                 ellipsizeMode={'head'}
                 onTextLayout={e => (e.nativeEvent.lines.length > 3 ? setCurrentFontSize(currentFontSize - 1) : void 0)}>
-                {isCardShowed ? card.name : void 0}
+                {isCardShowed || isCardPinned ? card.name : void 0}
               </Text>
 
-              {!isCardShowed ? (
-                <Image
-                  style={s.playerCardHint_BigCart}
-                  resizeMode={'contain'}
-                  tintColor={'rgba(0,0,0,0.15)'}
-                  source={require('@/assets/images/gamescreen/gleb_hand.png')}
-                />
-              ) : (
-                void 0
-              )}
+              <Image
+                style={{
+                  ...s.playerCardHint_BigCart,
+                }}
+                resizeMode={'contain'}
+                tintColor={'rgba(0,0,0,0.15)'}
+                source={require('@/assets/images/gamescreen/gleb_hand.png')}
+              />
             </View>
           </ImageBackground>
         </View>
@@ -65,18 +122,33 @@ export const PlayerCard = observer(({ card, isCardShowed, onPress }: PropsType) 
   }
 
   return (
-    <TouchableWithoutFeedback onPress={onPress}>
-      <View style={s.playerCardContainer}>
+    <TouchableWithoutFeedback onPress={() => {
+      if (canBePinned) {
+
+        isCardPinned
+          ? hidePin()
+          : showPin();
+      }
+      onPress();
+    }}>
+      <Animated.View style={s.playerCardContainer}>
         <Text style={s.playerCardTitle}>{cardTypeToCardTitleMap[card.type]}</Text>
 
         <ImageBackground
           source={
-            isCardShowed ? cardTypeToCardBackgroundMap[card.type] : require('@/assets/images/gamescreen/phobia_bg.png')
+            cardDisplayStatus ? cardTypeToCardBackgroundMap[card.type] : require('@/assets/images/gamescreen/phobia_bg.png')
           }
           resizeMode={'contain'}>
           <SafeAreaView style={s.playerCard}>
+
+            <Animated.Image
+              style={{ ...s.pinnedImage, transform: [{ translateY: translateYAnim }], opacity: opacityAnim }}
+              resizeMode={'contain'}
+              source={require('@/assets/images/gamescreen/Pin.png')} />
+
+
             <Image
-              tintColor={isCardShowed ? void 0 : '#616161'}
+              tintColor={isCardShowed || isCardPinned ? void 0 : '#616161'}
               style={s.playerCardIcon}
               resizeMode={'contain'}
               source={cardTypeToCardIconMap[card.type]}
@@ -87,10 +159,11 @@ export const PlayerCard = observer(({ card, isCardShowed, onPress }: PropsType) 
               numberOfLines={3}
               ellipsizeMode={'head'}
               onTextLayout={e => (e.nativeEvent.lines.length > 3 ? setCurrentFontSize(currentFontSize - 1) : void 0)}>
-              {isCardShowed ? card.name : ''}
+              {isCardShowed || isCardPinned ? card.name : ''}
+
             </Text>
 
-            {!isCardShowed ? (
+            {!cardDisplayStatus ? (
               <Image
                 style={s.playerCardHint}
                 resizeMode={'contain'}
@@ -102,7 +175,7 @@ export const PlayerCard = observer(({ card, isCardShowed, onPress }: PropsType) 
             )}
           </SafeAreaView>
         </ImageBackground>
-      </View>
+      </Animated.View>
     </TouchableWithoutFeedback>
   );
 });
@@ -119,6 +192,13 @@ const s = StyleSheet.create({
 
     right: 0,
     marginRight: 17,
+  },
+  pinnedImage: {
+    position: 'absolute',
+    right: 10,
+    top: -5,
+    width: 30,
+    height: 30,
   },
   playerCardHint_BigCart: {
     position: 'absolute',

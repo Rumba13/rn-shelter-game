@@ -15,8 +15,7 @@ export function SelectPlayerPage({ navigation }: PropsType) {
   const [isTicketShowed, setIsTicketShowed] = useState<boolean>(false);
 
   const translateYAnim = useRef(new Animated.Value(-200)).current;
-  useEffect(() => {
-  }, [translateYAnim]);
+  useEffect(() => {}, [translateYAnim]);
 
   const showTicket = () => {
     Animated.timing(translateYAnim, {

@@ -44,7 +44,8 @@ export function GamePage({}: PropsType) {
           onSnapToItem={index => {
             const currentItemOnScreen = Math.round(thumbsScrollPositionX / selectPlayerThumbsWidth);
 
-            if (currentItemOnScreen <= index - 4) { //auto scroll
+            if (currentItemOnScreen <= index - 4) {
+              //auto scroll
               selectPlayersThumbsRef.current?.scrollTo({
                 x: thumbsScrollPositionX + selectPlayerThumbsWidth * 4,
                 animated: true,

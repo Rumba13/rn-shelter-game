@@ -1,5 +1,4 @@
 import {
-  Alert,
   Image,
   ImageBackground,
   ScrollView,
@@ -11,9 +10,10 @@ import {
 } from 'react-native';
 import { PlayerCard } from '@/src/pages/game-page/ui/player-card/ui';
 import { Player } from '@/src/shared/lib/types/player';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { CardsOpenedState } from '@/src/pages/game-page/model/cards-opened-state';
 import { observer } from 'mobx-react';
+import { CardDisplayStatus } from '@/src/shared/lib/types/card-display-status';
 
 type PropsType = {
   player: Player;
@@ -25,8 +25,8 @@ type PropsType = {
 
 export const PlayerDetails = observer(({ player, playerNumber, style, isCurrentPlayer, isObserver }: PropsType) => {
   //TODO rename to player card
-  const isAllCardsShowed = isObserver || isCurrentPlayer;
-  const [cardsOpenedState] = useState(new CardsOpenedState(isAllCardsShowed));
+  const allCardsDisplayStatus = isObserver || isCurrentPlayer ? CardDisplayStatus.Showed : CardDisplayStatus.Hidden;
+  const [cardsOpenedState] = useState(new CardsOpenedState(allCardsDisplayStatus));
 
   return (
     <View style={{ ...s.mainContentWrapper, ...style }}>
@@ -55,54 +55,75 @@ export const PlayerDetails = observer(({ player, playerNumber, style, isCurrentP
               style={s.playerCardsBackground}>
               <ScrollView style={s.playerCards} showsVerticalScrollIndicator={false}>
                 <PlayerCard
+                  canBePinned={isCurrentPlayer}
+
                   card={player.bioCharacteristics}
-                  isCardShowed={cardsOpenedState.isBioCardShowed}
-                  onPress={() => cardsOpenedState.setIsBioCardShowed(true)}
+                  cardDisplayStatus={cardsOpenedState.bioCardDisplayStatus}
+                  // onPress={() =>  cardsOpenedState.setIsBioCardShowed(isCurrentPlayer? CardDisplayStatus.Pinned : CardDisplayStatus.Showed)}
+                  onPress={() => cardsOpenedState.setIsBioCardShowed((isCurrentPlayer ? (cardsOpenedState.bioCardDisplayStatus === CardDisplayStatus.Pinned ? CardDisplayStatus.Showed : CardDisplayStatus.Pinned) : CardDisplayStatus.Showed))}
+
                 />
                 <PlayerCard
+                  canBePinned={isCurrentPlayer}
                   card={player.health}
-                  isCardShowed={cardsOpenedState.isHealthCardShowed}
-                  onPress={() => cardsOpenedState.setIsHealthCardShowed(true)}
+                  cardDisplayStatus={cardsOpenedState.healthDisplayStatus}
+                  onPress={() => cardsOpenedState.setIsHealthCardShowed(isCurrentPlayer ? (cardsOpenedState.healthDisplayStatus === CardDisplayStatus.Pinned ? CardDisplayStatus.Showed : CardDisplayStatus.Pinned) : CardDisplayStatus.Showed)}
                 />
                 <PlayerCard
+                  canBePinned={isCurrentPlayer}
+
                   card={player.hobby}
-                  isCardShowed={cardsOpenedState.isHobbyCardShowed}
-                  onPress={() => cardsOpenedState.setIsHobbyCardShowed(true)}
+                  cardDisplayStatus={cardsOpenedState.hobbyDisplayStatus}
+                  onPress={() => cardsOpenedState.setIsHobbyCardShowed(isCurrentPlayer ? (cardsOpenedState.hobbyDisplayStatus === CardDisplayStatus.Pinned ? CardDisplayStatus.Showed : CardDisplayStatus.Pinned) : CardDisplayStatus.Showed)}
                 />
                 <PlayerCard
+                  canBePinned={isCurrentPlayer}
+
                   card={player.phobia}
-                  isCardShowed={cardsOpenedState.isPhobiaCardShowed}
-                  onPress={() => cardsOpenedState.setIsPhobiaCardShowed(true)}
+                  cardDisplayStatus={cardsOpenedState.phobiaDisplayStatus}
+                  onPress={() => cardsOpenedState.setIsPhobiaCardShowed(isCurrentPlayer ? (cardsOpenedState.phobiaDisplayStatus === CardDisplayStatus.Pinned ? CardDisplayStatus.Showed : CardDisplayStatus.Pinned) : CardDisplayStatus.Showed)}
                 />
                 <PlayerCard
+                  canBePinned={isCurrentPlayer}
+
                   card={player.character}
-                  isCardShowed={cardsOpenedState.isCharacterCardShowed}
-                  onPress={() => cardsOpenedState.setIsCharacterCardShowed(true)}
+                  cardDisplayStatus={cardsOpenedState.characterDisplayStatus}
+                  onPress={() => cardsOpenedState.setIsCharacterCardShowed(isCurrentPlayer ? (cardsOpenedState.characterDisplayStatus === CardDisplayStatus.Pinned ? CardDisplayStatus.Showed : CardDisplayStatus.Pinned) : CardDisplayStatus.Showed)}
                 />
                 <PlayerCard
+                  canBePinned={isCurrentPlayer}
+
                   card={player.additionalInformation}
-                  isCardShowed={cardsOpenedState.isAdditionalInformationCardShowed}
-                  onPress={() => cardsOpenedState.setIsAdditionalInformationCardShowed(true)}
+                  cardDisplayStatus={cardsOpenedState.additionalInformationDisplayStatus}
+                  onPress={() => cardsOpenedState.setIsAdditionalInformationCardShowed(isCurrentPlayer ? (cardsOpenedState.additionalInformationDisplayStatus === CardDisplayStatus.Pinned ? CardDisplayStatus.Showed : CardDisplayStatus.Pinned) : CardDisplayStatus.Showed)}
                 />
                 <PlayerCard
+                  canBePinned={isCurrentPlayer}
+
                   card={player.knowledge}
-                  isCardShowed={cardsOpenedState.isKnowledgeCardShowed}
-                  onPress={() => cardsOpenedState.setIsKnowledgeCardShowed(true)}
+                  cardDisplayStatus={cardsOpenedState.knowledgeDisplayStatus}
+                  onPress={() => cardsOpenedState.setIsKnowledgeCardShowed(isCurrentPlayer ? (cardsOpenedState.knowledgeDisplayStatus === CardDisplayStatus.Pinned ? CardDisplayStatus.Showed : CardDisplayStatus.Pinned) : CardDisplayStatus.Showed)}
                 />
                 <PlayerCard
+                  canBePinned={isCurrentPlayer}
+
                   card={player.luggage}
-                  isCardShowed={cardsOpenedState.isLuggageCardShowed}
-                  onPress={() => cardsOpenedState.setIsLuggageCardShowed(true)}
+                  cardDisplayStatus={cardsOpenedState.luggageDisplayStatus}
+                  onPress={() => cardsOpenedState.setIsLuggageCardShowed(isCurrentPlayer ? (cardsOpenedState.luggageDisplayStatus === CardDisplayStatus.Pinned ? CardDisplayStatus.Showed : CardDisplayStatus.Pinned) : CardDisplayStatus.Showed)}
                 />
                 <PlayerCard
+                  canBePinned={isCurrentPlayer}
+
                   card={player.actionCard}
-                  isCardShowed={cardsOpenedState.isActionCardShowed}
-                  onPress={() => cardsOpenedState.setIsActionCardShowed(true)}
+                  cardDisplayStatus={cardsOpenedState.actionDisplayStatus}
+                  onPress={() => cardsOpenedState.setIsActionCardShowed(isCurrentPlayer ? (cardsOpenedState.actionDisplayStatus === CardDisplayStatus.Pinned ? CardDisplayStatus.Showed : CardDisplayStatus.Pinned) : CardDisplayStatus.Showed)}
                 />
                 <PlayerCard
+                  canBePinned={isCurrentPlayer}
+
                   card={player.conditionCard}
-                  isCardShowed={cardsOpenedState.isConditionCardShowed}
-                  onPress={() => cardsOpenedState.setIsConditionCardShowed(true)}
+                  cardDisplayStatus={cardsOpenedState.conditionDisplayStatus}
+                  onPress={() => cardsOpenedState.setIsConditionCardShowed(isCurrentPlayer ? (cardsOpenedState.conditionDisplayStatus === CardDisplayStatus.Pinned ? CardDisplayStatus.Showed : CardDisplayStatus.Pinned) : CardDisplayStatus.Showed)}
                 />
               </ScrollView>
             </ImageBackground>

@@ -24,7 +24,6 @@ export function GameOptionRange({
   descriptionHeight,
   description,
 }: PropsType) {
-
   return (
     <GameOptionBase title={title} descriptionHeight={descriptionHeight} description={description}>
       <View style={s.selectedTitleWrapper}>

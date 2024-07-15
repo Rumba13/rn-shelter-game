@@ -53,7 +53,6 @@ const cardsKit: CardKit = <CardKit>{
     },
   ],
   'action-card': [
-
     {
       name: 'Копирует профессию любого игрока',
       type: 'action-card',
@@ -77,7 +76,8 @@ const cardsKit: CardKit = <CardKit>{
       name: 'Азартные игры',
       price: 0,
       id: 717,
-    }],
+    },
+  ],
   'luggage': [
     {
       name: 'Бомба(взрыв через 10 часов)',
@@ -101,7 +101,8 @@ const cardsKit: CardKit = <CardKit>{
       name: 'Аккуратный',
       price: 5,
       id: 9,
-    }],
+    },
+  ],
   'knowledge': [
     {
       name: 'Знает, что он ничего не знает',
@@ -124,11 +125,11 @@ const cardsKit: CardKit = <CardKit>{
       type: 'additional-information',
       name: 'Владеет языком жестов',
       price: 3,
-    }],
+    },
+  ],
 };
 
 test('expect setIdsToCardKit to set ids in card kit from 1 to 20', () => {
-
   expect(setIdsToCardKit(cardsKit, 1)).toStrictEqual({
     cardsKit: {
       'bio': [
@@ -188,7 +189,6 @@ test('expect setIdsToCardKit to set ids in card kit from 1 to 20', () => {
         },
       ],
       'action-card': [
-
         {
           name: 'Копирует профессию любого игрока',
           type: 'action-card',
@@ -215,7 +215,8 @@ test('expect setIdsToCardKit to set ids in card kit from 1 to 20', () => {
           name: 'Азартные игры',
           price: 0,
           id: 12,
-        }],
+        },
+      ],
       'luggage': [
         {
           name: 'Бомба(взрыв через 10 часов)',
@@ -242,7 +243,8 @@ test('expect setIdsToCardKit to set ids in card kit from 1 to 20', () => {
           name: 'Аккуратный',
           price: 5,
           id: 16,
-        }],
+        },
+      ],
       'knowledge': [
         {
           name: 'Знает, что он ничего не знает',
@@ -269,9 +271,9 @@ test('expect setIdsToCardKit to set ids in card kit from 1 to 20', () => {
           name: 'Владеет языком жестов',
           price: 3,
           id: 20,
-        }],
-    }, nextKitId: 21,
+        },
+      ],
+    },
+    nextKitId: 21,
   });
-
 });
-

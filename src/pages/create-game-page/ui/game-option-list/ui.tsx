@@ -39,7 +39,7 @@ export function GameOptionList<ItemsType>({
 
   useEffect(() => {
     onValueChange(selectedByDefault);
-  }, [ ]);
+  }, []);
 
   function sortOffCategoriesNames(_sheltersNames: string[]) {
     const sheltersNames: string[] = [];

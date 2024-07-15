@@ -1,42 +1,46 @@
 import { makeAutoObservable, runInAction } from 'mobx';
+import { CardDisplayStatus } from '@/src/shared/lib/types/card-display-status';
+import { Alert } from 'react-native';
 
 export class CardsOpenedState {
-  constructor(isAllCardsShowed: boolean) {
+  constructor(cardDisplayStatus: CardDisplayStatus) {
     makeAutoObservable(this);
-
-    this.isBioCardShowed = isAllCardsShowed;
-    this.isHealthCardShowed = isAllCardsShowed;
-    this.isHobbyCardShowed = isAllCardsShowed;
-    this.isPhobiaCardShowed = isAllCardsShowed;
-    this.isCharacterCardShowed = isAllCardsShowed;
-    this.isAdditionalInformationCardShowed = isAllCardsShowed;
-    this.isKnowledgeCardShowed = isAllCardsShowed;
-    this.isLuggageCardShowed = isAllCardsShowed;
-    this.isActionCardShowed = isAllCardsShowed;
-    this.isConditionCardShowed = isAllCardsShowed;
+    this.bioCardDisplayStatus =
+      this.healthDisplayStatus =
+        this.hobbyDisplayStatus =
+          this.phobiaDisplayStatus =
+            this.characterDisplayStatus =
+              this.additionalInformationDisplayStatus =
+                this.knowledgeDisplayStatus =
+                  this.luggageDisplayStatus =
+                    this.actionDisplayStatus =
+                      this.conditionDisplayStatus =
+                        cardDisplayStatus;
   }
 
-  public isBioCardShowed: boolean = false;
-  public isHealthCardShowed: boolean = false;
-  public isHobbyCardShowed: boolean = false;
-  public isPhobiaCardShowed: boolean = false;
-  public isCharacterCardShowed: boolean = false;
-  public isAdditionalInformationCardShowed: boolean = false;
-  public isKnowledgeCardShowed: boolean = false;
-  public isLuggageCardShowed: boolean = false;
-  public isActionCardShowed: boolean = false;
-  public isConditionCardShowed: boolean = false;
+  public bioCardDisplayStatus: CardDisplayStatus = CardDisplayStatus.Hidden;
+  public healthDisplayStatus: CardDisplayStatus = CardDisplayStatus.Hidden;
+  public hobbyDisplayStatus: CardDisplayStatus = CardDisplayStatus.Hidden;
+  public phobiaDisplayStatus: CardDisplayStatus = CardDisplayStatus.Hidden;
+  public characterDisplayStatus: CardDisplayStatus = CardDisplayStatus.Hidden;
+  public additionalInformationDisplayStatus: CardDisplayStatus = CardDisplayStatus.Hidden;
+  public knowledgeDisplayStatus: CardDisplayStatus = CardDisplayStatus.Hidden;
+  public luggageDisplayStatus: CardDisplayStatus = CardDisplayStatus.Hidden;
+  public actionDisplayStatus: CardDisplayStatus = CardDisplayStatus.Hidden;
+  public conditionDisplayStatus: CardDisplayStatus = CardDisplayStatus.Hidden;
 
-  public setIsBioCardShowed = (value: boolean) => {
-    this.isBioCardShowed = value;
+  public setIsBioCardShowed = (value: CardDisplayStatus) => {
+    this.bioCardDisplayStatus = value;
   };
-  public setIsHealthCardShowed = (value: boolean) => (this.isHealthCardShowed = value);
-  public setIsHobbyCardShowed = (value: boolean) => (this.isHobbyCardShowed = value);
-  public setIsPhobiaCardShowed = (value: boolean) => (this.isPhobiaCardShowed = value);
-  public setIsCharacterCardShowed = (value: boolean) => (this.isCharacterCardShowed = value);
-  public setIsAdditionalInformationCardShowed = (value: boolean) => (this.isAdditionalInformationCardShowed = value);
-  public setIsKnowledgeCardShowed = (value: boolean) => (this.isKnowledgeCardShowed = value);
-  public setIsLuggageCardShowed = (value: boolean) => (this.isLuggageCardShowed = value);
-  public setIsActionCardShowed = (value: boolean) => (this.isActionCardShowed = value);
-  public setIsConditionCardShowed = (value: boolean) => (this.isConditionCardShowed = value);
+
+  public setIsHealthCardShowed = (value: CardDisplayStatus) => (this.healthDisplayStatus = value);
+  public setIsHobbyCardShowed = (value: CardDisplayStatus) => (this.hobbyDisplayStatus = value);
+  public setIsPhobiaCardShowed = (value: CardDisplayStatus) => (this.phobiaDisplayStatus = value);
+  public setIsCharacterCardShowed = (value: CardDisplayStatus) => (this.characterDisplayStatus = value);
+  public setIsAdditionalInformationCardShowed = (value: CardDisplayStatus) =>
+    (this.additionalInformationDisplayStatus = value);
+  public setIsKnowledgeCardShowed = (value: CardDisplayStatus) => (this.knowledgeDisplayStatus = value);
+  public setIsLuggageCardShowed = (value: CardDisplayStatus) => (this.luggageDisplayStatus = value);
+  public setIsActionCardShowed = (value: CardDisplayStatus) => (this.actionDisplayStatus = value);
+  public setIsConditionCardShowed = (value: CardDisplayStatus) => (this.conditionDisplayStatus = value);
 }

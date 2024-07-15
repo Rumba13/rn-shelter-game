@@ -10,9 +10,7 @@ import { PseudoRandomGenerator } from '@/src/shared/lib/pseudo-random-generator'
 import { CreatePriceMap } from '@/src/feature/create-game/model/create-price-map';
 import { difficultyToTotalPrice } from '@/src/feature/create-game/model/difficulty-to-total-price';
 import { gameSettingsStore } from '@/src/entities/game';
-import {
-  characteristicBalanceToShuffleTimes,
-} from '@/src/feature/create-game/model/characteristic-balance-to-shuffle-times';
+import { characteristicBalanceToShuffleTimes } from '@/src/feature/create-game/model/characteristic-balance-to-shuffle-times';
 import { BalanceChances } from '@/src/shared/lib/types/balance-chances';
 import { playersBalanceToBalanceChances } from '@/src/feature/create-game/model/players-balance-to-balance-chances';
 import { SexualOrientation } from '@/src/shared/lib/types/sexual-orientation';
@@ -34,9 +32,7 @@ class CreateGameStore {
   }
 
   private selectRandomApocalypse(apocalypses: Apocalypse[]): Apocalypse {
-    return apocalypses[Math.trunc(
-      this.pseudoRandomGenerator.generateFrom(this.seed, 0, apocalypses.length),
-    )];
+    return apocalypses[Math.trunc(this.pseudoRandomGenerator.generateFrom(this.seed, 0, apocalypses.length))];
   }
 
   private selectRandomShelter(shelters: Shelter[]): Shelter {
@@ -76,7 +72,8 @@ class CreateGameStore {
     if (sexualOrientationOption === SexualOrientation.AllGays) {
       //:)
       const gayGenders = genders.filter(gender => gender !== 'straight' && gender !== 'pregnancy');
-      const selectedGayGender = gayGenders[Math.trunc(this.pseudoRandomGenerator.generateInRange(0, gayGenders.length))];
+      const selectedGayGender =
+        gayGenders[Math.trunc(this.pseudoRandomGenerator.generateInRange(0, gayGenders.length))];
 
       switch (selectedGayGender) {
         case 'homosexual':
@@ -139,7 +136,6 @@ class CreateGameStore {
     };
   }
 
-
   public filterCardsByPrice(filteredCards: Card[], price: number) {
     const cards = [];
 
@@ -150,8 +146,7 @@ class CreateGameStore {
     }
 
     return cards;
-  };
-
+  }
 
   public findCardWithPrice(cards: Card[], price: number, _exactPrice: number = price): Card {
     const cardsWithCurrentPrice = this.filterCardsByPrice(cards, price);
@@ -219,7 +214,6 @@ class CreateGameStore {
   }
 
   public createGame(gameSettings: GameSettings): GameType {
-
     try {
       return {
         apocalypse: this.selectRandomApocalypse(gameSettings.apocalypses),
