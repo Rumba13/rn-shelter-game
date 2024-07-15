@@ -13,7 +13,6 @@ export function AppLayout({ children }: PropsType) {
     RobotoSlabSemiBold: require('@/assets/fonts/RobotoSlab-SemiBold.ttf'),
   });
 
-
   useEffect(() => {
     setTimeout(() => {
       StatusBar.setTranslucent(true); //TODO find component that overriding the properties

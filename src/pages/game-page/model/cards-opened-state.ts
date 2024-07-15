@@ -30,13 +30,13 @@ export class CardsOpenedState {
   public setIsBioCardShowed = (value: boolean) => {
     this.isBioCardShowed = value;
   };
-  public setIsHealthCardShowed = (value: boolean) => this.isHealthCardShowed = value;
-  public setIsHobbyCardShowed = (value: boolean) => this.isHobbyCardShowed = value;
-  public setIsPhobiaCardShowed = (value: boolean) => this.isPhobiaCardShowed = value;
-  public setIsCharacterCardShowed = (value: boolean) => this.isCharacterCardShowed = value;
-  public setIsAdditionalInformationCardShowed = (value: boolean) => this.isAdditionalInformationCardShowed = value;
-  public setIsKnowledgeCardShowed = (value: boolean) => this.isKnowledgeCardShowed = value;
-  public setIsLuggageCardShowed = (value: boolean) => this.isLuggageCardShowed = value;
-  public setIsActionCardShowed = (value: boolean) => this.isActionCardShowed = value;
-  public setIsConditionCardShowed = (value: boolean) => this.isConditionCardShowed = value;
+  public setIsHealthCardShowed = (value: boolean) => (this.isHealthCardShowed = value);
+  public setIsHobbyCardShowed = (value: boolean) => (this.isHobbyCardShowed = value);
+  public setIsPhobiaCardShowed = (value: boolean) => (this.isPhobiaCardShowed = value);
+  public setIsCharacterCardShowed = (value: boolean) => (this.isCharacterCardShowed = value);
+  public setIsAdditionalInformationCardShowed = (value: boolean) => (this.isAdditionalInformationCardShowed = value);
+  public setIsKnowledgeCardShowed = (value: boolean) => (this.isKnowledgeCardShowed = value);
+  public setIsLuggageCardShowed = (value: boolean) => (this.isLuggageCardShowed = value);
+  public setIsActionCardShowed = (value: boolean) => (this.isActionCardShowed = value);
+  public setIsConditionCardShowed = (value: boolean) => (this.isConditionCardShowed = value);
 }

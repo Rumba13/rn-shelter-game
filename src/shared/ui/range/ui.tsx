@@ -21,8 +21,7 @@ type PropsType = {
 export const Range = observer(({ onValueChanged, options, max, min, defaultValue }: PropsType) => {
   const [minimalValue, setMinimalValue] = useState<number>(defaultValue);
 
-  useEffect(() => {
-  }, [min]);
+  useEffect(() => {}, [min]);
 
   function _onValueChanged(value: number) {
     setMinimalValue(min);
@@ -37,7 +36,13 @@ export const Range = observer(({ onValueChanged, options, max, min, defaultValue
       max={max}
       step={1}
       renderThumb={() => (
-        <View style={{ height: sliderPickerSize + 10, width: sliderPickerSize + 10, alignItems:"center", justifyContent:"center" }}>
+        <View
+          style={{
+            height: sliderPickerSize + 10,
+            width: sliderPickerSize + 10,
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}>
           <Image
             style={s.sliderPicker}
             resizeMode={'contain'}
@@ -46,7 +51,6 @@ export const Range = observer(({ onValueChanged, options, max, min, defaultValue
         </View>
       )}
       renderRail={() => (
-
         <Image
           style={s.sliderTrack}
           resizeMode={'contain'}

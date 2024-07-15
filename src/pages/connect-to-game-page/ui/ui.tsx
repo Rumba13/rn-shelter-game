@@ -10,7 +10,6 @@ export type PropsType = {
 };
 
 export function ConnectedToGamePage({ navigation }: PropsType) {
-
   return (
     <View style={{ height: '100%', width: '100%' }}>
       <View style={s.header}>
@@ -20,12 +19,11 @@ export function ConnectedToGamePage({ navigation }: PropsType) {
           source={require('@/assets/images/gameconnectionscreen/connect.png')}
         />
       </View>
-      <View style={{ maxWidth: 290, marginHorizontal: 'auto', flex:1, width:"100%" }}>
-        <View style={{ flex: 1,  width:"100%", maxHeight:"100%"}}>
+      <View style={{ maxWidth: 290, marginHorizontal: 'auto', flex: 1, width: '100%' }}>
+        <View style={{ flex: 1, width: '100%', maxHeight: '100%' }}>
           <ScanQRCode navigation={navigation} />
         </View>
-        <Footer onNextButtonPress={() => {
-        }} />
+        <Footer onNextButtonPress={() => {}} />
       </View>
     </View>
   );

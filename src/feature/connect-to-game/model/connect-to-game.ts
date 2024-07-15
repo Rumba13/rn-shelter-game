@@ -3,13 +3,8 @@ import { GameConnectionData } from '@/src/shared/lib/types/game-connection-data'
 import { apocalypses } from '@/src/entities/apocalypse';
 import { GameType } from '@/src/shared/lib/types/game';
 import { Player } from '@/src/shared/lib/types/player';
-import {
-  playerPropsShortNames,
-} from '@/src/entities/characteristic-card/model/player-props-short-names';
-import { sortedCardsStore } from '@/src/entities/characteristic-card/model/sorted-cards';
-import {
-  characteristicCards,
-} from '@/src/entities/characteristic-card/model/characteristic-card';
+import { playerPropsShortNames } from '@/src/entities/characteristic-card/model/player-props-short-names';
+import { characteristicCards } from '@/src/entities/characteristic-card/model/characteristic-card';
 import { gameStore } from '@/src/entities/game';
 import { professions } from '@/src/entities/profession';
 
@@ -24,20 +19,20 @@ class ConnectToGameStore {
 
     if (!apocalypse || !shelter) throw new Error('Apocalypse or shelter is undefined');
 
-
     const players: Player[] = <Player[]>gameLoadingData.players.map(player => {
-
       return {
-        bioCharacteristics: characteristicCards.find(card => card.id === player[playerPropsShortNames.bio]),
-        character: characteristicCards.find(card => card.id === player[playerPropsShortNames.character]),
-        health: characteristicCards.find(card => card.id === player[playerPropsShortNames.health]),
-        phobia: characteristicCards.find(card => card.id === player[playerPropsShortNames.phobia]),
-        actionCard: characteristicCards.find(card => card.id === player[playerPropsShortNames['action-card']]),
-        conditionCard: characteristicCards.find(card => card.id === player[playerPropsShortNames['condition-card']]),
-        additionalInformation: characteristicCards.find(card => card.id === player[playerPropsShortNames['additional-information']]),
-        luggage: characteristicCards.find(card => card.id === player[playerPropsShortNames.luggage]),
-        knowledge: characteristicCards.find(card => card.id === player[playerPropsShortNames.knowledge]),
-        hobby: characteristicCards.find(card => card.id === player[playerPropsShortNames.hobby]),
+        bioCharacteristics: characteristicCards.bio.find(card => card.id === player[playerPropsShortNames.bio]),
+        character: characteristicCards.character.find(card => card.id === player[playerPropsShortNames.character]),
+        health: characteristicCards.health.find(card => card.id === player[playerPropsShortNames.health]),
+        phobia: characteristicCards.phobia.find(card => card.id === player[playerPropsShortNames.phobia]),
+        actionCard: characteristicCards['action-card'].find(card => card.id === player[playerPropsShortNames['action-card']]),
+        conditionCard: characteristicCards['condition-card'].find(card => card.id === player[playerPropsShortNames['condition-card']]),
+        additionalInformation: characteristicCards['additional-information'].find(
+          card => card.id === player[playerPropsShortNames['additional-information']],
+        ),
+        luggage: characteristicCards.luggage.find(card => card.id === player[playerPropsShortNames.luggage]),
+        knowledge: characteristicCards.knowledge.find(card => card.id === player[playerPropsShortNames.knowledge]),
+        hobby: characteristicCards.hobby.find(card => card.id === player[playerPropsShortNames.hobby]),
         notes: '',
         isKicked: false,
         profession: professions.find(profession => profession.id === player[playerPropsShortNames.profession]),
@@ -49,9 +44,9 @@ class ConnectToGameStore {
       apocalypse,
       players: players,
       ending: '',
+      currentPlayerNumber: -1,
     };
     gameStore.setGame(game);
-    navigation.navigate('dev-page');
   }
 }
 

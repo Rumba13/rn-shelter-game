@@ -10,7 +10,6 @@ import { gameStore } from '@/src/entities/game/model/game';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { GamePage } from '@/src/pages/game-page';
 
-
 //@ts-ignore
 Text.defaultProps = Text.defaultProps || {};
 //@ts-ignore

@@ -6,8 +6,8 @@ import { useEffect, useState } from 'react';
 import { ImageButton } from '@/src/shared/ui/image-button/ui';
 
 type PropsType = {
-  selectedPlayerIndex: number,
-  setSelectedPlayerIndex: (playerIndex: number) => void
+  selectedPlayerIndex: number;
+  setSelectedPlayerIndex: (playerIndex: number) => void;
 };
 
 export function SelectPlayerSlider({ selectedPlayerIndex, setSelectedPlayerIndex }: PropsType) {
@@ -16,8 +16,7 @@ export function SelectPlayerSlider({ selectedPlayerIndex, setSelectedPlayerIndex
     RobotoSlabSemiBold: require('@/assets/fonts/RobotoSlab-SemiBold.ttf'),
   });
 
-  useEffect(() => {
-  }, [fontsLoaded]);
+  useEffect(() => {}, [fontsLoaded]);
 
   const players = [...new Array(gameSettingsStore.settings.playersCount).keys()].map(item => item + 1);
   const observer = (

@@ -7,5 +7,5 @@ export type GameType = {
   shelter: Shelter;
   players: Player[];
   ending: string;
-  currentPlayerNumber: number //TODO fix naming
+  currentPlayerNumber: number; //TODO fix naming
 };

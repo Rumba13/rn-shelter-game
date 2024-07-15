@@ -1,8 +1,6 @@
 import { makeAutoObservable } from 'mobx';
 import { GameType } from '@/src/shared/lib/types/game';
-import {
-  playerPropsShortNames,
-} from '@/src/entities/characteristic-card/model/player-props-short-names';
+import { playerPropsShortNames } from '@/src/entities/characteristic-card/model/player-props-short-names';
 
 class GameStore {
   public game: GameType | undefined = undefined;
@@ -16,8 +14,8 @@ class GameStore {
     this.gameCode = gameCode;
   }
 
-  public setCurrentPlayerNumber(playerNumber:number) {
-    this.getGame().currentPlayerNumber = playerNumber
+  public setCurrentPlayerNumber(playerNumber: number) {
+    this.getGame().currentPlayerNumber = playerNumber;
   }
 
   public getGame() {
@@ -25,7 +23,8 @@ class GameStore {
     return this.game;
   }
 
-  public createGameCode(): string { //TODO move to features
+  public createGameCode(): string {
+    //TODO move to features
     const game = this.getGame();
 
     return JSON.stringify({

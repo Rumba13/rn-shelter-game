@@ -2,7 +2,10 @@ import {
   Dimensions,
   StyleSheet,
   View,
-  Text, ImageBackground, TouchableWithoutFeedback, ScrollView,
+  Text,
+  ImageBackground,
+  TouchableWithoutFeedback,
+  ScrollView,
 } from 'react-native';
 import { gameStore } from '@/src/entities/game';
 import { useFonts } from 'expo-font';
@@ -11,7 +14,7 @@ import { PlayerDetails } from './player/ui';
 import Carousel from 'react-native-reanimated-carousel';
 import { ICarouselInstance } from 'react-native-reanimated-carousel';
 
-type PropsType = {}
+type PropsType = {};
 
 export function GamePage({}: PropsType) {
   const [fontsLoaded, fontsError] = useFonts({
@@ -23,20 +26,18 @@ export function GamePage({}: PropsType) {
 
   const game = gameStore.game;
   if (!game) throw new Error('Game is undefined');
-  const [selectedPlayerIndex, setSelectedPlayerIndex] = useState<number>(game.currentPlayerNumber === 0 ? 0 : game.currentPlayerNumber - 1);
+  const [selectedPlayerIndex, setSelectedPlayerIndex] = useState<number>(
+    game.currentPlayerNumber === 0 ? 0 : game.currentPlayerNumber - 1,
+  );
   const [thumbsScrollPositionX, setThumbsScrollPositionX] = useState(0);
-
 
   if (!fontsLoaded) return <View></View>;
 
-
-  useEffect(() => {
-  }, [fontsLoaded]);
+  useEffect(() => {}, [fontsLoaded]);
 
   return (
     <View style={s.gamePage}>
       <View style={{ flex: 1, maxHeight: 530, marginBottom: 10, marginHorizontal: 'auto' }}>
-
         <Carousel
           overscrollEnabled
           ref={selectPlayerSliderRef}
@@ -67,61 +68,69 @@ export function GamePage({}: PropsType) {
             setSelectedPlayerIndex(index);
           }}
           modeConfig={{}}
-          renderItem={(item) => {
-            return <PlayerDetails isObserver={game.currentPlayerNumber === 0}
-                                  isCurrentPlayer={game.currentPlayerNumber === item.index + 1}
-                                  style={{ marginLeft: 18 }} playerNumber={item.index + 1} player={item.item} />;
+          renderItem={item => {
+            return (
+              <PlayerDetails
+                isObserver={game.currentPlayerNumber === 0}
+                isCurrentPlayer={game.currentPlayerNumber === item.index + 1}
+                style={{ marginLeft: 18 }}
+                playerNumber={item.index + 1}
+                player={item.item}
+              />
+            );
           }}
         />
       </View>
 
       <View style={{ width: 290, marginHorizontal: 'auto' }}>
-
-        <ImageBackground resizeMode={'stretch'}
-                         source={require('@/assets/images/gamescreen/box.png')}>
-          <ScrollView showsHorizontalScrollIndicator={false}
-                      onScroll={(e) => setThumbsScrollPositionX(Math.round(e.nativeEvent.contentOffset.x))}
-                      ref={selectPlayersThumbsRef} contentContainerStyle={{ flexGrow: 1 }} horizontal
-                      style={s.selectPlayerThumbs}>
-
-
+        <ImageBackground resizeMode={'stretch'} source={require('@/assets/images/gamescreen/box.png')}>
+          <ScrollView
+            showsHorizontalScrollIndicator={false}
+            onScroll={e => setThumbsScrollPositionX(Math.round(e.nativeEvent.contentOffset.x))}
+            ref={selectPlayersThumbsRef}
+            contentContainerStyle={{ flexGrow: 1 }}
+            horizontal
+            style={s.selectPlayerThumbs}>
             {game.players.map((player, index) => {
-                const isThumbSelected = selectedPlayerIndex === index;
-                return (
-                  <View style={{
-                    ...s.selectPlayerThumb, ...(isThumbSelected ? {} : void 0),
+              const isThumbSelected = selectedPlayerIndex === index;
+              return (
+                <View
+                  style={{
+                    ...s.selectPlayerThumb,
+                    ...(isThumbSelected ? {} : void 0),
                   }}>
-                    <TouchableWithoutFeedback
-                      onPress={() => {
-                        selectPlayerSliderRef.current?.scrollTo({ index, animated: true });
-                      }}>
-                      {
-                        isThumbSelected
-                          ?
-                          <ImageBackground resizeMode={'cover'} source={require('@/assets/images/gamescreen/frame.png')}>
-                            <Text style={{
-                              ...s.selectPlayerThumbTitle,
-                              color: game.currentPlayerNumber === index + 1 ? '#232322' : '#6f586c',
-                            }}>{index + 1}</Text>
-                          </ImageBackground>
-                          :
-                          <Text style={{
+                  <TouchableWithoutFeedback
+                    onPress={() => {
+                      selectPlayerSliderRef.current?.scrollTo({ index, animated: true });
+                    }}>
+                    {isThumbSelected ? (
+                      <ImageBackground resizeMode={'cover'} source={require('@/assets/images/gamescreen/frame.png')}>
+                        <Text
+                          style={{
                             ...s.selectPlayerThumbTitle,
                             color: game.currentPlayerNumber === index + 1 ? '#232322' : '#6f586c',
-                          }}>{index + 1}</Text>
-                      }
-                    </TouchableWithoutFeedback>
-                  </View>
-                );
-              },
-            )}
+                          }}>
+                          {index + 1}
+                        </Text>
+                      </ImageBackground>
+                    ) : (
+                      <Text
+                        style={{
+                          ...s.selectPlayerThumbTitle,
+                          color: game.currentPlayerNumber === index + 1 ? '#232322' : '#6f586c',
+                        }}>
+                        {index + 1}
+                      </Text>
+                    )}
+                  </TouchableWithoutFeedback>
+                </View>
+              );
+            })}
           </ScrollView>
         </ImageBackground>
       </View>
     </View>
-
-  )
-    ;
+  );
 }
 
 const selectPlayerThumbsWidth = 72;

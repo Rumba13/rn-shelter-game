@@ -23,9 +23,7 @@ export function Footer({ styles, onNextButtonPress }: PropsType) {
           shadowImage={require('@/assets/images/gamecreationscreen/next_button_shadow.png')}
           style={s.createGameButton}
           height={65}
-          onPress={() => {
-            onNextButtonPress();
-          }}
+          onPress={onNextButtonPress}
         />
       </View>
 

@@ -6,6 +6,5 @@ export type Shelter = {
   rooms: string[];
   spaceInSquareMeters: number;
   stayTimeInMonths: number;
-  difficulty: number;
   id: number;
 };

@@ -22,9 +22,7 @@
         "backgroundColor": "#ff0000"
       },
       "package": "com.senderium.rnsheltergame",
-      "permissions": [
-        "android.permission"
-      ]
+      "permissions": ["android.permission"]
     },
     "web": {
       "bundler": "metro",

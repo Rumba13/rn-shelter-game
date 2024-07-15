@@ -5,6 +5,7 @@ import { apocalypses } from '@/src/entities/apocalypse';
 import { shelters } from '@/src/entities/shelter/model/shelters';
 import { characteristicCards } from '@/src/entities/characteristic-card/model/characteristic-card';
 import { Card } from '@/src/shared/lib/types/card';
+import { cardKitToCards } from '@/src/shared/lib/card-kit-to-cards';
 
 const gameSettings: GameSettings = {
   difficulty: 8,
@@ -15,7 +16,7 @@ const gameSettings: GameSettings = {
   balance: 4,
   apocalypses: apocalypses,
   shelters: shelters,
-  cardsKit: characteristicCards,
+  cardsKit: cardKitToCards(characteristicCards),
 };
 
 const cards: Card[] = [
@@ -27,7 +28,6 @@ const cards: Card[] = [
 test('Expect to find card with price 1', () => {
   expect(createGameStore.findCardWithPrice(cards, 3)).toStrictEqual({ id: 2, price: 3, name: 'Right', type: 'bio' });
 });
-
 
 test('Expect to create a game', () => {
   expect(createGameStore.createGame(gameSettings)).not.toBe(null);

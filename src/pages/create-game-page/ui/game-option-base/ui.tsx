@@ -18,9 +18,7 @@ export function GameOptionBase({ title, children, description }: PropsType) {
     RobotoSlabSemiBold: require('@/assets/fonts/RobotoSlab-SemiBold.ttf'),
   });
 
-  useEffect(() => {
-  }, [fontsLoaded]);
-
+  useEffect(() => {}, [fontsLoaded]);
 
   return (
     <View style={s.gameOption}>
@@ -39,12 +37,10 @@ export function GameOptionBase({ title, children, description }: PropsType) {
         />
         <View>
           <Text style={s.gameOptionTitle}>{title}</Text>
-
         </View>
         {children}
 
-        <Collapsible key={String(isCollapsed)} style={{ ...s.collapsible }} duration={700}
-                     collapsed={isCollapsed}>
+        <Collapsible key={String(isCollapsed)} style={{ ...s.collapsible }} duration={700} collapsed={isCollapsed}>
           <View style={{ flex: 1, height: 'auto' }}>
             <Text style={s.gameOptionDescription}>{description}</Text>
           </View>

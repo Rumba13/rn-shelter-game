@@ -19,8 +19,7 @@ export function SelectPlayerPage({ navigation }: PropsType) {
     RobotoSlabSemiBold: require('@/assets/fonts/RobotoSlab-SemiBold.ttf'),
   });
   const translateYAnim = useRef(new Animated.Value(-200)).current;
-  useEffect(() => {
-  }, [fontsLoaded, translateYAnim]);
+  useEffect(() => {}, [fontsLoaded, translateYAnim]);
 
   const showTicket = () => {
     Animated.timing(translateYAnim, {
@@ -66,8 +65,9 @@ export function SelectPlayerPage({ navigation }: PropsType) {
         />
       </Animated.View>
       <View style={{ flex: 1 }}>
-
-        <Text style={s.selectPlayerPageTitle} maxFontSizeMultiplier={1.1}>Выбери номер своего персонажа</Text>
+        <Text style={s.selectPlayerPageTitle} maxFontSizeMultiplier={1.1}>
+          Выбери номер своего персонажа
+        </Text>
         <View style={s.separatorWrapper}>
           <Image
             style={s.separator}
@@ -75,15 +75,17 @@ export function SelectPlayerPage({ navigation }: PropsType) {
             source={require('@/assets/images/playerselectionscreen/main/decal_vibor_igroka.png')}
           />
         </View>
-        <Text style={s.selectPlayerPageSubTitle} maxFontSizeMultiplier={1.25}>Два дауна не могут иметь один и тот же
-          номер</Text>
+        <Text style={s.selectPlayerPageSubTitle} maxFontSizeMultiplier={1.25}>
+          Два дауна не могут иметь один и тот же номер
+        </Text>
         <SelectPlayerSlider selectedPlayerIndex={selectedPlayerIndex} setSelectedPlayerIndex={setSelectedPlayerIndex} />
-
       </View>
-      <Footer onNextButtonPress={() => {
-        gameStore.setCurrentPlayerNumber(selectedPlayerIndex);
-        navigation.navigate('game-page');
-      }} />
+      <Footer
+        onNextButtonPress={() => {
+          gameStore.setCurrentPlayerNumber(selectedPlayerIndex);
+          navigation.navigate('game-page');
+        }}
+      />
     </Animated.View>
   );
 }
@@ -106,7 +108,7 @@ const s = StyleSheet.create({
     position: 'absolute',
     left: '50%',
     top: 0,
-    transform: [{ translateX: -(QRCodeSize / 2) }, { translateY: (QRCodeSize) / 2 + 30 }],
+    transform: [{ translateX: -(QRCodeSize / 2) }, { translateY: QRCodeSize / 2 + 30 }],
   },
   ticket: {
     maxWidth: '100%',

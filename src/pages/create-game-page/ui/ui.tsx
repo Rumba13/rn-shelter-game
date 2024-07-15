@@ -1,4 +1,4 @@
-import { Image, ImageBackground, SafeAreaView, ScrollView, Text, View } from 'react-native';
+import { Alert, Image, ImageBackground, SafeAreaView, ScrollView, Text, View } from 'react-native';
 import { Footer } from '@/src/shared/ui/footer/ui';
 import { useFonts } from 'expo-font';
 import { useEffect, useState } from 'react';
@@ -39,6 +39,7 @@ import {
 import { createGameStore } from '@/src/feature/create-game/model/create-game';
 import { gameStore } from '@/src/entities/game/model/game';
 import { OverlayModal } from '@/src/shared/ui/overlay-modal/ui';
+import { cardKitToCards } from '@/src/shared/lib/card-kit-to-cards';
 //TODO refactoring
 //TODO fix font issues
 
@@ -65,7 +66,6 @@ export const CreateGamePage = observer(({ navigation }: PropsType) => {
   return (
     <View style={s.createGamePageWrapper}>
       <View style={{ flex: 1, height: 'auto' }}>
-
         <Image
           style={s.pageTitle}
           resizeMode={'contain'}
@@ -138,7 +138,9 @@ export const CreateGamePage = observer(({ navigation }: PropsType) => {
                     descriptionHeight={70}
                     description={'Параметр определяет разброс характеристик'}
                     onValueChanged={characteristicBalance =>
-                      gameSettingsStore.setSettings(settings => (settings.characteristicBalance = characteristicBalance))
+                      gameSettingsStore.setSettings(
+                        settings => (settings.characteristicBalance = characteristicBalance),
+                      )
                     }
                     selectedTitle={characteristicBalanceValueToTitle(settings.characteristicBalance)}
                     min={gameSettingsStore.settingsLimits.characteristicBalance.min}
@@ -194,7 +196,7 @@ export const CreateGamePage = observer(({ navigation }: PropsType) => {
                     displayKey={'name'}
                     selectText={'Выбрать карточки'}
                     subKey={'children'}
-                    selectedByDefault={characteristicCards.map(card => card.name)}
+                    selectedByDefault={cardKitToCards(characteristicCards).map(card => card.name)}
                     searchPlaceholderText={'Искать карточки'}
                     onValueChange={characteristicCardsNames =>
                       gameSettingsStore.setSettings(options => {
@@ -210,8 +212,10 @@ export const CreateGamePage = observer(({ navigation }: PropsType) => {
           </View>
         </ImageBackground>
 
-        <OverlayModal isModalOpened={isErrorModalOpened} setIsModalOpened={setIsErrorModalOpened}
-                      overlayStyle={{ backgroundColor: 'rgba(255,0,0, 0.5)' }}>
+        <OverlayModal
+          isModalOpened={isErrorModalOpened}
+          setIsModalOpened={setIsErrorModalOpened}
+          overlayStyle={{ backgroundColor: 'rgba(255,0,0, 0.5)' }}>
           <View style={s.errorModalContent}>
             <Text style={s.errorModalTitle}>ААААААА ОЩИБКА</Text>
             <Text style={s.errorModalError}>{errorDescription}</Text>
@@ -220,10 +224,10 @@ export const CreateGamePage = observer(({ navigation }: PropsType) => {
       </View>
 
       <Footer
-
         onNextButtonPress={() => {
           try {
             gameStore.setGame(createGameStore.createGame(gameSettingsStore.settings));
+
             navigation.navigate('select-player-page');
           } catch (err) {
             setIsErrorModalOpened(true);

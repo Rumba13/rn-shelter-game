@@ -1,16 +1,15 @@
 import { CardType } from '@/src/shared/lib/types/card-type';
 
 export const playerPropsShortNames: { [key in CardType | 'profession']: string } = {
-  bio: 'b',
-  health: 'he',
-  character: 'c',
-  hobby: 'h',
-  phobia: 'p',
+  'bio': 'b',
+  'health': 'he',
+  'character': 'c',
+  'hobby': 'h',
+  'phobia': 'p',
   'additional-information': 'a',
-  knowledge: 'k',
-  luggage: 'l',
+  'knowledge': 'k',
+  'luggage': 'l',
   'condition-card': 'cc',
   'action-card': 'ac',
-  profession:"pr"
-
+  'profession': 'pr',
 };

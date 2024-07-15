@@ -6,8 +6,8 @@ import { ImageButton } from '@/src/shared/ui/image-button/ui';
 import { useFonts } from 'expo-font';
 
 type PropsType = {
-  navigation: any
-}
+  navigation: any;
+};
 
 export function ScanQRCode({ navigation }: PropsType) {
   const [permission, requestPermission] = useCameraPermissions();
@@ -17,36 +17,37 @@ export function ScanQRCode({ navigation }: PropsType) {
     RobotoSlabSemiBold: require('@/assets/fonts/RobotoSlab-SemiBold.ttf'),
   });
 
-  useEffect(() => {
-  }, [permission, fontsLoaded]);
+  useEffect(() => {}, [permission, fontsLoaded]);
 
   if (!permission) {
-    return (
-      <View></View>
-    );
+    return <View></View>;
   }
 
-
-  return <View style={{ flex: 1 }}>
-    {!(isCameraOpen && permission.granted) &&
-      <ImageButton style={s.qrCode} onPress={() => {
-        requestPermission();
-        setIsCameraOpen(true);
-      }}
-                   buttonImage={require('@/assets/images/gameconnectionscreen/qr.png')}
-                   shadowImage={require('@/assets/images/gameconnectionscreen/qr_shadow.png')} />
-    }
-    {isCameraOpen && permission.granted &&
-
-      <CameraView
-        facing={'back'}
-        style={{ width: 300, height: 300 }}
-        barcodeScannerSettings={{ barcodeTypes: ['qr'] }}
-        onBarcodeScanned={scanningResult => connectToGameStore.connectToGame(scanningResult.data, navigation)}>
-      </CameraView>
-    }
-    <Text style={s.qrTitle}>Отсканируй курлык код</Text>
-  </View>;
+  return (
+    <View style={{ flex: 1 }}>
+      {!(isCameraOpen && permission.granted) && (
+        <ImageButton
+          style={s.qrCode}
+          onPress={() => {
+            requestPermission();
+            setIsCameraOpen(true);
+          }}
+          buttonImage={require('@/assets/images/gameconnectionscreen/qr.png')}
+          shadowImage={require('@/assets/images/gameconnectionscreen/qr_shadow.png')}
+        />
+      )}
+      {isCameraOpen && permission.granted && (
+        <CameraView
+          facing={'back'}
+          style={{ width: 300, height: 300 }}
+          barcodeScannerSettings={{ barcodeTypes: ['qr'] }}
+          onBarcodeScanned={scanningResult =>
+            connectToGameStore.connectToGame(scanningResult.data, navigation)
+          }></CameraView>
+      )}
+      <Text style={s.qrTitle}>Отсканируй курлык код</Text>
+    </View>
+  );
 }
 
 const s = StyleSheet.create({

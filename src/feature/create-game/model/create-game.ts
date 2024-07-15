@@ -7,7 +7,6 @@ import { Card } from '@/src/shared/lib/types/card';
 import { professions } from '@/src/entities/profession';
 import { CardType } from '@/src/shared/lib/types/card-type';
 import { PseudoRandomGenerator } from '@/src/shared/lib/pseudo-random-generator';
-import { sortedCardsStore } from '@/src/entities/characteristic-card/model/sorted-cards';
 import { CreatePriceMap } from '@/src/feature/create-game/model/create-price-map';
 import { difficultyToTotalPrice } from '@/src/feature/create-game/model/difficulty-to-total-price';
 import { gameSettingsStore } from '@/src/entities/game';
@@ -19,6 +18,8 @@ import { playersBalanceToBalanceChances } from '@/src/feature/create-game/model/
 import { SexualOrientation } from '@/src/shared/lib/types/sexual-orientation';
 import { genders } from '@/src/entities/gender/model/genders';
 import { Profession } from '@/src/shared/lib/types/profession';
+import { characteristicCards } from '@/src/entities/characteristic-card/model/characteristic-card';
+import { Alert } from 'react-native';
 
 class CreateGameStore {
   private readonly pseudoRandomGenerator: PseudoRandomGenerator;
@@ -33,15 +34,13 @@ class CreateGameStore {
   }
 
   private selectRandomApocalypse(apocalypses: Apocalypse[]): Apocalypse {
-    const selectedApocalypseIndex = Math.trunc(
+    return apocalypses[Math.trunc(
       this.pseudoRandomGenerator.generateFrom(this.seed, 0, apocalypses.length),
-    );
-    return apocalypses[selectedApocalypseIndex];
+    )];
   }
 
   private selectRandomShelter(shelters: Shelter[]): Shelter {
-    const selectedShelterIndex = Math.trunc(this.pseudoRandomGenerator.generateFrom(this.seed, 0, shelters.length));
-    return shelters[selectedShelterIndex];
+    return shelters[Math.trunc(this.pseudoRandomGenerator.generateFrom(this.seed, 0, shelters.length))];
   }
 
   private selectRandomProfession(): Profession {
@@ -77,9 +76,9 @@ class CreateGameStore {
     if (sexualOrientationOption === SexualOrientation.AllGays) {
       //:)
       const gayGenders = genders.filter(gender => gender !== 'straight' && gender !== 'pregnancy');
-      const gayGender = gayGenders[Math.trunc(this.pseudoRandomGenerator.generateInRange(0, gayGenders.length))];
+      const selectedGayGender = gayGenders[Math.trunc(this.pseudoRandomGenerator.generateInRange(0, gayGenders.length))];
 
-      switch (gayGender) {
+      switch (selectedGayGender) {
         case 'homosexual':
           bioCharacteristics.gender = bioCharacteristics.sex.includes('Муж') ? 'гомосексуальный' : 'гомосексуальная';
           break;
@@ -115,14 +114,13 @@ class CreateGameStore {
       characteristicBalanceToShuffleTimes(characteristicBalance),
     );
 
-    const { character, health, luggage, hobby, knowledge, phobia, bio } = sortedCardsStore.sortedCards;
-
+    const { character, health, luggage, hobby, knowledge, phobia, bio } = characteristicCards;
 
     return {
       isKicked: false,
       profession: this.selectRandomProfession(),
       additionalInformation: this.findCardWithPrice(
-        sortedCardsStore.sortedCards['additional-information'],
+        characteristicCards['additional-information'],
         priceMap['additional-information'],
       ),
       health: this.findCardWithPrice(health, priceMap.health),
@@ -135,18 +133,34 @@ class CreateGameStore {
       luggage: this.findCardWithPrice(luggage, priceMap.luggage),
       knowledge: this.findCardWithPrice(knowledge, priceMap.knowledge),
       phobia: this.findCardWithPrice(phobia, priceMap.phobia),
-      actionCard: this.findCardWithPrice(sortedCardsStore.sortedCards['action-card'], priceMap['action-card']),
-      conditionCard: this.findCardWithPrice(sortedCardsStore.sortedCards['condition-card'], priceMap['condition-card']),
+      actionCard: this.findCardWithPrice(characteristicCards['action-card'], priceMap['action-card']),
+      conditionCard: this.findCardWithPrice(characteristicCards['condition-card'], priceMap['condition-card']),
       notes: '',
     };
   }
 
+
+  public filterCardsByPrice(filteredCards: Card[], price: number) {
+    const cards = [];
+
+    for (let i = 0; i < filteredCards.length; i++) {
+      if (filteredCards[i].price === price) {
+        cards.push(filteredCards[i]);
+      }
+    }
+
+    return cards;
+  };
+
+
   public findCardWithPrice(cards: Card[], price: number, _exactPrice: number = price): Card {
-    const cardsWithCurrentPrice = cards.filter(card => card.price === price);
+    const cardsWithCurrentPrice = this.filterCardsByPrice(cards, price);
 
     if (cardsWithCurrentPrice[0] === undefined) {
       if (price === gameSettingsStore.settingsLimits.card.minPrice) {
-        throw new Error(`Cannot find any card. Real price: ${_exactPrice}, Current price: ${price} cardType: ${cards[0].type} `);
+        throw new Error(
+          `Cannot find any card. Real price: ${_exactPrice}, Current price: ${price} cardType: ${cards[0].type} `,
+        );
       }
 
       return this.findCardWithPrice(cards, price - 1, _exactPrice);
@@ -191,6 +205,7 @@ class CreateGameStore {
     sexualOrientation: SexualOrientation,
   ): Player[] {
     const players: Player[] = [];
+
     this.pseudoRandomGenerator.resetSeed();
 
     for (let i = 1; i <= playersCount; i++) {
@@ -204,7 +219,6 @@ class CreateGameStore {
   }
 
   public createGame(gameSettings: GameSettings): GameType {
-    sortedCardsStore.setCardsKit(gameSettings.cardsKit);
 
     try {
       return {
@@ -218,11 +232,13 @@ class CreateGameStore {
           gameSettings.sexualOrientation,
         ),
         ending: 'Вы проебали!',
+        currentPlayerNumber: -1,
       };
-
     } catch (err) {
       console.log(err);
-      throw new Error('При генерации игры произошла ошибка, скорее всего она связанна с тем, что вы, ослы ебанные, создали такиииих ублюдских персонажей, что у меня даже характеристик таких блядь нету');
+      throw new Error(
+        'При генерации игры произошла ошибка, скорее всего она связанна с тем, что вы, ослы ебанные, создали такиииих ублюдских персонажей, что у меня даже характеристик таких блядь нету',
+      );
     }
   }
 }

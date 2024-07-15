@@ -7,10 +7,10 @@ import { useEffect, useState } from 'react';
 import { observer } from 'mobx-react';
 
 type PropsType = {
-  card: Card,
-  isCardShowed: boolean,
-  onPress: () => void
-}
+  card: Card;
+  isCardShowed: boolean;
+  onPress: () => void;
+};
 
 export const PlayerCard = observer(({ card, isCardShowed, onPress }: PropsType) => {
   const isBigCard = card.type === 'action-card' || card.type === 'condition-card';
@@ -23,29 +23,40 @@ export const PlayerCard = observer(({ card, isCardShowed, onPress }: PropsType) 
         <View style={s.playerCardContainer}>
           <Text style={s.playerCardTitle}>{cardTypeToCardTitleMap[card.type]}</Text>
           <ImageBackground
-            source={isCardShowed ? cardTypeToCardBackgroundMap[card.type] : require('@/assets/images/gamescreen/phobia_bg.png')}
-            resizeMode={isCardShowed ? 'contain' : 'repeat'}
-          >
+            source={
+              isCardShowed
+                ? cardTypeToCardBackgroundMap[card.type]
+                : require('@/assets/images/gamescreen/phobia_bg.png')
+            }
+            resizeMode={isCardShowed ? 'contain' : 'repeat'}>
             <View style={{ ...s.playerCard, height: 240 }}>
-              <Text style={{
-                ...s.playerCardDescription,
-                fontSize: currentFontSize,
-                width: '100%',
-                height: '100%',
-                paddingTop: 5,
-                paddingLeft: 4,
-                paddingRight: 8,
-              }}
-                    numberOfLines={10}
-                    adjustsFontSizeToFit
-                    ellipsizeMode={'head'}
-                    onTextLayout={(e) => e.nativeEvent.lines.length > 3 ? setCurrentFontSize(currentFontSize - 1) : void 0}
-              >{isCardShowed ? card.name : void 0}</Text>
+              <Text
+                style={{
+                  ...s.playerCardDescription,
+                  fontSize: currentFontSize,
+                  width: '100%',
+                  height: '100%',
+                  paddingTop: 5,
+                  paddingLeft: 4,
+                  paddingRight: 8,
+                }}
+                numberOfLines={10}
+                adjustsFontSizeToFit
+                ellipsizeMode={'head'}
+                onTextLayout={e => (e.nativeEvent.lines.length > 3 ? setCurrentFontSize(currentFontSize - 1) : void 0)}>
+                {isCardShowed ? card.name : void 0}
+              </Text>
 
-              {!isCardShowed ?
-                <Image style={s.playerCardHint_BigCart} resizeMode={'contain'} tintColor={'rgba(0,0,0,0.15)'}
-                       source={require('@/assets/images/gamescreen/gleb_hand.png')} /> : void 0
-              }
+              {!isCardShowed ? (
+                <Image
+                  style={s.playerCardHint_BigCart}
+                  resizeMode={'contain'}
+                  tintColor={'rgba(0,0,0,0.15)'}
+                  source={require('@/assets/images/gamescreen/gleb_hand.png')}
+                />
+              ) : (
+                void 0
+              )}
             </View>
           </ImageBackground>
         </View>
@@ -59,24 +70,36 @@ export const PlayerCard = observer(({ card, isCardShowed, onPress }: PropsType) 
         <Text style={s.playerCardTitle}>{cardTypeToCardTitleMap[card.type]}</Text>
 
         <ImageBackground
-          source={isCardShowed ? cardTypeToCardBackgroundMap[card.type] : require('@/assets/images/gamescreen/phobia_bg.png')}
+          source={
+            isCardShowed ? cardTypeToCardBackgroundMap[card.type] : require('@/assets/images/gamescreen/phobia_bg.png')
+          }
           resizeMode={'contain'}>
           <SafeAreaView style={s.playerCard}>
-            <Image tintColor={isCardShowed ? void 0 : '#616161'} style={s.playerCardIcon} resizeMode={'contain'}
-                   source={cardTypeToCardIconMap[card.type]} />
-            <Text adjustsFontSizeToFit style={{ ...s.playerCardDescription, fontSize: currentFontSize }}
-                  numberOfLines={3}
-                  ellipsizeMode={'head'}
-                  onTextLayout={(e) =>
-                    e.nativeEvent.lines.length > 3 ? setCurrentFontSize(currentFontSize - 1) : void 0
-                  }
-            >{isCardShowed ? card.name : ''}</Text>
+            <Image
+              tintColor={isCardShowed ? void 0 : '#616161'}
+              style={s.playerCardIcon}
+              resizeMode={'contain'}
+              source={cardTypeToCardIconMap[card.type]}
+            />
+            <Text
+              adjustsFontSizeToFit
+              style={{ ...s.playerCardDescription, fontSize: currentFontSize }}
+              numberOfLines={3}
+              ellipsizeMode={'head'}
+              onTextLayout={e => (e.nativeEvent.lines.length > 3 ? setCurrentFontSize(currentFontSize - 1) : void 0)}>
+              {isCardShowed ? card.name : ''}
+            </Text>
 
-            {!isCardShowed ? <Image style={s.playerCardHint} resizeMode={'contain'} tintColor={'rgba(0,0,0,0.15)'}
-                                    source={require('@/assets/images/gamescreen/gleb_hand.png')} /> : void 0
-            }
-
-
+            {!isCardShowed ? (
+              <Image
+                style={s.playerCardHint}
+                resizeMode={'contain'}
+                tintColor={'rgba(0,0,0,0.15)'}
+                source={require('@/assets/images/gamescreen/gleb_hand.png')}
+              />
+            ) : (
+              void 0
+            )}
           </SafeAreaView>
         </ImageBackground>
       </View>

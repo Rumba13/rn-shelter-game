@@ -23,8 +23,7 @@ export function InfoButton() {
     SpaceMono: require('../../../../../assets/fonts/SpaceMono-Regular.ttf'),
   });
 
-  useEffect(() => {
-  }, [fontsLoaded]);
+  useEffect(() => {}, [fontsLoaded]);
 
   if (!fontsLoaded) {
     return <Text>Loading...</Text>;
@@ -82,8 +81,8 @@ const s: any = {
     position: 'absolute',
     right: 0,
     top: 0,
-    minWidth:35,
-    minHeight:35,
+    minWidth: 35,
+    minHeight: 35,
     marginTop: 30,
     marginRight: 25,
   },
