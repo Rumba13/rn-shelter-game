@@ -13,6 +13,7 @@ export function AppLayout({ children }: PropsType) {
     RobotoSlabNormal: require('@/assets/fonts/RobotoSlab-Regular.ttf'),
     RobotoSlabExtraBold: require('@/assets/fonts/RobotoSlab-ExtraBold.ttf'),
     RobotoSlabMedium: require('@/assets/fonts/RobotoSlab-Medium.ttf'),
+    SpaceMono: require('@/assets/fonts/SpaceMono-Regular.ttf'),
   });
 
   useEffect(() => {
