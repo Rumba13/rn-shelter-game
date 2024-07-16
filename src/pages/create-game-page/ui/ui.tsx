@@ -81,6 +81,11 @@ export const CreateGamePage = observer(({ navigation }: PropsType) => {
                       gameSettingsStore.setSettings(options => (options.hillbillyMode = isEnable))
                     }
                   />
+                  <GameOptionCheckbox title={'Режим лотереи'}
+                                      descriptionHeight={80}
+                                      description={'Трудно объяснить, что этот режим делает...'}
+                                      onValueChange={value => gameSettingsStore.setSettings(settings => settings.lotteryTicketMode = value)}
+                  />
                   <GameOptionSelect
                     descriptionHeight={100}
                     description={'Параметр определяет кто пидр, кто не пидр и всё такое'}
@@ -217,6 +222,7 @@ export const CreateGamePage = observer(({ navigation }: PropsType) => {
         onNextButtonPress={() => {
           try {
             gameStore.setGame(createGameStore.createGame(gameSettingsStore.settings));
+            console.log(gameStore.getGame().players.map(player => player.number));
             navigation.navigate('select-player-page');
           } catch (err) {
             setIsErrorModalOpened(true);

@@ -1,25 +1,39 @@
 import { Image, StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
 import { Player } from '@/src/shared/lib/types/player';
+import { observer } from 'mobx-react';
+import { gameStore } from '@/src/entities/game';
 
 type PropsType = {
-  player: Player
+  player: Player,
+  onPress: () => void
 }
 
-export function KickOutButton({ player }: PropsType) {
-
+export const KickOutButton = observer(({ player, onPress }: PropsType) => {
 
   return (
     <View style={s.kickOutButtonWrapper}>
-      <TouchableWithoutFeedback onPress={() => player.isKicked = !player.isKicked}>
-        <Image
-          style={s.kickOutButton}
-          resizeMode={'contain'}
-          source={require('@/assets/images/gamescreen/vignatj.png')}
-        />
+      <TouchableWithoutFeedback onPress={() => {
+        gameStore.togglePlayerKickOut(player.number);
+        onPress();
+      }}>
+        {player.isKicked ? (
+          <Image
+            style={s.kickOutButton}
+            resizeMode={'contain'}
+            source={require('@/assets/images/gamescreen/vernutj.png')}
+          />
+        ) : (
+          <Image
+            style={s.kickOutButton}
+            resizeMode={'contain'}
+            source={require('@/assets/images/gamescreen/vignatj.png')}
+          />
+        )}
+
       </TouchableWithoutFeedback>
     </View>
   );
-}
+});
 
 const s = StyleSheet.create({
   kickOutButtonWrapper: {

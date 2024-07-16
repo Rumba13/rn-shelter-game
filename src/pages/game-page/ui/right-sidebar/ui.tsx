@@ -11,6 +11,11 @@ import {
 import { ImageButton } from '@/src/shared/ui/image-button/ui';
 import { useRef } from 'react';
 import { Player } from '@/src/shared/lib/types/player';
+import { ScratchCard } from '@/src/shared/ui/scratch-card/ui';
+//@ts-ignore
+import ScratchImage from '@/assets/images/gamescreen/skresti.png';
+import { useImage } from '@shopify/react-native-skia';
+import { gameSettingsStore } from '@/src/entities/game';
 
 type PropsType = {
   isOpened: boolean,
@@ -18,6 +23,7 @@ type PropsType = {
   setIsOpened: (value: boolean) => void,
   animationDuration: number,
   nonKickedPlayers: Player[],
+  ending: string
 }
 
 export function RightSidebar({
@@ -26,9 +32,13 @@ export function RightSidebar({
                                isCompletelyHidden,
                                animationDuration,
                                nonKickedPlayers,
+                               ending,
                              }: PropsType) {
   const sideBarClosedAtPx = 294;
-  const translateXAnim = useRef(new Animated.Value(sideBarClosedAtPx)).current;
+  const translateXAnim = useRef(new Animated.Value(sideBarClosedAtPx + 65)).current;
+  const scratchImage = useImage(ScratchImage);
+
+  if (!scratchImage) return null;
 
   const closeSideBar = () => {
     Animated.timing(translateXAnim, {
@@ -51,7 +61,6 @@ export function RightSidebar({
       useNativeDriver: true,
     }).start();
   };
-  hideSideBar();
 
   if (isCompletelyHidden) {
     hideSideBar();
@@ -81,15 +90,42 @@ export function RightSidebar({
           <View style={s.rightSideBar}>
             <ScrollView style={s.leftPlayersWrapper}>
               <Text style={s.leftPlayers}>
-                {/*{leftPlayersIndexes.map((playerName, index) => `${playerName}\n`)}*/}
-                {nonKickedPlayers.map((player: Player, index: number) => `${player.number} ${player.profession.name}\n`)}
+                {nonKickedPlayers.map((player: Player) => `${player.number} ${player.profession.name}\n`)}
               </Text>
             </ScrollView>
             <View style={s.endingWrapper}>
               <Image source={require('@/assets/images/gamescreen/koncovka.png')} resizeMode={'contain'}
                      style={s.endingImage} />
-              <Image resizeMode={'contain'} style={s.ending}
-                     source={require('@/assets/images/gamescreen/skresti.png')} />
+              <ScratchCard style={s.ending} image={scratchImage}>
+                <ImageBackground resizeMode={'contain'} source={require('@/assets/images/gamescreen/text_frame.png')}>
+                  <View style={{ height: '100%' }}>
+                    <ScrollView style={s.endingDescriptionWrapper}>
+
+                      {gameSettingsStore.settings.lotteryTicketMode
+                        ?
+                        <View style={{
+                          alignItems: 'center',
+                          height: 180,
+                          justifyContent: 'space-around',
+                          flexDirection: 'row',
+                        }}>
+                          <Image style={s.scratchReward} resizeMode={'contain'}
+                                 source={require('@/assets/images/scratch-reward.jpg')} />
+                          <Image style={s.scratchReward} resizeMode={'contain'}
+                                 source={require('@/assets/images/scratch-reward.jpg')} />
+                          <Image style={s.scratchReward} resizeMode={'contain'}
+                                 source={require('@/assets/images/scratch-reward.jpg')} />
+                        </View>
+                        :
+                        <Text style={s.endingDescription}>{ending}</Text>
+                      }
+
+                    </ScrollView>
+                  </View>
+                </ImageBackground>
+              </ScratchCard>
+              {/*<Image resizeMode={'contain'} style={s.ending}*/}
+              {/*       source={} />*/}
             </View>
           </View>
         </ImageBackground>
@@ -102,6 +138,25 @@ const leftSideBarWidth = 370;
 const helpButtonSize = 36;
 const sideBarIconSize = 48;
 const s = StyleSheet.create({
+  endingDescription: {
+    fontSize: 15,
+    color: '#232322',
+    fontFamily: 'RobotoSlabMedium',
+    lineHeight: 20,
+    letterSpacing: 1.3,
+    paddingHorizontal: 8,
+    paddingLeft: 12,
+    paddingVertical: 5,
+  },
+  scratchReward: {
+    maxWidth: '100%',
+    width: '20%',
+    height: 100,
+    alignSelf: 'center',
+  },
+  endingDescriptionWrapper: {
+    marginVertical: 'auto',
+  },
   endingWrapper: {
     position: 'absolute',
     bottom: 17,

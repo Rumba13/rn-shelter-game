@@ -23,6 +23,18 @@ class GameStore {
     return this.game;
   }
 
+  public togglePlayerKickOut(playerId: number) {
+    const game = this.getGame();
+
+    const playerToToggleKickOut = game.players.find(player => player.number === playerId);
+
+    if (playerToToggleKickOut === undefined) {
+      throw new Error('togglePlayerKickOut: Player is undefined');
+    }
+
+    playerToToggleKickOut.isKicked = !playerToToggleKickOut.isKicked;
+  }
+
   public createGameCode(): string {
     //TODO move to features
     const game = this.getGame();

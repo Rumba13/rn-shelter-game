@@ -14,10 +14,11 @@ import Carousel from 'react-native-reanimated-carousel';
 import { ICarouselInstance } from 'react-native-reanimated-carousel';
 import { LeftSidebar } from '@/src/pages/game-page/ui/left-sidebar/left-sidebar';
 import { RightSidebar } from '@/src/pages/game-page/ui/right-sidebar/ui';
+import { observer } from 'mobx-react';
 
 type PropsType = {};
 
-export function GamePage({}: PropsType) {
+export const  GamePage = observer(({}: PropsType) => {
   const selectPlayerSliderRef = React.createRef<ICarouselInstance>();
   const selectPlayersThumbsRef = React.createRef<ScrollView>();
   const [isLeftSidebarOpened, setIsLeftSidebarOpened] = React.useState<boolean>(true);
@@ -31,9 +32,6 @@ export function GamePage({}: PropsType) {
   );
   const [thumbsScrollPositionX, setThumbsScrollPositionX] = useState(0);
 
-
-
-
   return (
     <View style={s.gamePage}>
 
@@ -42,6 +40,7 @@ export function GamePage({}: PropsType) {
                    shelter={game.shelter} isOpened={isLeftSidebarOpened}
                    setIsOpened={setIsLeftSidebarOpened} />
       <RightSidebar
+        ending={game.ending}
         nonKickedPlayers={game.players.filter(player => !player.isKicked)}
         animationDuration={animationDuration} isCompletelyHidden={isLeftSidebarOpened}
         isOpened={isRightSidebarOpened} setIsOpened={setIsRightSidebarOpened} />
@@ -103,6 +102,8 @@ export function GamePage({}: PropsType) {
             style={s.selectPlayerThumbs}>
             {game.players.map((player, index) => {
               const isThumbSelected = selectedPlayerIndex === index;
+              const isThumbHighlighted = player.isKicked;
+
               return (
                 <View
                   key={index}
@@ -119,7 +120,7 @@ export function GamePage({}: PropsType) {
                         <Text
                           style={{
                             ...s.selectPlayerThumbTitle,
-                            color: game.currentPlayerNumber === index + 1 ? '#232322' : '#6f586c',
+                            color: game.currentPlayerNumber === index + 1 ? '#232322' : isThumbHighlighted? "#7f3941" : '#6f586c',
                           }}>
                           {index + 1}
                         </Text>
@@ -128,7 +129,7 @@ export function GamePage({}: PropsType) {
                       <Text
                         style={{
                           ...s.selectPlayerThumbTitle,
-                          color: game.currentPlayerNumber === index + 1 ? '#232322' : '#6f586c',
+                          color: game.currentPlayerNumber === index + 1 ? '#232322' :isThumbHighlighted? "#7f3941" : '#6f586c',
                         }}>
                         {index + 1}
                       </Text>
@@ -142,7 +143,7 @@ export function GamePage({}: PropsType) {
       </View>
     </View>
   );
-}
+})
 
 const selectPlayerThumbsWidth = 72;
 

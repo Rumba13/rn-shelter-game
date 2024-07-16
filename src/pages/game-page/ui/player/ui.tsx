@@ -1,4 +1,6 @@
 import {
+  Alert,
+  Animated,
   Image,
   ImageBackground,
   ScrollView,
@@ -10,7 +12,7 @@ import {
 } from 'react-native';
 import { PlayerCard } from '@/src/pages/game-page/ui/player-card/ui';
 import { Player } from '@/src/shared/lib/types/player';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { CardsOpenedState } from '@/src/pages/game-page/model/cards-opened-state';
 import { observer } from 'mobx-react';
 import { CardDisplayStatus } from '@/src/shared/lib/types/card-display-status';
@@ -28,6 +30,37 @@ export const PlayerDetails = observer(({ player, playerNumber, style, isCurrentP
   //TODO rename to player card
   const allCardsDisplayStatus = isObserver || isCurrentPlayer ? CardDisplayStatus.Showed : CardDisplayStatus.Hidden;
   const [cardsOpenedState] = useState(new CardsOpenedState(allCardsDisplayStatus));
+  const kickOutImageHideAtPx = -400;
+  const kickOutImageMaxScale = 2;
+  const animationDuration = 300;
+  const kickOutImageTranslateYAnim = useRef(new Animated.Value(player.isKicked ? 0 : kickOutImageHideAtPx)).current;
+  const kickOutImageScaleAnim = useRef(new Animated.Value(player.isKicked ? 1 : kickOutImageMaxScale)).current;
+
+  const showKickOutImage = () => {
+    Animated.timing(kickOutImageTranslateYAnim, {
+      toValue: 0,
+      duration: animationDuration,
+      useNativeDriver: true,
+    }).start();
+    Animated.timing(kickOutImageScaleAnim, {
+      toValue: 1,
+      duration: animationDuration,
+      useNativeDriver: true,
+    }).start();
+  };
+  const hideKickOutImage = () => {
+    Animated.timing(kickOutImageTranslateYAnim, {
+      toValue: kickOutImageHideAtPx,
+      duration: animationDuration,
+      useNativeDriver: true,
+    }).start();
+
+    Animated.timing(kickOutImageScaleAnim, {
+      toValue: kickOutImageMaxScale,
+      duration: animationDuration,
+      useNativeDriver: true,
+    }).start();
+  };
 
   return (
     <View style={{ ...s.mainContentWrapper, ...style }}>
@@ -42,7 +75,20 @@ export const PlayerDetails = observer(({ player, playerNumber, style, isCurrentP
           <Text numberOfLines={2} style={s.mainContentSubTitle}>
             {player.profession.name}
           </Text>
-          <KickOutButton player={player}/>
+          <KickOutButton player={player} onPress={() => {
+            if (player.isKicked) {
+              showKickOutImage();
+            } else hideKickOutImage();
+          }} />
+
+
+          <Animated.Image style={{
+            ...s.kickOutImage,
+            transform: [{ translateY: kickOutImageTranslateYAnim }, { scale: kickOutImageScaleAnim }],
+          }}
+                          source={require('@/assets/images/gamescreen/negoden.png')}
+                          resizeMode={'contain'} />
+
 
           <View style={s.playerCardsWrapper}>
             <ImageBackground
@@ -131,6 +177,15 @@ export const PlayerDetails = observer(({ player, playerNumber, style, isCurrentP
 });
 
 const s = StyleSheet.create({
+  kickOutImage: {
+    position: 'absolute',
+    right: 13,
+    top: 90,
+    zIndex: 1000,
+    maxWidth: '100%',
+    width: 125,
+    height: 56,
+  },
   playerCardsWrapper: {
     flex: 1,
     margin: 17,
@@ -155,6 +210,7 @@ const s = StyleSheet.create({
   },
 
   mainContent: {
+    position: 'relative',
     width: '100%',
     height: '100%',
   },
