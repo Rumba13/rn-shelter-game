@@ -14,6 +14,7 @@ import { useState } from 'react';
 import { CardsOpenedState } from '@/src/pages/game-page/model/cards-opened-state';
 import { observer } from 'mobx-react';
 import { CardDisplayStatus } from '@/src/shared/lib/types/card-display-status';
+import { KickOutButton } from '@/src/pages/game-page/ui/kick-out/ui';
 
 type PropsType = {
   player: Player;
@@ -41,13 +42,8 @@ export const PlayerDetails = observer(({ player, playerNumber, style, isCurrentP
           <Text numberOfLines={2} style={s.mainContentSubTitle}>
             {player.profession.name}
           </Text>
-          <TouchableWithoutFeedback>
-            <Image
-              style={s.kickOutButton}
-              resizeMode={'contain'}
-              source={require('@/assets/images/gamescreen/vignatj.png')}
-            />
-          </TouchableWithoutFeedback>
+          <KickOutButton player={player}/>
+
           <View style={s.playerCardsWrapper}>
             <ImageBackground
               source={require('@/assets/images/gamescreen/text_box.png')}
@@ -157,16 +153,7 @@ const s = StyleSheet.create({
     paddingHorizontal: 13,
     marginVertical: 10,
   },
-  kickOutButton: {
-    position: 'absolute',
-    top: 0,
-    right: 0,
-    height: 23,
-    width: 80,
-    marginTop: 5,
-    marginRight: 15,
-    maxWidth: '100%',
-  },
+
   mainContent: {
     width: '100%',
     height: '100%',

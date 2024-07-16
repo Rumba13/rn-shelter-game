@@ -86,8 +86,9 @@ export const PlayerCard = observer(({ card, cardDisplayStatus, onPress, canBePin
             <View style={{ ...s.playerCard, height: 240 }}>
 
               <Animated.Image
-                style={{ ...s.pinnedImage, transform: [{ translateY: translateYAnim }], opacity: opacityAnim }}
+                style={{ ...s.pinnedImage, transform: [{ translateY: translateYAnim }], opacity: opacityAnim, }}
                 resizeMode={'contain'}
+                
                 source={require('@/assets/images/gamescreen/Pin.png')} />
 
               <Text

@@ -17,33 +17,55 @@ import { stayTimeMonthsToTitle } from '@/src/pages/game-page/ui/stay-time-months
 
 type PropsType = {
   isOpened: boolean,
+  isCompletelyHidden: boolean,
   setIsOpened: (isOpened: boolean) => void,
   apocalypse: Apocalypse,
   shelter: Shelter,
-  shelterCapacity: number
+  shelterCapacity: number,
+  animationDuration: number,
 }
 
-export function LeftSidebar({ isOpened, setIsOpened, apocalypse, shelter, shelterCapacity }: PropsType) {
-  const translateXAnim = useRef(new Animated.Value(isOpened ? -7 : -(leftSideBarWidth - 77))).current;
+export function LeftSidebar({
+                              isOpened,
+                              setIsOpened,
+                              apocalypse,
+                              shelter,
+                              isCompletelyHidden,
+                              shelterCapacity,
+                              animationDuration,
+                            }: PropsType) {
+  const translateXAnim = useRef(new Animated.Value(-(leftSideBarWidth - 78))).current;
 
   const closeSideBar = () => {
     Animated.timing(translateXAnim, {
       toValue: -(leftSideBarWidth - 78),
-      duration: 500,
-      useNativeDriver: false,
+      duration: animationDuration,
+      useNativeDriver: true,
     }).start();
   };
   const openSideBar = () => {
     Animated.timing(translateXAnim, {
       toValue: -7,
-      duration: 500,
-      useNativeDriver: false,
+      duration: animationDuration,
+      useNativeDriver: true,
+    }).start();
+  };
+  const hideSideBar = () => {
+    Animated.timing(translateXAnim, {
+      toValue: -360,
+      duration: animationDuration,
+      useNativeDriver: true,
     }).start();
   };
 
-  isOpened
-    ? openSideBar()
-    : closeSideBar();
+
+  if (isCompletelyHidden) {
+    hideSideBar();
+  } else {
+    isOpened
+      ? openSideBar()
+      : closeSideBar();
+  }
 
 
   return (
@@ -135,7 +157,6 @@ const s = StyleSheet.create({
   },
   shelterSpace: {
     position: 'absolute',
-
     color: '#dcceac',
     bottom: 13,
     lineHeight: shelterInfoLineHeight,
@@ -213,7 +234,6 @@ const s = StyleSheet.create({
   sideBarWrapper: {
     position: 'absolute',
     top: -20,
-    // right: 20,
     zIndex: 200,
     width: leftSideBarWidth,
     height: Dimensions.get('window').height,

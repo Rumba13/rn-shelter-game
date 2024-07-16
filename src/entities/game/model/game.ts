@@ -32,6 +32,7 @@ class GameStore {
       apocalypseId: game.apocalypse.id,
       endingId: 1,
       players: game.players.map(player => ({
+        [playerPropsShortNames.number]: player.number,
         [playerPropsShortNames.profession]: player.profession.id,
         [playerPropsShortNames.bio]: player.bioCharacteristics.id,
         [playerPropsShortNames.health]: player.health.id,

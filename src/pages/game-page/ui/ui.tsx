@@ -13,6 +13,7 @@ import { PlayerDetails } from './player/ui';
 import Carousel from 'react-native-reanimated-carousel';
 import { ICarouselInstance } from 'react-native-reanimated-carousel';
 import { LeftSidebar } from '@/src/pages/game-page/ui/left-sidebar/left-sidebar';
+import { RightSidebar } from '@/src/pages/game-page/ui/right-sidebar/ui';
 
 type PropsType = {};
 
@@ -20,6 +21,8 @@ export function GamePage({}: PropsType) {
   const selectPlayerSliderRef = React.createRef<ICarouselInstance>();
   const selectPlayersThumbsRef = React.createRef<ScrollView>();
   const [isLeftSidebarOpened, setIsLeftSidebarOpened] = React.useState<boolean>(true);
+  const [isRightSidebarOpened, setIsRightSidebarOpened] = React.useState<boolean>(false);
+  const animationDuration = 450;
 
   const game = gameStore.game;
   if (!game) throw new Error('Game is undefined');
@@ -28,12 +31,20 @@ export function GamePage({}: PropsType) {
   );
   const [thumbsScrollPositionX, setThumbsScrollPositionX] = useState(0);
 
+
+
+
   return (
     <View style={s.gamePage}>
 
-      <LeftSidebar shelterCapacity={Math.floor(game.players.length / 2)} apocalypse={game.apocalypse}
+      <LeftSidebar animationDuration={animationDuration} isCompletelyHidden={isRightSidebarOpened}
+                   shelterCapacity={Math.floor(game.players.length / 2)} apocalypse={game.apocalypse}
                    shelter={game.shelter} isOpened={isLeftSidebarOpened}
                    setIsOpened={setIsLeftSidebarOpened} />
+      <RightSidebar
+        nonKickedPlayers={game.players.filter(player => !player.isKicked)}
+        animationDuration={animationDuration} isCompletelyHidden={isLeftSidebarOpened}
+        isOpened={isRightSidebarOpened} setIsOpened={setIsRightSidebarOpened} />
       <View style={{ flex: 1, maxHeight: 530, marginBottom: 10, marginHorizontal: 'auto' }}>
         <Carousel
           overscrollEnabled

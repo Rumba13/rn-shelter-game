@@ -107,7 +107,7 @@ class CreateGameStore {
     };
   }
 
-  private createPlayer(price: number, characteristicBalance: number, sexualOrientation: SexualOrientation): Player {
+  private createPlayer(price: number, characteristicBalance: number, sexualOrientation: SexualOrientation, playerNumber: number): Player {
     const priceMap: { [k in CardType]: number } = this.createPriceMap.createPriceMapShuffle(
       price,
       characteristicBalanceToShuffleTimes(characteristicBalance),
@@ -116,6 +116,7 @@ class CreateGameStore {
     const { character, health, luggage, hobby, knowledge, phobia, bio } = characteristicCards;
 
     return {
+      number: playerNumber,
       isKicked: false,
       profession: this.selectRandomProfession(),
       additionalInformation: this.findCardWithPrice(
@@ -207,7 +208,7 @@ class CreateGameStore {
 
     for (let i = 1; i <= playersCount; i++) {
       const playerPrice = this.balancePlayerPrice(playersBalance, difficultyToTotalPrice(difficulty));
-      players.push(this.createPlayer(playerPrice, characteristicBalance, sexualOrientation));
+      players.push(this.createPlayer(playerPrice, characteristicBalance, sexualOrientation, i));
     }
 
     this.usedProfessions = professions.slice(); //TODO refactor

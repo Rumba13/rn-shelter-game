@@ -9,7 +9,8 @@ import { gameStore } from '@/src/entities/game';
 import { professions } from '@/src/entities/profession';
 
 class ConnectToGameStore {
-  constructor() {}
+  constructor() {
+  }
 
   public connectToGame(gameCode: string, navigation: any) {
     const gameLoadingData: GameConnectionData = JSON.parse(gameCode);
@@ -20,6 +21,7 @@ class ConnectToGameStore {
 
     const players: Player[] = <Player[]>gameLoadingData.players.map(player => {
       return {
+        number: player[playerPropsShortNames['number']],
         bioCharacteristics: characteristicCards.bio.find(card => card.id === player[playerPropsShortNames.bio]),
         character: characteristicCards.character.find(card => card.id === player[playerPropsShortNames.character]),
         health: characteristicCards.health.find(card => card.id === player[playerPropsShortNames.health]),
@@ -43,7 +45,7 @@ class ConnectToGameStore {
     });
 
     const game: GameType = {
-      shelter: apocalypse,
+      shelter,
       apocalypse,
       players: players,
       ending: '',
