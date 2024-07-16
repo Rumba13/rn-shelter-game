@@ -107,14 +107,16 @@ export const PlayerCard = observer(({ card, cardDisplayStatus, onPress, canBePin
                 {isCardShowed || isCardPinned ? card.name : void 0}
               </Text>
 
-              <Image
-                style={{
-                  ...s.playerCardHint_BigCart,
-                }}
-                resizeMode={'contain'}
-                tintColor={'rgba(0,0,0,0.15)'}
-                source={require('@/assets/images/gamescreen/gleb_hand.png')}
-              />
+              {!cardDisplayStatus ? (
+                <Image
+                  style={s.playerCardHint_BigCart}
+                  resizeMode={'contain'}
+                  tintColor={'rgba(0,0,0,0.15)'}
+                  source={require('@/assets/images/gamescreen/gleb_hand.png')}
+                />
+              ) : (
+                void 0
+              )}
             </View>
           </TouchableWithoutFeedback>
         </ImageBackground>
