@@ -13,6 +13,7 @@ export const sheltersBorovEditionKit: Shelter[] = [
     spaceInSquareMeters: 20,
     stayTimeInMonths: 1,
     difficulty: 8,
+    id:12
   },
   {
     name: 'ЗИП',
@@ -29,5 +30,6 @@ export const sheltersBorovEditionKit: Shelter[] = [
     spaceInSquareMeters: 5000,
     stayTimeInMonths: 12 * 8,
     difficulty: 1,
+    id:13
   },
 ].map<Shelter>((shelter, index) => ({ ...shelter, id: previousKitId + 1 + index }));

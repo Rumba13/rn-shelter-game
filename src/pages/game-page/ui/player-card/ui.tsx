@@ -65,23 +65,24 @@ export const PlayerCard = observer(({ card, cardDisplayStatus, onPress, canBePin
 
   if (isBigCard) {
     return (
-      <TouchableWithoutFeedback onPress={() => {
-        if (canBePinned) {
-          isCardPinned
-            ? hidePin()
-            : showPin();
-        }
-        onPress();
-      }} style={{ height: '100%', width: '100%' }}>
-        <View style={s.playerCardContainer}>
-          <Text style={s.playerCardTitle}>{cardTypeToCardTitleMap[card.type]}</Text>
-          <ImageBackground
-            source={
-              isCardShowed || isCardPinned
-                ? cardTypeToCardBackgroundMap[card.type]
-                : require('@/assets/images/gamescreen/phobia_bg.png')
+
+      <View style={s.playerCardContainer}>
+        <Text style={s.playerCardTitle}>{cardTypeToCardTitleMap[card.type]}</Text>
+        <ImageBackground
+          source={
+            isCardShowed || isCardPinned
+              ? cardTypeToCardBackgroundMap[card.type]
+              : require('@/assets/images/gamescreen/phobia_bg.png')
+          }
+          resizeMode={isCardShowed || isCardPinned ? 'contain' : 'repeat'}>
+          <TouchableWithoutFeedback onPress={() => {
+            if (canBePinned) {
+              isCardPinned
+                ? hidePin()
+                : showPin();
             }
-            resizeMode={isCardShowed || isCardPinned ? 'contain' : 'repeat'}>
+            onPress();
+          }} style={{ height: '100%', width: '100%' }}>
             <View style={{ ...s.playerCard, height: 240 }}>
 
               <Animated.Image
@@ -115,30 +116,31 @@ export const PlayerCard = observer(({ card, cardDisplayStatus, onPress, canBePin
                 source={require('@/assets/images/gamescreen/gleb_hand.png')}
               />
             </View>
-          </ImageBackground>
-        </View>
-      </TouchableWithoutFeedback>
+          </TouchableWithoutFeedback>
+        </ImageBackground>
+      </View>
     );
   }
 
   return (
-    <TouchableWithoutFeedback onPress={() => {
-      if (canBePinned) {
+    <Animated.View style={s.playerCardContainer}>
+      <Text style={s.playerCardTitle}>{cardTypeToCardTitleMap[card.type]}</Text>
 
-        isCardPinned
-          ? hidePin()
-          : showPin();
-      }
-      onPress();
-    }}>
-      <Animated.View style={s.playerCardContainer}>
-        <Text style={s.playerCardTitle}>{cardTypeToCardTitleMap[card.type]}</Text>
 
-        <ImageBackground
-          source={
-            cardDisplayStatus ? cardTypeToCardBackgroundMap[card.type] : require('@/assets/images/gamescreen/phobia_bg.png')
+      <ImageBackground
+        source={
+          cardDisplayStatus ? cardTypeToCardBackgroundMap[card.type] : require('@/assets/images/gamescreen/phobia_bg.png')
+        }
+        resizeMode={'contain'}>
+        <TouchableWithoutFeedback onPress={() => {
+          if (canBePinned) {
+
+            isCardPinned
+              ? hidePin()
+              : showPin();
           }
-          resizeMode={'contain'}>
+          onPress();
+        }}>
           <SafeAreaView style={s.playerCard}>
 
             <Animated.Image
@@ -174,9 +176,9 @@ export const PlayerCard = observer(({ card, cardDisplayStatus, onPress, canBePin
               void 0
             )}
           </SafeAreaView>
-        </ImageBackground>
-      </Animated.View>
-    </TouchableWithoutFeedback>
+        </TouchableWithoutFeedback>
+      </ImageBackground>
+    </Animated.View>
   );
 });
 

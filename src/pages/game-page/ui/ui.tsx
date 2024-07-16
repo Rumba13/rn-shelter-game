@@ -8,16 +8,18 @@ import {
   ScrollView,
 } from 'react-native';
 import { gameStore } from '@/src/entities/game';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { PlayerDetails } from './player/ui';
 import Carousel from 'react-native-reanimated-carousel';
 import { ICarouselInstance } from 'react-native-reanimated-carousel';
+import { LeftSidebar } from '@/src/pages/game-page/ui/left-sidebar/left-sidebar';
 
 type PropsType = {};
 
 export function GamePage({}: PropsType) {
   const selectPlayerSliderRef = React.createRef<ICarouselInstance>();
   const selectPlayersThumbsRef = React.createRef<ScrollView>();
+  const [isLeftSidebarOpened, setIsLeftSidebarOpened] = React.useState<boolean>(true);
 
   const game = gameStore.game;
   if (!game) throw new Error('Game is undefined');
@@ -28,6 +30,10 @@ export function GamePage({}: PropsType) {
 
   return (
     <View style={s.gamePage}>
+
+      <LeftSidebar shelterCapacity={Math.floor(game.players.length / 2)} apocalypse={game.apocalypse}
+                   shelter={game.shelter} isOpened={isLeftSidebarOpened}
+                   setIsOpened={setIsLeftSidebarOpened} />
       <View style={{ flex: 1, maxHeight: 530, marginBottom: 10, marginHorizontal: 'auto' }}>
         <Carousel
           overscrollEnabled
@@ -62,6 +68,7 @@ export function GamePage({}: PropsType) {
           renderItem={item => {
             return (
               <PlayerDetails
+
                 key={item.index}
                 isObserver={game.currentPlayerNumber === 0}
                 isCurrentPlayer={game.currentPlayerNumber === item.index + 1}
@@ -130,6 +137,7 @@ const selectPlayerThumbsWidth = 72;
 
 const s = StyleSheet.create({
   gamePage: {
+    position: 'relative',
     height: Dimensions.get('window').height,
     width: Dimensions.get('window').width,
     marginTop: 20,

@@ -10,6 +10,9 @@ export function AppLayout({ children }: PropsType) {
   const [fontsLoaded, fontsError] = useFonts({
     RobotoSlab: require('@/assets/fonts/RobotoSlab-Bold.ttf'),
     RobotoSlabSemiBold: require('@/assets/fonts/RobotoSlab-SemiBold.ttf'),
+    RobotoSlabNormal: require('@/assets/fonts/RobotoSlab-Regular.ttf'),
+    RobotoSlabExtraBold: require('@/assets/fonts/RobotoSlab-ExtraBold.ttf'),
+    RobotoSlabMedium: require('@/assets/fonts/RobotoSlab-Medium.ttf'),
   });
 
   useEffect(() => {

@@ -84,7 +84,7 @@ export const sheltersStandartEditionKit: Shelter[] = [
     id: 6,
   },
   {
-    id: 6,
+    id: 7,
     name: 'Templewo',
     stayTimeInMonths: 24,
     location: 'Побережье озера Байкал',
@@ -94,7 +94,7 @@ export const sheltersStandartEditionKit: Shelter[] = [
     resources: ['Замороженное мясо и овощи', 'Пылесос "Кот-КокосOS"'],
   },
   {
-    id: 6,
+    id: 8,
     name: 'Regenwurmlager',
     stayTimeInMonths: 1,
     location: 'Степь',
@@ -108,7 +108,7 @@ export const sheltersStandartEditionKit: Shelter[] = [
     resources: ['Огромные запасы гречки', 'DVD проигрыватель и набор фильмов'],
   },
   {
-    id: 6,
+    id: 9,
     name: 'Тайфун',
     stayTimeInMonths: 9,
     location: 'Метрополитен крупного города',
@@ -124,7 +124,7 @@ export const sheltersStandartEditionKit: Shelter[] = [
     resources: ['Макароны и супы быстрого приготовления', 'Виниловый проигрыватель со старыми пластинками'],
   },
   {
-    id: 6,
+    id: 10,
     name: 'Вервольф',
     stayTimeInMonths: 1,
     location: 'Тундра',
@@ -140,7 +140,7 @@ export const sheltersStandartEditionKit: Shelter[] = [
     resources: ['Огромные запасы гречки', 'Техническая документация бункера'],
   },
   {
-    id: 6,
+    id: 11,
     name: 'Цитадель',
     stayTimeInMonths: 24,
     location: 'Рига',

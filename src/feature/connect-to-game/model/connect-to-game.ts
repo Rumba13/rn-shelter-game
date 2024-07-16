@@ -43,7 +43,7 @@ class ConnectToGameStore {
     });
 
     const game: GameType = {
-      shelter,
+      shelter: apocalypse,
       apocalypse,
       players: players,
       ending: '',
