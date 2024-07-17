@@ -1,4 +1,3 @@
-import { CardKit } from '@/src/shared/lib/types/card-kit';
 import { setIdsToCardKit } from '@/src/entities/characteristic-card/lib/set-ids-to-card-kit';
 
 export const { cardsKit: cardsStandartEdition, nextKitId } = setIdsToCardKit(
@@ -19,13 +18,13 @@ export const { cardsKit: cardsStandartEdition, nextKitId } = setIdsToCardKit(
       {
         type: 'bio',
         name: 'Женщина/ 19 лет/ бисексуальная',
-        price: 0,
+        price: 8,
         id: 616,
       },
       {
         type: 'bio',
         name: 'Женщина/ 20 лет/ гетеросексуальная',
-        price: 0,
+        price: 8,
         id: 609,
       },
       {
@@ -49,7 +48,7 @@ export const { cardsKit: cardsStandartEdition, nextKitId } = setIdsToCardKit(
       {
         type: 'bio',
         name: 'Женщина/ 22 год/ гетеросексуальная',
-        price: 8,
+        price: 7,
         id: 139,
       },
       {
@@ -61,49 +60,49 @@ export const { cardsKit: cardsStandartEdition, nextKitId } = setIdsToCardKit(
       {
         type: 'bio',
         name: 'Женщина/ 23 года/ бисексуальная',
-        price: 0,
+        price: 7,
         id: 725,
       },
       {
         type: 'bio',
         name: 'Женщина/ 23 года/ гетеросексуальная',
-        price: 8,
+        price: 7,
         id: 141,
       },
       {
         type: 'bio',
         name: 'Женщина/ 24 года/ гетеросексуальная',
-        price: 8,
+        price: 7,
         id: 142,
       },
       {
         type: 'bio',
         name: 'Женщина/ 25 лет/ беременна',
-        price: 8,
+        price: 6,
         id: 143,
       },
       {
         type: 'bio',
         name: 'Женщина/ 25 лет/ гетеросексуальная',
-        price: 8,
+        price: 6,
         id: 144,
       },
       {
         type: 'bio',
         name: 'Женщина/ 25 лет/ гомосексуальная',
-        price: 7,
+        price: 6,
         id: 145,
       },
       {
         type: 'bio',
         name: 'Женщина/ 29 лет/ асексуальная',
-        price: 0,
+        price: 6,
         id: 692,
       },
       {
         type: 'bio',
         name: 'Женщина/ 29 лет/ беременна',
-        price: 8,
+        price: 6,
         id: 146,
       },
       {
@@ -121,145 +120,145 @@ export const { cardsKit: cardsStandartEdition, nextKitId } = setIdsToCardKit(
       {
         type: 'bio',
         name: 'Женщина/ 35 лет/ гетеросексуальная',
-        price: 7,
+        price: 5,
         id: 149,
       },
       {
         type: 'bio',
         name: 'Женщина/ 36 лет/ гетеросексуальная',
-        price: 0,
+        price: 5,
         id: 743,
       },
       {
         type: 'bio',
         name: 'Женщина/ 37 лет/ гетеросексуальная',
-        price: 7,
+        price: 5,
         id: 150,
       },
       {
         type: 'bio',
         name: 'Женщина/ 38 лет/ гетеросексуальная',
-        price: 0,
+        price: 5,
         id: 682,
       },
       {
         type: 'bio',
         name: 'Женщина/ 39 лет/ беременна',
-        price: 7,
+        price: 5,
         id: 151,
       },
       {
         type: 'bio',
         name: 'Женщина/ 39 лет/ гетеросексуальная',
-        price: 6,
+        price: 5,
         id: 152,
       },
       {
         type: 'bio',
         name: 'Женщина/ 39 лет/ пансексуальная',
-        price: 6,
+        price: 5,
         id: 153,
       },
       {
         type: 'bio',
         name: 'Женщина/ 40 лет/ беременна',
-        price: 6,
+        price: 4,
         id: 154,
       },
       {
         type: 'bio',
         name: 'Женщина/ 40 лет/ гомосексуальная',
-        price: 0,
+        price: 4,
         id: 703,
       },
       {
         type: 'bio',
         name: 'Женщина/ 43 года/ беременна',
-        price: 6,
+        price: 4,
         id: 155,
       },
       {
         type: 'bio',
         name: 'Женщина/ 45 лет/ беременна',
-        price: 6,
+        price: 4,
         id: 156,
       },
       {
         type: 'bio',
         name: 'Женщина/ 45 лет/ гомосексуальная',
-        price: 5,
+        price: 4,
         id: 157,
       },
       {
         type: 'bio',
         name: 'Женщина/ 47 лет/ гетеросексуальная',
-        price: 6,
+        price: 4,
         id: 158,
       },
       {
         type: 'bio',
         name: 'Женщина/ 48 лет/ гетеросексуальная',
-        price: 0,
+        price: 4,
         id: 625,
       },
       {
         type: 'bio',
         name: 'Женщина/ 50 лет/ гетеросексуальная',
-        price: 5,
+        price: 3,
         id: 159,
       },
       {
         type: 'bio',
         name: 'Женщина/ 51 год/ пансексуальная',
-        price: 4,
+        price: 3,
         id: 160,
       },
       {
         type: 'bio',
         name: 'Женщина/ 52 года/ гетеросексуальная',
-        price: 5,
+        price: 3,
         id: 161,
       },
       {
         type: 'bio',
         name: 'Женщина/ 53 года/ бисексуальная',
-        price: 5,
+        price: 3,
         id: 162,
       },
       {
         type: 'bio',
         name: 'Женщина/ 63 года/ гетеросексуальная',
-        price: 4,
+        price: 3,
         id: 163,
       },
       {
         type: 'bio',
         name: 'Женщина/ 64 года/ гетеросексуальная',
-        price: 4,
+        price: 3,
         id: 164,
       },
       {
         type: 'bio',
         name: 'Женщина/ 65 лет/ гетеросексуальная',
-        price: 4,
+        price: 3,
         id: 165,
       },
       {
         type: 'bio',
         name: 'Женщина/ 68 лет/ гетеросексуальная',
-        price: 4,
+        price: 3,
         id: 166,
       },
       {
         type: 'bio',
         name: 'Женщина/ 69 лет/ гетеросексуальная',
-        price: 4,
+        price: 3,
         id: 167,
       },
       {
         type: 'bio',
         name: 'Женщина/ 70 лет/ гетеросексуальная',
-        price: 4,
+        price: 3,
         id: 168,
       },
       {
@@ -271,25 +270,25 @@ export const { cardsKit: cardsStandartEdition, nextKitId } = setIdsToCardKit(
       {
         type: 'bio',
         name: 'Мужчина/ 19 лет/ бисексуальный',
-        price: 0,
+        price: 8,
         id: 611,
       },
       {
         type: 'bio',
         name: 'Мужчина/ 19 лет/ гетеросексуальный',
-        price: 0,
+        price: 8,
         id: 663,
       },
       {
         type: 'bio',
         name: 'Мужчина/ 21 год/ гетеросексуальный',
-        price: 0,
+        price: 8,
         id: 590,
       },
       {
         type: 'bio',
         name: 'Мужчина/ 21 год/ пансексуальный',
-        price: 7,
+        price: 8,
         id: 275,
       },
       {
@@ -301,31 +300,31 @@ export const { cardsKit: cardsStandartEdition, nextKitId } = setIdsToCardKit(
       {
         type: 'bio',
         name: 'Мужчина/ 22 года/ гомосексуальный',
-        price: 0,
+        price: 7,
         id: 546,
       },
       {
         type: 'bio',
         name: 'Мужчина/ 23 года/ бисексуальный',
-        price: 0,
+        price: 7,
         id: 715,
       },
       {
         type: 'bio',
         name: 'Мужчина/ 23 года/ гетеросексуальный',
-        price: 8,
+        price: 7,
         id: 277,
       },
       {
         type: 'bio',
         name: 'Мужчина/ 24 года/ гетеросексуальный',
-        price: 8,
+        price: 7,
         id: 278,
       },
       {
         type: 'bio',
         name: 'Мужчина/ 24 года/ гомосексуальный',
-        price: 0,
+        price: 7,
         id: 613,
       },
       {
@@ -337,67 +336,67 @@ export const { cardsKit: cardsStandartEdition, nextKitId } = setIdsToCardKit(
       {
         type: 'bio',
         name: 'Мужчина/ 25 лет/ гетеросексуальный',
-        price: 0,
+        price: 6,
         id: 683,
       },
       {
         type: 'bio',
         name: 'Мужчина/ 28 лет/ гомосексуальный',
-        price: 7,
+        price: 6,
         id: 280,
       },
       {
         type: 'bio',
         name: 'Мужчина/ 31 год/ асексуальный',
-        price: 0,
+        price: 5,
         id: 567,
       },
       {
         type: 'bio',
         name: 'Мужчина/ 33 года/ гетеросексуальный',
-        price: 7,
+        price: 5,
         id: 281,
       },
       {
         type: 'bio',
         name: 'Мужчина/ 36 лет/ гетеросексуальный',
-        price: 7,
+        price: 5,
         id: 282,
       },
       {
         type: 'bio',
         name: 'Мужчина/ 36 лет/ пансексуальный',
-        price: 6,
+        price: 5,
         id: 283,
       },
       {
         type: 'bio',
         name: 'Мужчина/ 37 лет/ гетеросексуальный',
-        price: 7,
+        price: 5,
         id: 284,
       },
       {
         type: 'bio',
         name: 'Мужчина/ 38 лет/ бисексуальный',
-        price: 7,
+        price: 5,
         id: 285,
       },
       {
         type: 'bio',
         name: 'Мужчина/ 39 лет/ гетеросексуальный',
-        price: 7,
+        price: 5,
         id: 286,
       },
       {
         type: 'bio',
         name: 'Мужчина/ 39 лет/ гомосексуальный',
-        price: 6,
+        price: 5,
         id: 287,
       },
       {
         type: 'bio',
         name: 'Мужчина/ 40 лет/ гомосексуальный',
-        price: 5,
+        price: 4,
         id: 288,
       },
       {
@@ -409,85 +408,85 @@ export const { cardsKit: cardsStandartEdition, nextKitId } = setIdsToCardKit(
       {
         type: 'bio',
         name: 'Мужчина/ 47 лет/ гетеросексуальный',
-        price: 6,
+        price: 4,
         id: 290,
       },
       {
         type: 'bio',
         name: 'Мужчина/ 47 лет/ пансексуальный',
-        price: 0,
+        price: 4,
         id: 696,
       },
       {
         type: 'bio',
         name: 'Мужчина/ 48 лет/ гомосексуальный',
-        price: 5,
+        price: 4,
         id: 291,
       },
       {
         type: 'bio',
         name: 'Мужчина/ 49 лет/ гетеросексуальный',
-        price: 6,
+        price: 4,
         id: 292,
       },
       {
         type: 'bio',
         name: 'Мужчина/ 51 год/ гетеросексуальный',
-        price: 0,
+        price: 3,
         id: 653,
       },
       {
         type: 'bio',
         name: 'Мужчина/ 52 года/ гетеросексуальный',
-        price: 5,
+        price: 3,
         id: 293,
       },
       {
         type: 'bio',
         name: 'Мужчина/ 63 года/ гетеросексуальный',
-        price: 5,
+        price: 3,
         id: 294,
       },
       {
         type: 'bio',
         name: 'Мужчина/ 64 года/ гетеросексуальный',
-        price: 4,
+        price: 3,
         id: 295,
       },
       {
         type: 'bio',
         name: 'Мужчина/ 65 лет/ гетеросексуальный',
-        price: 4,
+        price: 3,
         id: 296,
       },
       {
         type: 'bio',
         name: 'Мужчина/ 66 лет/ гетеросексуальный',
-        price: 0,
+        price: 3,
         id: 586,
       },
       {
         type: 'bio',
         name: 'Мужчина/ 68 лет/ гетеросексуальный',
-        price: 4,
+        price: 3,
         id: 297,
       },
       {
         type: 'bio',
         name: 'Мужчина/ 69 лет/ гетеросексуальный',
-        price: 4,
+        price: 3,
         id: 298,
       },
       {
         type: 'bio',
         name: 'Мужчина/ 70 лет/ гетеросексуальный',
-        price: 4,
+        price: 3,
         id: 299,
       },
       {
         type: 'bio',
         name: 'Мужчина/ 72 года/ гетеросексуальный',
-        price: 4,
+        price: 3,
         id: 300,
       },
     ],
@@ -495,7 +494,7 @@ export const { cardsKit: cardsStandartEdition, nextKitId } = setIdsToCardKit(
       {
         type: 'phobia',
         name: 'Агирофобия (Айнарофобия) — боязнь улиц',
-        price: 0,
+        price: 5,
         id: 537,
       },
       {
@@ -531,7 +530,7 @@ export const { cardsKit: cardsStandartEdition, nextKitId } = setIdsToCardKit(
       {
         type: 'phobia',
         name: 'Арахнофобия — боязнь пауков',
-        price: 0,
+        price: 5,
         id: 708,
       },
       {
@@ -567,13 +566,13 @@ export const { cardsKit: cardsStandartEdition, nextKitId } = setIdsToCardKit(
       {
         type: 'phobia',
         name: 'Блаптофобия — боязнь нанести повреждение',
-        price: 0,
+        price: 7,
         id: 665,
       },
       {
         type: 'phobia',
         name: 'Вакцинофобия — боязнь прививок',
-        price: 0,
+        price: 5,
         id: 653,
       },
       {
@@ -615,7 +614,7 @@ export const { cardsKit: cardsStandartEdition, nextKitId } = setIdsToCardKit(
       {
         type: 'phobia',
         name: 'Гиерофобия — боязнь предметов религиозного культа',
-        price: 0,
+        price: 5,
         id: 641,
       },
       {
@@ -633,7 +632,7 @@ export const { cardsKit: cardsStandartEdition, nextKitId } = setIdsToCardKit(
       {
         type: 'phobia',
         name: 'Гомофобия — боязнь любого проявления гомосексуальности',
-        price: 0,
+        price: 5,
         id: 539,
       },
       {
@@ -759,7 +758,7 @@ export const { cardsKit: cardsStandartEdition, nextKitId } = setIdsToCardKit(
       {
         type: 'phobia',
         name: 'Психрофобия — боязнь холода',
-        price: 0,
+        price: 5,
         id: 539,
       },
       {
@@ -845,7 +844,7 @@ export const { cardsKit: cardsStandartEdition, nextKitId } = setIdsToCardKit(
       {
         type: 'health',
         name: 'Абсолютная слепота',
-        price: 0,
+        price: 3,
         id: 578,
       },
       {
@@ -887,7 +886,7 @@ export const { cardsKit: cardsStandartEdition, nextKitId } = setIdsToCardKit(
       {
         type: 'health',
         name: 'Болезнь Паркинсона',
-        price: 0,
+        price: 3,
         id: 626,
       },
       {
@@ -905,7 +904,7 @@ export const { cardsKit: cardsStandartEdition, nextKitId } = setIdsToCardKit(
       {
         type: 'health',
         name: 'Волчанка',
-        price: 0,
+        price: 3,
         id: 702,
       },
       {
@@ -947,13 +946,13 @@ export const { cardsKit: cardsStandartEdition, nextKitId } = setIdsToCardKit(
       {
         type: 'health',
         name: 'Гонорея',
-        price: 0,
+        price: 4,
         id: 661,
       },
       {
         type: 'health',
         name: 'Грипп',
-        price: 0,
+        price: 4,
         id: 531,
       },
       {
@@ -971,7 +970,7 @@ export const { cardsKit: cardsStandartEdition, nextKitId } = setIdsToCardKit(
       {
         type: 'health',
         name: 'Деменция',
-        price: 0,
+        price: 2,
         id: 561,
       },
       {
@@ -995,7 +994,7 @@ export const { cardsKit: cardsStandartEdition, nextKitId } = setIdsToCardKit(
       {
         type: 'health',
         name: 'Заикание',
-        price: 0,
+        price: 5,
         id: 674,
       },
       {
@@ -1030,8 +1029,8 @@ export const { cardsKit: cardsStandartEdition, nextKitId } = setIdsToCardKit(
       },
       {
         type: 'health',
-        name: 'Коронавирус ',
-        price: 0,
+        name: 'Коронавирус',
+        price: 3,
         id: 706,
       },
       {
@@ -1085,13 +1084,13 @@ export const { cardsKit: cardsStandartEdition, nextKitId } = setIdsToCardKit(
       {
         type: 'health',
         name: 'Оспа',
-        price: 0,
+        price: 3,
         id: 594,
       },
       {
         type: 'health',
         name: 'Параноидальное расстройство',
-        price: 0,
+        price: 2,
         id: 541,
       },
       {
@@ -1169,7 +1168,7 @@ export const { cardsKit: cardsStandartEdition, nextKitId } = setIdsToCardKit(
       {
         type: 'health',
         name: 'Сломана нога',
-        price: 0,
+        price: 2,
         id: 624,
       },
       {
@@ -1551,7 +1550,7 @@ export const { cardsKit: cardsStandartEdition, nextKitId } = setIdsToCardKit(
       {
         type: 'action-card',
         name: 'Выбранный игрок превращается в беременную женщину 29 лет',
-        price: 0,
+        price: 4,
         id: 658,
       },
       {
@@ -1575,7 +1574,7 @@ export const { cardsKit: cardsStandartEdition, nextKitId } = setIdsToCardKit(
       {
         type: 'action-card',
         name: 'Два выбранных вами игрока получают дополнительный голос против них на всех голосованиях, пока один из них не вылетит',
-        price: 0,
+        price: 5,
         id: 532,
       },
       {
@@ -1775,7 +1774,7 @@ export const { cardsKit: cardsStandartEdition, nextKitId } = setIdsToCardKit(
       {
         type: 'hobby',
         name: 'Азартные игры',
-        price: 0,
+        price: 3,
         id: 717,
       },
       {
@@ -1787,7 +1786,7 @@ export const { cardsKit: cardsStandartEdition, nextKitId } = setIdsToCardKit(
       {
         type: 'hobby',
         name: 'Анатомия',
-        price: 0,
+        price:5,
         id: 542,
       },
       {
@@ -1847,7 +1846,7 @@ export const { cardsKit: cardsStandartEdition, nextKitId } = setIdsToCardKit(
       {
         type: 'hobby',
         name: 'Гипноз',
-        price: 0,
+        price: 6,
         id: 721,
       },
       {
@@ -1907,7 +1906,7 @@ export const { cardsKit: cardsStandartEdition, nextKitId } = setIdsToCardKit(
       {
         type: 'hobby',
         name: 'Кулинария',
-        price: 0,
+        price: 6,
         id: 617,
       },
       {
@@ -1937,7 +1936,7 @@ export const { cardsKit: cardsStandartEdition, nextKitId } = setIdsToCardKit(
       {
         type: 'hobby',
         name: 'Медитация',
-        price: 0,
+        price: 4,
         id: 592,
       },
       {
@@ -1961,7 +1960,7 @@ export const { cardsKit: cardsStandartEdition, nextKitId } = setIdsToCardKit(
       {
         type: 'hobby',
         name: 'Орнитология',
-        price: 0,
+        price: 3,
         id: 652,
       },
       {
@@ -1985,7 +1984,7 @@ export const { cardsKit: cardsStandartEdition, nextKitId } = setIdsToCardKit(
       {
         type: 'hobby',
         name: 'Пение',
-        price: 0,
+        price: 3,
         id: 659,
       },
       {
@@ -2009,7 +2008,7 @@ export const { cardsKit: cardsStandartEdition, nextKitId } = setIdsToCardKit(
       {
         type: 'hobby',
         name: 'Программирование',
-        price: 0,
+        price:5,
         id: 530,
       },
       {
@@ -2111,7 +2110,7 @@ export const { cardsKit: cardsStandartEdition, nextKitId } = setIdsToCardKit(
       {
         type: 'hobby',
         name: 'Создание чучел',
-        price: 0,
+        price: 3,
         id: 709,
       },
       {
@@ -2141,7 +2140,7 @@ export const { cardsKit: cardsStandartEdition, nextKitId } = setIdsToCardKit(
       {
         type: 'hobby',
         name: 'Танцы',
-        price: 0,
+        price: 4,
         id: 603,
       },
       {
@@ -2159,7 +2158,7 @@ export const { cardsKit: cardsStandartEdition, nextKitId } = setIdsToCardKit(
       {
         type: 'hobby',
         name: 'Уборка',
-        price: 0,
+        price: 4,
         id: 760,
       },
       {
@@ -2189,7 +2188,7 @@ export const { cardsKit: cardsStandartEdition, nextKitId } = setIdsToCardKit(
       {
         type: 'hobby',
         name: 'Эксгибиционизм',
-        price: 0,
+        price: 2,
         id: 521,
       },
     ],
@@ -2221,7 +2220,7 @@ export const { cardsKit: cardsStandartEdition, nextKitId } = setIdsToCardKit(
       {
         type: 'luggage',
         name: '20 метров изоленты',
-        price: 0,
+        price: 5,
         id: 666,
       },
       {
@@ -2233,13 +2232,13 @@ export const { cardsKit: cardsStandartEdition, nextKitId } = setIdsToCardKit(
       {
         type: 'luggage',
         name: 'GPS-навигатор',
-        price: 0,
+        price: 6,
         id: 740,
       },
       {
         type: 'luggage',
         name: 'Бальзам "Звёздочка"',
-        price: 0,
+        price:6,
         id: 603,
       },
       {
@@ -2479,13 +2478,13 @@ export const { cardsKit: cardsStandartEdition, nextKitId } = setIdsToCardKit(
       {
         type: 'luggage',
         name: 'Револьвер с одним патроном',
-        price: 0,
+        price: 6,
         id: 640,
       },
       {
         type: 'luggage',
         name: 'Резиновая уточка',
-        price: 0,
+        price: 3,
         id: 572,
       },
       {
@@ -2503,7 +2502,7 @@ export const { cardsKit: cardsStandartEdition, nextKitId } = setIdsToCardKit(
       {
         type: 'luggage',
         name: 'Семена кукурузы',
-        price: 0,
+        price: 5,
         id: 564,
       },
       {
@@ -2593,7 +2592,7 @@ export const { cardsKit: cardsStandartEdition, nextKitId } = setIdsToCardKit(
       {
         type: 'luggage',
         name: 'Хирургические инструменты',
-        price: 0,
+        price: 6,
         id: 689,
       },
       {
@@ -2661,7 +2660,7 @@ export const { cardsKit: cardsStandartEdition, nextKitId } = setIdsToCardKit(
       {
         type: 'character',
         name: 'Безвольный',
-        price: 0,
+        price: 3,
         id: 513,
       },
       {
@@ -2697,7 +2696,7 @@ export const { cardsKit: cardsStandartEdition, nextKitId } = setIdsToCardKit(
       {
         type: 'character',
         name: 'Волевой',
-        price: 0,
+        price: 6,
         id: 627,
       },
       {
@@ -2877,7 +2876,7 @@ export const { cardsKit: cardsStandartEdition, nextKitId } = setIdsToCardKit(
       {
         type: 'character',
         name: 'Самоотверженный',
-        price: 0,
+        price: 6,
         id: 719,
       },
       {
@@ -2907,7 +2906,7 @@ export const { cardsKit: cardsStandartEdition, nextKitId } = setIdsToCardKit(
       {
         type: 'character',
         name: 'Хозяйственный',
-        price: 0,
+        price: 5,
         id: 534,
       },
       {
@@ -3017,7 +3016,7 @@ export const { cardsKit: cardsStandartEdition, nextKitId } = setIdsToCardKit(
       {
         type: 'knowledge',
         name: 'Координаты источника пресной воды',
-        price: 0,
+        price: 5,
         id: 725,
       },
       {
@@ -3101,7 +3100,7 @@ export const { cardsKit: cardsStandartEdition, nextKitId } = setIdsToCardKit(
       {
         type: 'knowledge',
         name: 'Координаты электростанции',
-        price: 0,
+        price: 5,
         id: 706,
       },
       {
@@ -3193,7 +3192,7 @@ export const { cardsKit: cardsStandartEdition, nextKitId } = setIdsToCardKit(
       {
         type: 'additional-information',
         name: 'Знает всё про компьютеры',
-        price: 0,
+        price: 5,
         id: 735,
       },
       {
@@ -3307,7 +3306,7 @@ export const { cardsKit: cardsStandartEdition, nextKitId } = setIdsToCardKit(
       {
         type: 'additional-information',
         name: 'По первому образованию биолог',
-        price: 0,
+        price: 5,
         id: 591,
       },
       {
@@ -3355,7 +3354,7 @@ export const { cardsKit: cardsStandartEdition, nextKitId } = setIdsToCardKit(
       {
         type: 'additional-information',
         name: 'Работал в скорой помощи',
-        price: 0,
+        price: 6,
         id: 561,
       },
       {
@@ -3367,7 +3366,7 @@ export const { cardsKit: cardsStandartEdition, nextKitId } = setIdsToCardKit(
       {
         type: 'additional-information',
         name: 'Рос в семье фермеров',
-        price: 0,
+        price: 4,
         id: 571,
       },
       {

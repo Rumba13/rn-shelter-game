@@ -42,7 +42,7 @@ class GameStore {
     return JSON.stringify({
       shelterId: game.shelter.id,
       apocalypseId: game.apocalypse.id,
-      endingId: 1,
+      endingId: game.ending.id,
       players: game.players.map(player => ({
         [playerPropsShortNames.number]: player.number,
         [playerPropsShortNames.profession]: player.profession.id,

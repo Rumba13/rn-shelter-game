@@ -20,6 +20,8 @@ import { genders } from '@/src/entities/gender/model/genders';
 import { Profession } from '@/src/shared/lib/types/profession';
 import { characteristicCards } from '@/src/entities/characteristic-card/model/characteristic-card';
 import { Alert } from 'react-native';
+import { Ending } from '@/src/shared/lib/types/ending';
+import { endings } from '@/src/entities/ending';
 
 class CreateGameStore {
   private readonly pseudoRandomGenerator: PseudoRandomGenerator;
@@ -216,11 +218,16 @@ class CreateGameStore {
     return players;
   }
 
+  private selectRandomEnding(endings: Ending[]): Ending {
+    return endings[Math.trunc(this.pseudoRandomGenerator.generateFrom(this.seed, 0, endings.length))];
+  }
+
   public createGame(gameSettings: GameSettings): GameType {
     try {
       return {
         apocalypse: this.selectRandomApocalypse(gameSettings.apocalypses),
         shelter: this.selectRandomShelter(gameSettings.shelters),
+        ending: this.selectRandomEnding(endings),
         players: this.createPlayers(
           gameSettings.playersCount,
           gameSettings.difficulty,
@@ -228,7 +235,6 @@ class CreateGameStore {
           gameSettings.balance,
           gameSettings.sexualOrientation,
         ),
-        ending: 'Вы проебали!',
         currentPlayerNumber: -1,
       };
     } catch (err) {

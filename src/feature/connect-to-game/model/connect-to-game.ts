@@ -7,6 +7,7 @@ import { playerPropsShortNames } from '@/src/entities/characteristic-card/model/
 import { characteristicCards } from '@/src/entities/characteristic-card/model/characteristic-card';
 import { gameStore } from '@/src/entities/game';
 import { professions } from '@/src/entities/profession';
+import { endings } from '@/src/entities/ending';
 
 class ConnectToGameStore {
   constructor() {
@@ -16,8 +17,10 @@ class ConnectToGameStore {
     const gameLoadingData: GameConnectionData = JSON.parse(gameCode);
     const shelter = shelters.find(shelter => shelter.id === gameLoadingData.shelterId);
     const apocalypse = apocalypses.find(apocalypse => apocalypse.id === gameLoadingData.apocalypseId);
+    const ending = endings.find(ending => ending.id === gameLoadingData.endingId);
 
-    if (!apocalypse || !shelter) throw new Error('Apocalypse or shelter is undefined');
+
+    if (!apocalypse || !shelter || !ending) throw new Error('Apocalypse or shelter or ending is undefined');
 
     const players: Player[] = <Player[]>gameLoadingData.players.map(player => {
       return {
@@ -48,7 +51,7 @@ class ConnectToGameStore {
       shelter,
       apocalypse,
       players: players,
-      ending: '',
+      ending: ending,
       currentPlayerNumber: -1,
     };
     gameStore.setGame(game);

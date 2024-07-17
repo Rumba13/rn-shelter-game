@@ -18,7 +18,7 @@ import { observer } from 'mobx-react';
 
 type PropsType = {};
 
-export const  GamePage = observer(({}: PropsType) => {
+export const GamePage = observer(({}: PropsType) => {
   const selectPlayerSliderRef = React.createRef<ICarouselInstance>();
   const selectPlayersThumbsRef = React.createRef<ScrollView>();
   const [isLeftSidebarOpened, setIsLeftSidebarOpened] = React.useState<boolean>(true);
@@ -40,7 +40,7 @@ export const  GamePage = observer(({}: PropsType) => {
                    shelter={game.shelter} isOpened={isLeftSidebarOpened}
                    setIsOpened={setIsLeftSidebarOpened} />
       <RightSidebar
-        ending={game.ending}
+        ending={game.ending.description}
         nonKickedPlayers={game.players.filter(player => !player.isKicked)}
         animationDuration={animationDuration} isCompletelyHidden={isLeftSidebarOpened}
         isOpened={isRightSidebarOpened} setIsOpened={setIsRightSidebarOpened} />
@@ -120,7 +120,7 @@ export const  GamePage = observer(({}: PropsType) => {
                         <Text
                           style={{
                             ...s.selectPlayerThumbTitle,
-                            color: game.currentPlayerNumber === index + 1 ? '#232322' : isThumbHighlighted? "#7f3941" : '#6f586c',
+                            color: game.currentPlayerNumber === index + 1 ? '#232322' : isThumbHighlighted ? '#7f3941' : '#6f586c',
                           }}>
                           {index + 1}
                         </Text>
@@ -129,7 +129,7 @@ export const  GamePage = observer(({}: PropsType) => {
                       <Text
                         style={{
                           ...s.selectPlayerThumbTitle,
-                          color: game.currentPlayerNumber === index + 1 ? '#232322' :isThumbHighlighted? "#7f3941" : '#6f586c',
+                          color: game.currentPlayerNumber === index + 1 ? '#232322' : isThumbHighlighted ? '#7f3941' : '#6f586c',
                         }}>
                         {index + 1}
                       </Text>
@@ -143,7 +143,7 @@ export const  GamePage = observer(({}: PropsType) => {
       </View>
     </View>
   );
-})
+});
 
 const selectPlayerThumbsWidth = 72;
 
