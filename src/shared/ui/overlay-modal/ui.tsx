@@ -1,5 +1,4 @@
-import { Text, TouchableWithoutFeedback, View, Modal, ImageBackground, ViewStyle, StyleSheet } from 'react-native';
-import { Background } from '@react-navigation/elements';
+import { TouchableWithoutFeedback, View, Modal, ViewStyle } from 'react-native';
 
 type PropsType = {
   isModalOpened: boolean;
@@ -20,7 +19,9 @@ export function OverlayModal({ isModalOpened, setIsModalOpened, children, styles
       style={{ ...s.modal, ...styles }}>
       <TouchableWithoutFeedback onPress={() => setIsModalOpened(false)}>
         <View style={{ ...s.modalOverlay, ...overlayStyle }}>
-          <TouchableWithoutFeedback onPress={e => e.stopPropagation()}>{children}</TouchableWithoutFeedback>
+          <TouchableWithoutFeedback onPress={e => e.stopPropagation()}>
+            <View>{children}</View>
+          </TouchableWithoutFeedback>
         </View>
       </TouchableWithoutFeedback>
     </Modal>
@@ -28,15 +29,11 @@ export function OverlayModal({ isModalOpened, setIsModalOpened, children, styles
 }
 
 const s: any = {
-  modal: {
-    maxWidth: 100,
-    maxHeight: 100,
-  },
+  modal: {},
   modalOverlay: {
     height: '100%',
     width: '100%',
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
   },

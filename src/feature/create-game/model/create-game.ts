@@ -10,9 +10,7 @@ import { PseudoRandomGenerator } from '@/src/shared/lib/pseudo-random-generator'
 import { CreatePriceMap } from '@/src/feature/create-game/model/create-price-map';
 import { difficultyToTotalPrice } from '@/src/feature/create-game/model/difficulty-to-total-price';
 import { gameSettingsStore } from '@/src/entities/game';
-import {
-  characteristicBalanceToShuffleTimes,
-} from '@/src/feature/create-game/model/characteristic-balance-to-shuffle-times';
+import { characteristicBalanceToShuffleTimes } from '@/src/feature/create-game/model/characteristic-balance-to-shuffle-times';
 import { BalanceChances } from '@/src/shared/lib/types/balance-chances';
 import { playersBalanceToBalanceChances } from '@/src/feature/create-game/model/players-balance-to-balance-chances';
 import { SexualOrientation } from '@/src/shared/lib/types/sexual-orientation';
@@ -109,7 +107,12 @@ class CreateGameStore {
     };
   }
 
-  private createPlayer(price: number, characteristicBalance: number, sexualOrientation: SexualOrientation, playerNumber: number): Player {
+  private createPlayer(
+    price: number,
+    characteristicBalance: number,
+    sexualOrientation: SexualOrientation,
+    playerNumber: number,
+  ): Player {
     const priceMap: { [k in CardType]: number } = this.createPriceMap.createPriceMapShuffle(
       price,
       characteristicBalanceToShuffleTimes(characteristicBalance),

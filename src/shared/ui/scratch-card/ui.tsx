@@ -1,19 +1,11 @@
 import React, { useRef, useState } from 'react';
-import {
-  Canvas,
-  Group,
-  Image,
-  Mask,
-  Path,
-  Rect,
-  Skia,
-} from '@shopify/react-native-skia';
+import { Canvas, Group, Image, Mask, Path, Rect, Skia } from '@shopify/react-native-skia';
 import { StyleProp, View, ViewStyle, StyleSheet } from 'react-native';
 
 type Props = {
-  style: StyleProp<ViewStyle>,
-  image: any,
-  children?: React.ReactNode,
+  style: StyleProp<ViewStyle>;
+  image: any;
+  children?: React.ReactNode;
 };
 export const ScratchCard: React.FC<Props> = ({ style, children, image }) => {
   const [[width, height], setSize] = useState([0, 0]);
@@ -21,7 +13,7 @@ export const ScratchCard: React.FC<Props> = ({ style, children, image }) => {
 
   return (
     <View
-      onLayout={(e) => {
+      onLayout={e => {
         setSize([e.nativeEvent.layout.width, e.nativeEvent.layout.height]);
       }}
       style={[styles.container, style]}>
@@ -51,14 +43,7 @@ export const ScratchCard: React.FC<Props> = ({ style, children, image }) => {
                   />
                 </Group>
               }>
-              <Image
-                image={image}
-                fit="cover"
-                x={0}
-                y={0}
-                width={width}
-                height={height}
-              />
+              <Image image={image} fit="cover" x={0} y={0} width={width} height={height} />
             </Mask>
           </Canvas>
         </>

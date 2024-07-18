@@ -10,15 +10,13 @@ import { professions } from '@/src/entities/profession';
 import { endings } from '@/src/entities/ending';
 
 class ConnectToGameStore {
-  constructor() {
-  }
+  constructor() {}
 
   public connectToGame(gameCode: string, navigation: any) {
     const gameLoadingData: GameConnectionData = JSON.parse(gameCode);
     const shelter = shelters.find(shelter => shelter.id === gameLoadingData.shelterId);
     const apocalypse = apocalypses.find(apocalypse => apocalypse.id === gameLoadingData.apocalypseId);
     const ending = endings.find(ending => ending.id === gameLoadingData.endingId);
-
 
     if (!apocalypse || !shelter || !ending) throw new Error('Apocalypse or shelter or ending is undefined');
 

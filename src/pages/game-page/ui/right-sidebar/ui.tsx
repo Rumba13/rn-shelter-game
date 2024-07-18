@@ -6,7 +6,8 @@ import {
   Dimensions,
   Image,
   Animated,
-  TouchableWithoutFeedback, ScrollView,
+  TouchableWithoutFeedback,
+  ScrollView,
 } from 'react-native';
 import { ImageButton } from '@/src/shared/ui/image-button/ui';
 import { useRef } from 'react';
@@ -18,22 +19,22 @@ import { useImage } from '@shopify/react-native-skia';
 import { gameSettingsStore } from '@/src/entities/game';
 
 type PropsType = {
-  isOpened: boolean,
-  isCompletelyHidden: boolean,
-  setIsOpened: (value: boolean) => void,
-  animationDuration: number,
-  nonKickedPlayers: Player[],
-  ending: string
-}
+  isOpened: boolean;
+  isCompletelyHidden: boolean;
+  setIsOpened: (value: boolean) => void;
+  animationDuration: number;
+  nonKickedPlayers: Player[];
+  ending: string;
+};
 
 export function RightSidebar({
-                               isOpened,
-                               setIsOpened,
-                               isCompletelyHidden,
-                               animationDuration,
-                               nonKickedPlayers,
-                               ending,
-                             }: PropsType) {
+  isOpened,
+  setIsOpened,
+  isCompletelyHidden,
+  animationDuration,
+  nonKickedPlayers,
+  ending,
+}: PropsType) {
   const sideBarClosedAtPx = 294;
   const translateXAnim = useRef(new Animated.Value(sideBarClosedAtPx + 65)).current;
   const scratchImage = useImage(ScratchImage);
@@ -65,27 +66,28 @@ export function RightSidebar({
   if (isCompletelyHidden) {
     hideSideBar();
   } else {
-    isOpened
-      ? openSideBar()
-      : closeSideBar();
+    isOpened ? openSideBar() : closeSideBar();
   }
 
   return (
     <Animated.View style={{ ...s.rightSideBarWrapper, transform: [{ translateX: translateXAnim }] }}>
       <View style={{ flex: 1, position: 'relative' }}>
-
         <ImageBackground resizeMode={'contain'} source={require('@/assets/images/gamescreen/right_final.png')}>
-
           <TouchableWithoutFeedback onPress={() => setIsOpened(!isOpened)}>
-            <Image style={s.rightSideBarWrapperIcon} resizeMode={'contain'}
-                   source={require('@/assets/images/gamescreen/end_icon.png')} />
+            <Image
+              style={s.rightSideBarWrapperIcon}
+              resizeMode={'contain'}
+              source={require('@/assets/images/gamescreen/end_icon.png')}
+            />
           </TouchableWithoutFeedback>
 
-
           <View style={s.helpButtonWrapper}>
-            <ImageButton style={s.helpButton} buttonImage={require('@/assets/images/core/vopros_icon.png')}
-                         shadowImage={require('@/assets/images/mainscreen/info_button.png')}
-                         options={{ xOffset: 3, yOffset: 2, yOffsetOnPress: 1, xOffSetOnPress: 1 }} />
+            <ImageButton
+              style={s.helpButton}
+              buttonImage={require('@/assets/images/core/vopros_icon.png')}
+              shadowImage={require('@/assets/images/mainscreen/info_button.png')}
+              options={{ xOffset: 3, yOffset: 2, yOffsetOnPress: 1, xOffSetOnPress: 1 }}
+            />
           </View>
           <View style={s.rightSideBar}>
             <ScrollView style={s.leftPlayersWrapper}>
@@ -94,32 +96,42 @@ export function RightSidebar({
               </Text>
             </ScrollView>
             <View style={s.endingWrapper}>
-              <Image source={require('@/assets/images/gamescreen/koncovka.png')} resizeMode={'contain'}
-                     style={s.endingImage} />
+              <Image
+                source={require('@/assets/images/gamescreen/koncovka.png')}
+                resizeMode={'contain'}
+                style={s.endingImage}
+              />
               <ScratchCard style={s.ending} image={scratchImage}>
                 <ImageBackground resizeMode={'contain'} source={require('@/assets/images/gamescreen/text_frame.png')}>
                   <View style={{ height: '100%' }}>
                     <ScrollView style={s.endingDescriptionWrapper}>
-
-                      {gameSettingsStore.settings.lotteryTicketMode
-                        ?
-                        <View style={{
-                          alignItems: 'center',
-                          height: 180,
-                          justifyContent: 'space-around',
-                          flexDirection: 'row',
-                        }}>
-                          <Image style={s.scratchReward} resizeMode={'contain'}
-                                 source={require('@/assets/images/scratch-reward.jpg')} />
-                          <Image style={s.scratchReward} resizeMode={'contain'}
-                                 source={require('@/assets/images/scratch-reward.jpg')} />
-                          <Image style={s.scratchReward} resizeMode={'contain'}
-                                 source={require('@/assets/images/scratch-reward.jpg')} />
+                      {gameSettingsStore.settings.lotteryTicketMode ? (
+                        <View
+                          style={{
+                            alignItems: 'center',
+                            height: 180,
+                            justifyContent: 'space-around',
+                            flexDirection: 'row',
+                          }}>
+                          <Image
+                            style={s.scratchReward}
+                            resizeMode={'contain'}
+                            source={require('@/assets/images/scratch-reward.jpg')}
+                          />
+                          <Image
+                            style={s.scratchReward}
+                            resizeMode={'contain'}
+                            source={require('@/assets/images/scratch-reward.jpg')}
+                          />
+                          <Image
+                            style={s.scratchReward}
+                            resizeMode={'contain'}
+                            source={require('@/assets/images/scratch-reward.jpg')}
+                          />
                         </View>
-                        :
+                      ) : (
                         <Text style={s.endingDescription}>{ending}</Text>
-                      }
-
+                      )}
                     </ScrollView>
                   </View>
                 </ImageBackground>
