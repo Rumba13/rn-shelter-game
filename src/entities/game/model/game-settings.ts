@@ -7,7 +7,7 @@ class GameSettingsStore {
   public settings: GameSettings = {
     sexualOrientation: SexualOrientation.Random,
     hillbillyMode: false,
-    lotteryTicketMode:false,
+    lotteryTicketMode: false,
     playersCount: 4,
     difficulty: 4,
     balance: 4,
@@ -15,7 +15,6 @@ class GameSettingsStore {
     apocalypses: [],
     cardsKit: [],
     characteristicBalance: 2,
-
   };
   public settingsLimits = {
     difficulty: {

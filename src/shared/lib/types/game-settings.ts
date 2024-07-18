@@ -15,6 +15,5 @@ export type GameSettings = {
 
   //Special options
   hillbillyMode: boolean;
-  lotteryTicketMode:boolean,
-
+  lotteryTicketMode: boolean;
 };

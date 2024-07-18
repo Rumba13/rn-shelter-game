@@ -7,7 +7,8 @@ import {
   Image,
   Animated,
   Touchable,
-  TouchableWithoutFeedback, ScrollView,
+  TouchableWithoutFeedback,
+  ScrollView,
 } from 'react-native';
 import { useEffect, useRef } from 'react';
 import { Apocalypse } from '@/src/shared/lib/types/apocalypse';
@@ -16,24 +17,24 @@ import { gameStore } from '@/src/entities/game';
 import { stayTimeMonthsToTitle } from '@/src/pages/game-page/ui/stay-time-months-to-title';
 
 type PropsType = {
-  isOpened: boolean,
-  isCompletelyHidden: boolean,
-  setIsOpened: (isOpened: boolean) => void,
-  apocalypse: Apocalypse,
-  shelter: Shelter,
-  shelterCapacity: number,
-  animationDuration: number,
-}
+  isOpened: boolean;
+  isCompletelyHidden: boolean;
+  setIsOpened: (isOpened: boolean) => void;
+  apocalypse: Apocalypse;
+  shelter: Shelter;
+  shelterCapacity: number;
+  animationDuration: number;
+};
 
 export function LeftSidebar({
-                              isOpened,
-                              setIsOpened,
-                              apocalypse,
-                              shelter,
-                              isCompletelyHidden,
-                              shelterCapacity,
-                              animationDuration,
-                            }: PropsType) {
+  isOpened,
+  setIsOpened,
+  apocalypse,
+  shelter,
+  isCompletelyHidden,
+  shelterCapacity,
+  animationDuration,
+}: PropsType) {
   const translateXAnim = useRef(new Animated.Value(-(leftSideBarWidth - 78))).current;
 
   const closeSideBar = () => {
@@ -58,34 +59,35 @@ export function LeftSidebar({
     }).start();
   };
 
-
   if (isCompletelyHidden) {
     hideSideBar();
   } else {
-    isOpened
-      ? openSideBar()
-      : closeSideBar();
+    isOpened ? openSideBar() : closeSideBar();
   }
-
 
   return (
     <Animated.View style={{ ...s.sideBarWrapper, transform: [{ translateX: translateXAnim }] }}>
-      <ImageBackground style={{ width: '100%', height: '100%' }} resizeMode={'contain'}
-                       source={require('@/assets/images/gamescreen/left_final.png')}>
+      <ImageBackground
+        style={{ width: '100%', height: '100%' }}
+        resizeMode={'contain'}
+        source={require('@/assets/images/gamescreen/left_final.png')}>
         <Animated.View style={s.leftSideBar}>
-          <View style={{
-            maxHeight: '100%',
-            flex: 1,
-            width: 278,
-            marginBottom: 20,
-            marginLeft: 17,
-            marginTop: 34,
-            padding: 16,
-          }}>
-
+          <View
+            style={{
+              maxHeight: '100%',
+              flex: 1,
+              width: 278,
+              marginBottom: 20,
+              marginLeft: 17,
+              marginTop: 34,
+              padding: 16,
+            }}>
             <View style={s.apocalypse}>
-              <Image style={s.apocalypseMainImage} resizeMode={'contain'}
-                     source={require('@/assets/images/gamescreen/apok.png')} />
+              <Image
+                style={s.apocalypseMainImage}
+                resizeMode={'contain'}
+                source={require('@/assets/images/gamescreen/apok.png')}
+              />
 
               <ImageBackground resizeMode={'contain'} source={require('@/assets/images/gamescreen/text_frame.png')}>
                 <View style={{ height: 190 }}>
@@ -97,14 +99,23 @@ export function LeftSidebar({
             </View>
 
             <View style={s.apocalypse}>
-              <Image style={s.shelterMainImage} resizeMode={'contain'}
-                     source={require('@/assets/images/gamescreen/bunker.png')} />
+              <Image
+                style={s.shelterMainImage}
+                resizeMode={'contain'}
+                source={require('@/assets/images/gamescreen/bunker.png')}
+              />
 
               <ImageBackground resizeMode={'contain'} source={require('@/assets/images/gamescreen/shelter_info.png')}>
                 <View style={s.shelterInfo}>
                   <Text style={s.shelterName}>{shelter.name}</Text>
-                  <Text style={s.shelterSpace}>{shelter.spaceInSquareMeters}{'\n'}m²</Text>
-                  <Text style={s.shelterCapacity}>{shelterCapacity}{'\n'}чел.</Text>
+                  <Text style={s.shelterSpace}>
+                    {shelter.spaceInSquareMeters}
+                    {'\n'}m²
+                  </Text>
+                  <Text style={s.shelterCapacity}>
+                    {shelterCapacity}
+                    {'\n'}чел.
+                  </Text>
                   <Text style={s.stayTime}>{stayTimeMonthsToTitle(shelter.stayTimeInMonths)}</Text>
                 </View>
               </ImageBackground>
@@ -113,23 +124,27 @@ export function LeftSidebar({
                 <View style={{ height: 190 }}>
                   <ScrollView style={s.shelterDescriptionWrapper}>
                     <Text style={s.shelterDescription}>
-                      {shelter.description}{'\n\n'}
-                      Местоположение: {shelter.location}{'\n\n'}
-                      Помещения:{'\n'}{shelter.rooms.join(';\n')}{'\n\n'}
-
-                      Доступные ресурсы:{'\n'}{shelter.resources.join(';\n')}.
-
+                      {shelter.description}
+                      {'\n\n'}
+                      Местоположение: {shelter.location}
+                      {'\n\n'}
+                      Помещения:{'\n'}
+                      {shelter.rooms.join(';\n')}
+                      {'\n\n'}
+                      Доступные ресурсы:{'\n'}
+                      {shelter.resources.join(';\n')}.
                     </Text>
                   </ScrollView>
                 </View>
               </ImageBackground>
             </View>
-
-
           </View>
           <TouchableWithoutFeedback onPress={() => setIsOpened(!isOpened)}>
-            <Image style={s.leftSideBarDetail} resizeMode={'contain'}
-                   source={require('@/assets/images/gamescreen/apoc_bunker_icon.png')} />
+            <Image
+              style={s.leftSideBarDetail}
+              resizeMode={'contain'}
+              source={require('@/assets/images/gamescreen/apoc_bunker_icon.png')}
+            />
           </TouchableWithoutFeedback>
         </Animated.View>
       </ImageBackground>
@@ -203,7 +218,6 @@ const s = StyleSheet.create({
     height: 109,
     width: '100%',
     marginBottom: 15,
-
   },
   apocalypseDescription: {
     fontSize: 15,

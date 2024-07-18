@@ -15,5 +15,5 @@ export type Player = {
   conditionCard: Card;
   actionCard: Card;
   notes: string;
-  number: number,
+  number: number;
 };

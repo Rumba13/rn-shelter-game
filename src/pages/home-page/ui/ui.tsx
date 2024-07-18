@@ -1,7 +1,7 @@
 import { Alert, Image, ImageBackground, View } from 'react-native';
 import React from 'react';
 import { ImageButton } from '@/src/shared/ui/image-button/ui';
-import { InfoButton } from '@/src/pages/home-page/ui/info-button/ui';
+import { InfoButtonAndModal } from '@/src/pages/home-page/ui/info-button/ui';
 
 type PropsType = {
   navigation: any;
@@ -57,7 +57,7 @@ export const HomePage = ({ navigation }: PropsType) => {
             marginTop: 10,
             width: '100%',
           }}>
-          <InfoButton />
+          <InfoButtonAndModal />
           <ImageButton
             buttonImage={require('../../../../assets/images/mainscreen/zakazat_igru.png')}
             shadowImage={require('../../../../assets/images/mainscreen/zakazat_igru_shadow.png')}

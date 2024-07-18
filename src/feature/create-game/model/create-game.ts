@@ -19,28 +19,22 @@ import { SexualOrientation } from '@/src/shared/lib/types/sexual-orientation';
 import { genders } from '@/src/entities/gender/model/genders';
 import { Profession } from '@/src/shared/lib/types/profession';
 import { characteristicCards } from '@/src/entities/characteristic-card/model/characteristic-card';
-import { Alert } from 'react-native';
 import { Ending } from '@/src/shared/lib/types/ending';
 import { endings } from '@/src/entities/ending';
+import { createSeedStore } from '@/src/feature/create-seed/model/create-seed';
 
 class CreateGameStore {
   private readonly pseudoRandomGenerator: PseudoRandomGenerator;
   private createPriceMap: CreatePriceMap;
-  private readonly _seedMax = 20000;
-  private readonly _seedMin = 1;
-  private readonly seed: number;
   private usedProfessions: Profession[] = professions.slice();
 
-  private createGameSeed(min: number, max: number) {
-    return Math.floor(Math.random() * (max - min + 1) + min);
-  }
 
   private selectRandomApocalypse(apocalypses: Apocalypse[]): Apocalypse {
-    return apocalypses[Math.trunc(this.pseudoRandomGenerator.generateFrom(this.seed, 0, apocalypses.length))];
+    return apocalypses[Math.trunc(this.pseudoRandomGenerator.generateFrom(createSeedStore.seed, 0, apocalypses.length))];
   }
 
   private selectRandomShelter(shelters: Shelter[]): Shelter {
-    return shelters[Math.trunc(this.pseudoRandomGenerator.generateFrom(this.seed, 0, shelters.length))];
+    return shelters[Math.trunc(this.pseudoRandomGenerator.generateFrom(createSeedStore.seed, 0, shelters.length))];
   }
 
   private selectRandomProfession(): Profession {
@@ -51,9 +45,8 @@ class CreateGameStore {
   }
 
   constructor() {
-    this.seed = this.createGameSeed(this._seedMin, this._seedMax);
-    this.pseudoRandomGenerator = new PseudoRandomGenerator(this.seed);
-    this.createPriceMap = new CreatePriceMap(this.pseudoRandomGenerator, this.seed);
+    this.pseudoRandomGenerator = new PseudoRandomGenerator(createSeedStore.seed);
+    this.createPriceMap = new CreatePriceMap(this.pseudoRandomGenerator, createSeedStore.seed);
   }
 
   private changeBioCharacteristicGender(bioCharacteristicCard: Card, sexualOrientationOption: SexualOrientation): Card {
@@ -109,7 +102,12 @@ class CreateGameStore {
     };
   }
 
-  private createPlayer(price: number, characteristicBalance: number, sexualOrientation: SexualOrientation, playerNumber: number): Player {
+  private createPlayer(
+    price: number,
+    characteristicBalance: number,
+    sexualOrientation: SexualOrientation,
+    playerNumber: number,
+  ): Player {
     const priceMap: { [k in CardType]: number } = this.createPriceMap.createPriceMapShuffle(
       price,
       characteristicBalanceToShuffleTimes(characteristicBalance),
@@ -219,7 +217,7 @@ class CreateGameStore {
   }
 
   private selectRandomEnding(endings: Ending[]): Ending {
-    return endings[Math.trunc(this.pseudoRandomGenerator.generateFrom(this.seed, 0, endings.length))];
+    return endings[Math.trunc(this.pseudoRandomGenerator.generateFrom(createSeedStore.seed, 0, endings.length))];
   }
 
   public createGame(gameSettings: GameSettings): GameType {

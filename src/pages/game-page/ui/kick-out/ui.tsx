@@ -4,18 +4,18 @@ import { observer } from 'mobx-react';
 import { gameStore } from '@/src/entities/game';
 
 type PropsType = {
-  player: Player,
-  onPress: () => void
-}
+  player: Player;
+  onPress: () => void;
+};
 
 export const KickOutButton = observer(({ player, onPress }: PropsType) => {
-
   return (
     <View style={s.kickOutButtonWrapper}>
-      <TouchableWithoutFeedback onPress={() => {
-        gameStore.togglePlayerKickOut(player.number);
-        onPress();
-      }}>
+      <TouchableWithoutFeedback
+        onPress={() => {
+          gameStore.togglePlayerKickOut(player.number);
+          onPress();
+        }}>
         {player.isKicked ? (
           <Image
             style={s.kickOutButton}
@@ -29,7 +29,6 @@ export const KickOutButton = observer(({ player, onPress }: PropsType) => {
             source={require('@/assets/images/gamescreen/vignatj.png')}
           />
         )}
-
       </TouchableWithoutFeedback>
     </View>
   );

@@ -25,16 +25,10 @@ import {
   characteristicCards,
   characteristicCardsList,
 } from '@/src/entities/characteristic-card/model/characteristic-card';
-import {
-  renderCharacteristicCardSelectedText,
-} from '@/src/pages/create-game-page/ui/render-characteristic-card-selected-text';
+import { renderCharacteristicCardSelectedText } from '@/src/pages/create-game-page/ui/render-characteristic-card-selected-text';
 import { CharacteristicCardsList } from '@/src/shared/lib/types/characteristic-cards-list';
-import {
-  characteristicCardNameToCard,
-} from '@/src/entities/characteristic-card/model/characteristic-card-name-to-card';
-import {
-  characteristicBalanceValueToTitle,
-} from '@/src/pages/create-game-page/ui/characteristic-balance-value-to-title';
+import { characteristicCardNameToCard } from '@/src/entities/characteristic-card/model/characteristic-card-name-to-card';
+import { characteristicBalanceValueToTitle } from '@/src/pages/create-game-page/ui/characteristic-balance-value-to-title';
 import { createGameStore } from '@/src/feature/create-game/model/create-game';
 import { gameStore } from '@/src/entities/game/model/game';
 import { OverlayModal } from '@/src/shared/ui/overlay-modal/ui';
@@ -81,10 +75,13 @@ export const CreateGamePage = observer(({ navigation }: PropsType) => {
                       gameSettingsStore.setSettings(options => (options.hillbillyMode = isEnable))
                     }
                   />
-                  <GameOptionCheckbox title={'Режим лотереи'}
-                                      descriptionHeight={80}
-                                      description={'Трудно объяснить, что этот режим делает...'}
-                                      onValueChange={value => gameSettingsStore.setSettings(settings => settings.lotteryTicketMode = value)}
+                  <GameOptionCheckbox
+                    title={'Режим лотереи'}
+                    descriptionHeight={80}
+                    description={'Трудно объяснить, что этот режим делает...'}
+                    onValueChange={value =>
+                      gameSettingsStore.setSettings(settings => (settings.lotteryTicketMode = value))
+                    }
                   />
                   <GameOptionSelect
                     descriptionHeight={100}

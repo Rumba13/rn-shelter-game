@@ -7,15 +7,15 @@ export class CardsOpenedState {
     makeAutoObservable(this);
     this.bioCardDisplayStatus =
       this.healthDisplayStatus =
-        this.hobbyDisplayStatus =
-          this.phobiaDisplayStatus =
-            this.characterDisplayStatus =
-              this.additionalInformationDisplayStatus =
-                this.knowledgeDisplayStatus =
-                  this.luggageDisplayStatus =
-                    this.actionDisplayStatus =
-                      this.conditionDisplayStatus =
-                        cardDisplayStatus;
+      this.hobbyDisplayStatus =
+      this.phobiaDisplayStatus =
+      this.characterDisplayStatus =
+      this.additionalInformationDisplayStatus =
+      this.knowledgeDisplayStatus =
+      this.luggageDisplayStatus =
+      this.actionDisplayStatus =
+      this.conditionDisplayStatus =
+        cardDisplayStatus;
   }
 
   public bioCardDisplayStatus: CardDisplayStatus = CardDisplayStatus.Hidden;

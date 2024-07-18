@@ -1786,7 +1786,7 @@ export const { cardsKit: cardsStandartEdition, nextKitId } = setIdsToCardKit(
       {
         type: 'hobby',
         name: 'Анатомия',
-        price:5,
+        price: 5,
         id: 542,
       },
       {
@@ -2008,7 +2008,7 @@ export const { cardsKit: cardsStandartEdition, nextKitId } = setIdsToCardKit(
       {
         type: 'hobby',
         name: 'Программирование',
-        price:5,
+        price: 5,
         id: 530,
       },
       {
@@ -2238,7 +2238,7 @@ export const { cardsKit: cardsStandartEdition, nextKitId } = setIdsToCardKit(
       {
         type: 'luggage',
         name: 'Бальзам "Звёздочка"',
-        price:6,
+        price: 6,
         id: 603,
       },
       {

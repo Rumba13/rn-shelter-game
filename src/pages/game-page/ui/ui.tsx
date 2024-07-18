@@ -34,16 +34,6 @@ export const GamePage = observer(({}: PropsType) => {
 
   return (
     <View style={s.gamePage}>
-
-      <LeftSidebar animationDuration={animationDuration} isCompletelyHidden={isRightSidebarOpened}
-                   shelterCapacity={Math.floor(game.players.length / 2)} apocalypse={game.apocalypse}
-                   shelter={game.shelter} isOpened={isLeftSidebarOpened}
-                   setIsOpened={setIsLeftSidebarOpened} />
-      <RightSidebar
-        ending={game.ending.description}
-        nonKickedPlayers={game.players.filter(player => !player.isKicked)}
-        animationDuration={animationDuration} isCompletelyHidden={isLeftSidebarOpened}
-        isOpened={isRightSidebarOpened} setIsOpened={setIsRightSidebarOpened} />
       <View style={{ flex: 1, maxHeight: 530, marginBottom: 10, marginHorizontal: 'auto' }}>
         <Carousel
           overscrollEnabled
@@ -78,7 +68,6 @@ export const GamePage = observer(({}: PropsType) => {
           renderItem={item => {
             return (
               <PlayerDetails
-
                 key={item.index}
                 isObserver={game.currentPlayerNumber === 0}
                 isCurrentPlayer={game.currentPlayerNumber === item.index + 1}
@@ -120,7 +109,12 @@ export const GamePage = observer(({}: PropsType) => {
                         <Text
                           style={{
                             ...s.selectPlayerThumbTitle,
-                            color: game.currentPlayerNumber === index + 1 ? '#232322' : isThumbHighlighted ? '#7f3941' : '#6f586c',
+                            color:
+                              game.currentPlayerNumber === index + 1
+                                ? '#232322'
+                                : isThumbHighlighted
+                                  ? '#7f3941'
+                                  : '#6f586c',
                           }}>
                           {index + 1}
                         </Text>
@@ -129,7 +123,12 @@ export const GamePage = observer(({}: PropsType) => {
                       <Text
                         style={{
                           ...s.selectPlayerThumbTitle,
-                          color: game.currentPlayerNumber === index + 1 ? '#232322' : isThumbHighlighted ? '#7f3941' : '#6f586c',
+                          color:
+                            game.currentPlayerNumber === index + 1
+                              ? '#232322'
+                              : isThumbHighlighted
+                                ? '#7f3941'
+                                : '#6f586c',
                         }}>
                         {index + 1}
                       </Text>
@@ -141,6 +140,23 @@ export const GamePage = observer(({}: PropsType) => {
           </ScrollView>
         </ImageBackground>
       </View>
+      <LeftSidebar
+        animationDuration={animationDuration}
+        isCompletelyHidden={isRightSidebarOpened}
+        shelterCapacity={Math.floor(game.players.length / 2)}
+        apocalypse={game.apocalypse}
+        shelter={game.shelter}
+        isOpened={isLeftSidebarOpened}
+        setIsOpened={setIsLeftSidebarOpened}
+      />
+      <RightSidebar
+        ending={game.ending.description}
+        nonKickedPlayers={game.players.filter(player => !player.isKicked)}
+        animationDuration={animationDuration}
+        isCompletelyHidden={isLeftSidebarOpened}
+        isOpened={isRightSidebarOpened}
+        setIsOpened={setIsRightSidebarOpened}
+      />
     </View>
   );
 });
