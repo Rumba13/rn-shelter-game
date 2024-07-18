@@ -9,7 +9,6 @@ import {
   View,
 } from 'react-native';
 import { useEffect, useRef, useState } from 'react';
-import { Grayscale } from 'react-native-color-matrix-image-filters';
 
 type PropsType = {
   style: any;
