@@ -13,7 +13,7 @@ export function Separator() {
           borderRadius={20}
           style={s.separatorImage}
           resizeMode={'cover'}
-          source={require('@/assets/images/Image1.png')}
+          source={require('@/assets/images/cook.png')}
         />
       </TouchableWithoutFeedback>
     </View>

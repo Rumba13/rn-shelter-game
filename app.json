@@ -1,33 +1,35 @@
 {
   "expo": {
-    "name": "rn-shelter-game",
-    "slug": "rn-shelter-game",
+    "name": "Shelter",
+    "slug": "Shelter",
     "entryPoint": "src/app/index",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/icon.jpg",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "splash": {
-      "image": "./assets/images/splash.png",
+      "image": "./assets/images/cook.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#000000"
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.senderium.rnsheltergame"
+      "bundleIdentifier": "com.senderium.shelter"
     },
     "android": {
       "adaptiveIcon": {
         "backgroundColor": "#ff0000"
       },
-      "package": "com.senderium.rnsheltergame",
-      "permissions": ["android.permission"]
+      "package": "com.senderium.shelter",
+      "permissions": [
+        "android.permission"
+      ]
     },
     "web": {
       "bundler": "metro",
       "output": "static",
-      "favicon": "./assets/images/favicon.png"
+      "favicon": "./assets/images/icon.jpg"
     },
     "plugins": [
       [
