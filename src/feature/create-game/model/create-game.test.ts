@@ -17,6 +17,7 @@ const gameSettings: GameSettings = {
   apocalypses: apocalypses,
   shelters: shelters,
   cardsKit: cardKitToCards(characteristicCards),
+  lotteryTicketMode: false,
 };
 
 const cards: Card[] = [
