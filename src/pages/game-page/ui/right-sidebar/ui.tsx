@@ -198,7 +198,7 @@ const s = StyleSheet.create({
     top: -20,
     right: 0,
     zIndex: 200,
-    width: leftSideBarWidth,
+    width: leftSideBarWidth, //TODO change naming
     height: Dimensions.get('window').height,
   },
   rightSideBar: {

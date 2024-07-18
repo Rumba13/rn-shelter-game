@@ -34,16 +34,6 @@ export const GamePage = observer(({}: PropsType) => {
 
   return (
     <View style={s.gamePage}>
-
-      <LeftSidebar animationDuration={animationDuration} isCompletelyHidden={isRightSidebarOpened}
-                   shelterCapacity={Math.floor(game.players.length / 2)} apocalypse={game.apocalypse}
-                   shelter={game.shelter} isOpened={isLeftSidebarOpened}
-                   setIsOpened={setIsLeftSidebarOpened} />
-      <RightSidebar
-        ending={game.ending.description}
-        nonKickedPlayers={game.players.filter(player => !player.isKicked)}
-        animationDuration={animationDuration} isCompletelyHidden={isLeftSidebarOpened}
-        isOpened={isRightSidebarOpened} setIsOpened={setIsRightSidebarOpened} />
       <View style={{ flex: 1, maxHeight: 530, marginBottom: 10, marginHorizontal: 'auto' }}>
         <Carousel
           overscrollEnabled
@@ -141,6 +131,15 @@ export const GamePage = observer(({}: PropsType) => {
           </ScrollView>
         </ImageBackground>
       </View>
+      <LeftSidebar animationDuration={animationDuration} isCompletelyHidden={isRightSidebarOpened}
+                   shelterCapacity={Math.floor(game.players.length / 2)} apocalypse={game.apocalypse}
+                   shelter={game.shelter} isOpened={isLeftSidebarOpened}
+                   setIsOpened={setIsLeftSidebarOpened} />
+      <RightSidebar
+        ending={game.ending.description}
+        nonKickedPlayers={game.players.filter(player => !player.isKicked)}
+        animationDuration={animationDuration} isCompletelyHidden={isLeftSidebarOpened}
+        isOpened={isRightSidebarOpened} setIsOpened={setIsRightSidebarOpened} />
     </View>
   );
 });
