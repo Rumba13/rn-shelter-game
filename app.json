@@ -1,9 +1,9 @@
 {
   "expo": {
     "name": "Shelter",
-    "slug": "Shelter",
+    "slug": "rn-shelter-game",
     "entryPoint": "src/app/index",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.jpg",
     "scheme": "myapp",
