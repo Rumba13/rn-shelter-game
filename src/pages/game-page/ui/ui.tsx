@@ -23,7 +23,7 @@ export const GamePage = observer(({}: PropsType) => {
   const selectPlayersThumbsRef = React.createRef<ScrollView>();
   const [isLeftSidebarOpened, setIsLeftSidebarOpened] = React.useState<boolean>(true);
   const [isRightSidebarOpened, setIsRightSidebarOpened] = React.useState<boolean>(false);
-  const animationDuration = 450;
+  const animationDuration = 200;
 
   const game = gameStore.game;
   if (!game) throw new Error('Game is undefined');
@@ -151,9 +151,9 @@ export const GamePage = observer(({}: PropsType) => {
       />
       <RightSidebar
         ending={game.ending.description}
-        nonKickedPlayers={game.players.filter(player => !player.isKicked)}
+        unKickedOutPlayers={game.players.filter(player => !player.isKicked)}
         animationDuration={animationDuration}
-        isCompletelyHidden={isLeftSidebarOpened}
+        isHidden={isLeftSidebarOpened}
         isOpened={isRightSidebarOpened}
         setIsOpened={setIsRightSidebarOpened}
       />

@@ -1,12 +1,9 @@
 import {
-  Alert,
   Animated,
-  Image,
   ImageBackground,
   ScrollView,
   StyleSheet,
   Text,
-  TouchableWithoutFeedback,
   View,
   ViewStyle,
 } from 'react-native';
@@ -16,7 +13,7 @@ import { useRef, useState } from 'react';
 import { CardsOpenedState } from '@/src/pages/game-page/model/cards-opened-state';
 import { observer } from 'mobx-react';
 import { CardDisplayStatus } from '@/src/shared/lib/types/card-display-status';
-import { KickOutButton } from '@/src/pages/game-page/ui/kick-out/ui';
+import { KickOutButton } from '@/src/pages/game-page/ui/kick-out-button/ui';
 
 type PropsType = {
   player: Player;

@@ -5,72 +5,65 @@ import {
   ImageBackground,
   Dimensions,
   Image,
-  Animated,
   TouchableWithoutFeedback,
   ScrollView,
 } from 'react-native';
 import { ImageButton } from '@/src/shared/ui/image-button/ui';
-import { useRef } from 'react';
 import { Player } from '@/src/shared/lib/types/player';
 import { ScratchCard } from '@/src/shared/ui/scratch-card/ui';
 //@ts-ignore
 import ScratchImage from '@/assets/images/gamescreen/skresti.png';
 import { useImage } from '@shopify/react-native-skia';
 import { gameSettingsStore } from '@/src/entities/game';
+import Animated, { useAnimatedStyle, useSharedValue, withTiming, Easing } from 'react-native-reanimated';
 
 type PropsType = {
   isOpened: boolean;
-  isCompletelyHidden: boolean;
+  isHidden: boolean;
   setIsOpened: (value: boolean) => void;
   animationDuration: number;
-  nonKickedPlayers: Player[];
+  unKickedOutPlayers: Player[];
   ending: string;
 };
 
-export function RightSidebar({
-  isOpened,
-  setIsOpened,
-  isCompletelyHidden,
-  animationDuration,
-  nonKickedPlayers,
-  ending,
-}: PropsType) {
-  const sideBarClosedAtPx = 294;
-  const translateXAnim = useRef(new Animated.Value(sideBarClosedAtPx + 65)).current;
-  const scratchImage = useImage(ScratchImage);
+const sidebarClosedAtPx = 294;
+const sidebarOpenedAtPx = 5;
+const sidebarHiddenAtPx = sidebarClosedAtPx + 65;
 
+export function RightSidebar({
+                               isOpened,
+                               setIsOpened,
+                               isHidden,
+                               animationDuration,
+                               unKickedOutPlayers,
+                               ending,
+                             }: PropsType) {
+  const sideBarTranslateXAnim = useSharedValue(sidebarHiddenAtPx);
+  const animatedSidebarStyles = useAnimatedStyle(() => ({
+    transform: [{
+      translateX: withTiming(sideBarTranslateXAnim.value, {
+        duration: animationDuration,
+        easing: Easing.linear,
+      }),
+    }],
+  }));
+  const scratchImage = useImage(ScratchImage);
   if (!scratchImage) return null;
 
-  const closeSideBar = () => {
-    Animated.timing(translateXAnim, {
-      toValue: sideBarClosedAtPx,
-      duration: animationDuration,
-      useNativeDriver: true,
-    }).start();
-  };
-  const openSideBar = () => {
-    Animated.timing(translateXAnim, {
-      toValue: 5,
-      duration: animationDuration,
-      useNativeDriver: true,
-    }).start();
-  };
-  const hideSideBar = () => {
-    Animated.timing(translateXAnim, {
-      toValue: sideBarClosedAtPx + 65,
-      duration: animationDuration,
-      useNativeDriver: true,
-    }).start();
-  };
+  const closeSideBar = () => sideBarTranslateXAnim.value = sidebarClosedAtPx;
+  const openSideBar = () => sideBarTranslateXAnim.value = sidebarOpenedAtPx;
+  const hideSideBar = () => sideBarTranslateXAnim.value = sidebarHiddenAtPx;
 
-  if (isCompletelyHidden) {
+  if (isHidden) {
     hideSideBar();
+  } else if (isOpened) {
+    openSideBar();
   } else {
-    isOpened ? openSideBar() : closeSideBar();
+    closeSideBar();
   }
 
   return (
-    <Animated.View style={{ ...s.rightSideBarWrapper, transform: [{ translateX: translateXAnim }] }}>
+    <Animated.View style={[s.rightSideBarWrapper, animatedSidebarStyles]}>
       <View style={{ flex: 1, position: 'relative' }}>
         <ImageBackground resizeMode={'contain'} source={require('@/assets/images/gamescreen/right_final.png')}>
           <TouchableWithoutFeedback onPress={() => setIsOpened(!isOpened)}>
@@ -92,7 +85,7 @@ export function RightSidebar({
           <View style={s.rightSideBar}>
             <ScrollView style={s.leftPlayersWrapper}>
               <Text style={s.leftPlayers}>
-                {nonKickedPlayers.map((player: Player) => `${player.number} ${player.profession.name}\n`)}
+                {unKickedOutPlayers.map((player: Player) => `${player.number} ${player.profession.name}\n`)}
               </Text>
             </ScrollView>
             <View style={s.endingWrapper}>
@@ -136,8 +129,6 @@ export function RightSidebar({
                   </View>
                 </ImageBackground>
               </ScratchCard>
-              {/*<Image resizeMode={'contain'} style={s.ending}*/}
-              {/*       source={} />*/}
             </View>
           </View>
         </ImageBackground>
@@ -146,7 +137,7 @@ export function RightSidebar({
   );
 }
 
-const leftSideBarWidth = 370;
+const sideBarWidth = 370;
 const helpButtonSize = 36;
 const sideBarIconSize = 48;
 const s = StyleSheet.create({
@@ -210,11 +201,11 @@ const s = StyleSheet.create({
     top: -20,
     right: 0,
     zIndex: 200,
-    width: leftSideBarWidth, //TODO change naming
+    width: sideBarWidth,
     height: Dimensions.get('window').height,
   },
   rightSideBar: {
-    width: leftSideBarWidth - 54,
+    width: sideBarWidth - 54,
     marginLeft: 'auto',
     height: '100%',
   },

@@ -5,16 +5,13 @@ import {
   View,
   Text,
   Image,
-  Animated,
-  Touchable,
   TouchableWithoutFeedback,
   ScrollView,
 } from 'react-native';
-import { useEffect, useRef } from 'react';
 import { Apocalypse } from '@/src/shared/lib/types/apocalypse';
 import { Shelter } from '@/src/shared/lib/types/shelter';
-import { gameStore } from '@/src/entities/game';
 import { stayTimeMonthsToTitle } from '@/src/pages/game-page/ui/stay-time-months-to-title';
+import Animated, { useAnimatedStyle, useSharedValue, withTiming, Easing } from 'react-native-reanimated';
 
 type PropsType = {
   isOpened: boolean;
@@ -27,37 +24,36 @@ type PropsType = {
 };
 
 export function LeftSidebar({
-  isOpened,
-  setIsOpened,
-  apocalypse,
-  shelter,
-  isCompletelyHidden,
-  shelterCapacity,
-  animationDuration,
-}: PropsType) {
-  const translateXAnim = useRef(new Animated.Value(-(leftSideBarWidth - 78))).current;
+                              isOpened,
+                              setIsOpened,
+                              apocalypse,
+                              shelter,
+                              isCompletelyHidden,
+                              shelterCapacity,
+                              animationDuration,
+                            }: PropsType) {
+  const translateXAnim = useSharedValue<number>(-(leftSideBarWidth - 78));
 
   const closeSideBar = () => {
-    Animated.timing(translateXAnim, {
-      toValue: -(leftSideBarWidth - 78),
-      duration: animationDuration,
-      useNativeDriver: true,
-    }).start();
+    translateXAnim.value = -(leftSideBarWidth - 78);
+
   };
   const openSideBar = () => {
-    Animated.timing(translateXAnim, {
-      toValue: -7,
-      duration: animationDuration,
-      useNativeDriver: true,
-    }).start();
+    translateXAnim.value = -7;
+
   };
   const hideSideBar = () => {
-    Animated.timing(translateXAnim, {
-      toValue: -360,
-      duration: animationDuration,
-      useNativeDriver: true,
-    }).start();
+    translateXAnim.value = -360;
+
   };
+  const animatedStyles = useAnimatedStyle(() => ({
+    transform: [{
+      translateX: withTiming(translateXAnim.value, {
+        duration: animationDuration,
+        easing: Easing.linear,
+      }),
+    }],
+  }));
 
   if (isCompletelyHidden) {
     hideSideBar();
@@ -66,12 +62,12 @@ export function LeftSidebar({
   }
 
   return (
-    <Animated.View style={{ ...s.sideBarWrapper, transform: [{ translateX: translateXAnim }] }}>
+    <Animated.View style={[s.sideBarWrapper, animatedStyles]}>
       <ImageBackground
         style={{ width: '100%', height: '100%' }}
         resizeMode={'contain'}
         source={require('@/assets/images/gamescreen/left_final.png')}>
-        <Animated.View style={s.leftSideBar}>
+        <View style={s.leftSideBar}>
           <View
             style={{
               maxHeight: '100%',
@@ -146,14 +142,13 @@ export function LeftSidebar({
               source={require('@/assets/images/gamescreen/apoc_bunker_icon.png')}
             />
           </TouchableWithoutFeedback>
-        </Animated.View>
+        </View>
       </ImageBackground>
     </Animated.View>
   );
 }
 
 const leftSideBarWidth = 370;
-const shelterInfoHeight = 109;
 const shelterInfoLineHeight = 16;
 const s = StyleSheet.create({
   shelterMainImage: {
