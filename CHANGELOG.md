@@ -2,6 +2,6 @@
 
 - Fix unscrollable modal content in `InfoModal`
 - Fix sidebar overlap on android
-- Set app name and icon 
+- Set app name and icon
 - Add version and seed display on `InfoModal`
 - Add `createSeedStore`

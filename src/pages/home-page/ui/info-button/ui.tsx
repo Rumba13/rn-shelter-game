@@ -42,8 +42,10 @@ export function InfoButtonAndModal() {
               <ScrollView style={s.privacyPolicy}>
                 <TouchableOpacity activeOpacity={1}>
                   <Text style={s.privacyPolicyDescription}>
-                    Версия приложения: {CONSTANTS.APP_VERSION}{'\n'}
-                    Сид: {createSeedStore.seed}{'\n\n'}
+                    Версия приложения: {CONSTANTS.APP_VERSION}
+                    {'\n'}
+                    Сид: {createSeedStore.seed}
+                    {'\n\n'}
                     Дополнительная информация:{'\n\n'}
                     1. С 29 июня запретить продажу трюфеля физическим лицам. 2. Приравнять курс трюфеля к золоту(в
                     соотношении 1 трюфель = 0.98762 грамма чистого золота) 1. С 29 июня запретить продажу трюфеля

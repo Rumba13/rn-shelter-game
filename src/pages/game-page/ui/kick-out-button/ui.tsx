@@ -39,9 +39,9 @@ const s = StyleSheet.create({
     position: 'absolute',
     top: 0,
     right: 0,
-    height: 23,
+    height: 32,
     width: 80,
-    marginTop: 5,
+    marginTop: 0,
     marginRight: 15,
   },
   kickOutButton: {

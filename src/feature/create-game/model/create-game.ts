@@ -10,9 +10,7 @@ import { PseudoRandomGenerator } from '@/src/shared/lib/pseudo-random-generator'
 import { CreatePriceMap } from '@/src/feature/create-game/model/create-price-map';
 import { difficultyToTotalPrice } from '@/src/feature/create-game/model/difficulty-to-total-price';
 import { gameSettingsStore } from '@/src/entities/game';
-import {
-  characteristicBalanceToShuffleTimes,
-} from '@/src/feature/create-game/model/characteristic-balance-to-shuffle-times';
+import { characteristicBalanceToShuffleTimes } from '@/src/feature/create-game/model/characteristic-balance-to-shuffle-times';
 import { BalanceChances } from '@/src/shared/lib/types/balance-chances';
 import { playersBalanceToBalanceChances } from '@/src/feature/create-game/model/players-balance-to-balance-chances';
 import { SexualOrientation } from '@/src/shared/lib/types/sexual-orientation';
@@ -28,9 +26,10 @@ class CreateGameStore {
   private createPriceMap: CreatePriceMap;
   private usedProfessions: Profession[] = professions.slice();
 
-
   private selectRandomApocalypse(apocalypses: Apocalypse[]): Apocalypse {
-    return apocalypses[Math.trunc(this.pseudoRandomGenerator.generateFrom(createSeedStore.seed, 0, apocalypses.length))];
+    return apocalypses[
+      Math.trunc(this.pseudoRandomGenerator.generateFrom(createSeedStore.seed, 0, apocalypses.length))
+    ];
   }
 
   private selectRandomShelter(shelters: Shelter[]): Shelter {

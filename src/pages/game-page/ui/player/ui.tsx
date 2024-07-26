@@ -1,19 +1,12 @@
-import {
-  Animated,
-  ImageBackground,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-  ViewStyle,
-} from 'react-native';
+import { ImageBackground, ScrollView, StyleSheet, Text, View, ViewStyle } from 'react-native';
 import { PlayerCard } from '@/src/pages/game-page/ui/player-card/ui';
 import { Player } from '@/src/shared/lib/types/player';
-import { useRef, useState } from 'react';
+import {  useState } from 'react';
 import { CardsOpenedState } from '@/src/pages/game-page/model/cards-opened-state';
 import { observer } from 'mobx-react';
 import { CardDisplayStatus } from '@/src/shared/lib/types/card-display-status';
 import { KickOutButton } from '@/src/pages/game-page/ui/kick-out-button/ui';
+import Animated, { Easing, withTiming, useSharedValue, useAnimatedStyle } from 'react-native-reanimated';
 
 type PropsType = {
   player: Player;
@@ -23,41 +16,42 @@ type PropsType = {
   isObserver: boolean;
 };
 
+const kickOutImageHiddenAtPx = -170;
+const kickOutImageShowedAtPx = 0;
+const kickOutImageHiddenScale = 2;
+const kickOutImageShowedScale = 1;
+const animationDuration = 110;
+
 export const PlayerDetails = observer(({ player, playerNumber, style, isCurrentPlayer, isObserver }: PropsType) => {
-  //TODO rename to player card
   const allCardsDisplayStatus = isObserver || isCurrentPlayer ? CardDisplayStatus.Showed : CardDisplayStatus.Hidden;
   const [cardsOpenedState] = useState(new CardsOpenedState(allCardsDisplayStatus));
-  const kickOutImageHideAtPx = -400;
-  const kickOutImageMaxScale = 2;
-  const animationDuration = 300;
-  const kickOutImageTranslateYAnim = useRef(new Animated.Value(player.isKicked ? 0 : kickOutImageHideAtPx)).current;
-  const kickOutImageScaleAnim = useRef(new Animated.Value(player.isKicked ? 1 : kickOutImageMaxScale)).current;
+  const kickOutImageTranslateYAnim = useSharedValue(player.isKicked ? 0 : kickOutImageHiddenAtPx);
+  const kickOutImageScaleAnim = useSharedValue(player.isKicked ? 1 : kickOutImageHiddenScale);
 
   const showKickOutImage = () => {
-    Animated.timing(kickOutImageTranslateYAnim, {
-      toValue: 0,
-      duration: animationDuration,
-      useNativeDriver: true,
-    }).start();
-    Animated.timing(kickOutImageScaleAnim, {
-      toValue: 1,
-      duration: animationDuration,
-      useNativeDriver: true,
-    }).start();
+    kickOutImageTranslateYAnim.value = kickOutImageShowedAtPx;
+    kickOutImageScaleAnim.value = kickOutImageShowedScale;
   };
   const hideKickOutImage = () => {
-    Animated.timing(kickOutImageTranslateYAnim, {
-      toValue: kickOutImageHideAtPx,
-      duration: animationDuration,
-      useNativeDriver: true,
-    }).start();
-
-    Animated.timing(kickOutImageScaleAnim, {
-      toValue: kickOutImageMaxScale,
-      duration: animationDuration,
-      useNativeDriver: true,
-    }).start();
+    kickOutImageTranslateYAnim.value = kickOutImageHiddenAtPx;
+    kickOutImageScaleAnim.value = kickOutImageHiddenScale;
   };
+  const animatedStyles = useAnimatedStyle(() => ({
+    transform: [
+      {
+        translateY: withTiming(kickOutImageTranslateYAnim.value, {
+          duration: animationDuration,
+          easing: Easing.linear,
+        }),
+      },
+      {
+        scale: withTiming(kickOutImageScaleAnim.value, {
+          duration: animationDuration,
+          easing: Easing.linear,
+        }),
+      },
+    ],
+  }));
 
   return (
     <View style={{ ...s.mainContentWrapper, ...style }}>
@@ -72,20 +66,10 @@ export const PlayerDetails = observer(({ player, playerNumber, style, isCurrentP
           <Text numberOfLines={2} style={s.mainContentSubTitle}>
             {player.profession.name}
           </Text>
-          <KickOutButton
-            player={player}
-            onPress={() => {
-              if (player.isKicked) {
-                showKickOutImage();
-              } else hideKickOutImage();
-            }}
-          />
+          <KickOutButton player={player} onPress={() => (player.isKicked ? showKickOutImage() : hideKickOutImage())} />
 
           <Animated.Image
-            style={{
-              ...s.kickOutImage,
-              transform: [{ translateY: kickOutImageTranslateYAnim }, { scale: kickOutImageScaleAnim }],
-            }}
+            style={[s.kickOutImage, animatedStyles]}
             source={require('@/assets/images/gamescreen/negoden.png')}
             resizeMode={'contain'}
           />
@@ -100,7 +84,6 @@ export const PlayerDetails = observer(({ player, playerNumber, style, isCurrentP
                   canBePinned={isCurrentPlayer}
                   card={player.bioCharacteristics}
                   cardDisplayStatus={cardsOpenedState.bioCardDisplayStatus}
-                  // onPress={() =>  cardsOpenedState.setIsBioCardShowed(isCurrentPlayer? CardDisplayStatus.Pinned : CardDisplayStatus.Showed)}
                   onPress={() =>
                     cardsOpenedState.setIsBioCardShowed(
                       isCurrentPlayer

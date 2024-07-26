@@ -31,28 +31,30 @@ const sidebarOpenedAtPx = 5;
 const sidebarHiddenAtPx = sidebarClosedAtPx + 65;
 
 export function RightSidebar({
-                               isOpened,
-                               setIsOpened,
-                               isHidden,
-                               animationDuration,
-                               unKickedOutPlayers,
-                               ending,
-                             }: PropsType) {
+  isOpened,
+  setIsOpened,
+  isHidden,
+  animationDuration,
+  unKickedOutPlayers,
+  ending,
+}: PropsType) {
   const sideBarTranslateXAnim = useSharedValue(sidebarHiddenAtPx);
   const animatedSidebarStyles = useAnimatedStyle(() => ({
-    transform: [{
-      translateX: withTiming(sideBarTranslateXAnim.value, {
-        duration: animationDuration,
-        easing: Easing.linear,
-      }),
-    }],
+    transform: [
+      {
+        translateX: withTiming(sideBarTranslateXAnim.value, {
+          duration: animationDuration,
+          easing: Easing.linear,
+        }),
+      },
+    ],
   }));
   const scratchImage = useImage(ScratchImage);
   if (!scratchImage) return null;
 
-  const closeSideBar = () => sideBarTranslateXAnim.value = sidebarClosedAtPx;
-  const openSideBar = () => sideBarTranslateXAnim.value = sidebarOpenedAtPx;
-  const hideSideBar = () => sideBarTranslateXAnim.value = sidebarHiddenAtPx;
+  const closeSideBar = () => (sideBarTranslateXAnim.value = sidebarClosedAtPx);
+  const openSideBar = () => (sideBarTranslateXAnim.value = sidebarOpenedAtPx);
+  const hideSideBar = () => (sideBarTranslateXAnim.value = sidebarHiddenAtPx);
 
   if (isHidden) {
     hideSideBar();

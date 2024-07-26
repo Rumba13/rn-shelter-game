@@ -24,35 +24,34 @@ type PropsType = {
 };
 
 export function LeftSidebar({
-                              isOpened,
-                              setIsOpened,
-                              apocalypse,
-                              shelter,
-                              isCompletelyHidden,
-                              shelterCapacity,
-                              animationDuration,
-                            }: PropsType) {
+  isOpened,
+  setIsOpened,
+  apocalypse,
+  shelter,
+  isCompletelyHidden,
+  shelterCapacity,
+  animationDuration,
+}: PropsType) {
   const translateXAnim = useSharedValue<number>(-(leftSideBarWidth - 78));
 
   const closeSideBar = () => {
     translateXAnim.value = -(leftSideBarWidth - 78);
-
   };
   const openSideBar = () => {
     translateXAnim.value = -7;
-
   };
   const hideSideBar = () => {
     translateXAnim.value = -360;
-
   };
   const animatedStyles = useAnimatedStyle(() => ({
-    transform: [{
-      translateX: withTiming(translateXAnim.value, {
-        duration: animationDuration,
-        easing: Easing.linear,
-      }),
-    }],
+    transform: [
+      {
+        translateX: withTiming(translateXAnim.value, {
+          duration: animationDuration,
+          easing: Easing.linear,
+        }),
+      },
+    ],
   }));
 
   if (isCompletelyHidden) {
