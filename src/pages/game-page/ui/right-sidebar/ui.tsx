@@ -20,7 +20,8 @@ import Animated, {
   useSharedValue,
   withTiming,
   Easing,
-  EasingFunction, EasingFunctionFactory,
+  EasingFunction,
+  EasingFunctionFactory,
 } from 'react-native-reanimated';
 import { QuestionButton } from '@/src/shared/ui/question-button/ui';
 
@@ -31,8 +32,7 @@ type PropsType = {
   animationDuration: number;
   unKickedOutPlayers: Player[];
   ending: string;
-  animationEasing: EasingFunction | EasingFunctionFactory
-
+  animationEasing: EasingFunction | EasingFunctionFactory;
 };
 
 const sidebarClosedAtPx = 294;
@@ -40,14 +40,14 @@ const sidebarOpenedAtPx = 5;
 const sidebarHiddenAtPx = sidebarClosedAtPx + 65;
 
 export function RightSidebar({
-                               isOpened,
-                               setIsOpened,
-                               isHidden,
-                               animationDuration,
-                               unKickedOutPlayers,
-                               ending,
-                               animationEasing,
-                             }: PropsType) {
+  isOpened,
+  setIsOpened,
+  isHidden,
+  animationDuration,
+  unKickedOutPlayers,
+  ending,
+  animationEasing,
+}: PropsType) {
   const sideBarTranslateXAnim = useSharedValue(sidebarHiddenAtPx);
   const animatedSidebarStyles = useAnimatedStyle(() => ({
     transform: [
@@ -79,10 +79,7 @@ export function RightSidebar({
       <View style={{ flex: 1, position: 'relative' }}>
         <ImageBackground resizeMode={'contain'} source={require('@/assets/images/gamescreen/right_final.webp')}>
           <TouchableWithoutFeedback onPress={() => setIsOpened(!isOpened)}>
-            <View
-              style={s.rightSideBarIconWrapper}
-            >
-
+            <View style={s.rightSideBarIconWrapper}>
               <Image
                 style={s.rightSideBarIcon}
                 resizeMode={'contain'}

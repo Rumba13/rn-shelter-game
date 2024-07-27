@@ -1,7 +1,7 @@
 import { ImageBackground, ScrollView, StyleSheet, Text, View, ViewStyle } from 'react-native';
 import { PlayerCard } from '@/src/pages/game-page/ui/player-card/ui';
 import { Player } from '@/src/shared/lib/types/player';
-import {  useState } from 'react';
+import { useState } from 'react';
 import { CardsOpenedState } from '@/src/pages/game-page/model/cards-opened-state';
 import { observer } from 'mobx-react';
 import { CardDisplayStatus } from '@/src/shared/lib/types/card-display-status';

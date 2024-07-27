@@ -16,7 +16,8 @@ import Animated, {
   useSharedValue,
   withTiming,
   Easing,
-  EasingFunction, EasingFunctionFactory,
+  EasingFunction,
+  EasingFunctionFactory,
 } from 'react-native-reanimated';
 
 type PropsType = {
@@ -27,19 +28,19 @@ type PropsType = {
   shelter: Shelter;
   shelterCapacity: number;
   animationDuration: number;
-  animationEasing: EasingFunction | EasingFunctionFactory
+  animationEasing: EasingFunction | EasingFunctionFactory;
 };
 
 export function LeftSidebar({
-                              isOpened,
-                              setIsOpened,
-                              apocalypse,
-                              shelter,
-                              isCompletelyHidden,
-                              shelterCapacity,
-                              animationDuration,
-                              animationEasing,
-                            }: PropsType) {
+  isOpened,
+  setIsOpened,
+  apocalypse,
+  shelter,
+  isCompletelyHidden,
+  shelterCapacity,
+  animationDuration,
+  animationEasing,
+}: PropsType) {
   const translateXAnim = useSharedValue<number>(-(leftSideBarWidth - 78));
 
   const closeSideBar = () => {
@@ -143,10 +144,7 @@ export function LeftSidebar({
             </View>
           </View>
           <TouchableWithoutFeedback onPress={() => setIsOpened(!isOpened)}>
-            <View
-              style={s.leftSideBarDetailWrapper}
-            >
-
+            <View style={s.leftSideBarDetailWrapper}>
               <Image
                 style={s.leftSideBarDetail}
                 resizeMode={'contain'}

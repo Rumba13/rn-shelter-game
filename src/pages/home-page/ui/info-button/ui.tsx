@@ -36,7 +36,7 @@ export function InfoButtonAndModal() {
               style={s.closeButton}
               buttonImage={require('../../../../../assets/images/popup/close.webp')}
               shadowImage={require('../../../../../assets/images/popup/close_shadow.webp')}
-              options={{ xOffset: -3, yOffset: -3, xOffSetOnPress: -1, yOffsetOnPress:-1 }}
+              options={{ xOffset: -3, yOffset: -3, xOffSetOnPress: -1, yOffsetOnPress: -1 }}
               onPress={() => setIsModalOpened(false)}
             />
             <View>

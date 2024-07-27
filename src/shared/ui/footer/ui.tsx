@@ -19,7 +19,7 @@ export function Footer({ styles, onNextButtonPress }: PropsType) {
           buttonImage={require('@/assets/images/gamecreationscreen/next_button.webp')}
           shadowImage={require('@/assets/images/gamecreationscreen/next_button_shadow.webp')}
           style={s.button}
-          options={{xOffset:-3, yOffset: -3, xOffSetOnPress: -1, yOffsetOnPress: -1}}
+          options={{ xOffset: -3, yOffset: -3, xOffSetOnPress: -1, yOffsetOnPress: -1 }}
           height={65}
           width={165}
           onPress={onNextButtonPress}

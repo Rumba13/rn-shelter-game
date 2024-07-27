@@ -20,28 +20,26 @@ export function SelectPlayerPage({ navigation }: PropsType) {
   const [isTicketShowed, setIsTicketShowed] = useState<boolean>(false);
   const translateYAnim = useSharedValue(ticketHiddenAtPx);
 
-  const showTicket = () => translateYAnim.value = ticketShowedAtPx;
-  const hideTicket = () => translateYAnim.value = ticketHiddenAtPx;
+  const showTicket = () => (translateYAnim.value = ticketShowedAtPx);
+  const hideTicket = () => (translateYAnim.value = ticketHiddenAtPx);
 
   const animatedStyles = useAnimatedStyle(() => ({
-    transform: [{
-      translateY: withTiming(translateYAnim.value, {
-        easing: Easing.inOut(Easing.quad),
-        duration: 300,
-      }),
-    }, {
-      translateX: ticketWrapperWidth / 2,
-    }],
+    transform: [
+      {
+        translateY: withTiming(translateYAnim.value, {
+          easing: Easing.inOut(Easing.quad),
+          duration: 300,
+        }),
+      },
+      {
+        translateX: ticketWrapperWidth / 2,
+      },
+    ],
   }));
 
   return (
     <Animated.View style={s.selectPlayerPage}>
-      <Animated.View
-        style={[
-          s.ticketWrapper,
-          animatedStyles,
-        ]
-        }>
+      <Animated.View style={[s.ticketWrapper, animatedStyles]}>
         <Image
           resizeMode={'cover'}
           style={s.ticket}

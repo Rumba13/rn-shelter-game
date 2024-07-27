@@ -21,7 +21,6 @@ type PropsType = {};
 const sidebarAnimationDuration = 270;
 const sidebarAnimationEasing: EasingFunction | EasingFunctionFactory = Easing.out(Easing.sin);
 
-
 export const GamePage = observer(({}: PropsType) => {
   const selectPlayerSliderRef = React.createRef<ICarouselInstance>();
   const selectPlayersThumbsRef = React.createRef<ScrollView>();

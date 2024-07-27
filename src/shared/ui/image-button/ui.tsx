@@ -35,17 +35,17 @@ const defaultYOnClickOffset = -2;
 const animationDuration = 35;
 
 export function ImageButton({
-                              buttonImage,
-                              shadowImage,
-                              height,
-                              width,
-                              style,
-                              onPress,
-                              options,
-                              title,
-                              maxFontSizeMultiplier,
-                              styleTitle,
-                            }: PropsType) {
+  buttonImage,
+  shadowImage,
+  height,
+  width,
+  style,
+  onPress,
+  options,
+  title,
+  maxFontSizeMultiplier,
+  styleTitle,
+}: PropsType) {
   const buttonImageXOffSet = options?.xOffset || defaultXOffset;
   const buttonImageYOffSet = options?.yOffset || defaultYOffset;
   const buttonImageOnPressXOffSet = options?.xOffSetOnPress || defaultXOnClickOffset;
@@ -90,10 +90,7 @@ export function ImageButton({
     <Animated.View style={{ ...s.buttonContainer, ...style, maxHeight: height, width }}>
       <ImageBackground source={shadowImage} style={s.buttonShadow} resizeMode={'contain'}>
         <Animated.View style={[{ maxHeight: '100%' }, animatedStyles]}>
-          <ImageBackground
-            source={buttonImage}
-            style={[s.buttonImage]}
-            resizeMode={'contain'}>
+          <ImageBackground source={buttonImage} style={[s.buttonImage]} resizeMode={'contain'}>
             <Text style={styleTitle} maxFontSizeMultiplier={maxFontSizeMultiplier}>
               {title}
             </Text>
@@ -101,11 +98,7 @@ export function ImageButton({
         </Animated.View>
       </ImageBackground>
 
-      <TouchableWithoutFeedback
-        style={s.buttonWrapper}
-        onPress={onPress}
-        onPressIn={onPressIn}
-        onPressOut={onPressOut}>
+      <TouchableWithoutFeedback style={s.buttonWrapper} onPress={onPress} onPressIn={onPressIn} onPressOut={onPressOut}>
         <View style={s.button}></View>
       </TouchableWithoutFeedback>
     </Animated.View>
