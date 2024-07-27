@@ -58,7 +58,7 @@ export const PlayerDetails = observer(({ player, playerNumber, style, isCurrentP
       <ImageBackground
         style={s.mainContentBackground}
         resizeMode={'contain'}
-        source={require('@/assets/images/gamescreen/igra.webp')}>
+        source={require('@/assets/images/gamescreen/igra.png')}>
         <View style={s.mainContent}>
           <Text ellipsizeMode={'head'} numberOfLines={1} style={s.mainContentTitle}>
             Игрок {playerNumber}
@@ -70,13 +70,13 @@ export const PlayerDetails = observer(({ player, playerNumber, style, isCurrentP
 
           <Animated.Image
             style={[s.kickOutImage, animatedStyles]}
-            source={require('@/assets/images/gamescreen/negoden.webp')}
+            source={require('@/assets/images/gamescreen/negoden.png')}
             resizeMode={'contain'}
           />
 
           <View style={s.playerCardsWrapper}>
             <ImageBackground
-              source={require('@/assets/images/gamescreen/text_box.webp')}
+              source={require('@/assets/images/gamescreen/text_box.png')}
               resizeMode={'contain'}
               style={s.playerCardsBackground}>
               <ScrollView style={s.playerCards} showsVerticalScrollIndicator={false}>

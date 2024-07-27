@@ -16,7 +16,7 @@ export function GameOptionBase({ title, children, description }: PropsType) {
 
   return (
     <View style={s.gameOption}>
-      <ImageBackground source={require('@/assets/images/gamecreationscreen/create_back.webp')} resizeMode={'stretch'}>
+      <ImageBackground source={require('@/assets/images/gamecreationscreen/create_back.png')} resizeMode={'stretch'}>
 
         <View style={{ margin: 10 }}>
           <QuestionButton onPress={() => setIsCollapsed(!isCollapsed)} />
@@ -31,7 +31,7 @@ export function GameOptionBase({ title, children, description }: PropsType) {
             </View>
           </Collapsible>
         </View>
-        <Image style={s.separator} source={require('@/assets/images/gamecreationscreen/razdelenije.webp')} />
+        <Image style={s.separator} source={require('@/assets/images/gamecreationscreen/razdelenije.png')} />
       </ImageBackground>
     </View>
   );

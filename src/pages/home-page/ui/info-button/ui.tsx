@@ -23,19 +23,19 @@ export function InfoButtonAndModal() {
       <TouchableWithoutFeedback onPress={() => setIsModalOpened(!isModalOpened)}>
         <Image
           style={s.infoButtonIcon}
-          source={require('../../../../../assets/images/mainscreen/info_button.webp')}
+          source={require('../../../../../assets/images/mainscreen/info_button.png')}
           resizeMode={'contain'}
         />
       </TouchableWithoutFeedback>
       <OverlayModal isModalOpened={isModalOpened} setIsModalOpened={setIsModalOpened}>
         <ImageBackground
-          source={require('../../../../../assets/images/popup/additional_info_background.webp')}
+          source={require('../../../../../assets/images/popup/additional_info_background.png')}
           resizeMode={'contain'}>
           <View style={s.modalContent}>
             <ImageButton
               style={s.closeButton}
-              buttonImage={require('../../../../../assets/images/popup/close.webp')}
-              shadowImage={require('../../../../../assets/images/popup/close_shadow.webp')}
+              buttonImage={require('../../../../../assets/images/popup/close.png')}
+              shadowImage={require('../../../../../assets/images/popup/close_shadow.png')}
               options={{ xOffset: -3, yOffset: -3, xOffSetOnPress: -1, yOffsetOnPress: -1 }}
               onPress={() => setIsModalOpened(false)}
             />

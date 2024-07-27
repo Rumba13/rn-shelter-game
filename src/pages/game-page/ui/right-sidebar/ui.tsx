@@ -12,7 +12,7 @@ import { ImageButton } from '@/src/shared/ui/image-button/ui';
 import { Player } from '@/src/shared/lib/types/player';
 import { ScratchCard } from '@/src/shared/ui/scratch-card/ui';
 //@ts-ignore
-import ScratchImage from '@/assets/images/gamescreen/skresti.webp';
+import ScratchImage from '@/assets/images/gamescreen/skresti.png';
 import { useImage } from '@shopify/react-native-skia';
 import { gameSettingsStore } from '@/src/entities/game';
 import Animated, {
@@ -77,13 +77,13 @@ export function RightSidebar({
   return (
     <Animated.View style={[s.rightSideBarWrapper, animatedSidebarStyles]}>
       <View style={{ flex: 1, position: 'relative' }}>
-        <ImageBackground resizeMode={'contain'} source={require('@/assets/images/gamescreen/right_final.webp')}>
+        <ImageBackground resizeMode={'contain'} source={require('@/assets/images/gamescreen/right_final.png')}>
           <TouchableWithoutFeedback onPress={() => setIsOpened(!isOpened)}>
             <View style={s.rightSideBarIconWrapper}>
               <Image
                 style={s.rightSideBarIcon}
                 resizeMode={'contain'}
-                source={require('@/assets/images/gamescreen/end_icon.webp')}
+                source={require('@/assets/images/gamescreen/end_icon.png')}
               />
             </View>
           </TouchableWithoutFeedback>
@@ -99,12 +99,12 @@ export function RightSidebar({
             </ScrollView>
             <View style={s.endingWrapper}>
               <Image
-                source={require('@/assets/images/gamescreen/koncovka.webp')}
+                source={require('@/assets/images/gamescreen/koncovka.png')}
                 resizeMode={'contain'}
                 style={s.endingImage}
               />
               <ScratchCard style={s.ending} image={scratchImage}>
-                <ImageBackground resizeMode={'contain'} source={require('@/assets/images/gamescreen/text_frame.webp')}>
+                <ImageBackground resizeMode={'contain'} source={require('@/assets/images/gamescreen/text_frame.png')}>
                   <View style={{ height: '100%' }}>
                     <ScrollView style={s.endingDescriptionWrapper}>
                       {gameSettingsStore.settings.lotteryTicketMode ? (
@@ -118,17 +118,17 @@ export function RightSidebar({
                           <Image
                             style={s.scratchReward}
                             resizeMode={'contain'}
-                            source={require('@/assets/images/scratch-reward.webp')}
+                            source={require('@/assets/images/scratch-reward.jpg')}
                           />
                           <Image
                             style={s.scratchReward}
                             resizeMode={'contain'}
-                            source={require('@/assets/images/scratch-reward.webp')}
+                            source={require('@/assets/images/scratch-reward.jpg')}
                           />
                           <Image
                             style={s.scratchReward}
                             resizeMode={'contain'}
-                            source={require('@/assets/images/scratch-reward.webp')}
+                            source={require('@/assets/images/scratch-reward.jpg')}
                           />
                         </View>
                       ) : (

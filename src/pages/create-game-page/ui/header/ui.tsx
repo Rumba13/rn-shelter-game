@@ -12,13 +12,13 @@ export const Header = observer(() => {
   const { playersCount } = gameSettingsStore.settings;
 
   return (
-    <ImageBackground source={require('@/assets/images/gamecreationscreen/create_back.webp')} resizeMode={'stretch'}>
+    <ImageBackground source={require('@/assets/images/gamecreationscreen/create_back.png')} resizeMode={'stretch'}>
       <View style={s.contentHeader}>
 
 
         <View style={{ flexDirection: 'row', marginBottom: 15 }}>
           <View style={s.headerImageWrapper}>
-            <Image style={s.headerImage} source={require('@/assets/images/gamecreationscreen/igroki.webp')} />
+            <Image style={s.headerImage} source={require('@/assets/images/gamecreationscreen/igroki.png')} />
             <View style={{ ...s.playersCountWrapper, transform: [{ translateX: playersCount > 9 ? 20 : 32 }] }}>
               <Text style={s.playersCount}>{playersCount}</Text>
             </View>

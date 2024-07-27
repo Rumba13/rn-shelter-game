@@ -52,14 +52,14 @@ export function CheckBox({ style, setIsToggled, isToggled }: PropsType) {
           <ImageBackground
             style={{ height: '100%' }}
             resizeMode={'contain'}
-            source={require('@/assets/images/gamecreationscreen/perekluchatel.webp')}>
+            source={require('@/assets/images/gamecreationscreen/perekluchatel.png')}>
             <Animated.Image
               style={{
                 ...s.checkBoxImage,
                 transform: [{ translateY: -26 }, { translateX: translateXAnim }],
               }}
               resizeMode={'contain'}
-              source={require('@/assets/images/gamecreationscreen/perekluchatel_knopka.webp')}
+              source={require('@/assets/images/gamecreationscreen/perekluchatel_knopka.png')}
             />
           </ImageBackground>
         </Animated.View>

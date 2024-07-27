@@ -46,7 +46,7 @@ export const Range = observer(({ onValueChanged, options, max, min, defaultValue
           <Image
             style={s.sliderPicker}
             resizeMode={'contain'}
-            source={options?.pickerImage ?? require('@/assets/images/gamecreationscreen/picker.webp')}
+            source={options?.pickerImage ?? require('@/assets/images/gamecreationscreen/picker.png')}
           />
         </View>
       )}
@@ -54,7 +54,7 @@ export const Range = observer(({ onValueChanged, options, max, min, defaultValue
         <Image
           style={s.sliderTrack}
           resizeMode={'contain'}
-          source={options?.trackImage ?? require('@/assets/images/gamecreationscreen/picker_line.webp')}
+          source={options?.trackImage ?? require('@/assets/images/gamecreationscreen/picker_line.png')}
         />
       )}
       renderRailSelected={() => void 0}

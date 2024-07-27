@@ -6,14 +6,14 @@ export function Separator() {
       <Image
         style={s.separatorDetail}
         resizeMode={'contain'}
-        source={require('@/assets/images/gamecreationscreen/razdelenije_premium.webp')}
+        source={require('@/assets/images/gamecreationscreen/razdelenije_premium.png')}
       />
       <TouchableWithoutFeedback onPress={() => Alert.alert('Я такая толстая!')}>
         <Image
           borderRadius={20}
           style={s.separatorImage}
           resizeMode={'cover'}
-          source={require('@/assets/images/cook.webp')}
+          source={require('@/assets/images/cook.png')}
         />
       </TouchableWithoutFeedback>
     </View>

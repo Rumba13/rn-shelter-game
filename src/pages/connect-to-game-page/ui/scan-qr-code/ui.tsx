@@ -25,8 +25,8 @@ export function ScanQRCode({ navigation }: PropsType) {
             requestPermission();
             setIsCameraOpen(true);
           }}
-          buttonImage={require('@/assets/images/gameconnectionscreen/qr.webp')}
-          shadowImage={require('@/assets/images/gameconnectionscreen/qr_shadow.webp')}
+          buttonImage={require('@/assets/images/gameconnectionscreen/qr.png')}
+          shadowImage={require('@/assets/images/gameconnectionscreen/qr_shadow.png')}
         />
       )}
       {isCameraOpen && permission.granted && (

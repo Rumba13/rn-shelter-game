@@ -43,7 +43,7 @@ export function SelectPlayerPage({ navigation }: PropsType) {
         <Image
           resizeMode={'cover'}
           style={s.ticket}
-          source={require('@/assets/images/playerselectionscreen/ticket/ticket(gay_people).webp')}
+          source={require('@/assets/images/playerselectionscreen/ticket/ticket(gay_people).png')}
         />
         <View style={s.QRCodeWrapper}>
           <QRCode value={gameStore.createGameCode()} size={QRCodeSize} backgroundColor={'transparent'} />
@@ -51,8 +51,8 @@ export function SelectPlayerPage({ navigation }: PropsType) {
         <ImageButton
           width={100}
           style={s.ticketButton}
-          buttonImage={require('@/assets/images/playerselectionscreen/ticket/arrow_ticket.webp')}
-          shadowImage={require('@/assets/images/playerselectionscreen/ticket/arrow_ticket(shadow).webp')}
+          buttonImage={require('@/assets/images/playerselectionscreen/ticket/arrow_ticket.png')}
+          shadowImage={require('@/assets/images/playerselectionscreen/ticket/arrow_ticket(shadow).png')}
           onPress={() => {
             setIsTicketShowed(!isTicketShowed);
             isTicketShowed ? hideTicket() : showTicket();
@@ -68,7 +68,7 @@ export function SelectPlayerPage({ navigation }: PropsType) {
           <Image
             style={s.separator}
             resizeMode={'contain'}
-            source={require('@/assets/images/playerselectionscreen/main/decal_vibor_igroka.webp')}
+            source={require('@/assets/images/playerselectionscreen/main/decal_vibor_igroka.png')}
           />
         </View>
         <Text style={s.selectPlayerPageSubTitle} maxFontSizeMultiplier={1.25}>

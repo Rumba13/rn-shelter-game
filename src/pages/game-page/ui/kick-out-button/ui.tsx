@@ -20,13 +20,13 @@ export const KickOutButton = observer(({ player, onPress }: PropsType) => {
           <Image
             style={s.kickOutButton}
             resizeMode={'contain'}
-            source={require('@/assets/images/gamescreen/vernutj.webp')}
+            source={require('@/assets/images/gamescreen/vernutj.png')}
           />
         ) : (
           <Image
             style={s.kickOutButton}
             resizeMode={'contain'}
-            source={require('@/assets/images/gamescreen/vignatj.webp')}
+            source={require('@/assets/images/gamescreen/vignatj.png')}
           />
         )}
       </TouchableWithoutFeedback>

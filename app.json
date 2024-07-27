@@ -3,13 +3,13 @@
     "name": "Shelter",
     "slug": "rn-shelter-game",
     "entryPoint": "src/app/index",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "orientation": "portrait",
     "icon": "./assets/images/icon.jpg",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "splash": {
-      "image": "./assets/images/cook.webp",
+      "image": "./assets/images/cook.png",
       "resizeMode": "contain",
       "backgroundColor": "#000000"
     },
@@ -27,7 +27,7 @@
     "web": {
       "bundler": "metro",
       "output": "static",
-      "favicon": "./assets/images/icon.webp"
+      "favicon": "./assets/images/icon.jpg"
     },
     "plugins": [
       [

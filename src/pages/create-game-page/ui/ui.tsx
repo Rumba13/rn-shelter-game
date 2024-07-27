@@ -59,10 +59,10 @@ export const CreateGamePage = observer(({ navigation }: PropsType) => {
         <Image
           style={s.pageTitle}
           resizeMode={'contain'}
-          source={require('../../../../assets/images/gamecreationscreen/create.webp')}
+          source={require('../../../../assets/images/gamecreationscreen/create.png')}
         />
         <ImageBackground
-          source={require('../../../../assets/images/gamecreationscreen/frame_back.webp')}
+          source={require('../../../../assets/images/gamecreationscreen/frame_back.png')}
           resizeMode={'contain'}
           style={s.mainContentBackground}>
           <View style={s.mainContentWrapper}>
