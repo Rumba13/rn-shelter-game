@@ -1,45 +1,47 @@
-import { View, Text, StyleSheet, Image, ImageBackground, Dimensions, Animated, Alert } from 'react-native';
-import { useEffect, useRef, useState } from 'react';
+import { View, Text, StyleSheet, Image, Dimensions, Alert } from 'react-native';
+import { useState } from 'react';
 import { ImageButton } from '@/src/shared/ui/image-button/ui';
 import { Footer } from '@/src/shared/ui/footer/ui';
 import { SelectPlayerSlider } from '@/src/pages/select-player-page/ui/select-player-slider/ui';
 import QRCode from 'react-native-qrcode-svg';
 import { gameStore } from '@/src/entities/game';
+import Animated, { useAnimatedStyle, useSharedValue, withTiming, Easing } from 'react-native-reanimated';
+import { translate } from '@shopify/react-native-skia';
 
 type PropsType = {
   navigation: any;
 };
 
+const ticketHiddenAtPx = -200;
+const ticketShowedAtPx = 270;
+
 export function SelectPlayerPage({ navigation }: PropsType) {
   const [selectedPlayerIndex, setSelectedPlayerIndex] = useState<number>(0);
   const [isTicketShowed, setIsTicketShowed] = useState<boolean>(false);
+  const translateYAnim = useSharedValue(ticketHiddenAtPx);
 
-  const translateYAnim = useRef(new Animated.Value(-200)).current;
-  useEffect(() => {
-  }, [translateYAnim]);
+  const showTicket = () => translateYAnim.value = ticketShowedAtPx;
+  const hideTicket = () => translateYAnim.value = ticketHiddenAtPx;
 
-  const showTicket = () => {
-    Animated.timing(translateYAnim, {
-      toValue: 270,
-      duration: 400,
-      useNativeDriver: false,
-    }).start();
-  };
-  const hideTicket = () => {
-    Animated.timing(translateYAnim, {
-      toValue: -200,
-      duration: 400,
-      useNativeDriver: false,
-    }).start();
-  };
+  const animatedStyles = useAnimatedStyle(() => ({
+    transform: [{
+      translateY: withTiming(translateYAnim.value, {
+        easing: Easing.inOut(Easing.quad),
+        duration: 300,
+      }),
+    }, {
+      translateX: ticketWrapperWidth / 2,
+    }],
+  }));
 
   return (
     <Animated.View style={s.selectPlayerPage}>
       <Animated.View
-        style={{
-          ...s.ticketWrapper,
-          transform: [{ translateX: ticketWrapperWidth / 2 }, { translateY: translateYAnim }],
-        }}>
+        style={[
+          s.ticketWrapper,
+          animatedStyles,
+        ]
+        }>
         <Image
           resizeMode={'cover'}
           style={s.ticket}
