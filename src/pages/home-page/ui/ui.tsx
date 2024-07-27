@@ -11,14 +11,14 @@ export const HomePage = ({ navigation }: PropsType) => {
   return (
     <View style={s.homePage}>
       <View style={s.mainContent}>
-        <Image style={s.logo} source={require('../../../../assets/images/mainscreen/logo.png')} />
+        <Image style={s.logo} source={require('../../../../assets/images/mainscreen/logo.webp')} />
         <ImageBackground
           style={s.buttons}
           resizeMode="stretch"
-          source={require('../../../../assets/images/mainscreen/black_box_main_menu.png')}>
+          source={require('../../../../assets/images/mainscreen/black_box_main_menu.webp')}>
           <ImageButton
-            buttonImage={require('../../../../assets/images/mainscreen/connect_button.png')}
-            shadowImage={require('../../../../assets/images/mainscreen/button_shadow_2.png')}
+            buttonImage={require('../../../../assets/images/mainscreen/connect_button.webp')}
+            shadowImage={require('../../../../assets/images/mainscreen/button_shadow_2.webp')}
             height={130}
             width={'100%'}
             style={{ marginBottom: 5 }}
@@ -26,23 +26,23 @@ export const HomePage = ({ navigation }: PropsType) => {
           />
 
           <ImageButton
-            buttonImage={require('../../../../assets/images/mainscreen/howtoplay_button.png')}
-            shadowImage={require('../../../../assets/images/mainscreen/button_shadow_1.png')}
+            buttonImage={require('../../../../assets/images/mainscreen/howtoplay_button.webp')}
+            shadowImage={require('../../../../assets/images/mainscreen/button_shadow_1.webp')}
             height={130}
             width={130}
           />
 
           <ImageButton
-            buttonImage={require('../../../../assets/images/mainscreen/create_button.png')}
-            shadowImage={require('../../../../assets/images/mainscreen/button_shadow_1.png')}
+            buttonImage={require('../../../../assets/images/mainscreen/create_button.webp')}
+            shadowImage={require('../../../../assets/images/mainscreen/button_shadow_1.webp')}
             height={130}
             width={130}
             onPress={() => navigation.navigate('create-game-page')}
           />
 
           <ImageButton
-            buttonImage={require('../../../../assets/images/mainscreen/premium_button3.png')}
-            shadowImage={require('../../../../assets/images/mainscreen/button_shadow_2.png')}
+            buttonImage={require('../../../../assets/images/mainscreen/premium_button3.webp')}
+            shadowImage={require('../../../../assets/images/mainscreen/button_shadow_2.webp')}
             height={130}
             width={'100%'}
             style={{ marginTop: 5 }}
@@ -59,8 +59,8 @@ export const HomePage = ({ navigation }: PropsType) => {
           }}>
           <InfoButtonAndModal />
           <ImageButton
-            buttonImage={require('../../../../assets/images/mainscreen/zakazat_igru.png')}
-            shadowImage={require('../../../../assets/images/mainscreen/zakazat_igru_shadow.png')}
+            buttonImage={require('../../../../assets/images/mainscreen/zakazat_igru.webp')}
+            shadowImage={require('../../../../assets/images/mainscreen/zakazat_igru_shadow.webp')}
             height={'auto'}
             width={210}
             style={{ marginLeft: 10 }}

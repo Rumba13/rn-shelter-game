@@ -9,7 +9,7 @@
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "splash": {
-      "image": "./assets/images/cook.png",
+      "image": "./assets/images/cook.webp",
       "resizeMode": "contain",
       "backgroundColor": "#000000"
     },
@@ -27,7 +27,7 @@
     "web": {
       "bundler": "metro",
       "output": "static",
-      "favicon": "./assets/images/icon.jpg"
+      "favicon": "./assets/images/icon.webp"
     },
     "plugins": [
       [

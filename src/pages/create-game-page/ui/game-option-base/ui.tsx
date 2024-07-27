@@ -30,7 +30,7 @@ export function GameOptionBase({ title, children, description }: PropsType) {
           </View>
         </Collapsible>
       </View>
-      <Image style={s.separator} source={require('@/assets/images/gamecreationscreen/razdelenije.png')} />
+      <Image style={s.separator} source={require('@/assets/images/gamecreationscreen/razdelenije.webp')} />
     </View>
   );
 }

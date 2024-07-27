@@ -84,7 +84,7 @@ export const GamePage = observer(({}: PropsType) => {
       </View>
 
       <View style={{ width: 290, marginHorizontal: 'auto' }}>
-        <ImageBackground resizeMode={'stretch'} source={require('@/assets/images/gamescreen/box.png')}>
+        <ImageBackground resizeMode={'stretch'} source={require('@/assets/images/gamescreen/box.webp')}>
           <ScrollView
             showsHorizontalScrollIndicator={false}
             onScroll={e => setThumbsScrollPositionX(Math.round(e.nativeEvent.contentOffset.x))}
@@ -108,7 +108,7 @@ export const GamePage = observer(({}: PropsType) => {
                       selectPlayerSliderRef.current?.scrollTo({ index, animated: true });
                     }}>
                     {isThumbSelected ? (
-                      <ImageBackground resizeMode={'cover'} source={require('@/assets/images/gamescreen/frame.png')}>
+                      <ImageBackground resizeMode={'cover'} source={require('@/assets/images/gamescreen/frame.webp')}>
                         <Text
                           style={{
                             ...s.selectPlayerThumbTitle,

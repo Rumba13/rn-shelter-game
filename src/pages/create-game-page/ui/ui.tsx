@@ -53,10 +53,10 @@ export const CreateGamePage = observer(({ navigation }: PropsType) => {
         <Image
           style={s.pageTitle}
           resizeMode={'contain'}
-          source={require('../../../../assets/images/gamecreationscreen/create.png')}
+          source={require('../../../../assets/images/gamecreationscreen/create.webp')}
         />
         <ImageBackground
-          source={require('../../../../assets/images/gamecreationscreen/frame_back.png')}
+          source={require('../../../../assets/images/gamecreationscreen/frame_back.webp')}
           resizeMode={'contain'}
           style={s.mainContentBackground}>
           <View style={s.mainContentWrapper}>
@@ -64,7 +64,7 @@ export const CreateGamePage = observer(({ navigation }: PropsType) => {
               <ScrollView decelerationRate={0.985}>
                 <ImageBackground
                   resizeMode={'repeat'}
-                  source={require('@/assets/images/gamecreationscreen/create_back.png')}>
+                  source={require('@/assets/images/gamecreationscreen/create_back.webp')}>
                   <Header />
                   <Separator />
                   <GameOptionCheckbox

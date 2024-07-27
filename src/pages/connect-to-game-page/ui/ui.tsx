@@ -16,7 +16,7 @@ export function ConnectedToGamePage({ navigation }: PropsType) {
         <Image
           style={s.headerImage}
           resizeMode={'contain'}
-          source={require('@/assets/images/gameconnectionscreen/connect.png')}
+          source={require('@/assets/images/gameconnectionscreen/connect.webp')}
         />
       </View>
       <View style={{ maxWidth: 290, marginHorizontal: 'auto', flex: 1, width: '100%' }}>

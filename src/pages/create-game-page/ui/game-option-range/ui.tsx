@@ -28,7 +28,7 @@ export function GameOptionRange({
     <GameOptionBase title={title} descriptionHeight={descriptionHeight} description={description}>
       <View style={s.selectedTitleWrapper}>
         <ImageBackground
-          source={require('@/assets/images/gamecreationscreen/create_text_frame.png')}
+          source={require('@/assets/images/gamecreationscreen/create_text_frame.webp')}
           resizeMode={'stretch'}>
           <Text style={s.selectedTitle}>{selectedTitle}</Text>
         </ImageBackground>
@@ -39,8 +39,8 @@ export function GameOptionRange({
         max={max}
         min={min}
         options={{
-          trackImage: require('@/assets/images/gamecreationscreen/picker_line_2_gradient.png'),
-          pickerImage: require('@/assets/images/gamecreationscreen/picker1.png'),
+          trackImage: require('@/assets/images/gamecreationscreen/picker_line_2_gradient.webp'),
+          pickerImage: require('@/assets/images/gamecreationscreen/picker1.webp'),
         }}
       />
     </GameOptionBase>

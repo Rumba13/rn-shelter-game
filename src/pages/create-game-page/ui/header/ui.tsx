@@ -14,7 +14,7 @@ export const Header = observer(() => {
     <View style={s.contentHeader}>
       <View style={{ flexDirection: 'row', marginBottom: 15 }}>
         <View style={s.headerImageWrapper}>
-          <Image style={s.headerImage} source={require('@/assets/images/gamecreationscreen/igroki.png')} />
+          <Image style={s.headerImage} source={require('@/assets/images/gamecreationscreen/igroki.webp')} />
           <View style={{ ...s.playersCountWrapper, transform: [{ translateX: playersCount > 9 ? 20 : 32 }] }}>
             <Text style={s.playersCount}>{playersCount}</Text>
           </View>

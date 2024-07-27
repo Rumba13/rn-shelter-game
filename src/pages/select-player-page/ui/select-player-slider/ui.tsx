@@ -15,7 +15,7 @@ export function SelectPlayerSlider({ selectedPlayerIndex, setSelectedPlayerIndex
     <Image
       style={s.sliderObserver}
       resizeMode={'contain'}
-      source={require('@/assets/images/playerselectionscreen/main/eye_icon.png')}
+      source={require('@/assets/images/playerselectionscreen/main/eye_icon.webp')}
     />
   );
   const sliderItems = [observer, ...players];
@@ -25,7 +25,7 @@ export function SelectPlayerSlider({ selectedPlayerIndex, setSelectedPlayerIndex
       <View style={s.sliderWrapper}>
         <ImageBackground
           resizeMode={'contain'}
-          source={require('@/assets/images/playerselectionscreen/main/vibor_igroka.png')}>
+          source={require('@/assets/images/playerselectionscreen/main/vibor_igroka.webp')}>
           <View style={{ width: '100%', height: '100%' }}>
             <Carousel
               style={s.slider}
@@ -74,8 +74,8 @@ export function SelectPlayerSlider({ selectedPlayerIndex, setSelectedPlayerIndex
       </View>
       <ImageButton
         style={s.shareButton}
-        buttonImage={require('@/assets/images/playerselectionscreen/main/podelitsa_pers_knopka.png')}
-        shadowImage={require('@/assets/images/playerselectionscreen/main/podelitsa_pers_knopka_shadow.png')}
+        buttonImage={require('@/assets/images/playerselectionscreen/main/podelitsa_pers_knopka.webp')}
+        shadowImage={require('@/assets/images/playerselectionscreen/main/podelitsa_pers_knopka_shadow.webp')}
         options={{ xOffset: -3, yOffset: -4, xOffSetOnPress: -1, yOffsetOnPress: -2 }}
         title={selectedPlayerIndex === 0 ? 'Поделиться игрой' : 'Поделиться персонажем'}
         styleTitle={{

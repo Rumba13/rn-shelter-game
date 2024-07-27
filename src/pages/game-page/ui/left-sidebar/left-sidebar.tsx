@@ -73,7 +73,7 @@ export function LeftSidebar({
       <ImageBackground
         style={{ width: '100%', height: '100%' }}
         resizeMode={'contain'}
-        source={require('@/assets/images/gamescreen/left_final.png')}>
+        source={require('@/assets/images/gamescreen/left_final.webp')}>
         <View style={s.leftSideBar}>
           <View
             style={{
@@ -89,10 +89,10 @@ export function LeftSidebar({
               <Image
                 style={s.apocalypseMainImage}
                 resizeMode={'contain'}
-                source={require('@/assets/images/gamescreen/apok.png')}
+                source={require('@/assets/images/gamescreen/apok.webp')}
               />
 
-              <ImageBackground resizeMode={'contain'} source={require('@/assets/images/gamescreen/text_frame.png')}>
+              <ImageBackground resizeMode={'contain'} source={require('@/assets/images/gamescreen/text_frame.webp')}>
                 <View style={{ height: 190 }}>
                   <ScrollView style={s.apocalypseDescriptionWrapper}>
                     <Text style={s.apocalypseDescription}>{apocalypse.description}</Text>
@@ -105,10 +105,10 @@ export function LeftSidebar({
               <Image
                 style={s.shelterMainImage}
                 resizeMode={'contain'}
-                source={require('@/assets/images/gamescreen/bunker.png')}
+                source={require('@/assets/images/gamescreen/bunker.webp')}
               />
 
-              <ImageBackground resizeMode={'contain'} source={require('@/assets/images/gamescreen/shelter_info.png')}>
+              <ImageBackground resizeMode={'contain'} source={require('@/assets/images/gamescreen/shelter_info.webp')}>
                 <View style={s.shelterInfo}>
                   <Text style={s.shelterName}>{shelter.name}</Text>
                   <Text style={s.shelterSpace}>
@@ -123,7 +123,7 @@ export function LeftSidebar({
                 </View>
               </ImageBackground>
 
-              <ImageBackground resizeMode={'contain'} source={require('@/assets/images/gamescreen/text_frame.png')}>
+              <ImageBackground resizeMode={'contain'} source={require('@/assets/images/gamescreen/text_frame.webp')}>
                 <View style={{ height: 190 }}>
                   <ScrollView style={s.shelterDescriptionWrapper}>
                     <Text style={s.shelterDescription}>
@@ -150,7 +150,7 @@ export function LeftSidebar({
               <Image
                 style={s.leftSideBarDetail}
                 resizeMode={'contain'}
-                source={require('@/assets/images/gamescreen/apoc_bunker_icon.png')}
+                source={require('@/assets/images/gamescreen/apoc_bunker_icon.webp')}
               />
             </View>
           </TouchableWithoutFeedback>
