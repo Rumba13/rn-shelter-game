@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { LayoutChangeEvent, View, Text, StyleProp, ViewStyle, StyleSheet } from 'react-native';
-import Animated, { useAnimatedStyle, useSharedValue, withTiming, Easing } from 'react-native-reanimated';
+import { LayoutChangeEvent, View, StyleProp, ViewStyle } from 'react-native';
+import Animated, { useAnimatedStyle, withTiming, Easing } from 'react-native-reanimated';
 
 type PropsType = {
   children: React.ReactNode;

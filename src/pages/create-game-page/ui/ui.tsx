@@ -25,10 +25,16 @@ import {
   characteristicCards,
   characteristicCardsList,
 } from '@/src/entities/characteristic-card/model/characteristic-card';
-import { renderCharacteristicCardSelectedText } from '@/src/pages/create-game-page/ui/render-characteristic-card-selected-text';
+import {
+  renderCharacteristicCardSelectedText,
+} from '@/src/pages/create-game-page/ui/render-characteristic-card-selected-text';
 import { CharacteristicCardsList } from '@/src/shared/lib/types/characteristic-cards-list';
-import { characteristicCardNameToCard } from '@/src/entities/characteristic-card/model/characteristic-card-name-to-card';
-import { characteristicBalanceValueToTitle } from '@/src/pages/create-game-page/ui/characteristic-balance-value-to-title';
+import {
+  characteristicCardNameToCard,
+} from '@/src/entities/characteristic-card/model/characteristic-card-name-to-card';
+import {
+  characteristicBalanceValueToTitle,
+} from '@/src/pages/create-game-page/ui/characteristic-balance-value-to-title';
 import { createGameStore } from '@/src/feature/create-game/model/create-game';
 import { gameStore } from '@/src/entities/game/model/game';
 import { OverlayModal } from '@/src/shared/ui/overlay-modal/ui';
@@ -62,143 +68,139 @@ export const CreateGamePage = observer(({ navigation }: PropsType) => {
           <View style={s.mainContentWrapper}>
             <SafeAreaView style={s.mainContent}>
               <ScrollView decelerationRate={0.985}>
-                <ImageBackground
-                  resizeMode={'repeat'}
-                  source={require('@/assets/images/gamecreationscreen/create_back.webp')}>
-                  <Header />
-                  <Separator />
-                  <GameOptionCheckbox
-                    title={`Проклятые деревенщины`}
-                    descriptionHeight={100}
-                    description={'Параметр определяет будут ли задействованы деревенщины'}
-                    onValueChange={isEnable =>
-                      gameSettingsStore.setSettings(options => (options.hillbillyMode = isEnable))
-                    }
-                  />
-                  <GameOptionCheckbox
-                    title={'Режим лотереи'}
-                    descriptionHeight={80}
-                    description={'Трудно объяснить, что этот режим делает...'}
-                    onValueChange={value =>
-                      gameSettingsStore.setSettings(settings => (settings.lotteryTicketMode = value))
-                    }
-                  />
-                  <GameOptionSelect
-                    descriptionHeight={100}
-                    description={'Параметр определяет кто пидр, кто не пидр и всё такое'}
-                    title={'Сексуальная Ориентация'}
-                    items={[
-                      SexualOrientation.Random,
-                      SexualOrientation.AllStraight,
-                      SexualOrientation.AllGays,
-                      SexualOrientation.Disable,
-                    ].map(value => ({
-                      value,
-                      key: value,
-                      label: sexualOrientationValueToTitle(value),
-                    }))}
-                    onValueChange={orientation =>
-                      gameSettingsStore.setSettings(options => (options.sexualOrientation = orientation))
-                    }
-                  />
-                  <GameOptionRange
-                    title={'Уровень сложности'}
-                    defaultValue={settings.difficulty}
-                    description={'Параметр определяет насколько персонажи полезны и безопасны в среднем'}
-                    descriptionHeight={100}
-                    selectedTitle={difficultyValueToTitle(gameSettingsStore.settings.difficulty)}
-                    onValueChanged={difficulty =>
-                      gameSettingsStore.setSettings(options => (options.difficulty = difficulty))
-                    }
-                    min={gameSettingsStore.settingsLimits.difficulty.min}
-                    max={gameSettingsStore.settingsLimits.difficulty.max}
-                  />
-                  <GameOptionRange
-                    title={'Баланс Персонажей'}
-                    descriptionHeight={100}
-                    description={'Параметр определяет насколько различается полезность персонажей'}
-                    onValueChanged={characterBalance =>
-                      gameSettingsStore.setSettings(options => (options.balance = characterBalance))
-                    }
-                    selectedTitle={characterBalanceValueToTitle(settings.balance)}
-                    min={gameSettingsStore.settingsLimits.balance.min}
-                    max={gameSettingsStore.settingsLimits.balance.max}
-                    defaultValue={settings.balance}
-                  />
-                  <GameOptionRange
-                    title={'Баланс характеристик'}
-                    descriptionHeight={70}
-                    description={'Параметр определяет разброс характеристик'}
-                    onValueChanged={characteristicBalance =>
-                      gameSettingsStore.setSettings(
-                        settings => (settings.characteristicBalance = characteristicBalance),
-                      )
-                    }
-                    selectedTitle={characteristicBalanceValueToTitle(settings.characteristicBalance)}
-                    min={gameSettingsStore.settingsLimits.characteristicBalance.min}
-                    max={gameSettingsStore.settingsLimits.characteristicBalance.max}
-                    defaultValue={settings.characteristicBalance}
-                  />
 
-                  <GameOptionList<ShelterCategoryList>
-                    title={'Список бункеров'}
-                    descriptionHeight={100}
-                    description={'Выберите из списка, с какими бункерами вы хотите играть'}
-                    renderSelectedText={renderBunkerSelectedText}
-                    items={sheltersCategories}
-                    uniqueKey={'name'}
-                    subKey={'children'}
-                    displayKey={'name'}
-                    selectText={'Выбрать бункер'}
-                    selectedByDefault={['Тора Бора']}
-                    searchPlaceholderText={'Искать Бункеры'}
-                    onValueChange={shelterNames =>
-                      gameSettingsStore.setSettings(options => {
-                        options.shelters = shelterNames.map(shelterName => shelterNameToShelter(shelterName));
-                      })
-                    }
-                  />
-                  <GameOptionList<ApocalypseCategories>
-                    title={'Список апокалипсисов'}
-                    descriptionHeight={100}
-                    description={'Выберите из списка, с какими апокалипсисами вы хотите играть'}
-                    renderSelectedText={renderApocalypseSelectedText}
-                    items={apocalypsesCategories}
-                    uniqueKey={'name'}
-                    displayKey={'name'}
-                    selectedByDefault={['Гигантские Змеи']}
-                    selectText={'Выбрать Апокалипсис'}
-                    searchPlaceholderText={'Искать Апокалипсисы'}
-                    onValueChange={apocalypsesNames =>
-                      gameSettingsStore.setSettings(options => {
-                        options.apocalypses = apocalypsesNames.map(apocalypseName =>
-                          apocalypseNameToApocalypse(apocalypseName),
-                        );
-                      })
-                    }
-                    subKey={'children'}
-                  />
-                  <GameOptionList<CharacteristicCardsList>
-                    title={'Список используемых карточек'}
-                    descriptionHeight={100}
-                    description={'Выберите из списка, с какими карточками вы хотите играть'}
-                    renderSelectedText={renderCharacteristicCardSelectedText}
-                    items={characteristicCardsList}
-                    uniqueKey={'name'}
-                    displayKey={'name'}
-                    selectText={'Выбрать карточки'}
-                    subKey={'children'}
-                    selectedByDefault={cardKitToCards(characteristicCards).map(card => card.name)}
-                    searchPlaceholderText={'Искать карточки'}
-                    onValueChange={characteristicCardsNames =>
-                      gameSettingsStore.setSettings(options => {
-                        options.cardsKit = characteristicCardsNames.map(cardName =>
-                          characteristicCardNameToCard(cardName),
-                        );
-                      })
-                    }
-                  />
-                </ImageBackground>
+                <Header />
+                <GameOptionCheckbox
+                  title={`Проклятые деревенщины`}
+                  descriptionHeight={100}
+                  description={'Параметр определяет будут ли задействованы деревенщины'}
+                  onValueChange={isEnable =>
+                    gameSettingsStore.setSettings(options => (options.hillbillyMode = isEnable))
+                  }
+                />
+                <GameOptionCheckbox
+                  title={'Режим лотереи'}
+                  descriptionHeight={80}
+                  description={'Трудно объяснить, что этот режим делает...'}
+                  onValueChange={value =>
+                    gameSettingsStore.setSettings(settings => (settings.lotteryTicketMode = value))
+                  }
+                />
+                <GameOptionSelect
+                  descriptionHeight={100}
+                  description={'Параметр определяет кто пидр, кто не пидр и всё такое'}
+                  title={'Сексуальная Ориентация'}
+                  items={[
+                    SexualOrientation.Random,
+                    SexualOrientation.AllStraight,
+                    SexualOrientation.AllGays,
+                    SexualOrientation.Disable,
+                  ].map(value => ({
+                    value,
+                    key: value,
+                    label: sexualOrientationValueToTitle(value),
+                  }))}
+                  onValueChange={orientation =>
+                    gameSettingsStore.setSettings(options => (options.sexualOrientation = orientation))
+                  }
+                />
+                <GameOptionRange
+                  title={'Уровень сложности'}
+                  defaultValue={settings.difficulty}
+                  description={'Параметр определяет насколько персонажи полезны и безопасны в среднем'}
+                  descriptionHeight={100}
+                  selectedTitle={difficultyValueToTitle(gameSettingsStore.settings.difficulty)}
+                  onValueChanged={difficulty =>
+                    gameSettingsStore.setSettings(options => (options.difficulty = difficulty))
+                  }
+                  min={gameSettingsStore.settingsLimits.difficulty.min}
+                  max={gameSettingsStore.settingsLimits.difficulty.max}
+                />
+                <GameOptionRange
+                  title={'Баланс Персонажей'}
+                  descriptionHeight={100}
+                  description={'Параметр определяет насколько различается полезность персонажей'}
+                  onValueChanged={characterBalance =>
+                    gameSettingsStore.setSettings(options => (options.balance = characterBalance))
+                  }
+                  selectedTitle={characterBalanceValueToTitle(settings.balance)}
+                  min={gameSettingsStore.settingsLimits.balance.min}
+                  max={gameSettingsStore.settingsLimits.balance.max}
+                  defaultValue={settings.balance}
+                />
+                <GameOptionRange
+                  title={'Баланс характеристик'}
+                  descriptionHeight={70}
+                  description={'Параметр определяет разброс характеристик'}
+                  onValueChanged={characteristicBalance =>
+                    gameSettingsStore.setSettings(
+                      settings => (settings.characteristicBalance = characteristicBalance),
+                    )
+                  }
+                  selectedTitle={characteristicBalanceValueToTitle(settings.characteristicBalance)}
+                  min={gameSettingsStore.settingsLimits.characteristicBalance.min}
+                  max={gameSettingsStore.settingsLimits.characteristicBalance.max}
+                  defaultValue={settings.characteristicBalance}
+                />
+
+                <GameOptionList<ShelterCategoryList>
+                  title={'Список бункеров'}
+                  descriptionHeight={100}
+                  description={'Выберите из списка, с какими бункерами вы хотите играть'}
+                  renderSelectedText={renderBunkerSelectedText}
+                  items={sheltersCategories}
+                  uniqueKey={'name'}
+                  subKey={'children'}
+                  displayKey={'name'}
+                  selectText={'Выбрать бункер'}
+                  selectedByDefault={['Тора Бора']}
+                  searchPlaceholderText={'Искать Бункеры'}
+                  onValueChange={shelterNames =>
+                    gameSettingsStore.setSettings(options => {
+                      options.shelters = shelterNames.map(shelterName => shelterNameToShelter(shelterName));
+                    })
+                  }
+                />
+                <GameOptionList<ApocalypseCategories>
+                  title={'Список апокалипсисов'}
+                  descriptionHeight={100}
+                  description={'Выберите из списка, с какими апокалипсисами вы хотите играть'}
+                  renderSelectedText={renderApocalypseSelectedText}
+                  items={apocalypsesCategories}
+                  uniqueKey={'name'}
+                  displayKey={'name'}
+                  selectedByDefault={['Гигантские Змеи']}
+                  selectText={'Выбрать Апокалипсис'}
+                  searchPlaceholderText={'Искать Апокалипсисы'}
+                  onValueChange={apocalypsesNames =>
+                    gameSettingsStore.setSettings(options => {
+                      options.apocalypses = apocalypsesNames.map(apocalypseName =>
+                        apocalypseNameToApocalypse(apocalypseName),
+                      );
+                    })
+                  }
+                  subKey={'children'}
+                />
+                <GameOptionList<CharacteristicCardsList>
+                  title={'Список используемых карточек'}
+                  descriptionHeight={100}
+                  description={'Выберите из списка, с какими карточками вы хотите играть'}
+                  renderSelectedText={renderCharacteristicCardSelectedText}
+                  items={characteristicCardsList}
+                  uniqueKey={'name'}
+                  displayKey={'name'}
+                  selectText={'Выбрать карточки'}
+                  subKey={'children'}
+                  selectedByDefault={cardKitToCards(characteristicCards).map(card => card.name)}
+                  searchPlaceholderText={'Искать карточки'}
+                  onValueChange={characteristicCardsNames =>
+                    gameSettingsStore.setSettings(options => {
+                      options.cardsKit = characteristicCardsNames.map(cardName =>
+                        characteristicCardNameToCard(cardName),
+                      );
+                    })
+                  }
+                />
               </ScrollView>
             </SafeAreaView>
           </View>

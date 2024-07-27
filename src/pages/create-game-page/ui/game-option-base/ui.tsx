@@ -1,4 +1,4 @@
-import { Image, Text, View } from 'react-native';
+import { Image, ImageBackground, Text, View } from 'react-native';
 import { useEffect, useState } from 'react';
 import { QuestionButton } from '@/src/shared/ui/question-button/ui';
 import { Collapsible } from '@/src/shared/ui/collapsible/ui';
@@ -16,20 +16,23 @@ export function GameOptionBase({ title, children, description }: PropsType) {
 
   return (
     <View style={s.gameOption}>
-      <View style={{ margin: 10 }}>
-        <QuestionButton onPress={() => setIsCollapsed(!isCollapsed)} />
-        <View>
-          <Text style={s.gameOptionTitle}>{title}</Text>
-        </View>
-        {children}
+      <ImageBackground source={require('@/assets/images/gamecreationscreen/create_back.webp')} resizeMode={'stretch'}>
 
-        <Collapsible isCollapsed={isCollapsed} style={{ ...s.collapsible }}>
-          <View style={{ flex: 1, height: 'auto', padding: 10 }}>
-            <Text style={s.gameOptionDescription}>{description}</Text>
+        <View style={{ margin: 10 }}>
+          <QuestionButton onPress={() => setIsCollapsed(!isCollapsed)} />
+          <View>
+            <Text style={s.gameOptionTitle}>{title}</Text>
           </View>
-        </Collapsible>
-      </View>
-      <Image style={s.separator} source={require('@/assets/images/gamecreationscreen/razdelenije.webp')} />
+          {children}
+
+          <Collapsible isCollapsed={isCollapsed} style={{ ...s.collapsible }}>
+            <View style={{ flex: 1, height: 'auto', padding: 10 }}>
+              <Text style={s.gameOptionDescription}>{description}</Text>
+            </View>
+          </Collapsible>
+        </View>
+        <Image style={s.separator} source={require('@/assets/images/gamecreationscreen/razdelenije.webp')} />
+      </ImageBackground>
     </View>
   );
 }
