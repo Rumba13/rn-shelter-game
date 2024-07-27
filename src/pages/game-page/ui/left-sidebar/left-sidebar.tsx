@@ -11,7 +11,13 @@ import {
 import { Apocalypse } from '@/src/shared/lib/types/apocalypse';
 import { Shelter } from '@/src/shared/lib/types/shelter';
 import { stayTimeMonthsToTitle } from '@/src/pages/game-page/ui/stay-time-months-to-title';
-import Animated, { useAnimatedStyle, useSharedValue, withTiming, Easing } from 'react-native-reanimated';
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+  Easing,
+  EasingFunction, EasingFunctionFactory,
+} from 'react-native-reanimated';
 
 type PropsType = {
   isOpened: boolean;
@@ -21,17 +27,19 @@ type PropsType = {
   shelter: Shelter;
   shelterCapacity: number;
   animationDuration: number;
+  animationEasing: EasingFunction | EasingFunctionFactory
 };
 
 export function LeftSidebar({
-  isOpened,
-  setIsOpened,
-  apocalypse,
-  shelter,
-  isCompletelyHidden,
-  shelterCapacity,
-  animationDuration,
-}: PropsType) {
+                              isOpened,
+                              setIsOpened,
+                              apocalypse,
+                              shelter,
+                              isCompletelyHidden,
+                              shelterCapacity,
+                              animationDuration,
+                              animationEasing,
+                            }: PropsType) {
   const translateXAnim = useSharedValue<number>(-(leftSideBarWidth - 78));
 
   const closeSideBar = () => {
@@ -48,7 +56,7 @@ export function LeftSidebar({
       {
         translateX: withTiming(translateXAnim.value, {
           duration: animationDuration,
-          easing: Easing.linear,
+          easing: animationEasing,
         }),
       },
     ],
@@ -135,11 +143,16 @@ export function LeftSidebar({
             </View>
           </View>
           <TouchableWithoutFeedback onPress={() => setIsOpened(!isOpened)}>
-            <Image
-              style={s.leftSideBarDetail}
-              resizeMode={'contain'}
-              source={require('@/assets/images/gamescreen/apoc_bunker_icon.png')}
-            />
+            <View
+              style={s.leftSideBarDetailWrapper}
+            >
+
+              <Image
+                style={s.leftSideBarDetail}
+                resizeMode={'contain'}
+                source={require('@/assets/images/gamescreen/apoc_bunker_icon.png')}
+              />
+            </View>
           </TouchableWithoutFeedback>
         </View>
       </ImageBackground>
@@ -150,6 +163,14 @@ export function LeftSidebar({
 const leftSideBarWidth = 370;
 const shelterInfoLineHeight = 16;
 const s = StyleSheet.create({
+  leftSideBarDetailWrapper: {
+    position: 'absolute',
+    right: 20,
+    bottom: 0,
+    padding: 10,
+    paddingBottom: 20,
+    paddingTop: 30,
+  },
   shelterMainImage: {
     maxWidth: '100%',
     marginHorizontal: 'auto',
@@ -247,9 +268,6 @@ const s = StyleSheet.create({
     height: Dimensions.get('window').height,
   },
   leftSideBarDetail: {
-    position: 'absolute',
-    right: 32,
-    bottom: 25,
     width: 43,
     height: 120,
   },

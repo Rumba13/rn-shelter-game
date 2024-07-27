@@ -15,7 +15,13 @@ import { ScratchCard } from '@/src/shared/ui/scratch-card/ui';
 import ScratchImage from '@/assets/images/gamescreen/skresti.png';
 import { useImage } from '@shopify/react-native-skia';
 import { gameSettingsStore } from '@/src/entities/game';
-import Animated, { useAnimatedStyle, useSharedValue, withTiming, Easing } from 'react-native-reanimated';
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+  Easing,
+  EasingFunction, EasingFunctionFactory,
+} from 'react-native-reanimated';
 import { QuestionButton } from '@/src/shared/ui/question-button/ui';
 
 type PropsType = {
@@ -25,6 +31,8 @@ type PropsType = {
   animationDuration: number;
   unKickedOutPlayers: Player[];
   ending: string;
+  animationEasing: EasingFunction | EasingFunctionFactory
+
 };
 
 const sidebarClosedAtPx = 294;
@@ -38,6 +46,7 @@ export function RightSidebar({
                                animationDuration,
                                unKickedOutPlayers,
                                ending,
+                               animationEasing,
                              }: PropsType) {
   const sideBarTranslateXAnim = useSharedValue(sidebarHiddenAtPx);
   const animatedSidebarStyles = useAnimatedStyle(() => ({
@@ -45,7 +54,7 @@ export function RightSidebar({
       {
         translateX: withTiming(sideBarTranslateXAnim.value, {
           duration: animationDuration,
-          easing: Easing.linear,
+          easing: animationEasing,
         }),
       },
     ],
@@ -70,11 +79,16 @@ export function RightSidebar({
       <View style={{ flex: 1, position: 'relative' }}>
         <ImageBackground resizeMode={'contain'} source={require('@/assets/images/gamescreen/right_final.png')}>
           <TouchableWithoutFeedback onPress={() => setIsOpened(!isOpened)}>
-            <Image
-              style={s.rightSideBarWrapperIcon}
-              resizeMode={'contain'}
-              source={require('@/assets/images/gamescreen/end_icon.png')}
-            />
+            <View
+              style={s.rightSideBarIconWrapper}
+            >
+
+              <Image
+                style={s.rightSideBarIcon}
+                resizeMode={'contain'}
+                source={require('@/assets/images/gamescreen/end_icon.png')}
+              />
+            </View>
           </TouchableWithoutFeedback>
 
           <View style={s.helpButtonWrapper}>
@@ -207,13 +221,19 @@ const s = StyleSheet.create({
     marginLeft: 'auto',
     height: '100%',
   },
-  rightSideBarWrapperIcon: {
-    position: 'absolute',
-    bottom: 24,
-    left: 29,
+  rightSideBarIcon: {
+
     maxWidth: '100%',
     width: sideBarIconSize,
     height: sideBarIconSize,
+  },
+  rightSideBarIconWrapper: {
+    position: 'absolute',
+    bottom: 0,
+    left: 17,
+    paddingBottom: 27,
+    paddingLeft: 10,
+    paddingTop: 20,
   },
   helpButton: {
     zIndex: 20,

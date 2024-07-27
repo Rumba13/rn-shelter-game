@@ -15,15 +15,18 @@ import { ICarouselInstance } from 'react-native-reanimated-carousel';
 import { LeftSidebar } from '@/src/pages/game-page/ui/left-sidebar/left-sidebar';
 import { RightSidebar } from '@/src/pages/game-page/ui/right-sidebar/ui';
 import { observer } from 'mobx-react';
+import { Easing, EasingFunction, EasingFunctionFactory } from 'react-native-reanimated';
 
 type PropsType = {};
+const sidebarAnimationDuration = 270;
+const sidebarAnimationEasing: EasingFunction | EasingFunctionFactory = Easing.out(Easing.sin);
+
 
 export const GamePage = observer(({}: PropsType) => {
   const selectPlayerSliderRef = React.createRef<ICarouselInstance>();
   const selectPlayersThumbsRef = React.createRef<ScrollView>();
   const [isLeftSidebarOpened, setIsLeftSidebarOpened] = React.useState<boolean>(true);
   const [isRightSidebarOpened, setIsRightSidebarOpened] = React.useState<boolean>(false);
-  const animationDuration = 200;
 
   const game = gameStore.game;
   if (!game) throw new Error('Game is undefined');
@@ -141,7 +144,8 @@ export const GamePage = observer(({}: PropsType) => {
         </ImageBackground>
       </View>
       <LeftSidebar
-        animationDuration={animationDuration}
+        animationEasing={sidebarAnimationEasing}
+        animationDuration={sidebarAnimationDuration}
         isCompletelyHidden={isRightSidebarOpened}
         shelterCapacity={Math.floor(game.players.length / 2)}
         apocalypse={game.apocalypse}
@@ -150,9 +154,10 @@ export const GamePage = observer(({}: PropsType) => {
         setIsOpened={setIsLeftSidebarOpened}
       />
       <RightSidebar
+        animationEasing={sidebarAnimationEasing}
         ending={game.ending.description}
         unKickedOutPlayers={game.players.filter(player => !player.isKicked)}
-        animationDuration={animationDuration}
+        animationDuration={sidebarAnimationDuration}
         isHidden={isLeftSidebarOpened}
         isOpened={isRightSidebarOpened}
         setIsOpened={setIsRightSidebarOpened}
