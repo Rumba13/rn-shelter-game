@@ -12,10 +12,10 @@ export function QuestionButton({ onPress }: PropsType) {
     onPress={onPress}
     style={s.optionHelpButton}
     options={{
-      yOffset: -2,
+      yOffset: -3,
+      xOffset: -2,
       yOffsetOnPress: -1,
-      xOffset: -1,
-      xOffSetOnPress: 0,
+      xOffSetOnPress: -1,
     }}
     buttonImage={require('@/assets/images/core/vopros_icon.png')}
     shadowImage={require('@/assets/images/gameconnectionscreen/info_icon_shadow.png')}

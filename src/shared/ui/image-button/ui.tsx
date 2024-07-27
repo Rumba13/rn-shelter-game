@@ -28,8 +28,8 @@ type PropsType = {
   maxFontSizeMultiplier?: number;
 };
 
-const defaultXOffset = 0;
-const defaultXOnClickOffset = 0;
+const defaultXOffset = -5;
+const defaultXOnClickOffset = -3;
 const defaultYOffset = -5;
 const defaultYOnClickOffset = -2;
 const animationDuration = 35;

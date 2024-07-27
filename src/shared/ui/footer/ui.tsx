@@ -18,8 +18,10 @@ export function Footer({ styles, onNextButtonPress }: PropsType) {
         <ImageButton
           buttonImage={require('@/assets/images/gamecreationscreen/next_button.png')}
           shadowImage={require('@/assets/images/gamecreationscreen/next_button_shadow.png')}
-          style={s.createGameButton}
+          style={s.button}
+          options={{xOffset:-3, yOffset: -3, xOffSetOnPress: -1, yOffsetOnPress: -1}}
           height={65}
+          width={165}
           onPress={onNextButtonPress}
         />
       </View>
@@ -46,10 +48,12 @@ const s: any = {
     height: 68,
     position: 'relative',
   },
-  createGameButton: {
+  button: {
     position: 'relative',
+    zIndex: 100,
     left: 0,
     top: 0,
+    alignSelf: 'center',
   },
   createGameButtonWrapper: {
     position: 'relative',

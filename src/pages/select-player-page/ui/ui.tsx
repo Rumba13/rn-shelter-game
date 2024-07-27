@@ -15,7 +15,8 @@ export function SelectPlayerPage({ navigation }: PropsType) {
   const [isTicketShowed, setIsTicketShowed] = useState<boolean>(false);
 
   const translateYAnim = useRef(new Animated.Value(-200)).current;
-  useEffect(() => {}, [translateYAnim]);
+  useEffect(() => {
+  }, [translateYAnim]);
 
   const showTicket = () => {
     Animated.timing(translateYAnim, {
@@ -56,7 +57,7 @@ export function SelectPlayerPage({ navigation }: PropsType) {
             setIsTicketShowed(!isTicketShowed);
             isTicketShowed ? hideTicket() : showTicket();
           }}
-          options={{ yOffset: -4, xOffset:-4, yOffsetOnPress:-2, xOffSetOnPress: -2 }}
+          options={{ yOffset: -4, xOffset: -4, yOffsetOnPress: -2, xOffSetOnPress: -2 }}
         />
       </Animated.View>
       <View style={{ flex: 1 }}>
