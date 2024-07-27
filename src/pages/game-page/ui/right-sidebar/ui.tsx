@@ -16,6 +16,7 @@ import ScratchImage from '@/assets/images/gamescreen/skresti.png';
 import { useImage } from '@shopify/react-native-skia';
 import { gameSettingsStore } from '@/src/entities/game';
 import Animated, { useAnimatedStyle, useSharedValue, withTiming, Easing } from 'react-native-reanimated';
+import { QuestionButton } from '@/src/shared/ui/question-button/ui';
 
 type PropsType = {
   isOpened: boolean;
@@ -31,13 +32,13 @@ const sidebarOpenedAtPx = 5;
 const sidebarHiddenAtPx = sidebarClosedAtPx + 65;
 
 export function RightSidebar({
-  isOpened,
-  setIsOpened,
-  isHidden,
-  animationDuration,
-  unKickedOutPlayers,
-  ending,
-}: PropsType) {
+                               isOpened,
+                               setIsOpened,
+                               isHidden,
+                               animationDuration,
+                               unKickedOutPlayers,
+                               ending,
+                             }: PropsType) {
   const sideBarTranslateXAnim = useSharedValue(sidebarHiddenAtPx);
   const animatedSidebarStyles = useAnimatedStyle(() => ({
     transform: [
@@ -77,12 +78,7 @@ export function RightSidebar({
           </TouchableWithoutFeedback>
 
           <View style={s.helpButtonWrapper}>
-            <ImageButton
-              style={s.helpButton}
-              buttonImage={require('@/assets/images/core/vopros_icon.png')}
-              shadowImage={require('@/assets/images/mainscreen/info_button.png')}
-              options={{ xOffset: 3, yOffset: 2, yOffsetOnPress: 1, xOffSetOnPress: 1 }}
-            />
+            <QuestionButton onPress={() => void 0} />
           </View>
           <View style={s.rightSideBar}>
             <ScrollView style={s.leftPlayersWrapper}>

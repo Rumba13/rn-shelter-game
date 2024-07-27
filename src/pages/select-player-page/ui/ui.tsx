@@ -56,7 +56,7 @@ export function SelectPlayerPage({ navigation }: PropsType) {
             setIsTicketShowed(!isTicketShowed);
             isTicketShowed ? hideTicket() : showTicket();
           }}
-          options={{ yOffset: 3, xOffset: 2, yOffsetOnPress: 1, xOffSetOnPress: 1 }}
+          options={{ yOffset: -4, xOffset:-4, yOffsetOnPress:-2, xOffSetOnPress: -2 }}
         />
       </Animated.View>
       <View style={{ flex: 1 }}>

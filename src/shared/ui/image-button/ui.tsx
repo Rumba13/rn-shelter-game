@@ -1,16 +1,14 @@
 import {
-  Button,
   GestureResponderEvent,
-  Image,
   ImageBackground,
-  LayoutAnimation,
   StyleProp,
   Text,
   TextStyle,
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import Animated, { useAnimatedStyle, useSharedValue, withTiming, Easing } from 'react-native-reanimated';
 
 type PropsType = {
   buttonImage: any;
@@ -30,77 +28,87 @@ type PropsType = {
   maxFontSizeMultiplier?: number;
 };
 
+const defaultXOffset = 0;
+const defaultXOnClickOffset = 0;
+const defaultYOffset = -5;
+const defaultYOnClickOffset = -2;
+const animationDuration = 35;
+
 export function ImageButton({
-  buttonImage,
-  shadowImage,
-  height,
-  width,
-  style,
-  onPress,
-  options,
-  title,
-  maxFontSizeMultiplier,
-  styleTitle,
-}: PropsType) {
-  const [isButtonPressed, setIsButtonPressed] = useState<boolean>(false);
+                              buttonImage,
+                              shadowImage,
+                              height,
+                              width,
+                              style,
+                              onPress,
+                              options,
+                              title,
+                              maxFontSizeMultiplier,
+                              styleTitle,
+                            }: PropsType) {
+  const buttonImageXOffSet = options?.xOffset || defaultXOffset;
+  const buttonImageYOffSet = options?.yOffset || defaultYOffset;
+  const buttonImageOnPressXOffSet = options?.xOffSetOnPress || defaultXOnClickOffset;
+  const buttonImageOnPressYOffSet = options?.yOffsetOnPress || defaultYOnClickOffset;
+  const buttonTranslateXAnim = useSharedValue(buttonImageXOffSet);
+  const buttonTranslateYAnim = useSharedValue(buttonImageYOffSet);
 
-  const buttonOnPressIn = () => {
-    LayoutAnimation.configureNext({
-      create: { type: 'linear', property: 'opacity' },
-      update: { type: 'linear' },
-      delete: { type: 'linear', property: 'opacity' },
-
-      duration: 55,
-    });
-    setIsButtonPressed(true);
+  const unPressButton = () => {
+    buttonTranslateXAnim.value = buttonImageXOffSet;
+    buttonTranslateYAnim.value = buttonImageYOffSet;
   };
-  const buttonOnPressOut = () => {
-    LayoutAnimation.configureNext({
-      create: { type: 'linear', property: 'opacity' },
-      update: { type: 'linear' },
-      delete: { type: 'linear', property: 'opacity' },
-
-      duration: 55,
-    });
-
-    setIsButtonPressed(false);
+  const pressButton = () => {
+    buttonTranslateXAnim.value = buttonImageOnPressXOffSet;
+    buttonTranslateYAnim.value = buttonImageOnPressYOffSet;
   };
+
+  const onPressIn = () => {
+    pressButton();
+  };
+  const onPressOut = () => {
+    unPressButton();
+  };
+
+  const animatedStyles = useAnimatedStyle(() => ({
+    transform: [
+      {
+        translateX: withTiming(buttonTranslateXAnim.value, {
+          easing: Easing.linear,
+          duration: animationDuration,
+        }),
+      },
+      {
+        translateY: withTiming(buttonTranslateYAnim.value, {
+          easing: Easing.linear,
+          duration: animationDuration,
+        }),
+      },
+    ],
+  }));
 
   return (
-    <View style={{ ...s.buttonContainer, ...style, maxHeight: height, width }}>
+    <Animated.View style={{ ...s.buttonContainer, ...style, maxHeight: height, width }}>
       <ImageBackground source={shadowImage} style={s.buttonShadow} resizeMode={'contain'}>
-        <View style={{ maxHeight: '100%' }}>
+        <Animated.View style={[{ maxHeight: '100%' }, animatedStyles]}>
           <ImageBackground
             source={buttonImage}
-            style={{
-              ...s.buttonImage,
-              ...{
-                bottom: options?.yOffset ?? 5,
-                right: options?.xOffset ?? 3,
-              },
-              ...(isButtonPressed
-                ? {
-                    bottom: options?.yOffsetOnPress ?? 3,
-                    right: options?.xOffSetOnPress ?? 3,
-                  }
-                : {}),
-            }}
+            style={[s.buttonImage]}
             resizeMode={'contain'}>
             <Text style={styleTitle} maxFontSizeMultiplier={maxFontSizeMultiplier}>
               {title}
             </Text>
           </ImageBackground>
-        </View>
+        </Animated.View>
       </ImageBackground>
 
       <TouchableWithoutFeedback
         style={s.buttonWrapper}
         onPress={onPress}
-        onPressIn={buttonOnPressIn}
-        onPressOut={buttonOnPressOut}>
+        onPressIn={onPressIn}
+        onPressOut={onPressOut}>
         <View style={s.button}></View>
       </TouchableWithoutFeedback>
-    </View>
+    </Animated.View>
   );
 }
 

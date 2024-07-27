@@ -2,6 +2,7 @@ import { Image, Text, View } from 'react-native';
 import { useEffect, useState } from 'react';
 import Collapsible from 'react-native-collapsible';
 import { ImageButton } from '@/src/shared/ui/image-button/ui';
+import { QuestionButton } from '@/src/shared/ui/question-button/ui';
 
 type PropsType = {
   children: any;
@@ -17,18 +18,7 @@ export function GameOptionBase({ title, children, description }: PropsType) {
   return (
     <View style={s.gameOption}>
       <View style={{ margin: 10 }}>
-        <ImageButton
-          onPress={() => setIsCollapsed(!isCollapsed)}
-          style={s.optionHelpButton}
-          options={{
-            xOffset: 2,
-            yOffset: 2,
-            xOffSetOnPress: 1,
-            yOffsetOnPress: 1,
-          }}
-          buttonImage={require('@/assets/images/core/vopros_icon.png')}
-          shadowImage={require('@/assets/images/gameconnectionscreen/info_icon_shadow.png')}
-        />
+        <QuestionButton onPress={() => setIsCollapsed(!isCollapsed)} />
         <View>
           <Text style={s.gameOptionTitle}>{title}</Text>
         </View>
