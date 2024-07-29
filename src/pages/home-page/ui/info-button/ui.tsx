@@ -81,8 +81,8 @@ const s = StyleSheet.create({
     minHeight: 35,
   },
   infoButtonIcon: {
-    maxWidth: 60,
-    maxHeight: 60,
+    flex: 1,
+    maxHeight: '100%',
   },
   modalContent: {
     position: 'relative',

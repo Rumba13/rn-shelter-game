@@ -17,7 +17,6 @@ export function GameOptionBase({ title, children, description }: PropsType) {
   return (
     <View style={s.gameOption}>
       <ImageBackground source={require('@/assets/images/gamecreationscreen/create_back.png')} resizeMode={'stretch'}>
-
         <View style={{ margin: 10 }}>
           <QuestionButton onPress={() => setIsCollapsed(!isCollapsed)} />
           <View>

@@ -25,16 +25,10 @@ import {
   characteristicCards,
   characteristicCardsList,
 } from '@/src/entities/characteristic-card/model/characteristic-card';
-import {
-  renderCharacteristicCardSelectedText,
-} from '@/src/pages/create-game-page/ui/render-characteristic-card-selected-text';
+import { renderCharacteristicCardSelectedText } from '@/src/pages/create-game-page/ui/render-characteristic-card-selected-text';
 import { CharacteristicCardsList } from '@/src/shared/lib/types/characteristic-cards-list';
-import {
-  characteristicCardNameToCard,
-} from '@/src/entities/characteristic-card/model/characteristic-card-name-to-card';
-import {
-  characteristicBalanceValueToTitle,
-} from '@/src/pages/create-game-page/ui/characteristic-balance-value-to-title';
+import { characteristicCardNameToCard } from '@/src/entities/characteristic-card/model/characteristic-card-name-to-card';
+import { characteristicBalanceValueToTitle } from '@/src/pages/create-game-page/ui/characteristic-balance-value-to-title';
 import { createGameStore } from '@/src/feature/create-game/model/create-game';
 import { gameStore } from '@/src/entities/game/model/game';
 import { OverlayModal } from '@/src/shared/ui/overlay-modal/ui';
@@ -68,7 +62,6 @@ export const CreateGamePage = observer(({ navigation }: PropsType) => {
           <View style={s.mainContentWrapper}>
             <SafeAreaView style={s.mainContent}>
               <ScrollView decelerationRate={0.985}>
-
                 <Header />
                 <GameOptionCheckbox
                   title={`Проклятые деревенщины`}
@@ -133,9 +126,7 @@ export const CreateGamePage = observer(({ navigation }: PropsType) => {
                   descriptionHeight={70}
                   description={'Параметр определяет разброс характеристик'}
                   onValueChanged={characteristicBalance =>
-                    gameSettingsStore.setSettings(
-                      settings => (settings.characteristicBalance = characteristicBalance),
-                    )
+                    gameSettingsStore.setSettings(settings => (settings.characteristicBalance = characteristicBalance))
                   }
                   selectedTitle={characteristicBalanceValueToTitle(settings.characteristicBalance)}
                   min={gameSettingsStore.settingsLimits.characteristicBalance.min}

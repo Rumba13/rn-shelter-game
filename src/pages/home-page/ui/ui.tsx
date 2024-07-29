@@ -1,106 +1,118 @@
-import { Alert, Image, ImageBackground, View } from 'react-native';
+import { Alert, Dimensions, Image, ImageBackground, View, Text, StatusBar } from 'react-native';
 import React from 'react';
 import { ImageButton } from '@/src/shared/ui/image-button/ui';
 import { InfoButtonAndModal } from '@/src/pages/home-page/ui/info-button/ui';
+import { SafeAreaProvider, useSafeAreaInsets, SafeAreaView } from 'react-native-safe-area-context';
 
 type PropsType = {
   navigation: any;
 };
 
+const SCREEN_HEIGHT = Dimensions.get('screen').height; // device height
+const STATUS_BAR_HEIGHT = StatusBar.currentHeight || 24;
+const WINDOW_HEIGHT = Dimensions.get('window').height;
+const NAVIGATION_BAR_HEIGHT = SCREEN_HEIGHT - WINDOW_HEIGHT - STATUS_BAR_HEIGHT;
+
 export const HomePage = ({ navigation }: PropsType) => {
+  console.log(useSafeAreaInsets());
+
   return (
-    <View style={s.homePage}>
-      <View style={s.mainContent}>
-        <Image style={s.logo} source={require('../../../../assets/images/mainscreen/logo.png')} />
-        <ImageBackground
-          style={s.buttons}
-          resizeMode="stretch"
-          source={require('../../../../assets/images/mainscreen/black_box_main_menu.png')}>
-          <ImageButton
-            buttonImage={require('../../../../assets/images/mainscreen/connect_button.png')}
-            shadowImage={require('../../../../assets/images/mainscreen/button_shadow_2.png')}
-            height={130}
-            width={'100%'}
-            style={{ marginBottom: 5 }}
-            onPress={() => navigation.navigate('connect-to-game-page')}
+    <SafeAreaView style={{ flex: 1}} edges={['bottom', 'left', 'top', 'right']}>
+      <View style={s.homePage}>
+        <View style={s.mainContent}>
+          <Image
+            style={s.logo}
+            source={require('../../../../assets/images/mainscreen/logo.png')}
+            resizeMode={'contain'}
           />
 
-          <ImageButton
-            buttonImage={require('../../../../assets/images/mainscreen/howtoplay_button.png')}
-            shadowImage={require('../../../../assets/images/mainscreen/button_shadow_1.png')}
-            height={130}
-            width={130}
-          />
+          <ImageBackground
+            style={s.buttonsBackground}
+            resizeMode="stretch"
+            source={require('../../../../assets/images/mainscreen/black_box_main_menu.png')}>
+            <View style={s.buttons}>
+              <ImageButton
+                buttonImage={require('../../../../assets/images/mainscreen/connect_button.png')}
+                shadowImage={require('../../../../assets/images/mainscreen/button_shadow_2.png')}
+                width={'100%'}
+                style={{ marginBottom: 5 }}
+                onPress={() => navigation.navigate('connect-to-game-page')}
+              />
+              <View style={{ flex: 1, flexDirection: 'row' }}>
+                <ImageButton
+                  buttonImage={require('../../../../assets/images/mainscreen/howtoplay_button.png')}
+                  shadowImage={require('../../../../assets/images/mainscreen/button_shadow_1.png')}
+                  style={{ marginRight: 7 }}
+                />
+                <ImageButton
+                  buttonImage={require('../../../../assets/images/mainscreen/create_button.png')}
+                  shadowImage={require('../../../../assets/images/mainscreen/button_shadow_1.png')}
+                  onPress={() => navigation.navigate('create-game-page')}
 
-          <ImageButton
-            buttonImage={require('../../../../assets/images/mainscreen/create_button.png')}
-            shadowImage={require('../../../../assets/images/mainscreen/button_shadow_1.png')}
-            height={130}
-            width={130}
-            onPress={() => navigation.navigate('create-game-page')}
-          />
+                />
+              </View>
 
-          <ImageButton
-            buttonImage={require('../../../../assets/images/mainscreen/premium_button3.png')}
-            shadowImage={require('../../../../assets/images/mainscreen/button_shadow_2.png')}
-            height={130}
-            width={'100%'}
-            style={{ marginTop: 5 }}
-            onPress={() => Alert.alert('Купи мне трюфель!')}
-          />
-        </ImageBackground>
-        <View
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            maxHeight: 80,
-            marginTop: 10,
-            width: '100%',
-          }}>
-          <InfoButtonAndModal />
-          <ImageButton
-            buttonImage={require('../../../../assets/images/mainscreen/zakazat_igru.png')}
-            shadowImage={require('../../../../assets/images/mainscreen/zakazat_igru_shadow.png')}
-            height={'auto'}
-            width={210}
-            style={{ marginLeft: 10 }}
-          />
+              <ImageButton
+                buttonImage={require('../../../../assets/images/mainscreen/premium_button3.png')}
+                shadowImage={require('../../../../assets/images/mainscreen/button_shadow_2.png')}
+                width={'100%'}
+                style={{ marginTop: 5 }}
+                onPress={() => Alert.alert('Купи мне трюфель!')}
+              />
+            </View>
+          </ImageBackground>
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              maxHeight: 80,
+              paddingTop: 5,
+              paddingBottom: 5,
+              flex: 1,
+            }}>
+            <InfoButtonAndModal />
+            <ImageButton
+              buttonImage={require('../../../../assets/images/mainscreen/zakazat_igru.png')}
+              shadowImage={require('../../../../assets/images/mainscreen/zakazat_igru_shadow.png')}
+              style={{ marginLeft: 10, flex: 4 }}
+            />
+          </View>
         </View>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 
 const s: any = {
   homePage: {
     height: '100%',
-    maxWidth: 280,
-    marginLeft: 'auto',
-    marginRight: 'auto',
+    marginHorizontal: 40,
+    flex: 1,
+  },
+  mainContent: {
+    alignItems: 'center',
+    flex: 1,
   },
   logo: {
     width: 240,
     height: 240,
-    objectFit: 'contain',
     marginTop: 10,
     marginBottom: 15,
   },
-  mainContent: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
   buttons: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    flexDirection: 'row',
+    flex: 1,
+    flexDirection: 'column',
+    width: '100%',
+    height: '100%',
     justifyContent: 'space-between',
-    height: 'auto',
     alignItems: 'end',
-    paddingTop: 10,
-    paddingRight: 2,
-    paddingLeft: 7,
+    paddingLeft: 9,
+    paddingRight: 3,
+    paddingTop: 7,
     paddingBottom: 1,
+  },
+  buttonsBackground: {
+    width: '100%',
+    aspectRatio: 569 / 809, //TODO get aspect ratio from image
   },
 };

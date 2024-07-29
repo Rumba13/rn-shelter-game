@@ -14,8 +14,6 @@ export const Header = observer(() => {
   return (
     <ImageBackground source={require('@/assets/images/gamecreationscreen/create_back.png')} resizeMode={'stretch'}>
       <View style={s.contentHeader}>
-
-
         <View style={{ flexDirection: 'row', marginBottom: 15 }}>
           <View style={s.headerImageWrapper}>
             <Image style={s.headerImage} source={require('@/assets/images/gamecreationscreen/igroki.png')} />

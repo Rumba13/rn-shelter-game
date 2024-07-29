@@ -6,6 +6,7 @@ import {
   TextStyle,
   TouchableWithoutFeedback,
   View,
+  ViewStyle,
 } from 'react-native';
 import { useState } from 'react';
 import Animated, { useAnimatedStyle, useSharedValue, withTiming, Easing } from 'react-native-reanimated';
@@ -13,9 +14,9 @@ import Animated, { useAnimatedStyle, useSharedValue, withTiming, Easing } from '
 type PropsType = {
   buttonImage: any;
   shadowImage: any;
-  height?: number | string;
   width?: number | string;
-  style?: any;
+  height?: number | string;
+  style?: StyleProp<ViewStyle>;
   onPress?: (event: GestureResponderEvent) => void;
   options?: {
     xOffSetOnPress?: number;
@@ -35,17 +36,17 @@ const defaultYOnClickOffset = -2;
 const animationDuration = 35;
 
 export function ImageButton({
-  buttonImage,
-  shadowImage,
-  height,
-  width,
-  style,
-  onPress,
-  options,
-  title,
-  maxFontSizeMultiplier,
-  styleTitle,
-}: PropsType) {
+                              buttonImage,
+                              shadowImage,
+                              width,
+                              height,
+                              style,
+                              onPress,
+                              options,
+                              title,
+                              maxFontSizeMultiplier,
+                              styleTitle,
+                            }: PropsType) {
   const buttonImageXOffSet = options?.xOffset || defaultXOffset;
   const buttonImageYOffSet = options?.yOffset || defaultYOffset;
   const buttonImageOnPressXOffSet = options?.xOffSetOnPress || defaultXOnClickOffset;
@@ -87,7 +88,7 @@ export function ImageButton({
   }));
 
   return (
-    <Animated.View style={{ ...s.buttonContainer, ...style, maxHeight: height, width }}>
+    <Animated.View style={[s.buttonContainer, style, { width, maxHeight: height }]}>
       <ImageBackground source={shadowImage} style={s.buttonShadow} resizeMode={'contain'}>
         <Animated.View style={[{ maxHeight: '100%' }, animatedStyles]}>
           <ImageBackground source={buttonImage} style={[s.buttonImage]} resizeMode={'contain'}>
@@ -106,7 +107,9 @@ export function ImageButton({
 }
 
 const s: any = {
-  buttonContainer: {},
+  buttonContainer: {
+    flex: 1,
+  },
   buttonShadow: {
     maxWidth: '100%',
     maxHeight: '100%',

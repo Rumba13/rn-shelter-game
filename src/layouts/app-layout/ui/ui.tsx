@@ -1,11 +1,15 @@
 import { Alert, Dimensions, ImageBackground, StatusBar, StyleSheet, View } from 'react-native';
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useFonts } from 'expo-font';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { SafeAreaProvider, SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
+import Constants from 'expo-constants';
 
 type PropsType = {
   children: React.ReactNode;
 };
+
+
 
 export function AppLayout({ children }: PropsType) {
   const [fontsLoaded, fontsError] = useFonts({
@@ -29,16 +33,18 @@ export function AppLayout({ children }: PropsType) {
   }
 
   return (
-    <View style={s.root}>
-      <GestureHandlerRootView style={{ flex: 1 }}>
-        <ImageBackground
-          source={require('../../../../assets/images/mainscreen/background.png')}
-          style={s.background}
-          resizeMode={'stretch'}>
-          {children}
-        </ImageBackground>
-      </GestureHandlerRootView>
-    </View>
+    <SafeAreaView style={{ flex: 1 }}>
+      <View style={s.root}>
+        <GestureHandlerRootView style={{ flex: 1 }}>
+          <ImageBackground
+            source={require('../../../../assets/images/mainscreen/background.png')}
+            style={s.background}
+            resizeMode={'stretch'}>
+            {children}
+          </ImageBackground>
+        </GestureHandlerRootView>
+      </View>
+    </SafeAreaView>
   );
 }
 
