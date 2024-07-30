@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Image, Dimensions, Alert } from 'react-native';
+import { View, Text, StyleSheet,   Dimensions, Alert } from 'react-native';
 import { useState } from 'react';
 import { ImageButton } from '@/src/shared/ui/image-button/ui';
 import { Footer } from '@/src/shared/ui/footer/ui';
@@ -6,8 +6,8 @@ import { SelectPlayerSlider } from '@/src/pages/select-player-page/ui/select-pla
 import QRCode from 'react-native-qrcode-svg';
 import { gameStore } from '@/src/entities/game';
 import Animated, { useAnimatedStyle, useSharedValue, withTiming, Easing } from 'react-native-reanimated';
-import { translate } from '@shopify/react-native-skia';
-import Constants from 'expo-constants';
+
+import { Image } from 'expo-image';
 
 type PropsType = {
   navigation: any;
@@ -43,9 +43,9 @@ export function SelectPlayerPage({ navigation }: PropsType) {
     <Animated.View style={s.selectPlayerPage}>
       <Animated.View style={[s.ticketWrapper, animatedStyles]}>
         <Image
-          resizeMode={'cover'}
+          contentFit={'cover'}
           style={s.ticket}
-          source={require('@/assets/images/playerselectionscreen/ticket/ticket(gay_people).png')}
+          source={require('@/assets/images/playerselectionscreen/ticket/ticket(gay_people).webp')}
         />
         <View style={s.QRCodeWrapper}>
           <QRCode value={gameStore.createGameCode()} size={QRCodeSize} backgroundColor={'transparent'} />
@@ -53,8 +53,8 @@ export function SelectPlayerPage({ navigation }: PropsType) {
         <ImageButton
           width={100}
           style={s.ticketButton}
-          buttonImage={require('@/assets/images/playerselectionscreen/ticket/arrow_ticket.png')}
-          shadowImage={require('@/assets/images/playerselectionscreen/ticket/arrow_ticket(shadow).png')}
+          buttonImage={require('@/assets/images/playerselectionscreen/ticket/arrow_ticket.webp')}
+          shadowImage={require('@/assets/images/playerselectionscreen/ticket/arrow_ticket(shadow).webp')}
           onPress={() => {
             setIsTicketShowed(!isTicketShowed);
             isTicketShowed ? hideTicket() : showTicket();
@@ -72,8 +72,8 @@ export function SelectPlayerPage({ navigation }: PropsType) {
           <View style={s.separatorWrapper}>
             <Image
               style={s.separator}
-              resizeMode={'contain'}
-              source={require('@/assets/images/playerselectionscreen/main/decal_vibor_igroka.png')}
+              contentFit={'contain'}
+              source={require('@/assets/images/playerselectionscreen/main/decal_vibor_igroka.webp')}
             />
           </View>
           <Text style={s.selectPlayerPageSubTitle} adjustsFontSizeToFit>

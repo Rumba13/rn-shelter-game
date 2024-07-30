@@ -14,11 +14,11 @@ export function Footer({ styles, onNextButtonPress }: PropsType) {
         <Image
           style={s.createGameButtonDetail}
           contentFit={'contain'}
-          source={require('@/assets/images/gamecreationscreen/next_dec.png')}
+          source={require('@/assets/images/gamecreationscreen/next_dec.webp')}
         />
         <ImageButton
-          buttonImage={require('@/assets/images/gamecreationscreen/next_button.png')}
-          shadowImage={require('@/assets/images/gamecreationscreen/next_button_shadow.png')}
+          buttonImage={require('@/assets/images/gamecreationscreen/next_button.webp')}
+          shadowImage={require('@/assets/images/gamecreationscreen/next_button_shadow.webp')}
           style={s.button}
           height={60}
           onPress={onNextButtonPress}
@@ -29,7 +29,7 @@ export function Footer({ styles, onNextButtonPress }: PropsType) {
         style={s.footerDetail}
         contentFit={'contain'}
         contentPosition={'bottom'}
-        source={require('@/assets/images/gamecreationscreen/cloud.png')}
+        source={require('@/assets/images/gamecreationscreen/cloud.webp')}
       />
     </View>
   );

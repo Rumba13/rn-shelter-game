@@ -18,8 +18,8 @@ export function QuestionButton({ onPress }: PropsType) {
         yOffsetOnPress: -1,
         xOffSetOnPress: -1,
       }}
-      buttonImage={require('@/assets/images/core/vopros_icon.png')}
-      shadowImage={require('@/assets/images/gameconnectionscreen/info_icon_shadow.png')}
+      buttonImage={require('@/assets/images/core/vopros_icon.webp')}
+      shadowImage={require('@/assets/images/gameconnectionscreen/info_icon_shadow.webp')}
     />
   );
 }

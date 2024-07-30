@@ -1,6 +1,6 @@
 import {
   GestureResponderEvent,
-  ImageBackground,
+
   StyleProp,
   Text,
   TextStyle,
@@ -8,8 +8,8 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
-import { useState } from 'react';
 import Animated, { useAnimatedStyle, useSharedValue, withTiming, Easing } from 'react-native-reanimated';
+import { ImageBackground } from 'expo-image';
 
 type PropsType = {
   buttonImage: any;
@@ -89,9 +89,9 @@ export function ImageButton({
 
   return (
     <Animated.View style={[s.buttonContainer, style, { width, minHeight: height }]}>
-      <ImageBackground source={shadowImage} style={s.buttonShadow} resizeMode={'contain'}>
+      <ImageBackground source={shadowImage} style={s.buttonShadow} contentFit={'contain'}>
         <Animated.View style={[{ maxHeight: '100%' }, animatedStyles]}>
-          <ImageBackground source={buttonImage} style={[s.buttonImage]} resizeMode={'contain'}>
+          <ImageBackground source={buttonImage} style={[s.buttonImage]} contentFit={'contain'}>
             <Text style={[s.title, styleTitle]} maxFontSizeMultiplier={maxFontSizeMultiplier} adjustsFontSizeToFit>
               {title}
             </Text>

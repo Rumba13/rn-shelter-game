@@ -1,4 +1,4 @@
-import { Image, ImageBackground, SafeAreaView, ScrollView, Text, View } from 'react-native';
+import { ImageBackground, SafeAreaView, ScrollView, Text, View } from 'react-native';
 import { Footer } from '@/src/shared/ui/footer/ui';
 import { useState } from 'react';
 import { Header } from './header/ui';
@@ -24,14 +24,21 @@ import {
   characteristicCards,
   characteristicCardsList,
 } from '@/src/entities/characteristic-card/model/characteristic-card';
-import { renderCharacteristicCardSelectedText } from '@/src/pages/create-game-page/ui/render-characteristic-card-selected-text';
+import {
+  renderCharacteristicCardSelectedText,
+} from '@/src/pages/create-game-page/ui/render-characteristic-card-selected-text';
 import { CharacteristicCardsList } from '@/src/shared/lib/types/characteristic-cards-list';
-import { characteristicCardNameToCard } from '@/src/entities/characteristic-card/model/characteristic-card-name-to-card';
-import { characteristicBalanceValueToTitle } from '@/src/pages/create-game-page/ui/characteristic-balance-value-to-title';
+import {
+  characteristicCardNameToCard,
+} from '@/src/entities/characteristic-card/model/characteristic-card-name-to-card';
+import {
+  characteristicBalanceValueToTitle,
+} from '@/src/pages/create-game-page/ui/characteristic-balance-value-to-title';
 import { createGameStore } from '@/src/feature/create-game/model/create-game';
 import { gameStore } from '@/src/entities/game/model/game';
 import { OverlayModal } from '@/src/shared/ui/overlay-modal/ui';
 import { cardKitToCards } from '@/src/shared/lib/card-kit-to-cards';
+import { Image } from 'expo-image';
 //TODO refactoring
 //TODO fix font issues
 
@@ -49,12 +56,12 @@ export const CreateGamePage = observer(({ navigation }: PropsType) => {
     <View style={s.createGamePageWrapper}>
       <Image
         style={s.pageTitle}
-        resizeMode={'contain'}
-        source={require('../../../../assets/images/gamecreationscreen/create.png')}
+        contentFit={'contain'}
+        source={require('../../../../assets/images/gamecreationscreen/create.webp')}
       />
       <View style={{ width: '80%', marginHorizontal: 'auto' }}>
         <ImageBackground
-          source={require('../../../../assets/images/gamecreationscreen/frame_back.png')}
+          source={require('../../../../assets/images/gamecreationscreen/frame_back.webp')}
           resizeMode={'contain'}
           style={s.mainContentBackground}>
           <View style={s.mainContentWrapper}>
@@ -250,9 +257,10 @@ const s: any = {
   },
   pageTitle: {
     maxWidth: '90%',
+    width: '100%',
+    height: 80,
     marginTop: 50,
     marginBottom: 13,
-    maxHeight: 80,
     flexBasis: 'auto',
     alignSelf: 'center',
   },

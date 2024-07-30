@@ -1,19 +1,19 @@
-import { Alert, Image, TouchableWithoutFeedback, View } from 'react-native';
+import { Alert,  TouchableWithoutFeedback, View } from 'react-native';
+import { Image } from 'expo-image';
 
-export function Separator() {
+export function Separator() { //Legacy
   return (
     <View style={s.separatorWrapper}>
       <Image
         style={s.separatorDetail}
-        resizeMode={'contain'}
-        source={require('@/assets/images/gamecreationscreen/razdelenije_premium.png')}
+        contentFit={'contain'}
+        source={require('@/assets/images/gamecreationscreen/razdelenije_premium.webp')}
       />
       <TouchableWithoutFeedback onPress={() => Alert.alert('Я такая толстая!')}>
         <Image
-          borderRadius={20}
           style={s.separatorImage}
-          resizeMode={'cover'}
-          source={require('@/assets/images/cook.png')}
+          contentFit={'cover'}
+          source={require('@/assets/images/cook.webp')}
         />
       </TouchableWithoutFeedback>
     </View>

@@ -1,14 +1,15 @@
 import {
   Animated,
   Easing,
-  Image,
-  ImageBackground,
+
+
   LayoutAnimation,
   Text,
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
 import { useEffect, useRef, useState } from 'react';
+import { ImageBackground } from 'expo-image';
 
 type PropsType = {
   style: any;
@@ -51,8 +52,8 @@ export function CheckBox({ style, setIsToggled, isToggled }: PropsType) {
         <Animated.View style={s.checkBoxChecker}>
           <ImageBackground
             style={{ height: '100%' }}
-            resizeMode={'contain'}
-            source={require('@/assets/images/gamecreationscreen/perekluchatel.png')}>
+            contentFit={'contain'}
+            source={require('@/assets/images/gamecreationscreen/perekluchatel.webp')}>
             <Animated.Image
               style={{
                 ...s.checkBoxImage,

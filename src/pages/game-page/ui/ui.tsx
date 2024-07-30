@@ -3,7 +3,6 @@ import {
   StyleSheet,
   View,
   Text,
-  ImageBackground,
   TouchableWithoutFeedback,
   ScrollView,
 } from 'react-native';
@@ -16,6 +15,7 @@ import { LeftSidebar } from '@/src/pages/game-page/ui/left-sidebar/left-sidebar'
 import { RightSidebar } from '@/src/pages/game-page/ui/right-sidebar/ui';
 import { observer } from 'mobx-react';
 import { Easing, EasingFunction, EasingFunctionFactory } from 'react-native-reanimated';
+import { ImageBackground } from 'expo-image';
 
 type PropsType = {};
 const sidebarAnimationDuration = 270;
@@ -83,7 +83,7 @@ export const GamePage = observer(({}: PropsType) => {
       </View>
 
       <View style={{ width: 290, marginHorizontal: 'auto' }}>
-        <ImageBackground resizeMode={'stretch'} source={require('@/assets/images/gamescreen/box.png')}>
+        <ImageBackground contentFit={'fill'} source={require('@/assets/images/gamescreen/box.webp')}>
           <ScrollView
             showsHorizontalScrollIndicator={false}
             onScroll={e => setThumbsScrollPositionX(Math.round(e.nativeEvent.contentOffset.x))}
@@ -107,7 +107,7 @@ export const GamePage = observer(({}: PropsType) => {
                       selectPlayerSliderRef.current?.scrollTo({ index, animated: true });
                     }}>
                     {isThumbSelected ? (
-                      <ImageBackground resizeMode={'cover'} source={require('@/assets/images/gamescreen/frame.png')}>
+                      <ImageBackground resizeMode={'cover'} source={require('@/assets/images/gamescreen/frame.webp')}>
                         <Text
                           style={{
                             ...s.selectPlayerThumbTitle,

@@ -1,5 +1,5 @@
-import { Image, StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
-import { CameraView, PermissionStatus, useCameraPermissions } from 'expo-camera';
+import {  StyleSheet, Text, View } from 'react-native';
+import { CameraView, useCameraPermissions } from 'expo-camera';
 import { connectToGameStore } from '@/src/feature/connect-to-game';
 import { useEffect, useState } from 'react';
 import { ImageButton } from '@/src/shared/ui/image-button/ui';
@@ -25,8 +25,8 @@ export function ScanQRCode({ navigation }: PropsType) {
             requestPermission();
             setIsCameraOpen(true);
           }}
-          buttonImage={require('@/assets/images/gameconnectionscreen/qr.png')}
-          shadowImage={require('@/assets/images/gameconnectionscreen/qr_shadow.png')}
+          buttonImage={require('@/assets/images/gameconnectionscreen/qr.webp')}
+          shadowImage={require('@/assets/images/gameconnectionscreen/qr_shadow.webp')}
         />
       )}
       {isCameraOpen && permission.granted && (

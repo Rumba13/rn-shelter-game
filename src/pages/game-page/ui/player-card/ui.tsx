@@ -1,6 +1,4 @@
 import {
-  Image,
-  ImageBackground,
   SafeAreaView,
   StyleSheet,
   Text,
@@ -15,6 +13,7 @@ import { cardTypeToCardBackgroundMap } from '@/src/pages/game-page/ui/player-car
 import { useEffect, useRef, useState } from 'react';
 import { observer } from 'mobx-react';
 import { CardDisplayStatus } from '@/src/shared/lib/types/card-display-status';
+import { Image, ImageBackground } from 'expo-image';
 
 type PropsType = {
   card: Card;
@@ -34,7 +33,7 @@ export const PlayerCard = observer(({ card, cardDisplayStatus, onPress, canBePin
 
   const animationDuration = 100;
   const showPin = () => {
-    Animated.timing(translateYAnim, {
+    Animated.timing(translateYAnim, { //TODO rewrite on react-native-reanimated
       toValue: 0,
       duration: animationDuration,
       useNativeDriver: false,
@@ -58,7 +57,8 @@ export const PlayerCard = observer(({ card, cardDisplayStatus, onPress, canBePin
     }).start();
   };
 
-  useEffect(() => {}, [opacityAnim, translateYAnim]);
+  useEffect(() => {
+  }, [opacityAnim, translateYAnim]);
 
   if (isBigCard) {
     return (
@@ -68,9 +68,11 @@ export const PlayerCard = observer(({ card, cardDisplayStatus, onPress, canBePin
           source={
             isCardShowed || isCardPinned
               ? cardTypeToCardBackgroundMap[card.type]
-              : require('@/assets/images/gamescreen/phobia_bg.png')
+              : require('@/assets/images/gamescreen/phobia_bg.webp')
           }
-          resizeMode={isCardShowed || isCardPinned ? 'contain' : 'repeat'}>
+          contentFit={isCardShowed || isCardPinned ? 'contain' : 'fill'}
+        >
+          {/*TODO is scale-down equal to repeat?*/}
           <TouchableWithoutFeedback
             onPress={() => {
               if (canBePinned) {
@@ -106,9 +108,9 @@ export const PlayerCard = observer(({ card, cardDisplayStatus, onPress, canBePin
               {!cardDisplayStatus ? (
                 <Image
                   style={s.playerCardHint_BigCart}
-                  resizeMode={'contain'}
+                  contentFit={'contain'}
                   tintColor={'rgba(0,0,0,0.15)'}
-                  source={require('@/assets/images/gamescreen/gleb_hand.png')}
+                  source={require('@/assets/images/gamescreen/gleb_hand.webp')}
                 />
               ) : (
                 void 0
@@ -128,7 +130,7 @@ export const PlayerCard = observer(({ card, cardDisplayStatus, onPress, canBePin
         source={
           cardDisplayStatus
             ? cardTypeToCardBackgroundMap[card.type]
-            : require('@/assets/images/gamescreen/phobia_bg.png')
+            : require('@/assets/images/gamescreen/phobia_bg.webp')
         }
         resizeMode={'contain'}>
         <TouchableWithoutFeedback
@@ -163,9 +165,9 @@ export const PlayerCard = observer(({ card, cardDisplayStatus, onPress, canBePin
             {!cardDisplayStatus ? (
               <Image
                 style={s.playerCardHint}
-                resizeMode={'contain'}
+                contentFit={'contain'}
                 tintColor={'rgba(0,0,0,0.15)'}
-                source={require('@/assets/images/gamescreen/gleb_hand.png')}
+                source={require('@/assets/images/gamescreen/gleb_hand.webp')}
               />
             ) : (
               void 0

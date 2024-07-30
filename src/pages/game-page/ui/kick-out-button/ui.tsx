@@ -1,7 +1,8 @@
-import { Image, StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
+import {  StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
 import { Player } from '@/src/shared/lib/types/player';
 import { observer } from 'mobx-react';
 import { gameStore } from '@/src/entities/game';
+import { Image } from 'expo-image';
 
 type PropsType = {
   player: Player;
@@ -19,14 +20,14 @@ export const KickOutButton = observer(({ player, onPress }: PropsType) => {
         {player.isKicked ? (
           <Image
             style={s.kickOutButton}
-            resizeMode={'contain'}
-            source={require('@/assets/images/gamescreen/vernutj.png')}
+            contentFit={'contain'}
+            source={require('@/assets/images/gamescreen/vernutj.webp')}
           />
         ) : (
           <Image
             style={s.kickOutButton}
-            resizeMode={'contain'}
-            source={require('@/assets/images/gamescreen/vignatj.png')}
+            contentFit={'contain'}
+            source={require('@/assets/images/gamescreen/vignatj.webp')}
           />
         )}
       </TouchableWithoutFeedback>

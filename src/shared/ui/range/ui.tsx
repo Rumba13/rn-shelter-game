@@ -1,9 +1,10 @@
-import { Alert, GestureResponderEvent, Image, Text, TouchableWithoutFeedback, View } from 'react-native';
+import { Alert, GestureResponderEvent, Text, TouchableWithoutFeedback, View } from 'react-native';
 import Slider from 'rn-range-slider';
 import { observer } from 'mobx-react';
 import { gameSettingsStore } from '@/src/entities/game/model/game-settings';
 import { Label } from '@/src/shared/ui/range/label';
 import { useEffect, useState } from 'react';
+import { Image } from 'expo-image';
 
 type PropsType = {
   onValueChanged: (value: number) => void;
@@ -21,7 +22,8 @@ type PropsType = {
 export const Range = observer(({ onValueChanged, options, max, min, defaultValue }: PropsType) => {
   const [minimalValue, setMinimalValue] = useState<number>(defaultValue);
 
-  useEffect(() => {}, [min]);
+  useEffect(() => {
+  }, [min]);
 
   function _onValueChanged(value: number) {
     setMinimalValue(min);
@@ -45,16 +47,16 @@ export const Range = observer(({ onValueChanged, options, max, min, defaultValue
           }}>
           <Image
             style={s.sliderPicker}
-            resizeMode={'contain'}
-            source={options?.pickerImage ?? require('@/assets/images/gamecreationscreen/picker.png')}
+            contentFit={'contain'}
+            source={options?.pickerImage ?? require('@/assets/images/gamecreationscreen/picker.webp')}
           />
         </View>
       )}
       renderRail={() => (
         <Image
           style={s.sliderTrack}
-          resizeMode={'contain'}
-          source={options?.trackImage ?? require('@/assets/images/gamecreationscreen/picker_line.png')}
+          contentFit={'contain'}
+          source={options?.trackImage ?? require('@/assets/images/gamecreationscreen/picker_line.webp')}
         />
       )}
       renderRailSelected={() => void 0}
@@ -89,7 +91,8 @@ const s: any = {
     height: sliderPickerSize,
   },
   sliderTrack: {
-    maxWidth: '100%',
+    width: '100%',
+    height: '100%',
     zIndex: -1,
   },
 };
