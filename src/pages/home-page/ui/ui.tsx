@@ -8,11 +8,9 @@ type PropsType = {
   navigation: any;
 };
 
-
 export const HomePage = ({ navigation }: PropsType) => {
-
   return (
-    <SafeAreaView style={{ flex: 1}} edges={['bottom', 'left', 'top', 'right']}>
+    <SafeAreaView style={{ flex: 1 }} edges={['bottom', 'left', 'top', 'right']}>
       <View style={s.homePage}>
         <View style={s.mainContent}>
           <Image
@@ -43,7 +41,6 @@ export const HomePage = ({ navigation }: PropsType) => {
                   buttonImage={require('../../../../assets/images/mainscreen/create_button.png')}
                   shadowImage={require('../../../../assets/images/mainscreen/button_shadow_1.png')}
                   onPress={() => navigation.navigate('create-game-page')}
-
                 />
               </View>
 

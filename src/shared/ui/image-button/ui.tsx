@@ -36,17 +36,17 @@ const defaultYOnClickOffset = -2;
 const animationDuration = 35;
 
 export function ImageButton({
-                              buttonImage,
-                              shadowImage,
-                              width,
-                              height,
-                              style,
-                              onPress,
-                              options,
-                              title,
-                              maxFontSizeMultiplier,
-                              styleTitle,
-                            }: PropsType) {
+  buttonImage,
+  shadowImage,
+  width,
+  height,
+  style,
+  onPress,
+  options,
+  title,
+  maxFontSizeMultiplier,
+  styleTitle,
+}: PropsType) {
   const buttonImageXOffSet = options?.xOffset || defaultXOffset;
   const buttonImageYOffSet = options?.yOffset || defaultYOffset;
   const buttonImageOnPressXOffSet = options?.xOffSetOnPress || defaultXOnClickOffset;

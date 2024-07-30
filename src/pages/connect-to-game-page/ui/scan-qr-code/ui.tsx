@@ -34,9 +34,7 @@ export function ScanQRCode({ navigation }: PropsType) {
           facing={'back'}
           style={{ width: 300, height: 300 }}
           barcodeScannerSettings={{ barcodeTypes: ['qr'] }}
-          onBarcodeScanned={scanningResult =>
-            connectToGameStore.connectToGame(scanningResult.data, navigation)
-          }></CameraView>
+          onBarcodeScanned={scanningResult => connectToGameStore.connectToGame(scanningResult.data, navigation)}></CameraView>
       )}
       <Text style={s.qrTitle}>Отсканируй курлык код</Text>
     </View>
@@ -45,9 +43,8 @@ export function ScanQRCode({ navigation }: PropsType) {
 
 const s = StyleSheet.create({
   qrCode: {
-    maxWidth: '100%',
-    width: 140,
-    height: 140,
+    minWidth: '50%',
+    marginHorizontal: 'auto',
   },
   qrTitle: {
     textAlign: 'center',

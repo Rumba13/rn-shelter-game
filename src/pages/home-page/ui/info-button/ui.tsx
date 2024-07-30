@@ -89,7 +89,6 @@ const s = StyleSheet.create({
     width: 320,
     height: 585,
     borderRadius: 15,
-
   },
   privacyPolicy: {
     position: 'absolute',

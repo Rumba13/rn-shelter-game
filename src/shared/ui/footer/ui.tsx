@@ -4,7 +4,7 @@ import { Image } from 'expo-image';
 
 type PropsType = {
   styles?: StyleProp<ViewStyle>;
-  onNextButtonPress: () => void;
+  onNextButtonPress?: () => void;
 };
 
 export function Footer({ styles, onNextButtonPress }: PropsType) {
@@ -40,7 +40,6 @@ const s: any = {
     flex: 1,
     position: 'relative',
     maxHeight: 170,
-    marginHorizontal: 35,
   },
   footerDetail: {
     position: 'absolute',

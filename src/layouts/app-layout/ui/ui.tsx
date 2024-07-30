@@ -9,7 +9,6 @@ type PropsType = {
   children: React.ReactNode;
 };
 
-
 const SCREEN_HEIGHT = Dimensions.get('screen').height; // device height
 const STATUS_BAR_HEIGHT = StatusBar.currentHeight || 24;
 const WINDOW_HEIGHT = Dimensions.get('window').height;
@@ -24,7 +23,6 @@ export function AppLayout({ children }: PropsType) {
     RobotoSlabMedium: require('@/assets/fonts/RobotoSlab-Medium.ttf'),
     SpaceMono: require('@/assets/fonts/SpaceMono-Regular.ttf'),
   });
-
 
   useEffect(() => {
     setTimeout(() => {
@@ -59,11 +57,10 @@ const s = StyleSheet.create({
     width: '100%',
   },
   root: {
-    height: Dimensions.get('window').height,
-    width: Dimensions.get('window').width,
+    height: '100%',
+    width: '100%',
     margin: 0,
     padding: 0,
-
   },
 });
 

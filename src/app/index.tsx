@@ -15,7 +15,7 @@ import {
 } from 'react-native';
 import { CreateGamePage } from '@/src/pages/create-game-page';
 import { SelectPlayerPage } from '@/src/pages/select-player-page';
-import { ConnectedToGamePage } from '@/src/pages/connect-to-game-page';
+import { ConnectToGamePage } from '@/src/pages/connect-to-game-page';
 import { gameStore } from '@/src/entities/game/model/game';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { GamePage } from '@/src/pages/game-page';
@@ -30,8 +30,6 @@ TextInput.defaultProps = TextInput.defaultProps || {};
 TextInput.defaultProps.allowFontScaling = false;
 
 const Stack = createNativeStackNavigator();
-
-
 
 export default function App() {
   const stackScreenOptions: NativeStackNavigationOptions = { headerShown: false, animation: 'fade_from_bottom' };
@@ -53,7 +51,7 @@ export default function App() {
   const ConnectToGamePageRoute = ({ navigation }: any) => {
     return (
       <AppLayout>
-        <ConnectedToGamePage navigation={navigation} />
+        <ConnectToGamePage navigation={navigation} />
       </AppLayout>
     );
   };

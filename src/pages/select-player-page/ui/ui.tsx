@@ -14,7 +14,7 @@ type PropsType = {
 };
 
 const ticketHiddenAtPx = -200;
-const ticketHeight = 715 / 2 // TODO add real ticket height
+const ticketHeight = 715 / 2; // TODO add real ticket height
 const ticketShowedAtPx = ticketHeight;
 export function SelectPlayerPage({ navigation }: PropsType) {
   const [selectedPlayerIndex, setSelectedPlayerIndex] = useState(0);

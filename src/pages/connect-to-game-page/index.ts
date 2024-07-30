@@ -1,1 +1,1 @@
-export { ConnectedToGamePage } from './ui/ui';
+export { ConnectToGamePage } from './ui/ui';
