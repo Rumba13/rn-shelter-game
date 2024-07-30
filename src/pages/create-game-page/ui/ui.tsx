@@ -1,8 +1,7 @@
-import { Alert, Image, ImageBackground, SafeAreaView, ScrollView, Text, View } from 'react-native';
+import { Image, ImageBackground, SafeAreaView, ScrollView, Text, View } from 'react-native';
 import { Footer } from '@/src/shared/ui/footer/ui';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Header } from './header/ui';
-import { Separator } from '@/src/pages/create-game-page/ui/separator/ui';
 import { GameOptionCheckbox } from '@/src/pages/create-game-page/ui/game-option-checkbox/ui';
 import { GameOptionSelect } from '@/src/pages/create-game-page/ui/game-option-select/ui';
 import { SexualOrientation } from '@/src/shared/lib/types/sexual-orientation';
@@ -25,15 +24,20 @@ import {
   characteristicCards,
   characteristicCardsList,
 } from '@/src/entities/characteristic-card/model/characteristic-card';
-import { renderCharacteristicCardSelectedText } from '@/src/pages/create-game-page/ui/render-characteristic-card-selected-text';
+import {
+  renderCharacteristicCardSelectedText,
+} from '@/src/pages/create-game-page/ui/render-characteristic-card-selected-text';
 import { CharacteristicCardsList } from '@/src/shared/lib/types/characteristic-cards-list';
-import { characteristicCardNameToCard } from '@/src/entities/characteristic-card/model/characteristic-card-name-to-card';
-import { characteristicBalanceValueToTitle } from '@/src/pages/create-game-page/ui/characteristic-balance-value-to-title';
+import {
+  characteristicCardNameToCard,
+} from '@/src/entities/characteristic-card/model/characteristic-card-name-to-card';
+import {
+  characteristicBalanceValueToTitle,
+} from '@/src/pages/create-game-page/ui/characteristic-balance-value-to-title';
 import { createGameStore } from '@/src/feature/create-game/model/create-game';
 import { gameStore } from '@/src/entities/game/model/game';
 import { OverlayModal } from '@/src/shared/ui/overlay-modal/ui';
 import { cardKitToCards } from '@/src/shared/lib/card-kit-to-cards';
-import { shelters } from '@/src/entities/shelter/model/shelters';
 //TODO refactoring
 //TODO fix font issues
 
@@ -45,21 +49,22 @@ export const CreateGamePage = observer(({ navigation }: PropsType) => {
   const [isErrorModalOpened, setIsErrorModalOpened] = useState<boolean>(false);
   const [errorDescription, setErrorDescription] = useState<string | null>(null);
 
-  const settings = gameSettingsStore.settings;
+  const { settings } = gameSettingsStore;
 
   return (
     <View style={s.createGamePageWrapper}>
-      <View style={{ flex: 1, height: 'auto' }}>
-        <Image
-          style={s.pageTitle}
-          resizeMode={'contain'}
-          source={require('../../../../assets/images/gamecreationscreen/create.png')}
-        />
+      <Image
+        style={s.pageTitle}
+        resizeMode={'contain'}
+        source={require('../../../../assets/images/gamecreationscreen/create.png')}
+      />
+      <View style={{ width: '80%', marginHorizontal: 'auto' }}>
         <ImageBackground
           source={require('../../../../assets/images/gamecreationscreen/frame_back.png')}
           resizeMode={'contain'}
           style={s.mainContentBackground}>
           <View style={s.mainContentWrapper}>
+
             <SafeAreaView style={s.mainContent}>
               <ScrollView decelerationRate={0.985}>
                 <Header />
@@ -218,9 +223,7 @@ export const CreateGamePage = observer(({ navigation }: PropsType) => {
             setIsErrorModalOpened(true);
             setErrorDescription(String(err));
           }
-        }}
-        styles={{ marginHorizontal: 50 }}
-      />
+        }} />
     </View>
   );
 });
@@ -253,25 +256,20 @@ const s: any = {
   pageTitle: {
     maxWidth: '90%',
     marginTop: 50,
-    marginBottom: 33,
+    marginBottom: 13,
     maxHeight: 80,
     flexBasis: 'auto',
     alignSelf: 'center',
   },
   mainContentWrapper: {
     position: 'relative',
-    width: '100%',
-    height: 470,
-
-    maxHeight: '100%',
+    marginBottom: 12,
+    marginHorizontal: 15,
+    marginTop: 12,
   },
-  mainContentBackground: {},
-  mainContent: {
+  mainContentBackground: {
     position: 'relative',
-    left: 67,
-    top: 10,
-    width: '65%',
-    height: '96%',
-    flexDirection: 'column',
+    aspectRatio: 549 / 934,
   },
+  mainContent: {},
 };

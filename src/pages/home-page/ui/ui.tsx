@@ -8,13 +8,8 @@ type PropsType = {
   navigation: any;
 };
 
-const SCREEN_HEIGHT = Dimensions.get('screen').height; // device height
-const STATUS_BAR_HEIGHT = StatusBar.currentHeight || 24;
-const WINDOW_HEIGHT = Dimensions.get('window').height;
-const NAVIGATION_BAR_HEIGHT = SCREEN_HEIGHT - WINDOW_HEIGHT - STATUS_BAR_HEIGHT;
 
 export const HomePage = ({ navigation }: PropsType) => {
-  console.log(useSafeAreaInsets());
 
   return (
     <SafeAreaView style={{ flex: 1}} edges={['bottom', 'left', 'top', 'right']}>

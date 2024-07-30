@@ -88,7 +88,7 @@ export function ImageButton({
   }));
 
   return (
-    <Animated.View style={[s.buttonContainer, style, { width, maxHeight: height }]}>
+    <Animated.View style={[s.buttonContainer, style, { width, minHeight: height }]}>
       <ImageBackground source={shadowImage} style={s.buttonShadow} resizeMode={'contain'}>
         <Animated.View style={[{ maxHeight: '100%' }, animatedStyles]}>
           <ImageBackground source={buttonImage} style={[s.buttonImage]} resizeMode={'contain'}>

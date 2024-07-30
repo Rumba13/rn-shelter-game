@@ -98,7 +98,7 @@ const s = StyleSheet.create({
     marginBottom: 23,
   },
   shareButton: {
-    display: 'flex',
+    flex: 1,
     height: 45,
     marginBottom: 10,
   },

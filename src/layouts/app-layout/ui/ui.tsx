@@ -10,6 +10,10 @@ type PropsType = {
 };
 
 
+const SCREEN_HEIGHT = Dimensions.get('screen').height; // device height
+const STATUS_BAR_HEIGHT = StatusBar.currentHeight || 24;
+const WINDOW_HEIGHT = Dimensions.get('window').height;
+const NAVIGATION_BAR_HEIGHT = SCREEN_HEIGHT - WINDOW_HEIGHT - STATUS_BAR_HEIGHT;
 
 export function AppLayout({ children }: PropsType) {
   const [fontsLoaded, fontsError] = useFonts({
@@ -20,6 +24,7 @@ export function AppLayout({ children }: PropsType) {
     RobotoSlabMedium: require('@/assets/fonts/RobotoSlab-Medium.ttf'),
     SpaceMono: require('@/assets/fonts/SpaceMono-Regular.ttf'),
   });
+
 
   useEffect(() => {
     setTimeout(() => {
@@ -58,6 +63,7 @@ const s = StyleSheet.create({
     width: Dimensions.get('window').width,
     margin: 0,
     padding: 0,
+
   },
 });
 

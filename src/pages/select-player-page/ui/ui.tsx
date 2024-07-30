@@ -7,16 +7,17 @@ import QRCode from 'react-native-qrcode-svg';
 import { gameStore } from '@/src/entities/game';
 import Animated, { useAnimatedStyle, useSharedValue, withTiming, Easing } from 'react-native-reanimated';
 import { translate } from '@shopify/react-native-skia';
+import Constants from 'expo-constants';
 
 type PropsType = {
   navigation: any;
 };
 
 const ticketHiddenAtPx = -200;
-const ticketShowedAtPx = 270;
-
+const ticketHeight = 715 / 2 // TODO add real ticket height
+const ticketShowedAtPx = ticketHeight;
 export function SelectPlayerPage({ navigation }: PropsType) {
-  const [selectedPlayerIndex, setSelectedPlayerIndex] = useState<number>(0);
+  const [selectedPlayerIndex, setSelectedPlayerIndex] = useState(0);
   const [isTicketShowed, setIsTicketShowed] = useState<boolean>(false);
   const translateYAnim = useSharedValue(ticketHiddenAtPx);
 
@@ -77,6 +78,7 @@ export function SelectPlayerPage({ navigation }: PropsType) {
         <SelectPlayerSlider selectedPlayerIndex={selectedPlayerIndex} setSelectedPlayerIndex={setSelectedPlayerIndex} />
       </View>
       <Footer
+        styles={{ flex: 1 }}
         onNextButtonPress={() => {
           gameStore.setCurrentPlayerNumber(selectedPlayerIndex);
           navigation.navigate('game-page');
@@ -95,7 +97,7 @@ const s = StyleSheet.create({
     position: 'absolute',
     width: ticketWrapperWidth,
     right: '50%',
-    zIndex: 100,
+    zIndex: 2222,
     maxHeight: 'auto',
     flex: 0,
     top: '-50%',
