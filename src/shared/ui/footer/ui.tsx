@@ -48,7 +48,7 @@ const s: any = {
     width: '100%',
   },
   button: {
-    zIndex: 100,
+    zIndex: 30,
     maxWidth: '55%',
     width: '100%',
   },
@@ -58,7 +58,7 @@ const s: any = {
     marginRight: 'auto',
     marginTop: 'auto',
     flexDirection: 'row',
-    zIndex: 100,
+    zIndex: 20,
     height: 90, //TODO remove fixed height
   },
   createGameButtonWrapper: {

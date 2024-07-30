@@ -1,6 +1,15 @@
-import { View, Text, StyleSheet, Image, ImageBackground, Dimensions, Animated } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  ImageBackground,
+  Dimensions,
+  Animated,
+  useWindowDimensions, Alert,
+} from 'react-native';
 import Carousel from 'react-native-reanimated-carousel/src/Carousel';
-import { gameSettingsStore } from '@/src/entities/game';
+import { gameSettingsStore, gameStore } from '@/src/entities/game';
 import { useEffect, useState } from 'react';
 import { ImageButton } from '@/src/shared/ui/image-button/ui';
 
@@ -10,33 +19,38 @@ type PropsType = {
 };
 
 export function SelectPlayerSlider({ selectedPlayerIndex, setSelectedPlayerIndex }: PropsType) {
-  const players = [...new Array(gameSettingsStore.settings.playersCount).keys()].map(item => item + 1);
-  const observer = (
+  const players = gameStore.getGame().players.map(player => player.number);
+  const observerPlayer = (
     <Image
       style={s.sliderObserver}
       resizeMode={'contain'}
       source={require('@/assets/images/playerselectionscreen/main/eye_icon.png')}
     />
   );
-  const sliderItems = [observer, ...players];
+  const sliderItems = [observerPlayer, ...players];
+  const sliderWidth = useWindowDimensions().width - 35; //margin horizontal
+
+  useEffect(() => {
+
+  }, [sliderWidth]);
 
   return (
     <>
-      <View style={s.sliderWrapper}>
+      <View style={s.sliderWrapper}  >
         <ImageBackground
           resizeMode={'contain'}
+          style={s.sliderBackground}
           source={require('@/assets/images/playerselectionscreen/main/vibor_igroka.png')}>
           <View style={{ width: '100%', height: '100%' }}>
             <Carousel
               style={s.slider}
               data={sliderItems}
               loop
-              width={200}
+              width={sliderWidth * 0.55}
               mode={'parallax'}
-              scrollAnimationDuration={200}
-              maxScrollDistancePerSwipe={300}
+              scrollAnimationDuration={60}
               overscrollEnabled
-              modeConfig={{ parallaxAdjacentItemScale: 0.55 }}
+              modeConfig={{ parallaxAdjacentItemScale: sliderWidth * 0.0017,  parallaxScrollingScale: sliderWidth * 0.0025 }}
               defaultIndex={selectedPlayerIndex}
               onSnapToItem={index => {
                 setSelectedPlayerIndex(index);
@@ -80,7 +94,6 @@ export function SelectPlayerSlider({ selectedPlayerIndex, setSelectedPlayerIndex
         title={selectedPlayerIndex === 0 ? 'Поделиться игрой' : 'Поделиться персонажем'}
         styleTitle={{
           textAlign: 'center',
-          lineHeight: 40,
           fontSize: 19,
           fontFamily: 'RobotoSlabSemiBold',
           letterSpacing: 1.2,
@@ -93,13 +106,15 @@ export function SelectPlayerSlider({ selectedPlayerIndex, setSelectedPlayerIndex
 
 const s = StyleSheet.create({
   sliderWrapper: {
-    height: 185,
+    width: '100%',
+    aspectRatio: 586 / 368,
     marginTop: 18,
     marginBottom: 23,
   },
+  sliderBackground: {},
   shareButton: {
-    flex: 1,
-    height: 45,
+    width: '100%',
+    maxHeight: 65,
     marginBottom: 10,
   },
   sliderObserver: {
@@ -109,15 +124,11 @@ const s = StyleSheet.create({
   },
   slider: {
     width: '100%',
-    height: '100%',
     display: 'flex',
-    position: 'relative',
-    alignItems: 'center',
-    alignContent: 'center',
     justifyContent: 'center',
+    borderWidth:1
   },
   sliderItem: {
-    display: 'flex',
     height: '100%',
     alignContent: 'center',
     justifyContent: 'center',

@@ -16,6 +16,7 @@ type PropsType = {
 const ticketHiddenAtPx = -200;
 const ticketHeight = 715 / 2; // TODO add real ticket height
 const ticketShowedAtPx = ticketHeight;
+
 export function SelectPlayerPage({ navigation }: PropsType) {
   const [selectedPlayerIndex, setSelectedPlayerIndex] = useState(0);
   const [isTicketShowed, setIsTicketShowed] = useState<boolean>(false);
@@ -61,24 +62,30 @@ export function SelectPlayerPage({ navigation }: PropsType) {
           options={{ yOffset: -4, xOffset: -4, yOffsetOnPress: -2, xOffSetOnPress: -2 }}
         />
       </Animated.View>
-      <View style={{ flex: 1 }}>
-        <Text style={s.selectPlayerPageTitle} maxFontSizeMultiplier={1.1}>
-          Выбери номер своего персонажа
-        </Text>
-        <View style={s.separatorWrapper}>
-          <Image
-            style={s.separator}
-            resizeMode={'contain'}
-            source={require('@/assets/images/playerselectionscreen/main/decal_vibor_igroka.png')}
-          />
+
+      <View style={s.maxWidthWrapper}>
+
+        <View style={{ flex: 1 }}>
+          <Text style={s.selectPlayerPageTitle} adjustsFontSizeToFit>
+            Выбери номер своего персонажа
+          </Text>
+          <View style={s.separatorWrapper}>
+            <Image
+              style={s.separator}
+              resizeMode={'contain'}
+              source={require('@/assets/images/playerselectionscreen/main/decal_vibor_igroka.png')}
+            />
+          </View>
+          <Text style={s.selectPlayerPageSubTitle} adjustsFontSizeToFit>
+            Два дауна не могут иметь один и тот же номер
+          </Text>
+          <SelectPlayerSlider selectedPlayerIndex={selectedPlayerIndex}
+                              setSelectedPlayerIndex={setSelectedPlayerIndex} />
         </View>
-        <Text style={s.selectPlayerPageSubTitle} maxFontSizeMultiplier={1.25}>
-          Два дауна не могут иметь один и тот же номер
-        </Text>
-        <SelectPlayerSlider selectedPlayerIndex={selectedPlayerIndex} setSelectedPlayerIndex={setSelectedPlayerIndex} />
       </View>
+
       <Footer
-        styles={{ flex: 1 }}
+        styles={{ marginHorizontal: 35 }}
         onNextButtonPress={() => {
           gameStore.setCurrentPlayerNumber(selectedPlayerIndex);
           navigation.navigate('game-page');
@@ -88,7 +95,7 @@ export function SelectPlayerPage({ navigation }: PropsType) {
   );
 }
 
-const maxContentWidth = 290;
+const maxContentWidth = 320;
 const ticketWrapperWidth = maxContentWidth + 60;
 const ticketButtonWidth = 100;
 const QRCodeSize = 145;
@@ -101,6 +108,11 @@ const s = StyleSheet.create({
     maxHeight: 'auto',
     flex: 0,
     top: '-50%',
+  },
+  maxWidthWrapper: {
+    marginTop: 140,
+    marginHorizontal: 45,
+    flex: 1,
   },
   QRCodeWrapper: {
     position: 'absolute',
@@ -122,12 +134,7 @@ const s = StyleSheet.create({
     transform: [{ translateX: -(ticketButtonWidth / 2) }],
   },
   selectPlayerPage: {
-    maxWidth: maxContentWidth,
-    paddingTop: 210,
-    marginHorizontal: 'auto',
-    height: 'auto',
     flex: 1,
-    maxHeight: Dimensions.get('window').height,
   },
   selectPlayerPageTitle: {
     marginBottom: 10,

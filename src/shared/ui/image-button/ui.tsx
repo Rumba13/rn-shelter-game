@@ -36,17 +36,17 @@ const defaultYOnClickOffset = -2;
 const animationDuration = 35;
 
 export function ImageButton({
-  buttonImage,
-  shadowImage,
-  width,
-  height,
-  style,
-  onPress,
-  options,
-  title,
-  maxFontSizeMultiplier,
-  styleTitle,
-}: PropsType) {
+                              buttonImage,
+                              shadowImage,
+                              width,
+                              height,
+                              style,
+                              onPress,
+                              options,
+                              title,
+                              maxFontSizeMultiplier,
+                              styleTitle,
+                            }: PropsType) {
   const buttonImageXOffSet = options?.xOffset || defaultXOffset;
   const buttonImageYOffSet = options?.yOffset || defaultYOffset;
   const buttonImageOnPressXOffSet = options?.xOffSetOnPress || defaultXOnClickOffset;
@@ -92,7 +92,7 @@ export function ImageButton({
       <ImageBackground source={shadowImage} style={s.buttonShadow} resizeMode={'contain'}>
         <Animated.View style={[{ maxHeight: '100%' }, animatedStyles]}>
           <ImageBackground source={buttonImage} style={[s.buttonImage]} resizeMode={'contain'}>
-            <Text style={styleTitle} maxFontSizeMultiplier={maxFontSizeMultiplier}>
+            <Text style={[s.title, styleTitle]} maxFontSizeMultiplier={maxFontSizeMultiplier} adjustsFontSizeToFit>
               {title}
             </Text>
           </ImageBackground>
@@ -109,6 +109,12 @@ export function ImageButton({
 const s: any = {
   buttonContainer: {
     flex: 1,
+  },
+  title: {
+    flex: 1,
+    fontSize: 16,
+    textAlign: 'center',
+    verticalAlign: 'middle',
   },
   buttonShadow: {
     maxWidth: '100%',
