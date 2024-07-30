@@ -3,14 +3,9 @@ import { createNativeStackNavigator, NativeStackNavigationOptions } from '@react
 import { HomePage } from '@/src/pages/home-page';
 import { AppLayout } from '@/src/layouts/app-layout';
 import {
-  Alert,
-  Button,
-  Dimensions,
   ScrollView,
-  StatusBar,
   Text,
   TextInput,
-  TouchableOpacity,
   View,
 } from 'react-native';
 import { CreateGamePage } from '@/src/pages/create-game-page';

@@ -126,7 +126,6 @@ const s = StyleSheet.create({
     width: '100%',
     display: 'flex',
     justifyContent: 'center',
-    borderWidth:1
   },
   sliderItem: {
     height: '100%',

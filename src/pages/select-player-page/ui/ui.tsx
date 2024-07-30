@@ -13,9 +13,9 @@ type PropsType = {
   navigation: any;
 };
 
-const ticketHiddenAtPx = -200;
-const ticketHeight = 715 / 2; // TODO add real ticket height
-const ticketShowedAtPx = ticketHeight;
+const ticketHiddenAtPx = -500;
+const ticketHeight = 715; // TODO add real ticket height
+const ticketShowedAtPx = -20;
 
 export function SelectPlayerPage({ navigation }: PropsType) {
   const [selectedPlayerIndex, setSelectedPlayerIndex] = useState(0);
@@ -104,13 +104,11 @@ const s = StyleSheet.create({
     position: 'absolute',
     width: ticketWrapperWidth,
     right: '50%',
-    zIndex: 2222,
-    maxHeight: 'auto',
-    flex: 0,
-    top: '-50%',
+    zIndex: 3000,
+    top: 0,
   },
   maxWidthWrapper: {
-    marginTop: 140,
+    marginTop: 200,
     marginHorizontal: 45,
     flex: 1,
   },
@@ -122,7 +120,7 @@ const s = StyleSheet.create({
   },
   ticket: {
     maxWidth: '100%',
-    height: 715, //TODO remove fixed height
+    height: ticketHeight, //TODO remove fixed height
   },
   ticketButton: {
     position: 'absolute',
@@ -134,6 +132,7 @@ const s = StyleSheet.create({
     transform: [{ translateX: -(ticketButtonWidth / 2) }],
   },
   selectPlayerPage: {
+    position: 'relative',
     flex: 1,
   },
   selectPlayerPageTitle: {
