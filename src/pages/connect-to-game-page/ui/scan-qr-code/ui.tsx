@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
+import { Alert, Image, StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
 import { CameraView, PermissionStatus, useCameraPermissions } from 'expo-camera';
 import { connectToGameStore } from '@/src/feature/connect-to-game';
 import { useEffect, useState } from 'react';
@@ -34,7 +34,10 @@ export function ScanQRCode({ navigation }: PropsType) {
           facing={'back'}
           style={{ width: 300, height: 300 }}
           barcodeScannerSettings={{ barcodeTypes: ['qr'] }}
-          onBarcodeScanned={scanningResult => connectToGameStore.connectToGame(scanningResult.data, navigation)}></CameraView>
+          onBarcodeScanned={scanningResult => {
+            Alert.alert('yay');
+            connectToGameStore.connectToGame(scanningResult.data, navigation);
+          }}></CameraView>
       )}
       <Text style={s.qrTitle}>Отсканируй курлык код</Text>
     </View>

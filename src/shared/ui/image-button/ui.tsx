@@ -28,6 +28,7 @@ type PropsType = {
   styleTitle?: StyleProp<TextStyle>;
   maxFontSizeMultiplier?: number;
 };
+export { PropsType as ImageButtonProps }
 
 const defaultXOffset = -5;
 const defaultXOnClickOffset = -3;

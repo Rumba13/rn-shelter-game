@@ -7,6 +7,7 @@ import { observer } from 'mobx-react';
 import { CardDisplayStatus } from '@/src/shared/lib/types/card-display-status';
 import { KickOutButton } from '@/src/pages/game-page/ui/kick-out-button/ui';
 import Animated, { Easing, withTiming, useSharedValue, useAnimatedStyle } from 'react-native-reanimated';
+import { adaptiveValue } from '@/src/shared/ui/adaptive-value/adaptive-value';
 
 type PropsType = {
   player: Player;
@@ -249,8 +250,7 @@ const s = StyleSheet.create({
   mainContentWrapper: {
     position: 'relative',
     width: '100%',
-    height: 530,
-
+    maxHeight: '100%',
     marginHorizontal: 'auto',
   },
   selectPlayerSlider: {
@@ -271,16 +271,16 @@ const s = StyleSheet.create({
     width: '100%',
     fontFamily: 'RobotoSlab',
     textAlign: 'center',
-    fontSize: 20,
-    marginTop: 3,
+    fontSize: adaptiveValue(20),
+    marginTop: '1%',
   },
   mainContentSubTitle: {
     width: '100%',
     fontFamily: 'RobotoSlabSemiBold',
     textAlign: 'center',
     height: 45,
-    fontSize: 20,
-    marginTop: 6,
+    fontSize: adaptiveValue(20),
+    marginTop: '2%',
   },
   mainContentBackground: {
     width: '100%',

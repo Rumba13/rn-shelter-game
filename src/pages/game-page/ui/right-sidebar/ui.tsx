@@ -24,6 +24,7 @@ import Animated, {
   EasingFunctionFactory,
 } from 'react-native-reanimated';
 import { QuestionButton } from '@/src/shared/ui/question-button/ui';
+import { adaptiveValue } from '@/src/shared/ui/adaptive-value/adaptive-value';
 
 type PropsType = {
   isOpened: boolean;
@@ -35,19 +36,24 @@ type PropsType = {
   animationEasing: EasingFunction | EasingFunctionFactory;
 };
 
-const sidebarClosedAtPx = 294;
+const sideBarAspectRatio = 657 / 1442;
+const sideBarHeight = Dimensions.get('window').height;
+const sideBarWidth = sideBarHeight * sideBarAspectRatio;
+
+const sidebarClosedAtPx = (sideBarWidth / 100 * 80);
 const sidebarOpenedAtPx = 5;
-const sidebarHiddenAtPx = sidebarClosedAtPx + 65;
+const sidebarHiddenAtPx = sidebarClosedAtPx + (sideBarWidth / 100 * 20);
+
 
 export function RightSidebar({
-  isOpened,
-  setIsOpened,
-  isHidden,
-  animationDuration,
-  unKickedOutPlayers,
-  ending,
-  animationEasing,
-}: PropsType) {
+                               isOpened,
+                               setIsOpened,
+                               isHidden,
+                               animationDuration,
+                               unKickedOutPlayers,
+                               ending,
+                               animationEasing,
+                             }: PropsType) {
   const sideBarTranslateXAnim = useSharedValue(sidebarHiddenAtPx);
   const animatedSidebarStyles = useAnimatedStyle(() => ({
     transform: [
@@ -77,7 +83,8 @@ export function RightSidebar({
   return (
     <Animated.View style={[s.rightSideBarWrapper, animatedSidebarStyles]}>
       <View style={{ flex: 1, position: 'relative' }}>
-        <ImageBackground resizeMode={'contain'} source={require('@/assets/images/gamescreen/right_final.png')}>
+        <ImageBackground style={{ width: '100%', height: '100%' }} resizeMode={'contain'}
+                         source={require('@/assets/images/gamescreen/right_final.png')}>
           <TouchableWithoutFeedback onPress={() => setIsOpened(!isOpened)}>
             <View style={s.rightSideBarIconWrapper}>
               <Image
@@ -89,7 +96,7 @@ export function RightSidebar({
           </TouchableWithoutFeedback>
 
           <View style={s.helpButtonWrapper}>
-            <QuestionButton onPress={() => void 0} />
+            <QuestionButton height={'100%'} width={'100%'} onPress={() => void 0} />
           </View>
           <View style={s.rightSideBar}>
             <ScrollView style={s.leftPlayersWrapper}>
@@ -146,8 +153,7 @@ export function RightSidebar({
   );
 }
 
-const sideBarWidth = 370;
-const helpButtonSize = 36;
+const helpButtonSize = adaptiveValue(36);
 const sideBarIconSize = 48;
 const s = StyleSheet.create({
   endingDescription: {
@@ -171,29 +177,31 @@ const s = StyleSheet.create({
   },
   endingWrapper: {
     position: 'absolute',
-    bottom: 17,
-    left: 19,
-    right: 22,
-    height: 427,
+    bottom: '2%',
+    left: '3%',
+    right: '5%',
+    top: '43.5%',
     padding: 20,
+    paddingTop: 0,
     justifyContent: 'center',
   },
   endingImage: {
     maxWidth: '100%',
-    height: 95,
+    width: '100%',
+    aspectRatio: 402 / 162,
     marginBottom: 30,
   },
   ending: {
-    height: 180,
-    maxWidth: '100%',
+    width: '100%',
+    aspectRatio: 458 / 356,
+    height: 'auto',
   },
   leftPlayersWrapper: {
     position: 'absolute',
-    top: 64,
-    right: 5,
-    left: 10,
-    height: 223,
-    marginTop: 10,
+    top: '9%',
+    left: '3%',
+    height: sideBarHeight * 0.29,
+    width: '100%',
   },
   leftPlayers: {
     height: '100%',
@@ -210,11 +218,11 @@ const s = StyleSheet.create({
     top: -20,
     right: 0,
     zIndex: 200,
-    width: sideBarWidth,
-    height: Dimensions.get('window').height,
+    height: sideBarHeight,
+    aspectRatio: sideBarAspectRatio,
   },
   rightSideBar: {
-    width: sideBarWidth - 54,
+    width: '84%',
     marginLeft: 'auto',
     height: '100%',
   },
@@ -225,23 +233,20 @@ const s = StyleSheet.create({
   },
   rightSideBarIconWrapper: {
     position: 'absolute',
-    bottom: 0,
-    left: 17,
-    paddingBottom: 27,
-    paddingLeft: 10,
-    paddingTop: 20,
+    top: '87.5%',
+    left: '3.5%',
+    paddingBottom: '6%',
+    paddingLeft: '3%',
+    paddingTop: '7%',
   },
   helpButton: {
     zIndex: 20,
-    maxWidth: '100%',
-    width: helpButtonSize,
-    height: helpButtonSize,
   },
-  helpButtonWrapper: {
+  helpButtonWrapper: { //TODO adaptive
     position: 'absolute',
     zIndex: 20,
-    bottom: 113,
-    left: 30,
+    top: '81%',
+    left: '7%',
     maxWidth: '100%',
     width: helpButtonSize,
     height: helpButtonSize,

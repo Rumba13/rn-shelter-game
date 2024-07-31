@@ -5,7 +5,7 @@ import {
   Text,
   ImageBackground,
   TouchableWithoutFeedback,
-  ScrollView,
+  ScrollView, Alert,
 } from 'react-native';
 import { gameStore } from '@/src/entities/game';
 import React, { useState } from 'react';
@@ -20,6 +20,9 @@ import { Easing, EasingFunction, EasingFunctionFactory } from 'react-native-rean
 type PropsType = {};
 const sidebarAnimationDuration = 270;
 const sidebarAnimationEasing: EasingFunction | EasingFunctionFactory = Easing.out(Easing.sin);
+const sliderRation = 1049 / 593;
+const sliderWidth = Dimensions.get('window').width - 84;
+const sliderHeight = sliderWidth * sliderRation;
 
 export const GamePage = observer(({}: PropsType) => {
   const selectPlayerSliderRef = React.createRef<ICarouselInstance>();
@@ -34,15 +37,16 @@ export const GamePage = observer(({}: PropsType) => {
   );
   const [thumbsScrollPositionX, setThumbsScrollPositionX] = useState(0);
 
+
   return (
     <View style={s.gamePage}>
-      <View style={{ flex: 1, maxHeight: 530, marginBottom: 10, marginHorizontal: 'auto' }}>
+      <View style={{ flex: 1, maxHeight: sliderHeight, marginBottom: 10, marginHorizontal: 'auto' }}>
         <Carousel
           overscrollEnabled
           ref={selectPlayerSliderRef}
           style={s.selectPlayerSlider}
           data={game.players}
-          width={300}
+          width={sliderWidth}
           scrollAnimationDuration={350}
           panGestureHandlerProps={{
             activeOffsetX: [-10, 10],
@@ -82,7 +86,7 @@ export const GamePage = observer(({}: PropsType) => {
         />
       </View>
 
-      <View style={{ width: 290, marginHorizontal: 'auto' }}>
+      <View style={{ width: sliderWidth / 100 * 95, marginHorizontal: 'auto' }}>
         <ImageBackground resizeMode={'stretch'} source={require('@/assets/images/gamescreen/box.png')}>
           <ScrollView
             showsHorizontalScrollIndicator={false}
@@ -165,7 +169,7 @@ export const GamePage = observer(({}: PropsType) => {
   );
 });
 
-const selectPlayerThumbsWidth = 72;
+const selectPlayerThumbsWidth = sliderWidth / 4 - 5;
 
 const s = StyleSheet.create({
   gamePage: {
@@ -176,11 +180,10 @@ const s = StyleSheet.create({
   },
   playerCardsBackground: {},
   selectPlayerSlider: {
-    width: 300 + 40,
-    marginHorizontal: 'auto',
+    width: sliderWidth + 40,
   },
   selectPlayerThumbs: {
-    width: 282,
+    width: "100%",
     height: 64,
     marginHorizontal: 'auto',
     flexDirection: 'row',

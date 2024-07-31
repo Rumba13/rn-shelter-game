@@ -6,7 +6,7 @@ import {
   Text,
   Image,
   TouchableWithoutFeedback,
-  ScrollView,
+  ScrollView, Alert, PixelRatio,
 } from 'react-native';
 import { Apocalypse } from '@/src/shared/lib/types/apocalypse';
 import { Shelter } from '@/src/shared/lib/types/shelter';
@@ -19,6 +19,7 @@ import Animated, {
   EasingFunction,
   EasingFunctionFactory,
 } from 'react-native-reanimated';
+import { adaptiveValue } from '@/src/shared/ui/adaptive-value/adaptive-value';
 
 type PropsType = {
   isOpened: boolean;
@@ -30,27 +31,33 @@ type PropsType = {
   animationDuration: number;
   animationEasing: EasingFunction | EasingFunctionFactory;
 };
+const sideBarAspectRatio = 657 / 1442;
+const sideBarHeight = Dimensions.get('window').height;
+const sideBarWidth = sideBarHeight * sideBarAspectRatio;
+
+const sideBarClosedAtPx = -(sideBarWidth / 100 * 78);
+const sideBarOpenedAtPx = 0;
+const sideBarHiddenAtPx = -430;
 
 export function LeftSidebar({
-  isOpened,
-  setIsOpened,
-  apocalypse,
-  shelter,
-  isCompletelyHidden,
-  shelterCapacity,
-  animationDuration,
-  animationEasing,
-}: PropsType) {
-  const translateXAnim = useSharedValue<number>(-(leftSideBarWidth - 78));
-
+                              isOpened,
+                              setIsOpened,
+                              apocalypse,
+                              shelter,
+                              isCompletelyHidden,
+                              shelterCapacity,
+                              animationDuration,
+                              animationEasing,
+                            }: PropsType) {
+  const translateXAnim = useSharedValue<number>(sideBarClosedAtPx);
   const closeSideBar = () => {
-    translateXAnim.value = -(leftSideBarWidth - 78);
+    translateXAnim.value = sideBarClosedAtPx;
   };
   const openSideBar = () => {
-    translateXAnim.value = -7;
+    translateXAnim.value = sideBarOpenedAtPx;
   };
   const hideSideBar = () => {
-    translateXAnim.value = -360;
+    translateXAnim.value = sideBarHiddenAtPx;
   };
   const animatedStyles = useAnimatedStyle(() => ({
     transform: [
@@ -78,12 +85,11 @@ export function LeftSidebar({
         <View style={s.leftSideBar}>
           <View
             style={{
-              maxHeight: '100%',
               flex: 1,
-              width: 278,
-              marginBottom: 20,
-              marginLeft: 17,
-              marginTop: 34,
+              marginBottom: '6%',
+              marginLeft: '3%',
+              marginTop: '10%',
+              marginRight: '19.5%',
               padding: 16,
             }}>
             <View style={s.apocalypse}>
@@ -94,7 +100,7 @@ export function LeftSidebar({
               />
 
               <ImageBackground resizeMode={'contain'} source={require('@/assets/images/gamescreen/text_frame.png')}>
-                <View style={{ height: 190 }}>
+                <View style={{ width: '100%', aspectRatio: 441 / 343 }}>
                   <ScrollView style={s.apocalypseDescriptionWrapper}>
                     <Text style={s.apocalypseDescription}>{apocalypse.description}</Text>
                   </ScrollView>
@@ -111,7 +117,7 @@ export function LeftSidebar({
 
               <ImageBackground resizeMode={'contain'} source={require('@/assets/images/gamescreen/shelter_info.png')}>
                 <View style={s.shelterInfo}>
-                  <Text style={s.shelterName}>{shelter.name}</Text>
+                  <Text style={s.shelterName} adjustsFontSizeToFit>{shelter.name}</Text>
                   <Text style={s.shelterSpace}>
                     {shelter.spaceInSquareMeters}
                     {'\n'}m²
@@ -124,8 +130,10 @@ export function LeftSidebar({
                 </View>
               </ImageBackground>
 
-              <ImageBackground resizeMode={'contain'} source={require('@/assets/images/gamescreen/text_frame.png')}>
-                <View style={{ height: 190 }}>
+              <ImageBackground style={{ marginTop: 20 }} resizeMode={'contain'}
+                               source={require('@/assets/images/gamescreen/text_frame.png')}>
+
+                <View style={{ width: '100%', aspectRatio: 441 / 343 }}>
                   <ScrollView style={s.shelterDescriptionWrapper}>
                     <Text style={s.shelterDescription}>
                       {shelter.description}
@@ -158,95 +166,92 @@ export function LeftSidebar({
   );
 }
 
-const leftSideBarWidth = 370;
+
 const shelterInfoLineHeight = 16;
 const s = StyleSheet.create({
-  leftSideBarDetailWrapper: {
-    position: 'absolute',
-    right: 20,
-    bottom: 0,
-    padding: 10,
-    paddingBottom: 20,
-    paddingTop: 30,
-  },
+
   shelterMainImage: {
-    maxWidth: '100%',
+    height: 'auto',
+    width: '75%',
     marginHorizontal: 'auto',
-    width: '70%',
+    maxWidth: '100%',
+    aspectRatio: 325 / 77,
+    marginBottom: 20,
+    marginTop: 20,
   },
   shelterName: {
     position: 'absolute',
     color: '#dcceac',
     fontFamily: 'RobotoSlabMedium',
-    fontSize: 27,
+    fontSize: adaptiveValue(23),
+    height: '37%',
     width: '100%',
-    top: 16,
+    top: '0%',
     textAlign: 'center',
   },
   shelterSpace: {
     position: 'absolute',
     color: '#dcceac',
-    bottom: 13,
+    bottom: '12%',
     lineHeight: shelterInfoLineHeight,
-    left: 50,
+    left: '20%',
     fontFamily: 'RobotoSlab',
-    fontSize: 13,
+    fontSize: adaptiveValue(13),
   },
   shelterCapacity: {
     position: 'absolute',
-    bottom: 13,
+    bottom: '12%',
     lineHeight: shelterInfoLineHeight,
-    left: 122,
+    left: '50%',
     color: '#dcceac',
     fontFamily: 'RobotoSlab',
-    fontSize: 13,
+    fontSize: adaptiveValue(13),
   },
   stayTime: {
     position: 'absolute',
-    bottom: 13,
-    left: 195,
+    bottom: '12%',
+    left: '80%',
     lineHeight: shelterInfoLineHeight,
     color: '#dcceac',
     fontFamily: 'RobotoSlab',
-    fontSize: 13,
+    fontSize: adaptiveValue(13),
   },
 
   apocalypse: {},
   apocalypseMainImage: {
+    height: 'auto',
+    width: '100%',
     maxWidth: '100%',
-    height: 110,
-    paddingHorizontal: 10,
+    aspectRatio: 492 / 202,
     marginBottom: 10,
+    paddingHorizontal: 10,
   },
   apocalypseDescriptionWrapper: {
-    maxHeight: 182,
-    marginVertical: 'auto',
+    margin: '1.7%',
   },
   shelterDescriptionWrapper: {
-    maxHeight: 182,
-    marginVertical: 'auto',
+    margin: '1.7%',
   },
   shelterInfo: {
     position: 'relative',
-    height: 109,
     width: '100%',
-    marginBottom: 15,
+    aspectRatio: 493 / 184,
   },
   apocalypseDescription: {
-    fontSize: 15,
+    fontSize: adaptiveValue(15),
     color: '#232322',
     fontFamily: 'RobotoSlabMedium',
-    lineHeight: 20,
+    lineHeight: adaptiveValue(20),
     letterSpacing: 1.3,
     paddingHorizontal: 8,
     paddingLeft: 12,
     paddingVertical: 5,
   },
   shelterDescription: {
-    fontSize: 15,
+    fontSize: adaptiveValue(15),
     color: '#232322',
     fontFamily: 'RobotoSlabMedium',
-    lineHeight: 20,
+    lineHeight: adaptiveValue(20),
     letterSpacing: 1.3,
     paddingHorizontal: 8,
     paddingLeft: 12,
@@ -257,16 +262,27 @@ const s = StyleSheet.create({
     position: 'relative',
     width: '100%',
     height: '100%',
+
   },
   sideBarWrapper: {
     position: 'absolute',
     top: -20,
     zIndex: 200,
-    width: leftSideBarWidth,
-    height: Dimensions.get('window').height,
+    height: sideBarHeight,
+    aspectRatio: sideBarAspectRatio,
   },
   leftSideBarDetail: {
-    width: 43,
-    height: 120,
+    width: 'auto',
+    height: '100%',
+    aspectRatio: 81 / 183,
+  },
+  leftSideBarDetailWrapper: {
+    height: '20.5%',
+    position: 'absolute',
+    right: '4%',
+    bottom: 0,
+    padding: '3%',
+    paddingBottom: '7%',
+    paddingTop: '6%',
   },
 });

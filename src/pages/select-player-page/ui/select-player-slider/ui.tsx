@@ -36,7 +36,7 @@ export function SelectPlayerSlider({ selectedPlayerIndex, setSelectedPlayerIndex
 
   return (
     <>
-      <View style={s.sliderWrapper}  >
+      <View style={s.sliderWrapper}>
         <ImageBackground
           resizeMode={'contain'}
           style={s.sliderBackground}
@@ -50,7 +50,10 @@ export function SelectPlayerSlider({ selectedPlayerIndex, setSelectedPlayerIndex
               mode={'parallax'}
               scrollAnimationDuration={60}
               overscrollEnabled
-              modeConfig={{ parallaxAdjacentItemScale: sliderWidth * 0.0017,  parallaxScrollingScale: sliderWidth * 0.0025 }}
+              modeConfig={{
+                parallaxAdjacentItemScale: sliderWidth * 0.0017,
+                parallaxScrollingScale: sliderWidth * 0.0025,
+              }}
               defaultIndex={selectedPlayerIndex}
               onSnapToItem={index => {
                 setSelectedPlayerIndex(index);
@@ -87,6 +90,8 @@ export function SelectPlayerSlider({ selectedPlayerIndex, setSelectedPlayerIndex
         </ImageBackground>
       </View>
       <ImageButton
+        width={'100%'}
+        height={65}
         style={s.shareButton}
         buttonImage={require('@/assets/images/playerselectionscreen/main/podelitsa_pers_knopka.png')}
         shadowImage={require('@/assets/images/playerselectionscreen/main/podelitsa_pers_knopka_shadow.png')}
@@ -99,6 +104,7 @@ export function SelectPlayerSlider({ selectedPlayerIndex, setSelectedPlayerIndex
           letterSpacing: 1.2,
           color: '#1a2634',
         }}
+
       />
     </>
   );
@@ -113,8 +119,6 @@ const s = StyleSheet.create({
   },
   sliderBackground: {},
   shareButton: {
-    width: '100%',
-    maxHeight: 65,
     marginBottom: 10,
   },
   sliderObserver: {

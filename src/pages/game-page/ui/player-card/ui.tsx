@@ -58,7 +58,8 @@ export const PlayerCard = observer(({ card, cardDisplayStatus, onPress, canBePin
     }).start();
   };
 
-  useEffect(() => {}, [opacityAnim, translateYAnim]);
+  useEffect(() => {
+  }, [opacityAnim, translateYAnim]);
 
   if (isBigCard) {
     return (
@@ -79,7 +80,7 @@ export const PlayerCard = observer(({ card, cardDisplayStatus, onPress, canBePin
               onPress();
             }}
             style={{ height: '100%', width: '100%' }}>
-            <View style={{ ...s.playerCard, height: 240 }}>
+            <View style={{ ...s.playerCard, aspectRatio: 1 }}>
               <Animated.Image
                 style={{ ...s.pinnedImage, transform: [{ translateY: translateYAnim }], opacity: opacityAnim }}
                 resizeMode={'contain'}
@@ -138,7 +139,7 @@ export const PlayerCard = observer(({ card, cardDisplayStatus, onPress, canBePin
             }
             onPress();
           }}>
-          <SafeAreaView style={s.playerCard}>
+          <SafeAreaView style={[s.playerCard, { aspectRatio: 471 / 134 }]}>
             <Animated.Image
               style={{ ...s.pinnedImage, transform: [{ translateY: translateYAnim }], opacity: opacityAnim }}
               resizeMode={'contain'}
@@ -214,7 +215,7 @@ const s = StyleSheet.create({
   },
   playerCard: {
     position: 'relative',
-    height: 70,
+    width: '100%',
     alignContent: 'center',
     flex: 1,
     flexDirection: 'row',
