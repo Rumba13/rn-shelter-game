@@ -12,6 +12,7 @@ import Carousel from 'react-native-reanimated-carousel/src/Carousel';
 import { gameSettingsStore, gameStore } from '@/src/entities/game';
 import { useEffect, useState } from 'react';
 import { ImageButton } from '@/src/shared/ui/image-button/ui';
+import { adaptiveValue } from '@/src/shared/ui/adaptive-value/adaptive-value';
 
 type PropsType = {
   selectedPlayerIndex: number;
@@ -99,7 +100,7 @@ export function SelectPlayerSlider({ selectedPlayerIndex, setSelectedPlayerIndex
         title={selectedPlayerIndex === 0 ? 'Поделиться игрой' : 'Поделиться персонажем'}
         styleTitle={{
           textAlign: 'center',
-          fontSize: 19,
+          fontSize: adaptiveValue(19),
           fontFamily: 'RobotoSlabSemiBold',
           letterSpacing: 1.2,
           color: '#1a2634',
@@ -138,7 +139,7 @@ const s = StyleSheet.create({
   },
   sliderItemText: {
     textAlign: 'center',
-    fontSize: 99,
+    fontSize: adaptiveValue(99),
     fontFamily: 'RobotoSlab',
     alignSelf: 'center',
     justifyContent: 'center',

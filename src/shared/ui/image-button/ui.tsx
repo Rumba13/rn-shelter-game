@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import { useState } from 'react';
 import Animated, { useAnimatedStyle, useSharedValue, withTiming, Easing } from 'react-native-reanimated';
+import { adaptiveValue } from '@/src/shared/ui/adaptive-value/adaptive-value';
 
 type PropsType = {
   buttonImage: any;
@@ -113,7 +114,7 @@ const s: any = {
   },
   title: {
     flex: 1,
-    fontSize: 16,
+    fontSize: adaptiveValue(16),
     textAlign: 'center',
     verticalAlign: 'middle',
   },

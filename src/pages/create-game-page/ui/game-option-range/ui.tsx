@@ -2,6 +2,7 @@ import { View, Text, Image, Alert, ImageBackground, SafeAreaView, ScrollView } f
 
 import { Range } from '@/src/shared/ui/range/ui';
 import { GameOptionBase } from '@/src/pages/create-game-page/ui/game-option-base/ui';
+import { adaptiveValue } from '@/src/shared/ui/adaptive-value/adaptive-value';
 
 type PropsType = {
   title: string;
@@ -55,7 +56,7 @@ const s: any = {
     maxHeight: 40,
   },
   selectedTitle: {
-    fontSize: 19,
+    fontSize: adaptiveValue(19),
     textAlign: 'center',
     color: '#98795d',
     fontFamily: 'RobotoSlabSemiBold',

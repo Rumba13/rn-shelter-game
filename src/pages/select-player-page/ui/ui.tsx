@@ -8,6 +8,7 @@ import { gameStore } from '@/src/entities/game';
 import Animated, { useAnimatedStyle, useSharedValue, withTiming, Easing } from 'react-native-reanimated';
 import { translate } from '@shopify/react-native-skia';
 import Constants from 'expo-constants';
+import { adaptiveValue } from '@/src/shared/ui/adaptive-value/adaptive-value';
 
 type PropsType = {
   navigation: any;
@@ -137,7 +138,7 @@ const s = StyleSheet.create({
   },
   selectPlayerPageTitle: {
     marginBottom: 10,
-    fontSize: 26,
+    fontSize: adaptiveValue(26),
     textAlign: 'center',
     fontFamily: 'RobotoSlab',
     letterSpacing: 1,
@@ -145,7 +146,7 @@ const s = StyleSheet.create({
   selectPlayerPageSubTitle: {
     marginTop: 10,
     textAlign: 'center',
-    fontSize: 18,
+    fontSize: adaptiveValue(18),
     color: '#664e64',
     letterSpacing: 1.4,
     fontFamily: 'RobotoSlabSemiBold',

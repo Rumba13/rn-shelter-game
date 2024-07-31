@@ -157,7 +157,7 @@ const helpButtonSize = adaptiveValue(36);
 const sideBarIconSize = 48;
 const s = StyleSheet.create({
   endingDescription: {
-    fontSize: 15,
+    fontSize: adaptiveValue(15),
     color: '#232322',
     fontFamily: 'RobotoSlabMedium',
     lineHeight: 20,
@@ -209,7 +209,7 @@ const s = StyleSheet.create({
     paddingLeft: 10,
     fontFamily: 'RobotoSlab',
     color: '#222327',
-    fontSize: 17,
+    fontSize: adaptiveValue(17),
     letterSpacing: 1.25,
     lineHeight: 22,
   },

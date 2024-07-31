@@ -16,6 +16,7 @@ import { LeftSidebar } from '@/src/pages/game-page/ui/left-sidebar/left-sidebar'
 import { RightSidebar } from '@/src/pages/game-page/ui/right-sidebar/ui';
 import { observer } from 'mobx-react';
 import { Easing, EasingFunction, EasingFunctionFactory } from 'react-native-reanimated';
+import { adaptiveValue } from '@/src/shared/ui/adaptive-value/adaptive-value';
 
 type PropsType = {};
 const sidebarAnimationDuration = 270;
@@ -194,7 +195,7 @@ const s = StyleSheet.create({
   selectPlayerThumbTitle: {
     textAlign: 'center',
     lineHeight: 57,
-    fontSize: 38,
+    fontSize: adaptiveValue(38),
     color: '#6f586c',
     height: '100%',
     fontFamily: 'RobotoSlabSemiBold',

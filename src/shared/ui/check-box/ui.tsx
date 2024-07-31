@@ -9,6 +9,7 @@ import {
   View,
 } from 'react-native';
 import { useEffect, useRef, useState } from 'react';
+import { adaptiveValue } from '@/src/shared/ui/adaptive-value/adaptive-value';
 
 type PropsType = {
   style: any;
@@ -35,7 +36,8 @@ export function CheckBox({ style, setIsToggled, isToggled }: PropsType) {
       isInteraction: true,
     }).start();
   };
-  useEffect(() => {}, [translateXAnim]);
+  useEffect(() => {
+  }, [translateXAnim]);
 
   return (
     <Animated.View style={{ ...s.checkBox, ...style }}>
@@ -89,10 +91,11 @@ const s: any = {
   },
   checkBoxTitle: {
     flex: 1,
-    fontSize: 18,
+    fontSize: adaptiveValue(18),
     textAlign: 'center',
-    alignSelf: 'center',
+    alignSelf: 'end',
     marginLeft: 5,
+    marginVertical: 'auto',
     fontFamily: 'RobotoSlabSemiBold',
   },
 };

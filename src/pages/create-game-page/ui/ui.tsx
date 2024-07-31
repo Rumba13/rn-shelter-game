@@ -32,6 +32,7 @@ import { createGameStore } from '@/src/feature/create-game/model/create-game';
 import { gameStore } from '@/src/entities/game/model/game';
 import { OverlayModal } from '@/src/shared/ui/overlay-modal/ui';
 import { cardKitToCards } from '@/src/shared/lib/card-kit-to-cards';
+import { adaptiveValue } from '@/src/shared/ui/adaptive-value/adaptive-value';
 //TODO refactoring
 //TODO fix font issues
 
@@ -227,7 +228,7 @@ const s: any = {
   errorModalTitle: {
     position: 'absolute',
     top: -36,
-    fontSize: 29,
+    fontSize: adaptiveValue(29),
     width: '100%',
     textAlign: 'center',
   },
@@ -238,7 +239,7 @@ const s: any = {
     borderRadius: 10,
   },
   errorModalError: {
-    fontSize: 18,
+    fontSize: adaptiveValue(18),
     lineHeight: 20,
     letterSpacing: 1.2,
     fontFamily: 'RobotoSlab',

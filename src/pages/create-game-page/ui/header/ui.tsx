@@ -7,6 +7,7 @@ import Slider from 'rn-range-slider';
 import { gameSettingsStore } from '@/src/entities/game/model/game-settings';
 import { observer } from 'mobx-react';
 import { Separator } from '@/src/pages/create-game-page/ui/separator/ui';
+import { adaptiveValue } from '@/src/shared/ui/adaptive-value/adaptive-value';
 
 export const Header = observer(() => {
   const { playersCount } = gameSettingsStore.settings;
@@ -52,7 +53,7 @@ const s: any = {
     borderRadius: 15,
   },
   modalTitle: {
-    fontSize: 20,
+    fontSize: adaptiveValue(20),
     marginBottom: 10,
   },
   modalClose: {
@@ -76,7 +77,7 @@ const s: any = {
   },
   playersCount: {
     position: 'absolute',
-    fontSize: 49,
+    fontSize: adaptiveValue(49),
     top: 0,
     color: '#21272e',
     fontFamily: 'RobotoSlab',
@@ -89,8 +90,8 @@ const s: any = {
     padding: 10,
   },
   headerTitle: {
-    fontSize: 18,
-    lineHeight: 25,
+    fontSize: adaptiveValue(18),
+    lineHeight: adaptiveValue(25),
     color: '#21272e',
     fontFamily: 'RobotoSlab',
     fontWeight: 600,

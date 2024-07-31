@@ -8,6 +8,7 @@ import Animated, {
 } from 'react-native-reanimated';
 
 import { ThemedText } from '@/components/ThemedText';
+import { adaptiveValue } from '@/src/shared/ui/adaptive-value/adaptive-value';
 
 export function HelloWave() {
   const rotationAnimation = useSharedValue(0);
@@ -30,7 +31,7 @@ export function HelloWave() {
 
 const styles = StyleSheet.create({
   text: {
-    fontSize: 31,
+    fontSize: adaptiveValue(31),
     lineHeight: 32,
     marginTop: -6,
   },

@@ -5,6 +5,7 @@ import { SectionedMultiSelectProps } from 'react-native-sectioned-multi-select';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { StyleSheet } from 'react-native';
+import { adaptiveValue } from '@/src/shared/ui/adaptive-value/adaptive-value';
 
 type PropsType<ItemsType> = {
   title: string;
@@ -84,7 +85,7 @@ export function GameOptionList<ItemsType>({
         onConfirm={() => onValueChange(selectedItems)}
         styles={StyleSheet.create({
           button: { backgroundColor: '#c3b5a8' },
-          itemText: { fontFamily: 'RobotoSlabSemiBold', fontSize: 16, letterSpacing: 0.7 },
+          itemText: { fontFamily: 'RobotoSlabSemiBold', fontSize: adaptiveValue(16), letterSpacing: 0.7 },
         })}
       />
     </GameOptionBase>

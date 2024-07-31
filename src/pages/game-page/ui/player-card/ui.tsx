@@ -15,6 +15,7 @@ import { cardTypeToCardBackgroundMap } from '@/src/pages/game-page/ui/player-car
 import { useEffect, useRef, useState } from 'react';
 import { observer } from 'mobx-react';
 import { CardDisplayStatus } from '@/src/shared/lib/types/card-display-status';
+import { adaptiveValue } from '@/src/shared/ui/adaptive-value/adaptive-value';
 
 type PropsType = {
   card: Card;
@@ -90,7 +91,7 @@ export const PlayerCard = observer(({ card, cardDisplayStatus, onPress, canBePin
               <Text
                 style={{
                   ...s.playerCardDescription,
-                  fontSize: currentFontSize,
+                  fontSize: adaptiveValue(currentFontSize),
                   width: '100%',
                   height: '100%',
                   paddingTop: 5,
@@ -154,7 +155,7 @@ export const PlayerCard = observer(({ card, cardDisplayStatus, onPress, canBePin
             />
             <Text
               adjustsFontSizeToFit
-              style={{ ...s.playerCardDescription, fontSize: currentFontSize }}
+              style={{ ...s.playerCardDescription, fontSize: adaptiveValue(currentFontSize) }}
               numberOfLines={3}
               ellipsizeMode={'head'}
               onTextLayout={e => (e.nativeEvent.lines.length > 3 ? setCurrentFontSize(currentFontSize - 1) : void 0)}>
@@ -208,7 +209,7 @@ const s = StyleSheet.create({
     left: 0,
   },
   playerCardTitle: {
-    fontSize: 16,
+    fontSize: adaptiveValue(16),
     fontFamily: 'RobotoSlabSemiBold',
     letterSpacing: 1.4,
     color: '#6f586c',
@@ -232,7 +233,7 @@ const s = StyleSheet.create({
     fontWeight: '500',
     fontFamily: 'RobotoSlabSemiBold',
     letterSpacing: 1.2,
-    lineHeight: 20,
+    lineHeight: adaptiveValue(20),
     color: '#232322',
   },
 });

@@ -3,6 +3,7 @@ import { CameraView, PermissionStatus, useCameraPermissions } from 'expo-camera'
 import { connectToGameStore } from '@/src/feature/connect-to-game';
 import { useEffect, useState } from 'react';
 import { ImageButton } from '@/src/shared/ui/image-button/ui';
+import { adaptiveValue } from '@/src/shared/ui/adaptive-value/adaptive-value';
 
 type PropsType = {
   navigation: any;
@@ -52,7 +53,7 @@ const s = StyleSheet.create({
   qrTitle: {
     textAlign: 'center',
     paddingTop: 10,
-    fontSize: 20,
+    fontSize: adaptiveValue(20),
     letterSpacing: 1.5,
     color: '#232322',
     fontFamily: 'RobotoSlabSemiBold',

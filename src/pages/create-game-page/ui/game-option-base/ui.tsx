@@ -2,6 +2,7 @@ import { Image, ImageBackground, Text, View } from 'react-native';
 import { useEffect, useState } from 'react';
 import { QuestionButton } from '@/src/shared/ui/question-button/ui';
 import { Collapsible } from '@/src/shared/ui/collapsible/ui';
+import { adaptiveValue } from '@/src/shared/ui/adaptive-value/adaptive-value';
 
 type PropsType = {
   children: any;
@@ -59,10 +60,12 @@ const s: any = {
     height: '100%',
     width: '100%',
     letterSpacing: 1.2,
-    lineHeight: 18,
+    lineHeight: adaptiveValue(22),
+    fontSize: adaptiveValue(16),
+
   },
   gameOptionTitle: {
-    fontSize: 20,
+    fontSize: adaptiveValue(20),
     color: '#232322',
     fontWeight: 600,
     fontFamily: 'RobotoSlabSemiBold',

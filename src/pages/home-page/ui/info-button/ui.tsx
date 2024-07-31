@@ -13,6 +13,7 @@ import { ImageButton } from '@/src/shared/ui/image-button/ui';
 import { useState } from 'react';
 import { CONSTANTS } from '@/src/shared/lib/constants';
 import { createSeedStore } from '@/src/feature/create-seed/model/create-seed';
+import { adaptiveValue } from '@/src/shared/ui/adaptive-value/adaptive-value';
 
 //TODO separate info button and modal
 export function InfoButtonAndModal() {
@@ -68,7 +69,7 @@ const s = StyleSheet.create({
   privacyPolicyDescription: {
     padding: 5,
     lineHeight: 18,
-    fontSize: 16,
+    fontSize: adaptiveValue(16),
     fontFamily: 'SpaceMono',
   },
   closeButton: {
