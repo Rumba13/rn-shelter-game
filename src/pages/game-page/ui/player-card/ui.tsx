@@ -125,7 +125,7 @@ export const PlayerCard = observer(({ card, cardDisplayStatus, onPress, canBePin
             ? cardTypeToCardBackgroundMap[card.type]
             : require('@/assets/images/gamescreen/phobia_bg.webp')
         }
-        resizeMode={'contain'}>
+        contentFit={'contain'}>
         <TouchableWithoutFeedback
           onPress={() => {
             if (canBePinned) {

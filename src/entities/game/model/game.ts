@@ -58,7 +58,6 @@ class GameStore {
         [playerPropsShortNames['action-card']]: player.actionCard.id,
       })),
     });
-    console.log(qrCodeData);
     return qrCodeData;
   }
 

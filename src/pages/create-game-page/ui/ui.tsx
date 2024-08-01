@@ -213,7 +213,6 @@ export const CreateGamePage = observer(({ navigation }: PropsType) => {
         onNextButtonPress={() => {
           try {
             gameStore.setGame(createGameStore.createGame(gameSettingsStore.settings));
-            console.log(gameStore.getGame().players.map(player => player.number));
             navigation.navigate('select-player-page');
           } catch (err) {
             setIsErrorModalOpened(true);

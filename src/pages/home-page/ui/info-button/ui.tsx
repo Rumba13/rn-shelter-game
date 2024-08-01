@@ -2,7 +2,6 @@ import { TouchableWithoutFeedback, View, Text, ScrollView, TouchableOpacity, Sty
 import { OverlayModal } from '@/src/shared/ui/overlay-modal/ui';
 import { ImageButton } from '@/src/shared/ui/image-button/ui';
 import { useState } from 'react';
-import { CONSTANTS } from '@/src/shared/lib/constants';
 import { createSeedStore } from '@/src/feature/create-seed/model/create-seed';
 import { adaptiveValue } from '@/src/shared/ui/adaptive-value/adaptive-value';
 import { Image, ImageBackground } from 'expo-image';
@@ -36,7 +35,7 @@ export function InfoButtonAndModal() {
               <ScrollView style={s.privacyPolicy}>
                 <TouchableOpacity activeOpacity={1}>
                   <Text style={s.privacyPolicyDescription}>
-                    Версия приложения: {CONSTANTS.APP_VERSION}
+                    Версия приложения: {process.env.EXPO_PUBLIC_APP_VERSION}
                     {'\n'}
                     Сид: {createSeedStore.seed}
                     {'\n\n'}
