@@ -1,7 +1,8 @@
-import { Image, ImageBackground, Text, View } from 'react-native';
-import { useEffect, useState } from 'react';
+import { ImageBackground, Text, View } from 'react-native';
+import { useState } from 'react';
 import { QuestionButton } from '@/src/shared/ui/question-button/ui';
 import { Collapsible } from '@/src/shared/ui/collapsible/ui';
+import { Image } from 'expo-image';
 import { adaptiveValue } from '@/src/shared/ui/adaptive-value/adaptive-value';
 
 type PropsType = {
@@ -17,7 +18,7 @@ export function GameOptionBase({ title, children, description }: PropsType) {
 
   return (
     <View style={s.gameOption}>
-      <ImageBackground source={require('@/assets/images/gamecreationscreen/create_back.png')} resizeMode={'stretch'}>
+      <ImageBackground source={require('@/assets/images/gamecreationscreen/create_back.webp')} resizeMode={'stretch'}>
         <View style={{ margin: 10 }}>
           <QuestionButton onPress={() => setIsCollapsed(!isCollapsed)} />
           <View>
@@ -31,7 +32,7 @@ export function GameOptionBase({ title, children, description }: PropsType) {
             </View>
           </Collapsible>
         </View>
-        <Image style={s.separator} source={require('@/assets/images/gamecreationscreen/razdelenije.png')} />
+        <Image style={s.separator} source={require('@/assets/images/gamecreationscreen/razdelenije.webp')} />
       </ImageBackground>
     </View>
   );
@@ -62,7 +63,6 @@ const s: any = {
     letterSpacing: 1.2,
     lineHeight: adaptiveValue(22),
     fontSize: adaptiveValue(16),
-
   },
   gameOptionTitle: {
     fontSize: adaptiveValue(20),

@@ -1,6 +1,5 @@
 import {
   GestureResponderEvent,
-  ImageBackground,
   StyleProp,
   Text,
   TextStyle,
@@ -10,6 +9,7 @@ import {
 } from 'react-native';
 import { useState } from 'react';
 import Animated, { useAnimatedStyle, useSharedValue, withTiming, Easing } from 'react-native-reanimated';
+import { ImageBackground } from 'expo-image';
 import { adaptiveValue } from '@/src/shared/ui/adaptive-value/adaptive-value';
 
 type PropsType = {
@@ -29,7 +29,7 @@ type PropsType = {
   styleTitle?: StyleProp<TextStyle>;
   maxFontSizeMultiplier?: number;
 };
-export { PropsType as ImageButtonProps }
+export { PropsType as ImageButtonProps };
 
 const defaultXOffset = -5;
 const defaultXOnClickOffset = -3;
@@ -38,17 +38,17 @@ const defaultYOnClickOffset = -2;
 const animationDuration = 35;
 
 export function ImageButton({
-                              buttonImage,
-                              shadowImage,
-                              width,
-                              height,
-                              style,
-                              onPress,
-                              options,
-                              title,
-                              maxFontSizeMultiplier,
-                              styleTitle,
-                            }: PropsType) {
+  buttonImage,
+  shadowImage,
+  width,
+  height,
+  style,
+  onPress,
+  options,
+  title,
+  maxFontSizeMultiplier,
+  styleTitle,
+}: PropsType) {
   const buttonImageXOffSet = options?.xOffset || defaultXOffset;
   const buttonImageYOffSet = options?.yOffset || defaultYOffset;
   const buttonImageOnPressXOffSet = options?.xOffSetOnPress || defaultXOnClickOffset;
@@ -91,9 +91,9 @@ export function ImageButton({
 
   return (
     <Animated.View style={[s.buttonContainer, style, { width, minHeight: height }]}>
-      <ImageBackground source={shadowImage} style={s.buttonShadow} resizeMode={'contain'}>
+      <ImageBackground source={shadowImage} style={s.buttonShadow} contentFit={'contain'}>
         <Animated.View style={[{ maxHeight: '100%' }, animatedStyles]}>
-          <ImageBackground source={buttonImage} style={[s.buttonImage]} resizeMode={'contain'}>
+          <ImageBackground source={buttonImage} style={[s.buttonImage]} contentFit={'contain'}>
             <Text style={[s.title, styleTitle]} maxFontSizeMultiplier={maxFontSizeMultiplier} adjustsFontSizeToFit>
               {title}
             </Text>

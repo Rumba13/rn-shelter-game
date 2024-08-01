@@ -1,18 +1,10 @@
-import {
-  View,
-  Text,
-  StyleSheet,
-  Image,
-  ImageBackground,
-  Dimensions,
-  Animated,
-  useWindowDimensions, Alert,
-} from 'react-native';
+import { View, Text, StyleSheet, Dimensions, Animated, useWindowDimensions, Alert } from 'react-native';
 import Carousel from 'react-native-reanimated-carousel/src/Carousel';
 import { gameSettingsStore, gameStore } from '@/src/entities/game';
 import { useEffect, useState } from 'react';
 import { ImageButton } from '@/src/shared/ui/image-button/ui';
 import { adaptiveValue } from '@/src/shared/ui/adaptive-value/adaptive-value';
+import { Image, ImageBackground } from 'expo-image';
 
 type PropsType = {
   selectedPlayerIndex: number;
@@ -24,24 +16,22 @@ export function SelectPlayerSlider({ selectedPlayerIndex, setSelectedPlayerIndex
   const observerPlayer = (
     <Image
       style={s.sliderObserver}
-      resizeMode={'contain'}
-      source={require('@/assets/images/playerselectionscreen/main/eye_icon.png')}
+      contentFit={'contain'}
+      source={require('@/assets/images/playerselectionscreen/main/eye_icon.webp')}
     />
   );
   const sliderItems = [observerPlayer, ...players];
   const sliderWidth = useWindowDimensions().width - 35; //margin horizontal
 
-  useEffect(() => {
-
-  }, [sliderWidth]);
+  useEffect(() => {}, [sliderWidth]);
 
   return (
     <>
       <View style={s.sliderWrapper}>
         <ImageBackground
-          resizeMode={'contain'}
+          contentFit={'contain'}
           style={s.sliderBackground}
-          source={require('@/assets/images/playerselectionscreen/main/vibor_igroka.png')}>
+          source={require('@/assets/images/playerselectionscreen/main/vibor_igroka.webp')}>
           <View style={{ width: '100%', height: '100%' }}>
             <Carousel
               style={s.slider}
@@ -94,8 +84,8 @@ export function SelectPlayerSlider({ selectedPlayerIndex, setSelectedPlayerIndex
         width={'100%'}
         height={65}
         style={s.shareButton}
-        buttonImage={require('@/assets/images/playerselectionscreen/main/podelitsa_pers_knopka.png')}
-        shadowImage={require('@/assets/images/playerselectionscreen/main/podelitsa_pers_knopka_shadow.png')}
+        buttonImage={require('@/assets/images/playerselectionscreen/main/podelitsa_pers_knopka.webp')}
+        shadowImage={require('@/assets/images/playerselectionscreen/main/podelitsa_pers_knopka_shadow.webp')}
         options={{ xOffset: -3, yOffset: -4, xOffSetOnPress: -1, yOffsetOnPress: -2 }}
         title={selectedPlayerIndex === 0 ? 'Поделиться игрой' : 'Поделиться персонажем'}
         styleTitle={{
@@ -105,7 +95,6 @@ export function SelectPlayerSlider({ selectedPlayerIndex, setSelectedPlayerIndex
           letterSpacing: 1.2,
           color: '#1a2634',
         }}
-
       />
     </>
   );
@@ -125,6 +114,7 @@ const s = StyleSheet.create({
   sliderObserver: {
     maxWidth: '100%',
     width: 100,
+    height: '100%',
     alignSelf: 'center',
   },
   slider: {

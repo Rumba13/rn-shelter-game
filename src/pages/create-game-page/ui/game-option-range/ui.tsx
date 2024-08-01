@@ -1,4 +1,5 @@
-import { View, Text, Image, Alert, ImageBackground, SafeAreaView, ScrollView } from 'react-native';
+import { View, Text } from 'react-native';
+import { ImageBackground } from 'expo-image';
 
 import { Range } from '@/src/shared/ui/range/ui';
 import { GameOptionBase } from '@/src/pages/create-game-page/ui/game-option-base/ui';
@@ -29,8 +30,8 @@ export function GameOptionRange({
     <GameOptionBase title={title} descriptionHeight={descriptionHeight} description={description}>
       <View style={s.selectedTitleWrapper}>
         <ImageBackground
-          source={require('@/assets/images/gamecreationscreen/create_text_frame.png')}
-          resizeMode={'stretch'}>
+          source={require('@/assets/images/gamecreationscreen/create_text_frame.webp')}
+          contentFit={'fill'}>
           <Text style={s.selectedTitle}>{selectedTitle}</Text>
         </ImageBackground>
       </View>
@@ -40,8 +41,8 @@ export function GameOptionRange({
         max={max}
         min={min}
         options={{
-          trackImage: require('@/assets/images/gamecreationscreen/picker_line_2_gradient.png'),
-          pickerImage: require('@/assets/images/gamecreationscreen/picker1.png'),
+          trackImage: require('@/assets/images/gamecreationscreen/picker_line_2_gradient.webp'),
+          pickerImage: require('@/assets/images/gamecreationscreen/picker1.webp'),
         }}
       />
     </GameOptionBase>

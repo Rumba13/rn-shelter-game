@@ -39,26 +39,25 @@ class GameStore {
     //TODO move to features
     const game = this.getGame();
 
-    const qrCodeData =
-      JSON.stringify({
-        shelterId: game.shelter.id,
-        apocalypseId: game.apocalypse.id,
-        endingId: game.ending.id,
-        players: game.players.map(player => ({
-          [playerPropsShortNames.number]: player.number,
-          [playerPropsShortNames.profession]: player.profession.id,
-          [playerPropsShortNames.bio]: player.bioCharacteristics.id,
-          [playerPropsShortNames.health]: player.health.id,
-          [playerPropsShortNames.character]: player.character.id,
-          [playerPropsShortNames.hobby]: player.hobby.id,
-          [playerPropsShortNames.phobia]: player.phobia.id,
-          [playerPropsShortNames['additional-information']]: player.additionalInformation.id,
-          [playerPropsShortNames.knowledge]: player.knowledge.id,
-          [playerPropsShortNames.luggage]: player.luggage.id,
-          [playerPropsShortNames['condition-card']]: player.conditionCard.id,
-          [playerPropsShortNames['action-card']]: player.actionCard.id,
-        })),
-      });
+    const qrCodeData = JSON.stringify({
+      shelterId: game.shelter.id,
+      apocalypseId: game.apocalypse.id,
+      endingId: game.ending.id,
+      players: game.players.map(player => ({
+        [playerPropsShortNames.number]: player.number,
+        [playerPropsShortNames.profession]: player.profession.id,
+        [playerPropsShortNames.bio]: player.bioCharacteristics.id,
+        [playerPropsShortNames.health]: player.health.id,
+        [playerPropsShortNames.character]: player.character.id,
+        [playerPropsShortNames.hobby]: player.hobby.id,
+        [playerPropsShortNames.phobia]: player.phobia.id,
+        [playerPropsShortNames['additional-information']]: player.additionalInformation.id,
+        [playerPropsShortNames.knowledge]: player.knowledge.id,
+        [playerPropsShortNames.luggage]: player.luggage.id,
+        [playerPropsShortNames['condition-card']]: player.conditionCard.id,
+        [playerPropsShortNames['action-card']]: player.actionCard.id,
+      })),
+    });
     console.log(qrCodeData);
     return qrCodeData;
   }

@@ -1,23 +1,19 @@
-import { Image, ImageBackground, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 import { Range } from '@/src/shared/ui/range/ui';
-import { OverlayModal } from '@/src/shared/ui/overlay-modal/ui';
-import { ImageButton } from '@/src/shared/ui/image-button/ui';
-import { useState } from 'react';
-import Slider from 'rn-range-slider';
 import { gameSettingsStore } from '@/src/entities/game/model/game-settings';
 import { observer } from 'mobx-react';
-import { Separator } from '@/src/pages/create-game-page/ui/separator/ui';
+import { Image, ImageBackground } from 'expo-image';
 import { adaptiveValue } from '@/src/shared/ui/adaptive-value/adaptive-value';
 
 export const Header = observer(() => {
   const { playersCount } = gameSettingsStore.settings;
 
   return (
-    <ImageBackground source={require('@/assets/images/gamecreationscreen/create_back.png')} resizeMode={'stretch'}>
+    <ImageBackground source={require('@/assets/images/gamecreationscreen/create_back.webp')} contentFit={'fill'}>
       <View style={s.contentHeader}>
         <View style={{ flexDirection: 'row', marginBottom: 15 }}>
           <View style={s.headerImageWrapper}>
-            <Image style={s.headerImage} source={require('@/assets/images/gamecreationscreen/igroki.png')} />
+            <Image style={s.headerImage} source={require('@/assets/images/gamecreationscreen/igroki.webp')} />
             <View style={{ ...s.playersCountWrapper, transform: [{ translateX: playersCount > 9 ? 20 : 32 }] }}>
               <Text style={s.playersCount}>{playersCount}</Text>
             </View>

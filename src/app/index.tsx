@@ -2,12 +2,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator, NativeStackNavigationOptions } from '@react-navigation/native-stack';
 import { HomePage } from '@/src/pages/home-page';
 import { AppLayout } from '@/src/layouts/app-layout';
-import {
-  ScrollView,
-  Text,
-  TextInput,
-  View,
-} from 'react-native';
+import { ScrollView, Text, TextInput, View } from 'react-native';
 import { CreateGamePage } from '@/src/pages/create-game-page';
 import { SelectPlayerPage } from '@/src/pages/select-player-page';
 import { ConnectToGamePage } from '@/src/pages/connect-to-game-page';

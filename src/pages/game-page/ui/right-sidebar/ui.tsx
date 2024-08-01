@@ -1,25 +1,16 @@
-import {
-  View,
-  Text,
-  StyleSheet,
-  ImageBackground,
-  Dimensions,
-  Image,
-  TouchableWithoutFeedback,
-  ScrollView,
-} from 'react-native';
-import { ImageButton } from '@/src/shared/ui/image-button/ui';
+import { View, Text, StyleSheet, Dimensions, TouchableWithoutFeedback, ScrollView } from 'react-native';
+import { Image, ImageBackground } from 'expo-image';
+
 import { Player } from '@/src/shared/lib/types/player';
 import { ScratchCard } from '@/src/shared/ui/scratch-card/ui';
 //@ts-ignore
-import ScratchImage from '@/assets/images/gamescreen/skresti.png';
+import ScratchImage from '@/assets/images/gamescreen/skresti.webp';
 import { useImage } from '@shopify/react-native-skia';
 import { gameSettingsStore } from '@/src/entities/game';
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
   withTiming,
-  Easing,
   EasingFunction,
   EasingFunctionFactory,
 } from 'react-native-reanimated';
@@ -40,20 +31,19 @@ const sideBarAspectRatio = 657 / 1442;
 const sideBarHeight = Dimensions.get('window').height;
 const sideBarWidth = sideBarHeight * sideBarAspectRatio;
 
-const sidebarClosedAtPx = (sideBarWidth / 100 * 80);
+const sidebarClosedAtPx = (sideBarWidth / 100) * 80;
 const sidebarOpenedAtPx = 5;
-const sidebarHiddenAtPx = sidebarClosedAtPx + (sideBarWidth / 100 * 20);
-
+const sidebarHiddenAtPx = sidebarClosedAtPx + (sideBarWidth / 100) * 20;
 
 export function RightSidebar({
-                               isOpened,
-                               setIsOpened,
-                               isHidden,
-                               animationDuration,
-                               unKickedOutPlayers,
-                               ending,
-                               animationEasing,
-                             }: PropsType) {
+  isOpened,
+  setIsOpened,
+  isHidden,
+  animationDuration,
+  unKickedOutPlayers,
+  ending,
+  animationEasing,
+}: PropsType) {
   const sideBarTranslateXAnim = useSharedValue(sidebarHiddenAtPx);
   const animatedSidebarStyles = useAnimatedStyle(() => ({
     transform: [
@@ -83,14 +73,16 @@ export function RightSidebar({
   return (
     <Animated.View style={[s.rightSideBarWrapper, animatedSidebarStyles]}>
       <View style={{ flex: 1, position: 'relative' }}>
-        <ImageBackground style={{ width: '100%', height: '100%' }} resizeMode={'contain'}
-                         source={require('@/assets/images/gamescreen/right_final.png')}>
+        <ImageBackground
+          style={{ width: '100%', height: '100%' }}
+          contentFit={'contain'}
+          source={require('@/assets/images/gamescreen/right_final.webp')}>
           <TouchableWithoutFeedback onPress={() => setIsOpened(!isOpened)}>
             <View style={s.rightSideBarIconWrapper}>
               <Image
                 style={s.rightSideBarIcon}
-                resizeMode={'contain'}
-                source={require('@/assets/images/gamescreen/end_icon.png')}
+                contentFit={'contain'}
+                source={require('@/assets/images/gamescreen/end_icon.webp')}
               />
             </View>
           </TouchableWithoutFeedback>
@@ -106,12 +98,12 @@ export function RightSidebar({
             </ScrollView>
             <View style={s.endingWrapper}>
               <Image
-                source={require('@/assets/images/gamescreen/koncovka.png')}
-                resizeMode={'contain'}
+                source={require('@/assets/images/gamescreen/koncovka.webp')}
+                contentFit={'contain'}
                 style={s.endingImage}
               />
               <ScratchCard style={s.ending} image={scratchImage}>
-                <ImageBackground resizeMode={'contain'} source={require('@/assets/images/gamescreen/text_frame.png')}>
+                <ImageBackground contentFit={'contain'} source={require('@/assets/images/gamescreen/text_frame.webp')}>
                   <View style={{ height: '100%' }}>
                     <ScrollView style={s.endingDescriptionWrapper}>
                       {gameSettingsStore.settings.lotteryTicketMode ? (
@@ -124,18 +116,18 @@ export function RightSidebar({
                           }}>
                           <Image
                             style={s.scratchReward}
-                            resizeMode={'contain'}
-                            source={require('@/assets/images/scratch-reward.jpg')}
+                            contentFit={'contain'}
+                            source={require('@/assets/images/scratch-reward.webp')}
                           />
                           <Image
                             style={s.scratchReward}
-                            resizeMode={'contain'}
-                            source={require('@/assets/images/scratch-reward.jpg')}
+                            contentFit={'contain'}
+                            source={require('@/assets/images/scratch-reward.webp')}
                           />
                           <Image
                             style={s.scratchReward}
-                            resizeMode={'contain'}
-                            source={require('@/assets/images/scratch-reward.jpg')}
+                            contentFit={'contain'}
+                            source={require('@/assets/images/scratch-reward.webp')}
                           />
                         </View>
                       ) : (
@@ -242,7 +234,8 @@ const s = StyleSheet.create({
   helpButton: {
     zIndex: 20,
   },
-  helpButtonWrapper: { //TODO adaptive
+  helpButtonWrapper: {
+    //TODO adaptive
     position: 'absolute',
     zIndex: 20,
     top: '81%',

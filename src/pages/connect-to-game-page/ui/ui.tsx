@@ -1,10 +1,7 @@
-import {
-  Image,
-  StyleSheet,
-  View,
-} from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { Footer } from '@/src/shared/ui/footer/ui';
 import { ScanQRCode } from '@/src/pages/connect-to-game-page/ui/scan-qr-code/ui';
+import { Image } from 'expo-image';
 
 export type PropsType = {
   navigation: any;
@@ -15,8 +12,8 @@ export function ConnectToGamePage({ navigation }: PropsType) {
     <View style={s.connectToGamePage}>
       <Image
         style={s.headerTitleImage}
-        resizeMode={'contain'}
-        source={require('@/assets/images/gameconnectionscreen/connect.png')}
+        contentFit={'contain'}
+        source={require('@/assets/images/gameconnectionscreen/connect.webp')}
       />
       <View style={s.content}>
         <ScanQRCode navigation={navigation} />

@@ -1,4 +1,4 @@
-import { ImageBackground, ScrollView, StyleSheet, Text, View, ViewStyle } from 'react-native';
+import { ScrollView, StyleSheet, Text, View, ViewStyle } from 'react-native';
 import { PlayerCard } from '@/src/pages/game-page/ui/player-card/ui';
 import { Player } from '@/src/shared/lib/types/player';
 import { useState } from 'react';
@@ -8,6 +8,7 @@ import { CardDisplayStatus } from '@/src/shared/lib/types/card-display-status';
 import { KickOutButton } from '@/src/pages/game-page/ui/kick-out-button/ui';
 import Animated, { Easing, withTiming, useSharedValue, useAnimatedStyle } from 'react-native-reanimated';
 import { adaptiveValue } from '@/src/shared/ui/adaptive-value/adaptive-value';
+import { ImageBackground } from 'expo-image';
 
 type PropsType = {
   player: Player;
@@ -58,8 +59,8 @@ export const PlayerDetails = observer(({ player, playerNumber, style, isCurrentP
     <View style={{ ...s.mainContentWrapper, ...style }}>
       <ImageBackground
         style={s.mainContentBackground}
-        resizeMode={'contain'}
-        source={require('@/assets/images/gamescreen/igra.png')}>
+        contentFit={'contain'}
+        source={require('@/assets/images/gamescreen/igra.webp')}>
         <View style={s.mainContent}>
           <Text ellipsizeMode={'head'} numberOfLines={1} style={s.mainContentTitle}>
             Игрок {playerNumber}
@@ -71,14 +72,14 @@ export const PlayerDetails = observer(({ player, playerNumber, style, isCurrentP
 
           <Animated.Image
             style={[s.kickOutImage, animatedStyles]}
-            source={require('@/assets/images/gamescreen/negoden.png')}
+            source={require('@/assets/images/gamescreen/negoden.webp')}
             resizeMode={'contain'}
           />
 
           <View style={s.playerCardsWrapper}>
             <ImageBackground
-              source={require('@/assets/images/gamescreen/text_box.png')}
-              resizeMode={'contain'}
+              source={require('@/assets/images/gamescreen/text_box.webp')}
+              contentFit={'contain'}
               style={s.playerCardsBackground}>
               <ScrollView style={s.playerCards} showsVerticalScrollIndicator={false}>
                 <PlayerCard

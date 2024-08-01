@@ -1,13 +1,4 @@
-import {
-  Image,
-  ImageBackground,
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  TouchableWithoutFeedback,
-  View,
-  Animated,
-} from 'react-native';
+import { SafeAreaView, StyleSheet, Text, TouchableWithoutFeedback, View, Animated } from 'react-native';
 import { Card } from '@/src/shared/lib/types/card';
 import { cardTypeToCardTitleMap } from '@/src/pages/game-page/ui/player-card/card-type-to-card-title-map';
 import { cardTypeToCardIconMap } from '@/src/pages/game-page/ui/player-card/card-type-to-card-icon-map';
@@ -16,6 +7,7 @@ import { useEffect, useRef, useState } from 'react';
 import { observer } from 'mobx-react';
 import { CardDisplayStatus } from '@/src/shared/lib/types/card-display-status';
 import { adaptiveValue } from '@/src/shared/ui/adaptive-value/adaptive-value';
+import { Image, ImageBackground } from 'expo-image';
 
 type PropsType = {
   card: Card;
@@ -36,6 +28,7 @@ export const PlayerCard = observer(({ card, cardDisplayStatus, onPress, canBePin
   const animationDuration = 100;
   const showPin = () => {
     Animated.timing(translateYAnim, {
+      //TODO rewrite on react-native-reanimated
       toValue: 0,
       duration: animationDuration,
       useNativeDriver: false,
@@ -59,8 +52,7 @@ export const PlayerCard = observer(({ card, cardDisplayStatus, onPress, canBePin
     }).start();
   };
 
-  useEffect(() => {
-  }, [opacityAnim, translateYAnim]);
+  useEffect(() => {}, [opacityAnim, translateYAnim]);
 
   if (isBigCard) {
     return (
@@ -70,9 +62,10 @@ export const PlayerCard = observer(({ card, cardDisplayStatus, onPress, canBePin
           source={
             isCardShowed || isCardPinned
               ? cardTypeToCardBackgroundMap[card.type]
-              : require('@/assets/images/gamescreen/phobia_bg.png')
+              : require('@/assets/images/gamescreen/phobia_bg.webp')
           }
-          resizeMode={isCardShowed || isCardPinned ? 'contain' : 'repeat'}>
+          contentFit={isCardShowed || isCardPinned ? 'contain' : 'fill'}>
+          {}
           <TouchableWithoutFeedback
             onPress={() => {
               if (canBePinned) {
@@ -108,9 +101,9 @@ export const PlayerCard = observer(({ card, cardDisplayStatus, onPress, canBePin
               {!cardDisplayStatus ? (
                 <Image
                   style={s.playerCardHint_BigCart}
-                  resizeMode={'contain'}
+                  contentFit={'contain'}
                   tintColor={'rgba(0,0,0,0.15)'}
-                  source={require('@/assets/images/gamescreen/gleb_hand.png')}
+                  source={require('@/assets/images/gamescreen/gleb_hand.webp')}
                 />
               ) : (
                 void 0
@@ -130,7 +123,7 @@ export const PlayerCard = observer(({ card, cardDisplayStatus, onPress, canBePin
         source={
           cardDisplayStatus
             ? cardTypeToCardBackgroundMap[card.type]
-            : require('@/assets/images/gamescreen/phobia_bg.png')
+            : require('@/assets/images/gamescreen/phobia_bg.webp')
         }
         resizeMode={'contain'}>
         <TouchableWithoutFeedback
@@ -150,7 +143,7 @@ export const PlayerCard = observer(({ card, cardDisplayStatus, onPress, canBePin
             <Image
               tintColor={isCardShowed || isCardPinned ? void 0 : '#616161'}
               style={s.playerCardIcon}
-              resizeMode={'contain'}
+              contentFit={'contain'}
               source={cardTypeToCardIconMap[card.type]}
             />
             <Text
@@ -165,9 +158,9 @@ export const PlayerCard = observer(({ card, cardDisplayStatus, onPress, canBePin
             {!cardDisplayStatus ? (
               <Image
                 style={s.playerCardHint}
-                resizeMode={'contain'}
+                contentFit={'contain'}
                 tintColor={'rgba(0,0,0,0.15)'}
-                source={require('@/assets/images/gamescreen/gleb_hand.png')}
+                source={require('@/assets/images/gamescreen/gleb_hand.webp')}
               />
             ) : (
               void 0

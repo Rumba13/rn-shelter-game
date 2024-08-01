@@ -1,12 +1,4 @@
-import {
-  Dimensions,
-  StyleSheet,
-  View,
-  Text,
-  ImageBackground,
-  TouchableWithoutFeedback,
-  ScrollView, Alert,
-} from 'react-native';
+import { Dimensions, StyleSheet, View, Text, TouchableWithoutFeedback, ScrollView, Alert } from 'react-native';
 import { gameStore } from '@/src/entities/game';
 import React, { useState } from 'react';
 import { PlayerDetails } from './player/ui';
@@ -17,6 +9,7 @@ import { RightSidebar } from '@/src/pages/game-page/ui/right-sidebar/ui';
 import { observer } from 'mobx-react';
 import { Easing, EasingFunction, EasingFunctionFactory } from 'react-native-reanimated';
 import { adaptiveValue } from '@/src/shared/ui/adaptive-value/adaptive-value';
+import { ImageBackground } from 'expo-image';
 
 type PropsType = {};
 const sidebarAnimationDuration = 270;
@@ -37,7 +30,6 @@ export const GamePage = observer(({}: PropsType) => {
     game.currentPlayerNumber === 0 ? 0 : game.currentPlayerNumber - 1,
   );
   const [thumbsScrollPositionX, setThumbsScrollPositionX] = useState(0);
-
 
   return (
     <View style={s.gamePage}>
@@ -87,8 +79,8 @@ export const GamePage = observer(({}: PropsType) => {
         />
       </View>
 
-      <View style={{ width: sliderWidth / 100 * 95, marginHorizontal: 'auto' }}>
-        <ImageBackground resizeMode={'stretch'} source={require('@/assets/images/gamescreen/box.png')}>
+      <View style={{ width: (sliderWidth / 100) * 95, marginHorizontal: 'auto' }}>
+        <ImageBackground contentFit={'fill'} source={require('@/assets/images/gamescreen/box.webp')}>
           <ScrollView
             showsHorizontalScrollIndicator={false}
             onScroll={e => setThumbsScrollPositionX(Math.round(e.nativeEvent.contentOffset.x))}
@@ -112,7 +104,7 @@ export const GamePage = observer(({}: PropsType) => {
                       selectPlayerSliderRef.current?.scrollTo({ index, animated: true });
                     }}>
                     {isThumbSelected ? (
-                      <ImageBackground resizeMode={'cover'} source={require('@/assets/images/gamescreen/frame.png')}>
+                      <ImageBackground resizeMode={'cover'} source={require('@/assets/images/gamescreen/frame.webp')}>
                         <Text
                           style={{
                             ...s.selectPlayerThumbTitle,
@@ -184,7 +176,7 @@ const s = StyleSheet.create({
     width: sliderWidth + 40,
   },
   selectPlayerThumbs: {
-    width: "100%",
+    width: '100%',
     height: 64,
     marginHorizontal: 'auto',
     flexDirection: 'row',

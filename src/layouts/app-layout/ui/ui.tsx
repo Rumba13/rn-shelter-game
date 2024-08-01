@@ -1,9 +1,10 @@
-import { Alert, Dimensions, ImageBackground, StatusBar, StyleSheet, View } from 'react-native';
+import { Alert, Dimensions, StatusBar, StyleSheet, View } from 'react-native';
 import React, { useEffect } from 'react';
 import { useFonts } from 'expo-font';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaProvider, SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import Constants from 'expo-constants';
+import { ImageBackground } from 'expo-image';
 
 type PropsType = {
   children: React.ReactNode;
@@ -40,9 +41,9 @@ export function AppLayout({ children }: PropsType) {
       <View style={s.root}>
         <GestureHandlerRootView style={{ flex: 1 }}>
           <ImageBackground
-            source={require('../../../../assets/images/mainscreen/background.png')}
+            source={require('../../../../assets/images/mainscreen/background.webp')}
             style={s.background}
-            resizeMode={'stretch'}>
+            contentFit={'fill'}>
             {children}
           </ImageBackground>
         </GestureHandlerRootView>

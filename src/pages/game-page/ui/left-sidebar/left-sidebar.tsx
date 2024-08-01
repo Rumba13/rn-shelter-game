@@ -1,12 +1,12 @@
 import {
   Dimensions,
-  ImageBackground,
   StyleSheet,
   View,
   Text,
-  Image,
   TouchableWithoutFeedback,
-  ScrollView, Alert, PixelRatio,
+  ScrollView,
+  Alert,
+  PixelRatio,
 } from 'react-native';
 import { Apocalypse } from '@/src/shared/lib/types/apocalypse';
 import { Shelter } from '@/src/shared/lib/types/shelter';
@@ -19,6 +19,7 @@ import Animated, {
   EasingFunction,
   EasingFunctionFactory,
 } from 'react-native-reanimated';
+import { Image, ImageBackground } from 'expo-image';
 import { adaptiveValue } from '@/src/shared/ui/adaptive-value/adaptive-value';
 
 type PropsType = {
@@ -35,20 +36,20 @@ const sideBarAspectRatio = 657 / 1442;
 const sideBarHeight = Dimensions.get('window').height;
 const sideBarWidth = sideBarHeight * sideBarAspectRatio;
 
-const sideBarClosedAtPx = -(sideBarWidth / 100 * 78);
+const sideBarClosedAtPx = -((sideBarWidth / 100) * 78);
 const sideBarOpenedAtPx = 0;
 const sideBarHiddenAtPx = -430;
 
 export function LeftSidebar({
-                              isOpened,
-                              setIsOpened,
-                              apocalypse,
-                              shelter,
-                              isCompletelyHidden,
-                              shelterCapacity,
-                              animationDuration,
-                              animationEasing,
-                            }: PropsType) {
+  isOpened,
+  setIsOpened,
+  apocalypse,
+  shelter,
+  isCompletelyHidden,
+  shelterCapacity,
+  animationDuration,
+  animationEasing,
+}: PropsType) {
   const translateXAnim = useSharedValue<number>(sideBarClosedAtPx);
   const closeSideBar = () => {
     translateXAnim.value = sideBarClosedAtPx;
@@ -80,8 +81,8 @@ export function LeftSidebar({
     <Animated.View style={[s.sideBarWrapper, animatedStyles]}>
       <ImageBackground
         style={{ width: '100%', height: '100%' }}
-        resizeMode={'contain'}
-        source={require('@/assets/images/gamescreen/left_final.png')}>
+        contentFit={'contain'}
+        source={require('@/assets/images/gamescreen/left_final.webp')}>
         <View style={s.leftSideBar}>
           <View
             style={{
@@ -95,11 +96,11 @@ export function LeftSidebar({
             <View style={s.apocalypse}>
               <Image
                 style={s.apocalypseMainImage}
-                resizeMode={'contain'}
-                source={require('@/assets/images/gamescreen/apok.png')}
+                contentFit={'contain'}
+                source={require('@/assets/images/gamescreen/apok.webp')}
               />
 
-              <ImageBackground resizeMode={'contain'} source={require('@/assets/images/gamescreen/text_frame.png')}>
+              <ImageBackground contentFit={'contain'} source={require('@/assets/images/gamescreen/text_frame.webp')}>
                 <View style={{ width: '100%', aspectRatio: 441 / 343 }}>
                   <ScrollView style={s.apocalypseDescriptionWrapper}>
                     <Text style={s.apocalypseDescription}>{apocalypse.description}</Text>
@@ -111,13 +112,15 @@ export function LeftSidebar({
             <View style={s.apocalypse}>
               <Image
                 style={s.shelterMainImage}
-                resizeMode={'contain'}
-                source={require('@/assets/images/gamescreen/bunker.png')}
+                contentFit={'contain'}
+                source={require('@/assets/images/gamescreen/bunker.webp')}
               />
 
-              <ImageBackground resizeMode={'contain'} source={require('@/assets/images/gamescreen/shelter_info.png')}>
+              <ImageBackground contentFit={'contain'} source={require('@/assets/images/gamescreen/shelter_info.webp')}>
                 <View style={s.shelterInfo}>
-                  <Text style={s.shelterName} adjustsFontSizeToFit>{shelter.name}</Text>
+                  <Text style={s.shelterName} adjustsFontSizeToFit>
+                    {shelter.name}
+                  </Text>
                   <Text style={s.shelterSpace}>
                     {shelter.spaceInSquareMeters}
                     {'\n'}m²
@@ -130,9 +133,10 @@ export function LeftSidebar({
                 </View>
               </ImageBackground>
 
-              <ImageBackground style={{ marginTop: 20 }} resizeMode={'contain'}
-                               source={require('@/assets/images/gamescreen/text_frame.png')}>
-
+              <ImageBackground
+                style={{ marginTop: 20 }}
+                contentFit={'contain'}
+                source={require('@/assets/images/gamescreen/text_frame.webp')}>
                 <View style={{ width: '100%', aspectRatio: 441 / 343 }}>
                   <ScrollView style={s.shelterDescriptionWrapper}>
                     <Text style={s.shelterDescription}>
@@ -155,8 +159,8 @@ export function LeftSidebar({
             <View style={s.leftSideBarDetailWrapper}>
               <Image
                 style={s.leftSideBarDetail}
-                resizeMode={'contain'}
-                source={require('@/assets/images/gamescreen/apoc_bunker_icon.png')}
+                contentFit={'contain'}
+                source={require('@/assets/images/gamescreen/apoc_bunker_icon.webp')}
               />
             </View>
           </TouchableWithoutFeedback>
@@ -166,10 +170,8 @@ export function LeftSidebar({
   );
 }
 
-
 const shelterInfoLineHeight = 16;
 const s = StyleSheet.create({
-
   shelterMainImage: {
     height: 'auto',
     width: '75%',
@@ -262,7 +264,6 @@ const s = StyleSheet.create({
     position: 'relative',
     width: '100%',
     height: '100%',
-
   },
   sideBarWrapper: {
     position: 'absolute',

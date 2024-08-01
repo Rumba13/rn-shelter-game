@@ -1,19 +1,11 @@
-import {
-  Image,
-  TouchableWithoutFeedback,
-  View,
-  Text,
-  ImageBackground,
-  ScrollView,
-  TouchableOpacity,
-  StyleSheet,
-} from 'react-native';
+import { TouchableWithoutFeedback, View, Text, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
 import { OverlayModal } from '@/src/shared/ui/overlay-modal/ui';
 import { ImageButton } from '@/src/shared/ui/image-button/ui';
 import { useState } from 'react';
 import { CONSTANTS } from '@/src/shared/lib/constants';
 import { createSeedStore } from '@/src/feature/create-seed/model/create-seed';
 import { adaptiveValue } from '@/src/shared/ui/adaptive-value/adaptive-value';
+import { Image, ImageBackground } from 'expo-image';
 
 //TODO separate info button and modal
 export function InfoButtonAndModal() {
@@ -24,19 +16,19 @@ export function InfoButtonAndModal() {
       <TouchableWithoutFeedback onPress={() => setIsModalOpened(!isModalOpened)}>
         <Image
           style={s.infoButtonIcon}
-          source={require('../../../../../assets/images/mainscreen/info_button.png')}
-          resizeMode={'contain'}
+          source={require('../../../../../assets/images/mainscreen/info_button.webp')}
+          contentFit={'contain'}
         />
       </TouchableWithoutFeedback>
       <OverlayModal isModalOpened={isModalOpened} setIsModalOpened={setIsModalOpened}>
         <ImageBackground
-          source={require('../../../../../assets/images/popup/additional_info_background.png')}
-          resizeMode={'contain'}>
+          source={require('../../../../../assets/images/popup/additional_info_background.webp')}
+          contentFit={'contain'}>
           <View style={s.modalContent}>
             <ImageButton
               style={s.closeButton}
-              buttonImage={require('../../../../../assets/images/popup/close.png')}
-              shadowImage={require('../../../../../assets/images/popup/close_shadow.png')}
+              buttonImage={require('../../../../../assets/images/popup/close.webp')}
+              shadowImage={require('../../../../../assets/images/popup/close_shadow.webp')}
               options={{ xOffset: -3, yOffset: -3, xOffSetOnPress: -1, yOffsetOnPress: -1 }}
               onPress={() => setIsModalOpened(false)}
             />
@@ -79,10 +71,12 @@ const s = StyleSheet.create({
     marginTop: 30,
     marginRight: 25,
     minWidth: 35,
-    minHeight: 35,
+    height: 35,
+    width: 35,
   },
   infoButtonIcon: {
     flex: 1,
+    height: '100%',
     maxHeight: '100%',
   },
   modalContent: {

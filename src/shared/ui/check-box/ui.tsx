@@ -1,14 +1,6 @@
-import {
-  Animated,
-  Easing,
-  Image,
-  ImageBackground,
-  LayoutAnimation,
-  Text,
-  TouchableWithoutFeedback,
-  View,
-} from 'react-native';
+import { Animated, Easing, LayoutAnimation, Text, TouchableWithoutFeedback, View } from 'react-native';
 import { useEffect, useRef, useState } from 'react';
+import { ImageBackground } from 'expo-image';
 import { adaptiveValue } from '@/src/shared/ui/adaptive-value/adaptive-value';
 
 type PropsType = {
@@ -36,8 +28,7 @@ export function CheckBox({ style, setIsToggled, isToggled }: PropsType) {
       isInteraction: true,
     }).start();
   };
-  useEffect(() => {
-  }, [translateXAnim]);
+  useEffect(() => {}, [translateXAnim]);
 
   return (
     <Animated.View style={{ ...s.checkBox, ...style }}>
@@ -53,8 +44,8 @@ export function CheckBox({ style, setIsToggled, isToggled }: PropsType) {
         <Animated.View style={s.checkBoxChecker}>
           <ImageBackground
             style={{ height: '100%' }}
-            resizeMode={'contain'}
-            source={require('@/assets/images/gamecreationscreen/perekluchatel.png')}>
+            contentFit={'contain'}
+            source={require('@/assets/images/gamecreationscreen/perekluchatel.webp')}>
             <Animated.Image
               style={{
                 ...s.checkBoxImage,

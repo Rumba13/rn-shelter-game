@@ -3,8 +3,8 @@ import { StyleSheet } from 'react-native';
 
 type PropsType = {
   onPress: () => void;
-  height?: number | string
-  width?: number | string
+  height?: number | string;
+  width?: number | string;
 };
 
 const helpButtonSize = 35;
@@ -22,8 +22,8 @@ export function QuestionButton({ onPress, height, width }: PropsType) {
         yOffsetOnPress: -1,
         xOffSetOnPress: -1,
       }}
-      buttonImage={require('@/assets/images/core/vopros_icon.png')}
-      shadowImage={require('@/assets/images/gameconnectionscreen/info_icon_shadow.png')}
+      buttonImage={require('@/assets/images/core/vopros_icon.webp')}
+      shadowImage={require('@/assets/images/gameconnectionscreen/info_icon_shadow.webp')}
     />
   );
 }
