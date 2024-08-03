@@ -1,47 +1,42 @@
-import { shelters } from '@/src/entities/shelter/model/shelters';
+import {  sheltersStore } from '@/src/entities/shelter/model/shelters';
 import { GameConnectionData } from '@/src/shared/lib/types/game-connection-data';
-import { apocalypses } from '@/src/entities/apocalypse';
 import { GameType } from '@/src/shared/lib/types/game';
 import { Player } from '@/src/shared/lib/types/player';
 import { playerPropsShortNames } from '@/src/entities/characteristic-card/model/player-props-short-names';
-import { characteristicCards } from '@/src/entities/characteristic-card/model/characteristic-card';
+import { cardsStore } from '@/src/entities/characteristic-card/model/characteristic-card';
 import { gameStore } from '@/src/entities/game';
-import { professions } from '@/src/entities/profession';
 import { endings } from '@/src/entities/ending';
+import { apocalypsesStore } from '@/src/entities/apocalypse/model/apocalypses';
+import { professionsStore } from '@/src/entities/profession/model/professions';
 
 class ConnectToGameStore {
-  constructor() {}
+  constructor() {
+  }
 
   public connectToGame(gameCode: string, navigation: any) {
     const gameLoadingData: GameConnectionData = JSON.parse(gameCode);
-    const shelter = shelters.find(shelter => shelter.id === gameLoadingData.shelterId);
-    const apocalypse = apocalypses.find(apocalypse => apocalypse.id === gameLoadingData.apocalypseId);
+    const shelter = sheltersStore.getShelterById(gameLoadingData.shelterId);
+    const apocalypse = apocalypsesStore.getApocalypseById(gameLoadingData.apocalypseId);
     const ending = endings.find(ending => ending.id === gameLoadingData.endingId);
 
     if (!apocalypse || !shelter || !ending) throw new Error('Apocalypse or shelter or ending is undefined');
 
-    const players: Player[] = <Player[]>gameLoadingData.players.map(player => {
+    const players: Player[] = <Player[]>gameLoadingData.players.map(playerData => {
       return {
-        number: player[playerPropsShortNames['number']],
-        bioCharacteristics: characteristicCards.bio.find(card => card.id === player[playerPropsShortNames.bio]),
-        character: characteristicCards.character.find(card => card.id === player[playerPropsShortNames.character]),
-        health: characteristicCards.health.find(card => card.id === player[playerPropsShortNames.health]),
-        phobia: characteristicCards.phobia.find(card => card.id === player[playerPropsShortNames.phobia]),
-        actionCard: characteristicCards['action-card'].find(
-          card => card.id === player[playerPropsShortNames['action-card']],
-        ),
-        conditionCard: characteristicCards['condition-card'].find(
-          card => card.id === player[playerPropsShortNames['condition-card']],
-        ),
-        additionalInformation: characteristicCards['additional-information'].find(
-          card => card.id === player[playerPropsShortNames['additional-information']],
-        ),
-        luggage: characteristicCards.luggage.find(card => card.id === player[playerPropsShortNames.luggage]),
-        knowledge: characteristicCards.knowledge.find(card => card.id === player[playerPropsShortNames.knowledge]),
-        hobby: characteristicCards.hobby.find(card => card.id === player[playerPropsShortNames.hobby]),
+        number: playerData[playerPropsShortNames['number']],
+        bioCharacteristics: cardsStore.getCardById(playerData[playerPropsShortNames.bio]),
+        character: cardsStore.getCardById(playerData[playerPropsShortNames.character]),
+        health: cardsStore.getCardById(playerData[playerPropsShortNames.health]),
+        phobia: cardsStore.getCardById(playerData[playerPropsShortNames.phobia]),
+        actionCard: cardsStore.getCardById(playerData[playerPropsShortNames['action-card']]),
+        conditionCard: cardsStore.getCardById(playerData[playerPropsShortNames['condition-card']]),
+        additionalInformation: cardsStore.getCardById(playerData[playerPropsShortNames['additional-information']]),
+        luggage: cardsStore.getCardById(playerData[playerPropsShortNames.luggage]),
+        knowledge: cardsStore.getCardById(playerData[playerPropsShortNames.knowledge]),
+        hobby: cardsStore.getCardById(playerData[playerPropsShortNames.hobby]),
         notes: '',
         isKicked: false,
-        profession: professions.find(profession => profession.id === player[playerPropsShortNames.profession]),
+        profession: professionsStore.getProfessionById(playerData[playerPropsShortNames.profession]),
       };
     });
 

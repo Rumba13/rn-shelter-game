@@ -2,14 +2,17 @@ import { Alert, Dimensions, View, Text, StatusBar } from 'react-native';
 import React from 'react';
 import { ImageButton } from '@/src/shared/ui/image-button/ui';
 import { InfoButtonAndModal } from '@/src/pages/home-page/ui/info-button/ui';
-import { SafeAreaProvider, useSafeAreaInsets, SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { Image, ImageBackground } from 'expo-image';
+import { databaseStore } from '@/src/shared/model/database-store';
+import { cardsStore } from '@/src/entities/characteristic-card/model/characteristic-card';
 
 type PropsType = {
   navigation: any;
 };
 
 export const HomePage = ({ navigation }: PropsType) => {
+
   return (
     <SafeAreaView style={{ flex: 1 }} edges={['bottom', 'left', 'top', 'right']}>
       <View style={s.homePage}>

@@ -1,11 +1,10 @@
 import { createGameStore } from '@/src/feature/create-game/model/create-game';
 import { GameSettings } from '@/src/shared/lib/types/game-settings';
 import { SexualOrientation } from '@/src/shared/lib/types/sexual-orientation';
-import { apocalypses } from '@/src/entities/apocalypse';
-import { shelters } from '@/src/entities/shelter/model/shelters';
-import { characteristicCards } from '@/src/entities/characteristic-card/model/characteristic-card';
+import { sheltersStore } from '@/src/entities/shelter/model/shelters';
+import { cardsStore } from '@/src/entities/characteristic-card/model/characteristic-card';
 import { Card } from '@/src/shared/lib/types/card';
-import { cardKitToCards } from '@/src/shared/lib/card-kit-to-cards';
+import { apocalypsesStore } from '@/src/entities/apocalypse/model/apocalypses';
 
 const gameSettings: GameSettings = {
   difficulty: 8,
@@ -14,9 +13,9 @@ const gameSettings: GameSettings = {
   characteristicBalance: 2,
   sexualOrientation: SexualOrientation.Random,
   balance: 4,
-  apocalypses: apocalypses,
-  shelters: shelters,
-  cardsKit: cardKitToCards(characteristicCards),
+  apocalypses: apocalypsesStore.getAllApocalypses(),
+  shelters: sheltersStore.getAllShelters(),
+  cardsKit: cardsStore.getAllCards(),
   lotteryTicketMode: false,
 };
 

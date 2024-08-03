@@ -4,42 +4,43 @@ import { Apocalypse } from '@/src/shared/lib/types/apocalypse';
 import { Shelter } from '@/src/shared/lib/types/shelter';
 import { Player } from '@/src/shared/lib/types/player';
 import { Card } from '@/src/shared/lib/types/card';
-import { professions } from '@/src/entities/profession';
 import { CardType } from '@/src/shared/lib/types/card-type';
 import { PseudoRandomGenerator } from '@/src/shared/lib/pseudo-random-generator';
 import { CreatePriceMap } from '@/src/feature/create-game/model/create-price-map';
 import { difficultyToTotalPrice } from '@/src/feature/create-game/model/difficulty-to-total-price';
 import { gameSettingsStore } from '@/src/entities/game';
-import { characteristicBalanceToShuffleTimes } from '@/src/feature/create-game/model/characteristic-balance-to-shuffle-times';
+import {
+  characteristicBalanceToShuffleTimes,
+} from '@/src/feature/create-game/model/characteristic-balance-to-shuffle-times';
 import { BalanceChances } from '@/src/shared/lib/types/balance-chances';
 import { playersBalanceToBalanceChances } from '@/src/feature/create-game/model/players-balance-to-balance-chances';
 import { SexualOrientation } from '@/src/shared/lib/types/sexual-orientation';
 import { genders } from '@/src/entities/gender/model/genders';
 import { Profession } from '@/src/shared/lib/types/profession';
-import { characteristicCards } from '@/src/entities/characteristic-card/model/characteristic-card';
+import { cardsStore } from '@/src/entities/characteristic-card/model/characteristic-card';
 import { Ending } from '@/src/shared/lib/types/ending';
 import { endings } from '@/src/entities/ending';
 import { createSeedStore } from '@/src/feature/create-seed/model/create-seed';
+import { databaseStore } from '@/src/shared/model/database-store';
 
 class CreateGameStore {
   private readonly pseudoRandomGenerator: PseudoRandomGenerator;
   private createPriceMap: CreatePriceMap;
-  private usedProfessions: Profession[] = professions.slice();
 
   private selectRandomApocalypse(apocalypses: Apocalypse[]): Apocalypse {
     return apocalypses[
       Math.trunc(this.pseudoRandomGenerator.generateFrom(createSeedStore.seed, 0, apocalypses.length))
-    ];
+      ];
   }
 
   private selectRandomShelter(shelters: Shelter[]): Shelter {
     return shelters[Math.trunc(this.pseudoRandomGenerator.generateFrom(createSeedStore.seed, 0, shelters.length))];
   }
 
-  private selectRandomProfession(): Profession {
-    const professionIndex = Math.trunc(this.pseudoRandomGenerator.generateInRange(1, this.usedProfessions.length));
-    const profession = this.usedProfessions[professionIndex];
-    this.usedProfessions.splice(professionIndex, 1);
+  private selectRandomProfession(professions: Profession[]): Profession {
+    const professionIndex = Math.trunc(this.pseudoRandomGenerator.generateInRange(1, professions.length));
+    const profession = professions[professionIndex];
+    professions.splice(professionIndex, 1);
     return profession;
   }
 
@@ -106,34 +107,33 @@ class CreateGameStore {
     characteristicBalance: number,
     sexualOrientation: SexualOrientation,
     playerNumber: number,
+    unusedProfessions: Profession[],
   ): Player {
     const priceMap: { [k in CardType]: number } = this.createPriceMap.createPriceMapShuffle(
       price,
       characteristicBalanceToShuffleTimes(characteristicBalance),
     );
 
-    const { character, health, luggage, hobby, knowledge, phobia, bio } = characteristicCards;
-
     return {
       number: playerNumber,
       isKicked: false,
-      profession: this.selectRandomProfession(),
+      profession: this.selectRandomProfession(unusedProfessions),
       additionalInformation: this.findCardWithPrice(
-        characteristicCards['additional-information'],
+        cardsStore.getCardsByType('additional-information'),
         priceMap['additional-information'],
       ),
-      health: this.findCardWithPrice(health, priceMap.health),
+      health: this.findCardWithPrice(cardsStore.getCardsByType('health'), priceMap.health),
       bioCharacteristics: this.changeBioCharacteristicGender(
-        this.findCardWithPrice(bio, priceMap.bio),
+        this.findCardWithPrice(cardsStore.getCardsByType('bio'), priceMap.bio),
         sexualOrientation,
       ),
-      character: this.findCardWithPrice(character, priceMap.character),
-      hobby: this.findCardWithPrice(hobby, priceMap.hobby),
-      luggage: this.findCardWithPrice(luggage, priceMap.luggage),
-      knowledge: this.findCardWithPrice(knowledge, priceMap.knowledge),
-      phobia: this.findCardWithPrice(phobia, priceMap.phobia),
-      actionCard: this.findCardWithPrice(characteristicCards['action-card'], priceMap['action-card']),
-      conditionCard: this.findCardWithPrice(characteristicCards['condition-card'], priceMap['condition-card']),
+      character: this.findCardWithPrice(cardsStore.getCardsByType('character'), priceMap.character),
+      hobby: this.findCardWithPrice(cardsStore.getCardsByType('hobby'), priceMap.hobby),
+      luggage: this.findCardWithPrice(cardsStore.getCardsByType('luggage'), priceMap.luggage),
+      knowledge: this.findCardWithPrice(cardsStore.getCardsByType('knowledge'), priceMap.knowledge),
+      phobia: this.findCardWithPrice(cardsStore.getCardsByType('phobia'), priceMap.phobia),
+      actionCard: this.findCardWithPrice(cardsStore.getCardsByType('action-card'), priceMap['action-card']),
+      conditionCard: this.findCardWithPrice(cardsStore.getCardsByType('condition-card'), priceMap['condition-card']),
       notes: '',
     };
   }
@@ -201,16 +201,15 @@ class CreateGameStore {
     playersBalance: number,
     sexualOrientation: SexualOrientation,
   ): Player[] {
-    const players: Player[] = [];
-
+    const unusedProfessions = databaseStore.database.getAllSync<Profession>('SELECT * FROM professions;');
     this.pseudoRandomGenerator.resetSeed();
+
+    const players: Player[] = [];
 
     for (let i = 1; i <= playersCount; i++) {
       const playerPrice = this.balancePlayerPrice(playersBalance, difficultyToTotalPrice(difficulty));
-      players.push(this.createPlayer(playerPrice, characteristicBalance, sexualOrientation, i));
+      players.push(this.createPlayer(playerPrice, characteristicBalance, sexualOrientation, i, unusedProfessions));
     }
-
-    this.usedProfessions = professions.slice(); //TODO refactor
 
     return players;
   }

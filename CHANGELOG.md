@@ -1,3 +1,10 @@
+## 1.2.0 (August 1, 2024)
+- Change images format to `.webp`
+- Replace react-native images with `expo-image`
+- Add adaptive ui
+- Add 70 new professions
+- Add global error catching
+
 ## 1.1.1 (July 28, 2024)
 
 - Fix flashing background issue

@@ -1,10 +1,10 @@
-import { apocalypses } from './apocalypses';
+import {  apocalypsesStore } from './apocalypses';
 import { Apocalypse } from '@/src/shared/lib/types/apocalypse';
 
 export function apocalypseNameToApocalypse(apocalypseName: string): Apocalypse {
-  const apocalypse = apocalypses.find(apocalypse => apocalypse.name === apocalypseName);
+  const apocalypse = apocalypsesStore.getApocalypseByName(apocalypseName);
 
-  if (apocalypse === undefined) {
+  if (!apocalypse) {
     throw new Error('Apocalypse is undefined');
   }
 

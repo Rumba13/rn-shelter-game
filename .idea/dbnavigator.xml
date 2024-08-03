@@ -1,0 +1,1108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DBNavigator.Project.DDLFileAttachmentManager">
+    <mappings />
+    <preferences />
+  </component>
+  <component name="DBNavigator.Project.DataEditorManager">
+    <record-view-column-sorting-type value="BY_INDEX" />
+    <value-preview-text-wrapping value="false" />
+    <value-preview-pinned value="false" />
+  </component>
+  <component name="DBNavigator.Project.DatabaseBrowserManager">
+    <autoscroll-to-editor value="false" />
+    <autoscroll-from-editor value="true" />
+    <show-object-properties value="false" />
+    <loaded-nodes />
+  </component>
+  <component name="DBNavigator.Project.DatabaseConsoleManager">
+    <connection id="afbdfb32-9d3f-4f8a-b1fe-6b7d2b4481e4">
+      <console name="Game" type="STANDARD" schema="main" session="Main"><![CDATA[SELECT * FROM apocalypses;
+
+ALTER TABLE apocalypses ADD COLUMN edition TEXT NOT NULL DEFAULT 'standart';
+
+
+UPDATE professions SET name = 'Древний рус' WHERE name = 'Сатору Годжо'
+
+
+
+CREATE TABLE cards( 
+name TEXT NOT NULL,
+id INTEGER PRIMARY KEY,
+price INTEGER NOT NULL,
+type TEXT NOT NULL
+);
+
+SELECT $1 FROM professions;
+
+SELECT name FROM cards;
+
+SELECT COUNT(*) AS count FROM cards;
+
+INSERT INTO cards ([type],[name],[price])
+VALUES
+('phobia','Агирофобия (Айнарофобия) — боязнь улиц',5),
+('phobia','Агорофобия — боязнь городов',4),
+('phobia','Акрофобия — боязнь высоты',6),
+('phobia','Аматофобия — боязнь пыли',6),
+('phobia','Андрофобия — боязнь мужчин',2),
+('phobia','Антропофобия — боязнь людей',2),
+('phobia','Арахнофобия — боязнь пауков',5),
+('phobia','Аулофобия – боязнь флейты',5),
+('phobia','Аутофобия — боязнь одиночества',5),
+('phobia','Баллистофобия — боязнь поражения пулей',6),
+('phobia','Барофобия — боязнь подъёма тяжести',3),
+('phobia','Библиофобия – боязнь библиотек',4),
+('phobia','Блаптофобия — боязнь нанести повреждение',7),
+('phobia','Вакцинофобия — боязнь прививок',5),
+('phobia','Галлофобия — боязнь оружия',3),
+('phobia','Гаптофобия — боязнь прикосновений',3),
+('phobia','Гемофобия — боязнь крови',4),
+('phobia','Геронтофобия — боязнь общения с пожилыми людьми',6),
+('phobia','Гетерофобия — боязнь противоположного пола',3),
+('phobia','Гидрофобия — боязнь воды,утопления',6),
+('phobia','Гиерофобия — боязнь предметов религиозного культа',5),
+('phobia','Гилофобия — боязнь леса, заблудиться в лесу',5),
+('phobia','Гинекофобия — боязнь женщин',3),
+('phobia','Гомофобия — боязнь любого проявления гомосексуальности',5),
+('phobia','Гравидофобия — боязнь беременных, беременности',6),
+('phobia','Демонофобия — боязнь нечистой силы',6),
+('phobia','Зоофобия — боязнь животных',4),
+('phobia','Канинофобия — боязнь собак',4),
+('phobia','Киберофобия – боязнь компьютеров',4),
+('phobia','Клаустрофобия — боязнь замкнутого пространства',4),
+('phobia','Коулрофобия — боязнь клоунов',6),
+('phobia','Ксантофобия — боязнь желтого цвета',5),
+('phobia','Ксенофобия — боязнь всего незнакомого, непривычного',5),
+('phobia','Лисофобия — боязнь заболеть бешенством',6),
+('phobia','Логофобия — боязнь говорить',2),
+('phobia','Мусофобия — боязнь мышей и крыс',3),
+('phobia','Неофобия — боязнь нового, перемен',5),
+('phobia','Нет фобии',7),
+('phobia','Никтофобия — боязнь ночи, темноты',5),
+('phobia','Орнитофобия — боязнь птиц и их перьев',6),
+('phobia','Охлофобия — боязнь толпы',6),
+('phobia','Панофобия — боязнь всего',1),
+('phobia','Паразитофобия — боязнь насекомых-паразитов',6),
+('phobia','Педофобия — навязчивый страх детей',4),
+('phobia','Психрофобия — боязнь холода',5),
+('phobia','Радиофобия — боязнь радиации',6),
+('phobia','Социофобия — боязнь общества',1),
+('phobia','Танатофобия — паническая боязнь смерти',4),
+('phobia','Термофобия — боязнь жары и натопленных помещений',6),
+('phobia','Тетрафобия — боязнь числа 4',5),
+('phobia','Топофобия — боязнь остаться одному в помещении',6),
+('phobia','Трипофобия — боязнь кластерных отверстий',6),
+('phobia','Трискайдекафобия — боязнь числа 13',6),
+('phobia','Турофобия — боязнь сыра',6),
+('phobia','Фазмофобия — боязнь призраков и духов',6),
+('phobia','Фармакофобия — боязнь принимать лекарства',2),
+('phobia','Эргофобия — боязнь работать',1),
+('phobia','Ятрофобия — боязнь врачей',5),
+('health','Абсолютная слепота',3),
+('health','Аллергия на солнечный свет',4),
+('health','Аритмия',3),
+('health','Бесплодие',5),
+('health','Бессонница',5),
+('health','Биполярное расстройство',2),
+('health','Болезнь Альцгеймера',3),
+('health','Болезнь Паркинсона',3),
+('health','ВИЧ',4),
+('health','Ветрянка в осложнённой форме',3),
+('health','Волчанка',3),
+('health','Вши',5),
+('health','Гайморит',4),
+('health','Гемофилия',4),
+('health','Гепатит C',3),
+('health','Глухонемой',3),
+('health','Глухота на одно ухо',4),
+('health','Гонорея',4),
+('health','Грипп',4),
+('health','Дальнозоркость',5),
+('health','Дальтонизм',5),
+('health','Деменция',2),
+('health','Диарея',1),
+('health','Дизурия',5),
+('health','Дислексия',4),
+('health','Заикание',5),
+('health','Идеально здоров',6),
+('health','Ишемическая болезнь сердца',3),
+('health','Камни в почках',4),
+('health','Катаракта',4),
+('health','Клещевой энцефалит',2),
+('health','Коронавирус',3),
+('health','Корь',3),
+('health','Косоглазие',4),
+('health','Малярия',2),
+('health','Наркотическая зависимость',4),
+('health','Немота',3),
+('health','Нет одной ноги',2),
+('health','Нет одной руки',2),
+('health','Ночная слепота',5),
+('health','Оспа',3),
+('health','Параноидальное расстройство',2),
+('health','Пневмония',3),
+('health','Повышенное давление',5),
+('health','Подагра',4),
+('health','Пониженное давление',4),
+('health','Посттравматическое стрессовое расстройство',2),
+('health','Почечная недостаточность',3),
+('health','Псориаз',5),
+('health','Сахарный диабет',3),
+('health','Синдром Туретта',3),
+('health','Склероз',3),
+('health','Слеп на один глаз',3),
+('health','Сломан палец',4),
+('health','Сломана нога',2),
+('health','Сломана рука',3),
+('health','Сотрясение мозга',4),
+('health','Табачная зависимость',4),
+('health','Туберкулез',2),
+('health','Туберкулез ',2),
+('health','Холера',3),
+('health','Хроническая мигрень',5),
+('health','Хронический насморк',5),
+('health','Цинга',4),
+('health','Цирроз печени',3),
+('health','Чума',2),
+('health','Шизофрения',2),
+('health','Эпилепсия',2),
+('health','Язва желудка',5),
+('health','Язвенный колит',4),
+('condition-card','В случае вашего выбывания бункер очистится от всех текущих вредителей',6),
+('condition-card','В случае вашего выбывания в бункере заведутся вредители: змеи',1),
+('condition-card','В случае вашего выбывания в бункере заведутся вредители: крысы',1),
+('condition-card','В случае вашего выбывания в бункере заведутся вредители: пауки',1),
+('condition-card','В случае вашего выбывания все раскрытые здоровья станут идеальными',8),
+('condition-card','В случае вашего выбывания вы выбираете игрока, на котором будет посмертно отмечен ваш голос на всех следующих голосованиях',3),
+('condition-card','В случае вашего выбывания количество мест в бункере увеличивается на одно',8),
+('condition-card','В случае вашего выбывания количество мест в бункере уменьшится на одно.',1),
+('condition-card','В случае вашего выбывания отдайте свой багаж одному из игроков (раскройте, если он был закрыт)',2),
+('condition-card','В случае вашего выбывания сделайте любую комнату полностью оборудованной',4),
+('condition-card','В случае вашего выбывания сделайте любую комнату пустой',1),
+('condition-card','Вас нельзя выгнать на последнем голосовании',8),
+('condition-card','Ваш персонаж защищён от карточек действия, раскрывающих ваши характеристики (работает 1 раз)',6),
+('condition-card','Вы защищены от всех манипуляций со здоровьем, кроме лечения (работает много раз)',7),
+('condition-card','Вы перенаправляете абсолютно все карты, используемые на вас в следующего по списку (работает много раз)',7),
+('condition-card','Если вас выгнали на первом голосовании, вы выбираете того, кто выйдет из бункера вместо вас и остаётесь в бункере (вас всё ещё можно выгнать позже)',6),
+('condition-card','Если ваш персонаж остаётся в бункере до последнего круга, количество мест в бункере увеличится на 1',7),
+('condition-card','Если вы были единственным, кто проголосовал за вас, никто не может проголосовать за вас на следующем круге (работает 1 раз)',8),
+('condition-card','Если вы проходите в бункер команда получает дополнительный запас продовольствия (озвучивается в конце игры)',4),
+('condition-card','Если вы проходите в бункер, команда находит в нём 3 заряженных автомата Калашникова (озвучивается в конце игры)',7),
+('condition-card','Если вы проходите в бункер, команда находит в нём запас антибиотиков и бинтов (озвучивается в конце игры)',6),
+('condition-card','Если две ваши характеристики были раскрыты картами действия или условия, за вас нельзя проголосовать до конца игры',5),
+('condition-card','Если за вас проголосовало большинство, вы отражаете голос каждого, кто проголосовал против вас в него же самого (один раз за игру, отражённые голоса невозможно поменять)',5),
+('condition-card','Если за вас проголосовало большинство, поменяйтесь последней раскрытой вами характеристикой с любым игроком и объявите переголосование (работает 1 раз, если ни у кого не раскрыта эта характеристика, карта сгорает)',8),
+('condition-card','Если за вас проголосовало большинство, раскройте ещё одну свою характеристику и объявите переголосование (работает 1 раз)',8),
+('condition-card','Если за вас проголосовало ровно 3, 6 или 9 игроков, вы меняетесь любой открытой у вас обоих характеристикой с любым игроком (работает 1 раз)',7),
+('condition-card','Если за двух игроков проголосовало одинаковое количество человек, вы решаете кто покинет бункер (работает много раз)',6),
+('condition-card','Если за двух игроков проголосовало одинаковое количество человек, заставьте их открыть ещё одну характеристику на ваш выбор (работает 1 раз)',6),
+('condition-card','Если игрок меняется с вами характеристикой, вы не можете быть выгнаны до него (работает 1 раз)',6),
+('condition-card','Если на вас используют карту действия, вы получаете копию этой карты, которую можете использовать позже (работает 1 раз)',7),
+('condition-card','Если на первом круге выбывает игрок, за которого вы не голосовали, все, кто проголосовал за выбывшего, лишаются права голоса на следующем голосовании ',3),
+('condition-card','Если первый раскрытый за игру багаж раскрыт картой действия, вы воруете его, а ваше здоровье становится идеальным',6),
+('condition-card','Если у вас пытаются украсть или уничтожить багаж, вы воруете или уничтожаете багаж игрока, пытавшегося это сделать (если багаж игрока закрыт, он обязан его раскрыть, работает много раз) ',3),
+('condition-card','Если у выбывшего игрока был открыт багаж, заберите его себе (работает 1 раз)',5),
+('condition-card','Если человек использовал на вас карту, ваш голос против него на всех голосованиях будет считаться за 2',6),
+('condition-card','Если человек использовал на вас карту, ваш голос против него на следующем голосовании будет считаться за 3 (работает 1 раз)',8),
+('condition-card','Игрок, раскрывший вашу характеристику картой действия, также раскрывает одну из своих характеристик на ваш выбор (работает много раз)',5),
+('condition-card','Когда вы раскрываете характер, все остальные должны раскрыть его следующей характеристикой, если он был закрыт',3),
+('condition-card','На вас не работают добавочные голоса от карточек (всю игру)',5),
+('condition-card','На втором круге все вскрывают характеристику на ваш выбор (тот, у кого эта характеристика вскрыта, вскрывает любую характеристику на свой выбор)',4),
+('condition-card','После раскрытия вашего здоровья ваш голос считается за два (всю игру)',8),
+('condition-card','После раскрытия вашего здоровья, другие игроки не смогут раскрыть своё здоровье на протяжении текущего круга',1),
+('action-card','Вы можете вскрыть две характеристики за один ход',6),
+('action-card','Вы можете проголосовать дважды (один раз за игру)',8),
+('action-card','Вы обладаете тем же знанием, что и выбранный вами игрок',7),
+('action-card','Выбранный игрок забывает своё знание',3),
+('action-card','Выбранный игрок не вскрывает характеристику на следующем ходу',4),
+('action-card','Выбранный игрок превращается в беременную женщину 29 лет',4),
+('action-card','Выбранный игрок теряет право говорить на предстоящем обсуждении',7),
+('action-card','Выбранный человек избавляется от фобии',6),
+('action-card','Выбранный человек становится идеально здоровым',7),
+('action-card','Два выбранных вами игрока получают дополнительный голос против них на всех голосованиях, пока один из них не вылетит',5),
+('action-card','Заберите багаж игрока, только что покинувшего бункер',5),
+('action-card','Заберите профессию последнего умершего игрока',3),
+('action-card','Запретите игроку голосовать (один раз за игру)',8),
+('action-card','Здоровье выбранного игрока становится таким же как у вас',4),
+('action-card','Избавляет человека от беременности',3),
+('action-card','Измените любую свою характеристику на одну из открытых игроками характеристик (Кроме профессии)',8),
+('action-card','Измените пол любого игрока (лишает беременности)',4),
+('action-card','Измените собственный пол (лишает беременности)',4),
+('action-card','Истребите любую живность в бункере',6),
+('action-card','Комната на ваш выбор становится открытой и оборудованной',7),
+('action-card','Назовите характеристику, которую раскроет выбранный игрок на следующем круге',3),
+('action-card','Обменяйтесь багажом с другим игроком (Оба багажа должны быть раскрыты)',7),
+('action-card','Обменяйтесь здоровьем с любым оставшимся игроком',7),
+('action-card','Обменяйтесь фобиями с выбранным игроком',7),
+('action-card','Отмените последнюю карту действия или условия',4),
+('action-card','Отмените последнюю карту действия или условия ',6),
+('action-card','Получите иммунитет на голосовании этого круга (можно объявить только в начале любого круга, кроме последнего)',8),
+('action-card','Раскройте багаж одного игрока',3),
+('action-card','Раскройте биологические характеристики одного игрока',3),
+('action-card','Раскройте доп. информацию одного игрока',3),
+('action-card','Раскройте здоровье одного игрока',3),
+('action-card','Раскройте любую характеристику одного игрока',4),
+('action-card','Раскройте фобию одного игрока',4),
+('action-card','Раскройте хобби одного игрока',3),
+('action-card','Скопируйте карту действия использованную на этом кругу',6),
+('action-card','Скопируйте профессию любого игрока (ваша профессия исчезает)',7),
+('action-card','Увеличьте возраст выбранного игрока на 10 (максимальный возраст 80)',3),
+('action-card','Украдите любой раскрытый багаж (Использовать другие карты на украденный багаж невозможно)',7),
+('action-card','Уменьшите возраст выбранного игрока на 10 (минимальный возраст 18)',5),
+('action-card','Уничтожьте багаж любого игрока (раскрытый)',5),
+('action-card','Характер выбранного игрока становится "вменяемый"',6),
+('hobby','Автомобилизм',4),
+('hobby','Азартные игры',3),
+('hobby','Альпинизм',7),
+('hobby','Анатомия',5),
+('hobby','Боевые искусства',6),
+('hobby','Бродяжничество',3),
+('hobby','Вандализм',2),
+('hobby','Ведение блога',3),
+('hobby','Ведение дневника',3),
+('hobby','Волонтёрство',3),
+('hobby','Вскрытие замков',6),
+('hobby','Выращивание растений',7),
+('hobby','Вязание',3),
+('hobby','Гипноз',6),
+('hobby','Граффити',3),
+('hobby','Дайвинг',3),
+('hobby','Живодёрство',3),
+('hobby','Игра в гольф',3),
+('hobby','Игра на губной гармошке',4),
+('hobby','Изучение работы бункеров',6),
+('hobby','Изучение топографических карт',4),
+('hobby','Каллиграфия',3),
+('hobby','Клептомания',2),
+('hobby','Кулинария',6),
+('hobby','Лечение травами',5),
+('hobby','Мазохизм',2),
+('hobby','Макраме',3),
+('hobby','Мастерство выживания',8),
+('hobby','Медитация',4),
+('hobby','Некрофилия',2),
+('hobby','Нимфомания',4),
+('hobby','Нудизм',4),
+('hobby','Орнитология',3),
+('hobby','Охота',5),
+('hobby','Паркур',5),
+('hobby','Парусный спорт',3),
+('hobby','Пение',3),
+('hobby','Пиромания',1),
+('hobby','Плетение ковров',3),
+('hobby','Плотницкое дело',6),
+('hobby','Программирование',5),
+('hobby','Прогулки на свежем воздухе',3),
+('hobby','Прыжки с парашютом',3),
+('hobby','Психология',5),
+('hobby','Пчеловодство',4),
+('hobby','Пьянство',2),
+('hobby','Разведение рыб',6),
+('hobby','Ремонт часов',5),
+('hobby','Рисование',3),
+('hobby','Робототехника',6),
+('hobby','Роспись хной',3),
+('hobby','Рыбалка',5),
+('hobby','Садизм',1),
+('hobby','Садоводство',6),
+('hobby','Сатанизм',3),
+('hobby','Сбор грибов',5),
+('hobby','Создание оружия',5),
+('hobby','Создание чучел',3),
+('hobby','Сочинение стихотворений',3),
+('hobby','Спортивное ориентирование',6),
+('hobby','Стрельба из лука',7),
+('hobby','Стрельба по мишеням',7),
+('hobby','Танцы',4),
+('hobby','Терроризм',1),
+('hobby','Токсикомания',3),
+('hobby','Уборка',4),
+('hobby','Хиромантия',3),
+('hobby','Шахматы',3),
+('hobby','Шитьё',6),
+('hobby','Эзотерика',3),
+('hobby','Эксгибиционизм',2),
+('luggage','1 миллион долларов',3),
+('luggage','10 комплектов термобелья',5),
+('luggage','10 саженцев фруктовых деревьев',5),
+('luggage','2 Костюма химзащиты',6),
+('luggage','20 метров изоленты',5),
+('luggage','3 слитка золота',3),
+('luggage','GPS-навигатор',6),
+('luggage','Бальзам "Звёздочка"',6),
+('luggage','Бейсбольная бита',5),
+('luggage','Блочный лук и 100 стрел',6),
+('luggage','Бутылочные крышки',3),
+('luggage','Виагра',3),
+('luggage','Гарпун',5),
+('luggage','Гитара',3),
+('luggage','Головка сыра 2кг.',4),
+('luggage','Диктофон',4),
+('luggage','Домашняя библиотека',3),
+('luggage','Ингалятор',3),
+('luggage','Инсулин',5),
+('luggage','Калоши',3),
+('luggage','Карты Таро',3),
+('luggage','Кислородный баллон с маской',3),
+('luggage','Кожаная куртка',5),
+('luggage','Колода карт',3),
+('luggage','Комплект для дайвинга',5),
+('luggage','Комплект раций',6),
+('luggage','Комплект удочек и рыболовные снасти',5),
+('luggage','Лук и стрелы',5),
+('luggage','Лупа',3),
+('luggage','Магнитофон и кассеты 80-х',4),
+('luggage','Машинный аккумулятор',5),
+('luggage','Металлоискатель',5),
+('luggage','Набор альпиниста',5),
+('luggage','Набор инструментов для механика',6),
+('luggage','Набор ножей для метания',5),
+('luggage','Надувная лодка',5),
+('luggage','Налобный фонарик',5),
+('luggage','Настольные игры',3),
+('luggage','Открывашка',3),
+('luggage','Переносная электростанция',8),
+('luggage','Пистолет ТТ и 152 патрона',7),
+('luggage','Портативный дефибриллятор',5),
+('luggage','Пособие по психологии',5),
+('luggage','Постер с Райаном Гослингом',3),
+('luggage','Прах Фредди Меркьюри',3),
+('luggage','Профессиональный театральный грим',3),
+('luggage','Радио',5),
+('luggage','Револьвер с одним патроном',6),
+('luggage','Резиновая уточка',3),
+('luggage','Рыбий жир',3),
+('luggage','Самогонный аппарат',5),
+('luggage','Семена кукурузы',5),
+('luggage','Семена пшеницы',5),
+('luggage','Сигнальная ракета',4),
+('luggage','Сумка ветеринарного врача',6),
+('luggage','Сумка с обезболивающими',4),
+('luggage','Счётчик Гейгера',4),
+('luggage','Тепловизор',6),
+('luggage','Учебники по биологии',5),
+('luggage','Учебники по химии',5),
+('luggage','Фермерский инкубатор с набором яиц',4),
+('luggage','Фильтры для воды',5),
+('luggage','Флейта',3),
+('luggage','Фотоаппарат',5),
+('luggage','Химические средства от крупных вредителей',5),
+('luggage','Химические средства от насекомых',5),
+('luggage','Хирургические инструменты',6),
+('luggage','Чемоданчик фельдшера скорой помощи',6),
+('luggage','Швейная машинка',6),
+('luggage','Эластичный бинт',3),
+('luggage','Электрорезак',5),
+('luggage','Эротические журналы',3),
+('character','Агрессивный',1),
+('character','Аккуратный',5),
+('character','Альтруистичный',6),
+('character','Аскетичный',7),
+('character','Бдительный',5),
+('character','Безвольный',3),
+('character','Беспринципный',4),
+('character','Бесстрашный',7),
+('character','Благожелательный',5),
+('character','Буйный',2),
+('character','Великодушный',5),
+('character','Волевой',6),
+('character','Вспыльчивый',3),
+('character','Высокомерный',3),
+('character','Грубый',3),
+('character','Дикий',1),
+('character','Доброжелательный',5),
+('character','Добрый',6),
+('character','Жестокий',3),
+('character','Импульсивный',4),
+('character','Инфантильный',4),
+('character','Исполнительный',5),
+('character','Истеричный',3),
+('character','Конфликтный',3),
+('character','Лидер',7),
+('character','Мудрый',6),
+('character','Наглый',4),
+('character','Надёжный',6),
+('character','Назойливый',4),
+('character','Настырный',4),
+('character','Неадекватный',2),
+('character','Нежный',5),
+('character','Общительный',5),
+('character','Оптимист',6),
+('character','Отважный',6),
+('character','Подлый',3),
+('character','Похотливый',4),
+('character','Психопат',1),
+('character','Рассудительный',6),
+('character','Решительный',6),
+('character','Самовлюблённый',4),
+('character','Самоотверженный',6),
+('character','Стратег',7),
+('character','Тактик',6),
+('character','Терпеливый',6),
+('character','Хладнокровный',7),
+('character','Хозяйственный',5),
+('character','Храбрый',6),
+('character','Эгоистичный',3),
+('knowledge','В бункере есть комната с картой местности',6),
+('knowledge','В бункере есть сад камней "Дзэн"',3),
+('knowledge','Координаты бункера с 2 биохимиками',5),
+('knowledge','Координаты бункера с 2 иммунологами',5),
+('knowledge','Координаты бункера с 2 инженерами',5),
+('knowledge','Координаты бункера с 2 строителями',5),
+('knowledge','Координаты бункера с 4 фертильными женщинами',5),
+('knowledge','Координаты бункера, в котором есть клаустрофоб',4),
+('knowledge','Координаты бункера, в котором есть пианист',3),
+('knowledge','Координаты бункера, в котором есть собака',2),
+('knowledge','Координаты бункера, в котором есть танцор',2),
+('knowledge','Координаты бункера, в котором есть юрист',4),
+('knowledge','Координаты военного радиоцентра',7),
+('knowledge','Координаты военной базы',5),
+('knowledge','Координаты враждебно настроенного бункера',3),
+('knowledge','Координаты источника пресной воды',5),
+('knowledge','Координаты медицинского бункера с сертифицированными врачами',5),
+('knowledge','Координаты местонахождения автомобиля',5),
+('knowledge','Координаты местонахождения катера',5),
+('knowledge','Координаты нахождения бронетранспортера',5),
+('knowledge','Координаты нахождения спасательного вертолёта',7),
+('knowledge','Координаты роддома',5),
+('knowledge','Координаты склада с медикаментами',5),
+('knowledge','Координаты склада с оружием',6),
+('knowledge','Координаты склада с продовольствием',5),
+('knowledge','Координаты склада с саженцами',3),
+('knowledge','Координаты тайника с припасами',6),
+('knowledge','Координаты фуры с шоколадными батончиками Wapi`s',5),
+('knowledge','Координаты центра репродукции',3),
+('knowledge','Координаты электростанции',5),
+('knowledge','Около бункера находится ''IKEA''',5),
+('knowledge','Около бункера находится полицейский участок',5),
+('knowledge','Около бункера находится продуктовый магазин',5),
+('knowledge','Около бункера находится строительный магазин',5),
+('knowledge','Частота спасательной радиостанции',7),
+('additional-information','Верит в жизнь после смерти',4),
+('additional-information','Владеет языком жестов',3),
+('additional-information','Выиграл миллион',4),
+('additional-information','Вырос в детском доме',4),
+('additional-information','Глубоко верующий',5),
+('additional-information','Занимался торговлей людьми',2),
+('additional-information','Занял первое место на всемирной олимпиаде по химии',5),
+('additional-information','Знает 5 языков',3),
+('additional-information','Знает азбуку Морзе',4),
+('additional-information','Знает всё про компьютеры',5),
+('additional-information','Изучал воду и её очищение',5),
+('additional-information','Имеет лётную лицензию',6),
+('additional-information','Имеет тягу к убийствам',1),
+('additional-information','Имел кличку "Крысиный король"',4),
+('additional-information','Испытал клиническую смерть',4),
+('additional-information','Клянется, что побывал на НЛО',2),
+('additional-information','Лечился в психбольнице',2),
+('additional-information','Любит вкусно поесть',4),
+('additional-information','Мастер на все руки',6),
+('additional-information','Мастер спорта по боксу',8),
+('additional-information','Может оказать первую помощь',7),
+('additional-information','Может сделать алкоголь из чего угодно',7),
+('additional-information','Находится в федеральном розыске',4),
+('additional-information','Не может контролировать себя',1),
+('additional-information','Ненавидит всех людей',1),
+('additional-information','Обладает фотографической памятью',7),
+('additional-information','Остался в живых на необитаемом острове',8),
+('additional-information','По первому образованию архитектор',4),
+('additional-information','По первому образованию биолог',5),
+('additional-information','По первому образованию химик',6),
+('additional-information','Побывал в горячей точке',8),
+('additional-information','Подрабатывал в театре',3),
+('additional-information','Принимал роды на дому',4),
+('additional-information','Продавал наркотики',5),
+('additional-information','Пролежал в коме год',2),
+('additional-information','Проходил курсы психолога',5),
+('additional-information','Работал в скорой помощи',6),
+('additional-information','Рос в семье геологов',6),
+('additional-information','Рос в семье фермеров',4),
+('additional-information','Сдал экзамен по вождению с первой попытки',4),
+('additional-information','Серьёзно задумывается о суициде',2),
+('additional-information','Сидел за воровство',3),
+('additional-information','Состоит в клубе "Навыки выживания" 3 года',7),
+('additional-information','Состоит в ордене Иллюминатов',3),
+('additional-information','Спал с мужчинами за деньги',4),
+('additional-information','Считает всех идиотами',2),
+('additional-information','Убил старуху топором',2),
+('additional-information','Умеет делать луки и копья',5),
+('additional-information','Умеет ориентироваться по звездам',6),
+('additional-information','Умышленно убил человека',2),
+('additional-information','Учился в мед. университете 4 года',6),
+('additional-information','Фанат "Звёздных войн"',3),
+('additional-information','Фанат сериала "Друзья"',2),
+('additional-information','Хочет восстановить коммунизм',4),
+('additional-information','Часто теряет сознание',3),
+('additional-information','Часто ходил в походы',6),
+('additional-information','Читал все книги про зомби',4);
+
+SELECT * FROM cards WHERE name = 'Имел кличку "Крысиный король"';
+UPDATE cards SET name = 'Имел кличку "Крысиный король"' WHERE id = 533;
+SELECT * FROM cards WHERE id = 533;
+SELECT * FROM cards
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+INSERT INTO [cards] ([name],[type],[price], edition)
+VALUES
+('ДедИнсайд/ 16 лет/ гомосексуальный','bio',1, 'borov'),
+('Мужчина/ 120 лет/ гетеросексуальный','bio',1, 'borov'),
+('Женщина/ 96 лет/ бисексуальный','bio',1, 'borov'),
+('Мужчина/ 116 лет/ гомосексуальный','bio',1, 'borov'),
+('Мужчина/ 79 лет/ гомосексуальный','bio',1, 'borov'),
+('ХуйПоймиЧто/ 17 лет/ хуйсексуальный','bio',1, 'borov'),
+('Мужчина/ 94 лет/ гомосексуальный','bio',1, 'borov'),
+('Женщина/ 197 лет/ пока не определилась','bio',1, 'borov'),
+('Сдох','health',1, 'borov'),
+('Копирует профессию любого игрока','action-card',1, 'borov'),
+('Копирует ориентацию любого игрока','action-card',1, 'borov'),
+('Бомба(взрыв через 10 часов)','luggage',1, 'borov'),
+('Дилдо Евы','luggage',1, 'borov'),
+('Хагги Вагги','luggage',1, 'borov'),
+('Знает, что он ничего не знает','knowledge',1, 'borov'),
+('Знает мать одного из игроков','knowledge',4, 'borov'),
+('Знает, что хочет шпёхнуть Еву','knowledge',1, 'borov');]]></console>
+    </connection>
+  </component>
+  <component name="DBNavigator.Project.DatabaseEditorStateManager">
+    <last-used-providers />
+  </component>
+  <component name="DBNavigator.Project.DatabaseFileManager">
+    <open-files />
+  </component>
+  <component name="DBNavigator.Project.DatabaseSessionManager">
+    <connection id="afbdfb32-9d3f-4f8a-b1fe-6b7d2b4481e4" />
+  </component>
+  <component name="DBNavigator.Project.ExecutionManager">
+    <retain-sticky-names value="false" />
+  </component>
+  <component name="DBNavigator.Project.ObjectQuickFilterManager">
+    <last-used-operator value="EQUAL" />
+    <filters />
+  </component>
+  <component name="DBNavigator.Project.ScriptExecutionManager" clear-outputs="true">
+    <recently-used-interfaces>
+      <mapping database-type="SQLITE" interface-id="DEFAULT" />
+    </recently-used-interfaces>
+  </component>
+  <component name="DBNavigator.Project.Settings">
+    <connections>
+      <connection id="afbdfb32-9d3f-4f8a-b1fe-6b7d2b4481e4" active="true" signed="true">
+        <database>
+          <name value="Game" />
+          <description value="" />
+          <database-type value="SQLITE" />
+          <config-type value="BASIC" />
+          <database-version value="3.44" />
+          <driver-source value="BUNDLED" />
+          <driver-library value="" />
+          <driver value="" />
+          <url-type value="FILE" />
+          <host value="" />
+          <port value="" />
+          <database value="" />
+          <tns-folder value="" />
+          <tns-profile value="" />
+          <files>
+            <file path="C:\new-code\rn-shelter-game\game\SQLite\game.db" schema="main" />
+          </files>
+          <type value="NONE" />
+          <user value="" />
+          <deprecated-pwd value="" />
+        </database>
+        <properties>
+          <auto-commit value="false" />
+        </properties>
+        <ssh-settings>
+          <active value="false" />
+          <proxy-host value="" />
+          <proxy-port value="22" />
+          <proxy-user value="" />
+          <deprecated-proxy-pwd value="" />
+          <auth-type value="PASSWORD" />
+          <key-file value="" />
+          <key-passphrase value="" />
+        </ssh-settings>
+        <ssl-settings>
+          <active value="false" />
+          <certificate-authority-file value="" />
+          <client-certificate-file value="" />
+          <client-key-file value="" />
+        </ssl-settings>
+        <details>
+          <charset value="UTF-8" />
+          <session-management value="true" />
+          <ddl-file-binding value="true" />
+          <database-logging value="true" />
+          <connect-automatically value="false" />
+          <restore-workspace value="true" />
+          <restore-workspace-deep value="false" />
+          <environment-type value="default" />
+          <connectivity-timeout value="30" />
+          <idle-time-to-disconnect value="30" />
+          <idle-time-to-disconnect-pool value="5" />
+          <credential-expiry-time value="10" />
+          <max-connection-pool-size value="7" />
+          <alternative-statement-delimiter value="" />
+        </details>
+        <debugger>
+          <compile-dependencies value="true" />
+          <tcp-driver-tunneling value="false" />
+          <tcp-host-address value="" />
+          <tcp-port-from value="4000" />
+          <tcp-port-to value="4999" />
+          <debugger-type value="JDBC" />
+        </debugger>
+        <object-filters hide-empty-schemas="false" hide-pseudo-columns="false" hide-audit-columns="false">
+          <object-filters />
+          <object-type-filter use-master-settings="true">
+            <object-type name="SCHEMA" enabled="true" />
+            <object-type name="USER" enabled="true" />
+            <object-type name="ROLE" enabled="true" />
+            <object-type name="PRIVILEGE" enabled="true" />
+            <object-type name="CHARSET" enabled="true" />
+            <object-type name="TABLE" enabled="true" />
+            <object-type name="VIEW" enabled="true" />
+            <object-type name="MATERIALIZED_VIEW" enabled="true" />
+            <object-type name="NESTED_TABLE" enabled="true" />
+            <object-type name="COLUMN" enabled="true" />
+            <object-type name="INDEX" enabled="true" />
+            <object-type name="CONSTRAINT" enabled="true" />
+            <object-type name="DATASET_TRIGGER" enabled="true" />
+            <object-type name="DATABASE_TRIGGER" enabled="true" />
+            <object-type name="SYNONYM" enabled="true" />
+            <object-type name="SEQUENCE" enabled="true" />
+            <object-type name="PROCEDURE" enabled="true" />
+            <object-type name="FUNCTION" enabled="true" />
+            <object-type name="PACKAGE" enabled="true" />
+            <object-type name="TYPE" enabled="true" />
+            <object-type name="TYPE_ATTRIBUTE" enabled="true" />
+            <object-type name="ARGUMENT" enabled="true" />
+            <object-type name="DIMENSION" enabled="true" />
+            <object-type name="CLUSTER" enabled="true" />
+            <object-type name="DBLINK" enabled="true" />
+          </object-type-filter>
+        </object-filters>
+      </connection>
+    </connections>
+    <browser-settings>
+      <general>
+        <display-mode value="TABBED" />
+        <navigation-history-size value="100" />
+        <show-object-details value="false" />
+        <enable-sticky-paths value="true" />
+      </general>
+      <filters>
+        <object-type-filter>
+          <object-type name="SCHEMA" enabled="true" />
+          <object-type name="USER" enabled="true" />
+          <object-type name="ROLE" enabled="true" />
+          <object-type name="PRIVILEGE" enabled="true" />
+          <object-type name="CHARSET" enabled="true" />
+          <object-type name="TABLE" enabled="true" />
+          <object-type name="VIEW" enabled="true" />
+          <object-type name="MATERIALIZED_VIEW" enabled="true" />
+          <object-type name="NESTED_TABLE" enabled="true" />
+          <object-type name="COLUMN" enabled="true" />
+          <object-type name="INDEX" enabled="true" />
+          <object-type name="CONSTRAINT" enabled="true" />
+          <object-type name="DATASET_TRIGGER" enabled="true" />
+          <object-type name="DATABASE_TRIGGER" enabled="true" />
+          <object-type name="SYNONYM" enabled="true" />
+          <object-type name="SEQUENCE" enabled="true" />
+          <object-type name="PROCEDURE" enabled="true" />
+          <object-type name="FUNCTION" enabled="true" />
+          <object-type name="PACKAGE" enabled="true" />
+          <object-type name="TYPE" enabled="true" />
+          <object-type name="TYPE_ATTRIBUTE" enabled="true" />
+          <object-type name="ARGUMENT" enabled="true" />
+          <object-type name="DIMENSION" enabled="true" />
+          <object-type name="CLUSTER" enabled="true" />
+          <object-type name="DBLINK" enabled="true" />
+        </object-type-filter>
+      </filters>
+      <sorting>
+        <object-type name="COLUMN" sorting-type="NAME" />
+        <object-type name="FUNCTION" sorting-type="NAME" />
+        <object-type name="PROCEDURE" sorting-type="NAME" />
+        <object-type name="ARGUMENT" sorting-type="POSITION" />
+        <object-type name="TYPE ATTRIBUTE" sorting-type="POSITION" />
+      </sorting>
+      <default-editors>
+        <object-type name="VIEW" editor-type="SELECTION" />
+        <object-type name="PACKAGE" editor-type="SELECTION" />
+        <object-type name="TYPE" editor-type="SELECTION" />
+      </default-editors>
+    </browser-settings>
+    <navigation-settings>
+      <lookup-filters>
+        <lookup-objects>
+          <object-type name="SCHEMA" enabled="true" />
+          <object-type name="USER" enabled="false" />
+          <object-type name="ROLE" enabled="false" />
+          <object-type name="PRIVILEGE" enabled="false" />
+          <object-type name="CHARSET" enabled="false" />
+          <object-type name="TABLE" enabled="true" />
+          <object-type name="VIEW" enabled="true" />
+          <object-type name="MATERIALIZED VIEW" enabled="true" />
+          <object-type name="INDEX" enabled="true" />
+          <object-type name="CONSTRAINT" enabled="true" />
+          <object-type name="DATASET TRIGGER" enabled="true" />
+          <object-type name="DATABASE TRIGGER" enabled="true" />
+          <object-type name="SYNONYM" enabled="false" />
+          <object-type name="SEQUENCE" enabled="true" />
+          <object-type name="PROCEDURE" enabled="true" />
+          <object-type name="FUNCTION" enabled="true" />
+          <object-type name="PACKAGE" enabled="true" />
+          <object-type name="TYPE" enabled="true" />
+          <object-type name="DIMENSION" enabled="false" />
+          <object-type name="CLUSTER" enabled="false" />
+          <object-type name="DBLINK" enabled="true" />
+        </lookup-objects>
+        <force-database-load value="false" />
+        <prompt-connection-selection value="true" />
+        <prompt-schema-selection value="true" />
+      </lookup-filters>
+    </navigation-settings>
+    <dataset-grid-settings>
+      <general>
+        <enable-zooming value="true" />
+        <enable-column-tooltip value="true" />
+      </general>
+      <sorting>
+        <nulls-first value="true" />
+        <max-sorting-columns value="4" />
+      </sorting>
+      <audit-columns>
+        <column-names value="" />
+        <visible value="true" />
+        <editable value="false" />
+      </audit-columns>
+    </dataset-grid-settings>
+    <dataset-editor-settings>
+      <text-editor-popup>
+        <active value="false" />
+        <active-if-empty value="false" />
+        <data-length-threshold value="100" />
+        <popup-delay value="1000" />
+      </text-editor-popup>
+      <values-actions-popup>
+        <show-popup-button value="true" />
+        <element-count-threshold value="1000" />
+        <data-length-threshold value="250" />
+      </values-actions-popup>
+      <general>
+        <fetch-block-size value="100" />
+        <fetch-timeout value="30" />
+        <trim-whitespaces value="true" />
+        <convert-empty-strings-to-null value="true" />
+        <select-content-on-cell-edit value="true" />
+        <large-value-preview-active value="true" />
+      </general>
+      <filters>
+        <prompt-filter-dialog value="true" />
+        <default-filter-type value="BASIC" />
+      </filters>
+      <qualified-text-editor text-length-threshold="300">
+        <content-types>
+          <content-type name="Text" enabled="true" />
+          <content-type name="XML" enabled="true" />
+          <content-type name="DTD" enabled="true" />
+          <content-type name="HTML" enabled="true" />
+          <content-type name="XHTML" enabled="true" />
+          <content-type name="CSS" enabled="true" />
+          <content-type name="SQL" enabled="true" />
+          <content-type name="PL/SQL" enabled="true" />
+          <content-type name="JavaScript" enabled="true" />
+          <content-type name="JSON" enabled="true" />
+          <content-type name="JSON5" enabled="true" />
+          <content-type name="YAML" enabled="true" />
+        </content-types>
+      </qualified-text-editor>
+      <record-navigation>
+        <navigation-target value="VIEWER" />
+      </record-navigation>
+    </dataset-editor-settings>
+    <code-editor-settings>
+      <general>
+        <show-object-navigation-gutter value="false" />
+        <show-spec-declaration-navigation-gutter value="true" />
+        <enable-spellchecking value="true" />
+        <enable-reference-spellchecking value="false" />
+      </general>
+      <confirmations>
+        <save-changes value="false" />
+        <revert-changes value="true" />
+        <exit-on-changes value="ASK" />
+      </confirmations>
+    </code-editor-settings>
+    <code-completion-settings>
+      <filters>
+        <basic-filter>
+          <filter-element type="RESERVED_WORD" id="keyword" selected="true" />
+          <filter-element type="RESERVED_WORD" id="function" selected="true" />
+          <filter-element type="RESERVED_WORD" id="parameter" selected="true" />
+          <filter-element type="RESERVED_WORD" id="datatype" selected="true" />
+          <filter-element type="RESERVED_WORD" id="exception" selected="true" />
+          <filter-element type="OBJECT" id="schema" selected="true" />
+          <filter-element type="OBJECT" id="role" selected="true" />
+          <filter-element type="OBJECT" id="user" selected="true" />
+          <filter-element type="OBJECT" id="privilege" selected="true" />
+          <user-schema>
+            <filter-element type="OBJECT" id="table" selected="true" />
+            <filter-element type="OBJECT" id="view" selected="true" />
+            <filter-element type="OBJECT" id="materialized view" selected="true" />
+            <filter-element type="OBJECT" id="index" selected="true" />
+            <filter-element type="OBJECT" id="constraint" selected="true" />
+            <filter-element type="OBJECT" id="trigger" selected="true" />
+            <filter-element type="OBJECT" id="synonym" selected="false" />
+            <filter-element type="OBJECT" id="sequence" selected="true" />
+            <filter-element type="OBJECT" id="procedure" selected="true" />
+            <filter-element type="OBJECT" id="function" selected="true" />
+            <filter-element type="OBJECT" id="package" selected="true" />
+            <filter-element type="OBJECT" id="type" selected="true" />
+            <filter-element type="OBJECT" id="dimension" selected="true" />
+            <filter-element type="OBJECT" id="cluster" selected="true" />
+            <filter-element type="OBJECT" id="dblink" selected="true" />
+          </user-schema>
+          <public-schema>
+            <filter-element type="OBJECT" id="table" selected="false" />
+            <filter-element type="OBJECT" id="view" selected="false" />
+            <filter-element type="OBJECT" id="materialized view" selected="false" />
+            <filter-element type="OBJECT" id="index" selected="false" />
+            <filter-element type="OBJECT" id="constraint" selected="false" />
+            <filter-element type="OBJECT" id="trigger" selected="false" />
+            <filter-element type="OBJECT" id="synonym" selected="false" />
+            <filter-element type="OBJECT" id="sequence" selected="false" />
+            <filter-element type="OBJECT" id="procedure" selected="false" />
+            <filter-element type="OBJECT" id="function" selected="false" />
+            <filter-element type="OBJECT" id="package" selected="false" />
+            <filter-element type="OBJECT" id="type" selected="false" />
+            <filter-element type="OBJECT" id="dimension" selected="false" />
+            <filter-element type="OBJECT" id="cluster" selected="false" />
+            <filter-element type="OBJECT" id="dblink" selected="false" />
+          </public-schema>
+          <any-schema>
+            <filter-element type="OBJECT" id="table" selected="true" />
+            <filter-element type="OBJECT" id="view" selected="true" />
+            <filter-element type="OBJECT" id="materialized view" selected="true" />
+            <filter-element type="OBJECT" id="index" selected="true" />
+            <filter-element type="OBJECT" id="constraint" selected="true" />
+            <filter-element type="OBJECT" id="trigger" selected="true" />
+            <filter-element type="OBJECT" id="synonym" selected="true" />
+            <filter-element type="OBJECT" id="sequence" selected="true" />
+            <filter-element type="OBJECT" id="procedure" selected="true" />
+            <filter-element type="OBJECT" id="function" selected="true" />
+            <filter-element type="OBJECT" id="package" selected="true" />
+            <filter-element type="OBJECT" id="type" selected="true" />
+            <filter-element type="OBJECT" id="dimension" selected="true" />
+            <filter-element type="OBJECT" id="cluster" selected="true" />
+            <filter-element type="OBJECT" id="dblink" selected="true" />
+          </any-schema>
+        </basic-filter>
+        <extended-filter>
+          <filter-element type="RESERVED_WORD" id="keyword" selected="true" />
+          <filter-element type="RESERVED_WORD" id="function" selected="true" />
+          <filter-element type="RESERVED_WORD" id="parameter" selected="true" />
+          <filter-element type="RESERVED_WORD" id="datatype" selected="true" />
+          <filter-element type="RESERVED_WORD" id="exception" selected="true" />
+          <filter-element type="OBJECT" id="schema" selected="true" />
+          <filter-element type="OBJECT" id="user" selected="true" />
+          <filter-element type="OBJECT" id="role" selected="true" />
+          <filter-element type="OBJECT" id="privilege" selected="true" />
+          <user-schema>
+            <filter-element type="OBJECT" id="table" selected="true" />
+            <filter-element type="OBJECT" id="view" selected="true" />
+            <filter-element type="OBJECT" id="materialized view" selected="true" />
+            <filter-element type="OBJECT" id="index" selected="true" />
+            <filter-element type="OBJECT" id="constraint" selected="true" />
+            <filter-element type="OBJECT" id="trigger" selected="true" />
+            <filter-element type="OBJECT" id="synonym" selected="true" />
+            <filter-element type="OBJECT" id="sequence" selected="true" />
+            <filter-element type="OBJECT" id="procedure" selected="true" />
+            <filter-element type="OBJECT" id="function" selected="true" />
+            <filter-element type="OBJECT" id="package" selected="true" />
+            <filter-element type="OBJECT" id="type" selected="true" />
+            <filter-element type="OBJECT" id="dimension" selected="true" />
+            <filter-element type="OBJECT" id="cluster" selected="true" />
+            <filter-element type="OBJECT" id="dblink" selected="true" />
+          </user-schema>
+          <public-schema>
+            <filter-element type="OBJECT" id="table" selected="true" />
+            <filter-element type="OBJECT" id="view" selected="true" />
+            <filter-element type="OBJECT" id="materialized view" selected="true" />
+            <filter-element type="OBJECT" id="index" selected="true" />
+            <filter-element type="OBJECT" id="constraint" selected="true" />
+            <filter-element type="OBJECT" id="trigger" selected="true" />
+            <filter-element type="OBJECT" id="synonym" selected="true" />
+            <filter-element type="OBJECT" id="sequence" selected="true" />
+            <filter-element type="OBJECT" id="procedure" selected="true" />
+            <filter-element type="OBJECT" id="function" selected="true" />
+            <filter-element type="OBJECT" id="package" selected="true" />
+            <filter-element type="OBJECT" id="type" selected="true" />
+            <filter-element type="OBJECT" id="dimension" selected="true" />
+            <filter-element type="OBJECT" id="cluster" selected="true" />
+            <filter-element type="OBJECT" id="dblink" selected="true" />
+          </public-schema>
+          <any-schema>
+            <filter-element type="OBJECT" id="table" selected="true" />
+            <filter-element type="OBJECT" id="view" selected="true" />
+            <filter-element type="OBJECT" id="materialized view" selected="true" />
+            <filter-element type="OBJECT" id="index" selected="true" />
+            <filter-element type="OBJECT" id="constraint" selected="true" />
+            <filter-element type="OBJECT" id="trigger" selected="true" />
+            <filter-element type="OBJECT" id="synonym" selected="true" />
+            <filter-element type="OBJECT" id="sequence" selected="true" />
+            <filter-element type="OBJECT" id="procedure" selected="true" />
+            <filter-element type="OBJECT" id="function" selected="true" />
+            <filter-element type="OBJECT" id="package" selected="true" />
+            <filter-element type="OBJECT" id="type" selected="true" />
+            <filter-element type="OBJECT" id="dimension" selected="true" />
+            <filter-element type="OBJECT" id="cluster" selected="true" />
+            <filter-element type="OBJECT" id="dblink" selected="true" />
+          </any-schema>
+        </extended-filter>
+      </filters>
+      <sorting enabled="true">
+        <sorting-element type="RESERVED_WORD" id="keyword" />
+        <sorting-element type="RESERVED_WORD" id="datatype" />
+        <sorting-element type="OBJECT" id="column" />
+        <sorting-element type="OBJECT" id="table" />
+        <sorting-element type="OBJECT" id="view" />
+        <sorting-element type="OBJECT" id="materialized view" />
+        <sorting-element type="OBJECT" id="index" />
+        <sorting-element type="OBJECT" id="constraint" />
+        <sorting-element type="OBJECT" id="trigger" />
+        <sorting-element type="OBJECT" id="synonym" />
+        <sorting-element type="OBJECT" id="sequence" />
+        <sorting-element type="OBJECT" id="procedure" />
+        <sorting-element type="OBJECT" id="function" />
+        <sorting-element type="OBJECT" id="package" />
+        <sorting-element type="OBJECT" id="type" />
+        <sorting-element type="OBJECT" id="dimension" />
+        <sorting-element type="OBJECT" id="cluster" />
+        <sorting-element type="OBJECT" id="dblink" />
+        <sorting-element type="OBJECT" id="schema" />
+        <sorting-element type="OBJECT" id="role" />
+        <sorting-element type="OBJECT" id="user" />
+        <sorting-element type="RESERVED_WORD" id="function" />
+        <sorting-element type="RESERVED_WORD" id="parameter" />
+      </sorting>
+      <format>
+        <enforce-code-style-case value="true" />
+      </format>
+    </code-completion-settings>
+    <execution-engine-settings>
+      <statement-execution>
+        <fetch-block-size value="100" />
+        <execution-timeout value="20" />
+        <debug-execution-timeout value="600" />
+        <focus-result value="false" />
+        <prompt-execution value="false" />
+      </statement-execution>
+      <script-execution>
+        <command-line-interfaces />
+        <execution-timeout value="300" />
+      </script-execution>
+      <method-execution>
+        <execution-timeout value="30" />
+        <debug-execution-timeout value="600" />
+        <parameter-history-size value="10" />
+      </method-execution>
+    </execution-engine-settings>
+    <operation-settings>
+      <transactions>
+        <uncommitted-changes>
+          <on-project-close value="ASK" />
+          <on-disconnect value="ASK" />
+          <on-autocommit-toggle value="ASK" />
+        </uncommitted-changes>
+        <multiple-uncommitted-changes>
+          <on-commit value="ASK" />
+          <on-rollback value="ASK" />
+        </multiple-uncommitted-changes>
+      </transactions>
+      <session-browser>
+        <disconnect-session value="ASK" />
+        <kill-session value="ASK" />
+        <reload-on-filter-change value="false" />
+      </session-browser>
+      <compiler>
+        <compile-type value="KEEP" />
+        <compile-dependencies value="ASK" />
+        <always-show-controls value="false" />
+      </compiler>
+    </operation-settings>
+    <ddl-file-settings>
+      <extensions>
+        <mapping file-type-id="VIEW" extensions="vw" />
+        <mapping file-type-id="TRIGGER" extensions="trg" />
+        <mapping file-type-id="PROCEDURE" extensions="prc" />
+        <mapping file-type-id="FUNCTION" extensions="fnc" />
+        <mapping file-type-id="PACKAGE" extensions="pkg" />
+        <mapping file-type-id="PACKAGE_SPEC" extensions="pks" />
+        <mapping file-type-id="PACKAGE_BODY" extensions="pkb" />
+        <mapping file-type-id="TYPE" extensions="tpe" />
+        <mapping file-type-id="TYPE_SPEC" extensions="tps" />
+        <mapping file-type-id="TYPE_BODY" extensions="tpb" />
+      </extensions>
+      <general>
+        <lookup-ddl-files value="true" />
+        <create-ddl-files value="false" />
+        <synchronize-ddl-files value="true" />
+        <use-qualified-names value="false" />
+        <make-scripts-rerunnable value="true" />
+      </general>
+    </ddl-file-settings>
+    <general-settings>
+      <regional-settings>
+        <date-format value="MEDIUM" />
+        <number-format value="UNGROUPED" />
+        <locale value="SYSTEM_DEFAULT" />
+        <use-custom-formats value="false" />
+      </regional-settings>
+      <environment>
+        <environment-types>
+          <environment-type id="development" name="Development" description="Development environment" color="-2430209/-12296320" readonly-code="false" readonly-data="false" />
+          <environment-type id="integration" name="Integration" description="Integration environment" color="-2621494/-12163514" readonly-code="true" readonly-data="false" />
+          <environment-type id="production" name="Production" description="Productive environment" color="-11574/-10271420" readonly-code="true" readonly-data="true" />
+          <environment-type id="other" name="Other" description="" color="-1576/-10724543" readonly-code="false" readonly-data="false" />
+        </environment-types>
+        <visibility-settings>
+          <connection-tabs value="true" />
+          <dialog-headers value="true" />
+          <object-editor-tabs value="true" />
+          <script-editor-tabs value="false" />
+          <execution-result-tabs value="true" />
+        </visibility-settings>
+      </environment>
+    </general-settings>
+  </component>
+  <component name="DBNavigator.Project.StatementExecutionManager">
+    <execution-variables />
+    <execution-variable-types />
+  </component>
+</project>

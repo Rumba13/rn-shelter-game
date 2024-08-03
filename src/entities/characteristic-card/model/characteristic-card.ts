@@ -1,12 +1,40 @@
-import { CharacteristicCardsList } from '@/src/shared/lib/types/characteristic-cards-list';
-import { cardsStandartEdition } from '@/src/entities/characteristic-card/model/cards-kits/cards-standart-edition';
-import { cardsBorovEdition } from '@/src/entities/characteristic-card/model/cards-kits/cards-borov-edition';
-import { mergeCardKits } from '@/src/shared/lib/merge-card-kits';
-import { CardKit } from '@/src/shared/lib/types/card-kit';
-import { cardKitToCards } from '@/src/shared/lib/card-kit-to-cards';
+import { Card } from '@/src/shared/lib/types/card';
+import { databaseStore } from '@/src/shared/model/database-store';
+import { Edition } from '@/src/shared/lib/edition';
+import { CardType } from '@/src/shared/lib/types/card-type';
 
-export const characteristicCards: CardKit = mergeCardKits(cardsStandartEdition, cardsBorovEdition);
-export const characteristicCardsList: CharacteristicCardsList[] = [
-  { name: 'Карточки Стандартного Издания', children: cardKitToCards(cardsStandartEdition) },
-  { name: 'Карточки Издания "Боров"', children: cardKitToCards(cardsBorovEdition) },
-];
+class CardsStore {
+  public getCardsByEdition(edition: Edition): Card[] {
+    return databaseStore.database.getAllSync<Card>(`SELECT * FROM cards WHERE edition = '${edition}';`);
+  }
+
+  public getCardById(id: number): Card {
+    const card = databaseStore.database.getFirstSync<Card>(`SELECT * FROM cards WHERE id = '${id}';`);
+
+    if (!card) throw new Error('Card not found');
+
+    return card;
+  }
+
+  public getCardByName(name: string): Card {
+    const card = databaseStore.database.getFirstSync<Card>(`SELECT * FROM cards WHERE name = '${name.replaceAll('\'', '\'\'')}'`);
+
+    if (!card) throw new Error('Card not found');
+
+    return card;
+  }
+
+  public getCardsByType(cardType: CardType): Card[] {
+    return databaseStore.database.getAllSync(`SELECT * FROM cards WHERE type = '${cardType}';`);
+  }
+
+  public getAllCards(): Card[] {
+    const a = Date.now();
+    const b = databaseStore.database.getAllSync<Card>(`SELECT * FROM cards;`);
+    console.log(Date.now() - a + " ms");
+    return b;
+  }
+
+}
+
+export const cardsStore = new CardsStore();

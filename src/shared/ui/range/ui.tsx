@@ -21,8 +21,9 @@ type PropsType = {
 
 export const Range = observer(({ onValueChanged, options, max, min, defaultValue }: PropsType) => {
   const [minimalValue, setMinimalValue] = useState<number>(defaultValue);
-
-  useEffect(() => {}, [min]);
+  const [sliderTimeoutId, setSliderTimeoutId] = useState<NodeJS.Timeout>();
+  useEffect(() => {
+  }, [min]);
 
   function _onValueChanged(value: number) {
     setMinimalValue(min);
@@ -59,22 +60,11 @@ export const Range = observer(({ onValueChanged, options, max, min, defaultValue
         />
       )}
       renderRailSelected={() => void 0}
-      onValueChanged={_onValueChanged}
+      onValueChanged={(value) => {
+        _onValueChanged(value);
+      }}
     />
-    // <TouchableWithoutFeedback onPressIn={onPressIn}>
-    //   <View style={s.slider}>
-    //     <Image
-    //       style={s.sliderPicker}
-    //       resizeMode={'contain'}
-    //       source={require('@/assets/images/gamecreationscreen/picker.png')}
-    //     />
-    //     <Image
-    //       style={s.sliderTrack}
-    //       resizeMode={'contain'}
-    //       source={require('@/assets/images/gamecreationscreen/picker_line.png')}
-    //     />
-    //   </View>
-    // </TouchableWithoutFeedback>
+
   );
 });
 const sliderPickerSize = 36;

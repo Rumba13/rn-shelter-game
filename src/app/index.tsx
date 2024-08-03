@@ -9,6 +9,8 @@ import { ConnectToGamePage } from '@/src/pages/connect-to-game-page';
 import { gameStore } from '@/src/entities/game/model/game';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { GamePage } from '@/src/pages/game-page';
+import { SQLiteProvider } from 'expo-sqlite/next';
+import { createStackNavigator } from '@react-navigation/stack';
 
 //@ts-ignore
 Text.defaultProps = Text.defaultProps || {};
@@ -22,7 +24,7 @@ TextInput.defaultProps.allowFontScaling = false;
 const Stack = createNativeStackNavigator();
 
 export default function App() {
-  const stackScreenOptions: NativeStackNavigationOptions = { headerShown: false, animation: 'fade_from_bottom' };
+  const stackScreenOptions: NativeStackNavigationOptions = { headerShown: false, animation: 'fade_from_bottom', };
 
   const HomePageRoute = ({ navigation }: any) => {
     return (
@@ -109,18 +111,22 @@ export default function App() {
     );
   };
   //Change navigate animation
+
   return (
     <SafeAreaProvider>
-      <NavigationContainer independent>
-        <Stack.Navigator>
-          <Stack.Screen name={'home-page'} options={stackScreenOptions} component={HomePageRoute} />
-          <Stack.Screen name={'create-game-page'} options={stackScreenOptions} component={CreateGamePageRoute} />
-          <Stack.Screen name={'select-player-page'} options={stackScreenOptions} component={SelectPlayerPageRoute} />
-          <Stack.Screen name={'dev-page'} options={stackScreenOptions} component={DevPageRoute} />
-          <Stack.Screen name={'game-page'} options={stackScreenOptions} component={GamePageRoute} />
-          <Stack.Screen name={'connect-to-game-page'} options={stackScreenOptions} component={ConnectToGamePageRoute} />
-        </Stack.Navigator>
-      </NavigationContainer>
+      <SQLiteProvider databaseName={'game-assets.db'} assetSource={{ assetId: require('../../SQLite/game-assets.db') }}>
+        <NavigationContainer independent>
+          <Stack.Navigator>
+            <Stack.Screen name={'home-page'}  options={stackScreenOptions} component={HomePageRoute} />
+            <Stack.Screen name={'create-game-page'} options={stackScreenOptions} component={CreateGamePageRoute} />
+            <Stack.Screen name={'select-player-page'} options={stackScreenOptions} component={SelectPlayerPageRoute} />
+            <Stack.Screen name={'dev-page'} options={stackScreenOptions} component={DevPageRoute} />
+            <Stack.Screen name={'game-page'} options={stackScreenOptions} component={GamePageRoute} />
+            <Stack.Screen name={'connect-to-game-page'} options={stackScreenOptions}
+                          component={ConnectToGamePageRoute} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </SQLiteProvider>
     </SafeAreaProvider>
   );
 }

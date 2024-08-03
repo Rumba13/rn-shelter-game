@@ -1,5 +1,10 @@
-import { professionsStandartEdition } from '@/src/entities/profession/model/professions-kits/professions-standart-edition';
-import { professionBorovEdition } from '@/src/entities/profession/model/professions-kits/profession-borov-edition';
 import { Profession } from '@/src/shared/lib/types/profession';
+import { databaseStore } from '@/src/shared/model/database-store';
 
-export const professions: Profession[] = [...professionsStandartEdition, ...professionBorovEdition];
+class ProfessionsStore {
+  public getProfessionById(id: number): Profession | null {
+    return databaseStore.database.getFirstSync<Profession>(`SELECT * FROM professions WHERE id = '${id}'`);
+  }
+}
+
+export const professionsStore = new ProfessionsStore();

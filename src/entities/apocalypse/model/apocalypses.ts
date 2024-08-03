@@ -1,17 +1,23 @@
 import { Apocalypse } from '@/src/shared/lib/types/apocalypse';
-import { ApocalypseCategories } from '@/src/shared/lib/types/apocalypse-categories';
-import { apocalypsesStandartEditionKit } from '@/src/entities/apocalypse/model/apocalypses-kits/apocalypses-standart-edition-kit';
-import { apocalypsesBorovEditionKit } from '@/src/entities/apocalypse/model/apocalypses-kits/apocalypses-borov-edition-kit';
+import { databaseStore } from '@/src/shared/model/database-store';
+import { Edition } from '@/src/shared/lib/edition';
 
-export const apocalypses: Apocalypse[] = [...apocalypsesStandartEditionKit, ...apocalypsesBorovEditionKit];
+class ApocalypsesStore {
 
-export const apocalypsesCategories: ApocalypseCategories[] = [
-  {
-    name: 'Апокалипсисы Стандартного Издания',
-    children: [...apocalypsesStandartEditionKit],
-  },
-  {
-    name: 'Апокалипсисы Издания "Боров"',
-    children: [...apocalypsesBorovEditionKit],
-  },
-];
+  constructor() {}
+
+  public getApocalypsesByEdition(edition: Edition): Apocalypse[] {
+    return databaseStore.database.getAllSync<Apocalypse>(`SELECT * FROM apocalypses WHERE edition = '${edition}';`);
+  }
+  public getApocalypseByName(name: string) {
+    return databaseStore.database.getFirstSync<Apocalypse>(`SELECT * FROM apocalypses WHERE name = '${name}'`);
+  }
+  public getApocalypseById(id: number) {
+    return databaseStore.database.getFirstSync<Apocalypse>(`SELECT * FROM apocalypses WHERE id = '${id}'`);
+  }
+  public getAllApocalypses(): Apocalypse[] {
+    return databaseStore.database.getAllSync<Apocalypse>(`SELECT * FROM apocalypses`);
+  }
+}
+
+export const apocalypsesStore = new ApocalypsesStore();

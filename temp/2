@@ -1,9 +1,4 @@
-import { nextKitId as previousKitId } from '@/src/entities/characteristic-card/model/cards-kits/cards-standart-edition';
-import { setIdsToCardKit } from '@/src/entities/characteristic-card/lib/set-ids-to-card-kit';
-
-export const { cardsKit, nextKitId } = setIdsToCardKit(
-  {
-    'bio': [
+[
       {
         name: 'ДедИнсайд/ 16 лет/ гомосексуальный',
         type: 'bio',
@@ -44,17 +39,15 @@ export const { cardsKit, nextKitId } = setIdsToCardKit(
         type: 'bio',
         price: 1,
       },
-    ],
-    'phobia': [],
-    'health': [
+
+
       {
         name: 'Сдох',
         type: 'health',
         price: 1,
       },
-    ],
-    'condition-card': [],
-    'action-card': [
+
+
       {
         name: 'Копирует профессию любого игрока',
         type: 'action-card',
@@ -66,9 +59,8 @@ export const { cardsKit, nextKitId } = setIdsToCardKit(
         type: 'action-card',
         price: 1,
       },
-    ],
-    'hobby': [],
-    'luggage': [
+
+
       {
         name: 'Бомба(взрыв через 10 часов)',
         type: 'luggage',
@@ -84,9 +76,8 @@ export const { cardsKit, nextKitId } = setIdsToCardKit(
         type: 'luggage',
         price: 1,
       },
-    ],
-    'character': [],
-    'knowledge': [
+
+
       {
         name: 'Знает, что он ничего не знает',
         type: 'knowledge',
@@ -102,8 +93,4 @@ export const { cardsKit, nextKitId } = setIdsToCardKit(
         type: 'knowledge',
         price: 1,
       },
-    ],
-    'additional-information': [],
-  },
-  previousKitId,
-);
+   ]
