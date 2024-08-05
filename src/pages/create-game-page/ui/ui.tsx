@@ -35,7 +35,6 @@ import { Image } from 'expo-image';
 import { adaptiveValue } from '@/src/shared/ui/adaptive-value/adaptive-value';
 import { apocalypsesStore } from '@/src/entities/apocalypse/model/apocalypses';
 import { sheltersStore } from '@/src/entities/shelter/model/shelters';
-import { databaseStore } from '@/src/shared/model/database-store';
 
 //TODO refactoring
 //TODO fix font issues
@@ -47,14 +46,15 @@ type PropsType = {
 export const CreateGamePage = observer(({ navigation }: PropsType) => {
   const [isErrorModalOpened, setIsErrorModalOpened] = useState<boolean>(false);
   const [errorDescription, setErrorDescription] = useState<string | null>(null);
-  const [isLoaded, setIsLoaded] = useState<boolean>();
+  const [isPageFullLoadingStarted, setIsPageFullLoadingStarted] = useState<boolean>(false);
+
   const { settings } = gameSettingsStore;
 
   useEffect(() => {
-    setIsLoaded(true);
-  }, [settings]);
-
-  console.log(databaseStore.database.getAllSync(`SELECT name FROM sqlite_master WHERE type='table';`))
+    setTimeout(() => {
+      setIsPageFullLoadingStarted(true);
+    }, 100);
+  }, []);
 
   return (
     <View style={s.createGamePageWrapper}>
@@ -107,7 +107,7 @@ export const CreateGamePage = observer(({ navigation }: PropsType) => {
                   }
                 />
 
-                {isLoaded && <>
+                {isPageFullLoadingStarted && <>
 
                   <GameOptionRange
                     title={'Уровень сложности'}
