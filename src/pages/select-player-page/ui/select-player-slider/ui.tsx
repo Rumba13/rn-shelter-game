@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet, Dimensions, Animated, useWindowDimensions, Alert } from 'react-native';
 import Carousel from 'react-native-reanimated-carousel/src/Carousel';
-import { gameSettingsStore, gameStore } from '@/src/entities/game';
+import {  gameStore } from '@/src/entities/game';
 import { useEffect, useState } from 'react';
 import { ImageButton } from '@/src/shared/ui/image-button/ui';
 import { adaptiveValue } from '@/src/shared/ui/adaptive-value/adaptive-value';
