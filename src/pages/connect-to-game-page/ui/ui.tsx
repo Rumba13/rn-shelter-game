@@ -19,7 +19,7 @@ export function ConnectToGamePage({ navigation }: PropsType) {
         <ScanQRCode navigation={navigation} />
       </View>
       <View style={{ flex: 1 }}></View>
-      <Footer styles={{ marginHorizontal: 35 }} />
+      <Footer style={{ marginHorizontal: 35 }} />
     </View>
   );
 }

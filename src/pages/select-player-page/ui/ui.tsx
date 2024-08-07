@@ -86,8 +86,8 @@ export function SelectPlayerPage({ navigation }: PropsType) {
       </View>
 
       <Footer
-        styles={{ marginHorizontal: 35 }}
-        onNextButtonPress={() => {
+        style={{ marginHorizontal: 35 }}
+        onButtonPress={() => {
           gameStore.setCurrentPlayerNumber(selectedPlayerIndex);
           navigation.navigate('game-page');
         }}

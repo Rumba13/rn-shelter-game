@@ -7,69 +7,60 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
-import { useState } from 'react';
 import Animated, { useAnimatedStyle, useSharedValue, withTiming, Easing } from 'react-native-reanimated';
 import { ImageBackground } from 'expo-image';
 import { adaptiveValue } from '@/src/shared/ui/adaptive-value/adaptive-value';
 
 type PropsType = {
+  style?: StyleProp<ViewStyle>;
   buttonImage: any;
   shadowImage: any;
   width?: number | string;
-  height?: number | string;
-  style?: StyleProp<ViewStyle>;
+  minHeight?: number | string;
   onPress?: (event: GestureResponderEvent) => void;
-  options?: {
-    xOffSetOnPress?: number;
-    yOffsetOnPress?: number;
-    xOffset?: number;
-    yOffset?: number;
-  };
+  options: ButtonOptionsType;
   title?: string;
-  styleTitle?: StyleProp<TextStyle>;
+  titleStyle?: StyleProp<TextStyle>;
   maxFontSizeMultiplier?: number;
 };
+type ButtonOptionsType = {
+  xOffSetOnPress: number;
+  yOffsetOnPress: number;
+  xOffset: number;
+  yOffset: number;
+}
 export { PropsType as ImageButtonProps };
 
-const defaultXOffset = -5;
-const defaultXOnClickOffset = -3;
-const defaultYOffset = -5;
-const defaultYOnClickOffset = -2;
-const animationDuration = 35;
+const defaultOptions: ButtonOptionsType = {
+  xOffset: -5,
+  yOffset: -5,
+  xOffSetOnPress: -3,
+  yOffsetOnPress: -2,
+};
+const buttonAnimationDuration = 35;
 
 export function ImageButton({
-  buttonImage,
-  shadowImage,
-  width,
-  height,
-  style,
-  onPress,
-  options,
-  title,
-  maxFontSizeMultiplier,
-  styleTitle,
-}: PropsType) {
-  const buttonImageXOffSet = options?.xOffset || defaultXOffset;
-  const buttonImageYOffSet = options?.yOffset || defaultYOffset;
-  const buttonImageOnPressXOffSet = options?.xOffSetOnPress || defaultXOnClickOffset;
-  const buttonImageOnPressYOffSet = options?.yOffsetOnPress || defaultYOnClickOffset;
-  const buttonTranslateXAnim = useSharedValue(buttonImageXOffSet);
-  const buttonTranslateYAnim = useSharedValue(buttonImageYOffSet);
+                              buttonImage,
+                              shadowImage,
+                              width,
+                              minHeight,
+                              style: buttonContainerStyle,
+                              onPress,
+                              options = defaultOptions,
+                              title,
+                              maxFontSizeMultiplier,
+                              titleStyle,
+                            }: PropsType) {
+  const buttonTranslateXAnim = useSharedValue(options.xOffset);
+  const buttonTranslateYAnim = useSharedValue(options.yOffset);
 
   const unPressButton = () => {
-    buttonTranslateXAnim.value = buttonImageXOffSet;
-    buttonTranslateYAnim.value = buttonImageYOffSet;
+    buttonTranslateXAnim.value = options.xOffset;
+    buttonTranslateYAnim.value = options.yOffset;
   };
   const pressButton = () => {
-    buttonTranslateXAnim.value = buttonImageOnPressXOffSet;
-    buttonTranslateYAnim.value = buttonImageOnPressYOffSet;
-  };
-
-  const onPressIn = () => {
-    pressButton();
-  };
-  const onPressOut = () => {
-    unPressButton();
+    buttonTranslateXAnim.value = options.xOffSetOnPress;
+    buttonTranslateYAnim.value = options.yOffsetOnPress;
   };
 
   const animatedStyles = useAnimatedStyle(() => ({
@@ -77,31 +68,31 @@ export function ImageButton({
       {
         translateX: withTiming(buttonTranslateXAnim.value, {
           easing: Easing.linear,
-          duration: animationDuration,
+          duration: buttonAnimationDuration,
         }),
       },
       {
         translateY: withTiming(buttonTranslateYAnim.value, {
           easing: Easing.linear,
-          duration: animationDuration,
+          duration: buttonAnimationDuration,
         }),
       },
     ],
   }));
 
   return (
-    <Animated.View style={[s.buttonContainer, style, { width, minHeight: height }]}>
-      <ImageBackground source={shadowImage} style={s.buttonShadow} contentFit={'contain'}>
-        <Animated.View style={[{ maxHeight: '100%' }, animatedStyles]}>
-          <ImageBackground source={buttonImage} style={[s.buttonImage]} contentFit={'contain'}>
-            <Text style={[s.title, styleTitle]} maxFontSizeMultiplier={maxFontSizeMultiplier} adjustsFontSizeToFit>
-              {title}
-            </Text>
+    <Animated.View style={[s.buttonContainer, buttonContainerStyle, { width, minHeight }]}>
+      <ImageBackground style={s.buttonShadow} source={shadowImage} contentFit={'contain'}>
+        <Animated.View style={animatedStyles}>
+          <ImageBackground style={[s.buttonImage]} source={buttonImage} contentFit={'contain'}>
+            <Text style={[s.title, titleStyle]} maxFontSizeMultiplier={maxFontSizeMultiplier}
+                  adjustsFontSizeToFit>{title}</Text>
           </ImageBackground>
         </Animated.View>
       </ImageBackground>
 
-      <TouchableWithoutFeedback style={s.buttonWrapper} onPress={onPress} onPressIn={onPressIn} onPressOut={onPressOut}>
+      <TouchableWithoutFeedback style={s.buttonWrapper} onPress={onPress} onPressIn={pressButton}
+                                onPressOut={unPressButton}>
         <View style={s.button}></View>
       </TouchableWithoutFeedback>
     </Animated.View>
@@ -123,18 +114,17 @@ const s: any = {
     maxHeight: '100%',
   },
   buttonImage: {
-    maxWidth: '100%',
     position: 'relative',
+    maxWidth: '100%',
     maxHeight: '100%',
     minHeight: '100%',
   },
-  buttonImage__pressed: {},
   button: {
     position: 'absolute',
     top: 0,
+    right: 0,
     bottom: 0,
     left: 0,
-    right: 0,
     zIndex: 12,
     maxHeight: '100%',
     minHeight: '100%',

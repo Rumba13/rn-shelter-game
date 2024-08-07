@@ -102,7 +102,7 @@ export function RightSidebar({
                 contentFit={'contain'}
                 style={s.endingImage}
               />
-              <ScratchCard style={s.ending} image={scratchImage}>
+              <ScratchCard style={s.ending} scratchImage={scratchImage}>
                 <ImageBackground contentFit={'contain'} source={require('@/assets/images/gamescreen/text_frame.webp')}>
                   <View style={{ height: '100%' }}>
                     <ScrollView style={s.endingDescriptionWrapper}>

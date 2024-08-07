@@ -1,31 +1,34 @@
-import { Alert, GestureResponderEvent, Text, TouchableWithoutFeedback, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import Slider from 'rn-range-slider';
 import { observer } from 'mobx-react';
-import { gameSettingsStore } from '@/src/entities/game/model/game-settings';
-import { Label } from '@/src/shared/ui/range/label';
 import { useEffect, useState } from 'react';
-import { Image } from 'expo-image';
+import { RangeRail } from '@/src/shared/ui/range/range-rail';
+import { RangeThumb } from '@/src/shared/ui/range/range-thumb';
 
 type PropsType = {
   onValueChanged: (value: number) => void;
   min: number;
   max: number;
   defaultValue: number;
-  options?: {
-    trackImage?: any;
-    pickerImage?: any;
-  };
+  options?: OptionsType
+};
+type OptionsType = {
+  trackImage?: any;
+  pickerImage?: any;
 };
 
-//TODO when closing modal with range in it, sliderTrack stand in front of sliderPicker
+const defaultOptions: OptionsType = {
+  trackImage: require('@/assets/images/gamecreationscreen/picker_line.webp'),
+  pickerImage: require('@/assets/images/gamecreationscreen/picker.webp'),
+};
 
-export const Range = observer(({ onValueChanged, options, max, min, defaultValue }: PropsType) => {
-  const [minimalValue, setMinimalValue] = useState<number>(defaultValue);
-  const [sliderTimeoutId, setSliderTimeoutId] = useState<NodeJS.Timeout>();
+export const Range = observer(({ onValueChanged, options = defaultOptions, max, min, defaultValue }: PropsType) => {
+  const [minimalValue, setMinimalValue] = useState<number>(defaultValue); //Set slider default value through slider.min
+
   useEffect(() => {
   }, [min]);
 
-  function _onValueChanged(value: number) {
+  function _onValueChanged(value: number) { //Unset slider default value
     setMinimalValue(min);
     onValueChanged(value);
   }
@@ -33,55 +36,21 @@ export const Range = observer(({ onValueChanged, options, max, min, defaultValue
   return (
     <Slider
       style={s.slider}
-      disableRange
       min={minimalValue}
       max={max}
       step={1}
-      renderThumb={() => (
-        <View
-          style={{
-            height: sliderPickerSize + 10,
-            width: sliderPickerSize + 10,
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}>
-          <Image
-            style={s.sliderPicker}
-            contentFit={'contain'}
-            source={options?.pickerImage ?? require('@/assets/images/gamecreationscreen/picker.webp')}
-          />
-        </View>
-      )}
-      renderRail={() => (
-        <Image
-          style={s.sliderTrack}
-          contentFit={'contain'}
-          source={options?.trackImage ?? require('@/assets/images/gamecreationscreen/picker_line.webp')}
-        />
-      )}
+      renderThumb={() => <RangeThumb pickerImage={options.pickerImage} />}
+      renderRail={() => <RangeRail trackImage={options.trackImage} />}
       renderRailSelected={() => void 0}
-      onValueChanged={(value) => {
-        _onValueChanged(value);
-      }}
+      onValueChanged={_onValueChanged}
+      disableRange
     />
-
   );
 });
-const sliderPickerSize = 36;
-const s: any = {
+const s = StyleSheet.create({
   slider: {
     position: 'relative',
-    maxHeight: 'auto',
     top: -5,
+    maxHeight: 'auto',
   },
-  sliderPicker: {
-    zIndex: 2,
-    width: sliderPickerSize,
-    height: sliderPickerSize,
-  },
-  sliderTrack: {
-    width: '100%',
-    height: '100%',
-    zIndex: -1,
-  },
-};
+});

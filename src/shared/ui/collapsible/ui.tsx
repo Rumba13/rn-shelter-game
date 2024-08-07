@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { LayoutChangeEvent, View, StyleProp, ViewStyle } from 'react-native';
+import { LayoutChangeEvent, View, StyleProp, ViewStyle, StyleSheet } from 'react-native';
 import Animated, { useAnimatedStyle, withTiming, Easing } from 'react-native-reanimated';
 
 type PropsType = {
@@ -8,33 +8,43 @@ type PropsType = {
   style?: StyleProp<ViewStyle>;
 };
 
-export const Collapsible = ({ children, isCollapsed, style }: PropsType) => {
-  const [height, setHeight] = useState(0);
+const animationDuration = 170;
 
-  const onLayout = (event: LayoutChangeEvent) => {
-    const onLayoutHeight = event.nativeEvent.layout.height;
+export const Collapsible = ({ children, isCollapsed, style: collapsibleStyle }: PropsType) => {
+  const [contentHeight, setContentHeight] = useState(0);
 
-    if (onLayoutHeight > 0 && height !== onLayoutHeight) {
-      setHeight(onLayoutHeight);
+  const _setContentHeight = (event: LayoutChangeEvent) => {
+    const newContentHeight = event.nativeEvent.layout.height;
+
+    if (newContentHeight > 0 && newContentHeight !== contentHeight) {
+      setContentHeight(newContentHeight);
     }
   };
 
-  const collapsableStyle = useAnimatedStyle(() => {
-    const animatedHeight = withTiming(isCollapsed ? 0 : height, {
+  const collapsibleAnimatedStyle = useAnimatedStyle(() => {
+    const animatedHeight = withTiming(isCollapsed ? 0 : contentHeight, {
       easing: Easing.out(Easing.sin),
-      duration: 170,
+      duration: animationDuration,
     });
 
     return {
       height: animatedHeight,
     };
-  }, [isCollapsed, height]);
+  }, [isCollapsed]);
 
   return (
-    <Animated.View style={[collapsableStyle, style, { overflow: 'hidden' }]}>
-      <View onLayout={onLayout} style={{ position: 'absolute', maxWidth: '100%' }}>
-        {children}
-      </View>
+    <Animated.View style={[s.collapsible, collapsibleStyle, collapsibleAnimatedStyle]}>
+      <View style={s.collapsibleContent} onLayout={_setContentHeight}>{children}</View>
     </Animated.View>
   );
 };
+
+const s = StyleSheet.create({
+  collapsible: {
+    overflow: 'hidden',
+  },
+  collapsibleContent: {
+    position: 'absolute',
+    maxWidth: '100%',
+  },
+});

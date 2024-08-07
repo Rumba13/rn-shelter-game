@@ -1,5 +1,5 @@
 import { Shelter } from '@/src/shared/lib/types/shelter';
-import { Edition } from '@/src/shared/lib/edition';
+import { Edition } from '@/src/shared/lib/types/edition';
 import { databaseStore } from '@/src/shared/model/database-store';
 import { ShelterEncoded } from '@/src/shared/lib/types/shelter-encoded';
 

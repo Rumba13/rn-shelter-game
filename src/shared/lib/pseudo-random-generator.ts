@@ -23,7 +23,7 @@ export class PseudoRandomGenerator {
     return next % max;
   }
 
-  public generateFrom(seed: number, min: number, max: number) {
-    return ((seed * 16807) % 2147483647) % max;
+  public generateInRangeFromSeed(min: number, max: number) {
+    return ((this._initialSeed * 16807) % 2147483647) % max;
   }
 }

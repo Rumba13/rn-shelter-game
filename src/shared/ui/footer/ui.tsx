@@ -1,74 +1,73 @@
-import { StyleProp, View, ViewStyle } from 'react-native';
+import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 import { ImageButton } from '@/src/shared/ui/image-button/ui';
 import { Image } from 'expo-image';
 
 type PropsType = {
-  styles?: StyleProp<ViewStyle>;
-  onNextButtonPress?: () => void;
+  style?: StyleProp<ViewStyle>;
+  onButtonPress?: () => void;
 };
 
-export function Footer({ styles, onNextButtonPress }: PropsType) {
+export function Footer({ style: footerStyle, onButtonPress }: PropsType) {
   return (
-    <View style={[s.footer, styles]}>
-      <View style={s.wrapper}>
+    <View style={[s.footer, footerStyle]}>
+      <View style={s.buttonWrapper}>
         <Image
-          style={s.createGameButtonDetail}
-          contentFit={'contain'}
+          style={s.buttonDetail}
           source={require('@/assets/images/gamecreationscreen/next_dec.webp')}
+          contentFit={'contain'}
         />
         <ImageButton
+          style={s.button}
           buttonImage={require('@/assets/images/gamecreationscreen/next_button.webp')}
           shadowImage={require('@/assets/images/gamecreationscreen/next_button_shadow.webp')}
-          style={s.button}
-          height={60}
-          onPress={onNextButtonPress}
+          onPress={onButtonPress}
         />
       </View>
 
       <Image
         style={s.footerDetail}
+        source={require('@/assets/images/gamecreationscreen/cloud.webp')}
         contentFit={'contain'}
         contentPosition={'bottom'}
-        source={require('@/assets/images/gamecreationscreen/cloud.webp')}
       />
     </View>
   );
 }
 
-const s: any = {
+const s = StyleSheet.create({
   footer: {
-    flex: 1,
     position: 'relative',
+    flex: 1,
     maxHeight: 170,
   },
   footerDetail: {
     position: 'absolute',
     bottom: 0,
-    height: '100%',
     width: '100%',
+    height: '100%',
   },
   button: {
     zIndex: 30,
-    maxWidth: '55%',
     width: '100%',
+    maxWidth: '55%',
   },
-  wrapper: {
+  buttonWrapper: {
     position: 'relative',
     bottom: '12.5%',
-    marginRight: 'auto',
-    marginTop: 'auto',
-    flexDirection: 'row',
     zIndex: 20,
-    height: 90, //TODO remove fixed height
+    flexDirection: 'row',
+    height: 90, //TODO remove fixed height if needed
+    marginTop: 'auto',
+    marginRight: 'auto',
   },
   createGameButtonWrapper: {
     position: 'relative',
   },
-  createGameButtonDetail: {
+  buttonDetail: {
     position: 'relative',
-    height: 'auto',
-    width: '20%',
-    marginRight: 10,
     top: '5%',
+    width: '20%',
+    height: 'auto',
+    marginRight: 10,
   },
-};
+});

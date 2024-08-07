@@ -1,56 +1,53 @@
-import { Animated, Easing, LayoutAnimation, Text, TouchableWithoutFeedback, View } from 'react-native';
-import { useEffect, useRef, useState } from 'react';
+import { StyleProp, Text, TouchableWithoutFeedback, ViewStyle } from 'react-native';
 import { ImageBackground } from 'expo-image';
 import { adaptiveValue } from '@/src/shared/ui/adaptive-value/adaptive-value';
+import Animated, { Easing, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 
 type PropsType = {
-  style: any;
+  style: StyleProp<ViewStyle>;
   isToggled: boolean;
-  setIsToggled: (bool: boolean) => void;
+  setIsToggled: (value: boolean) => void;
 };
+const animationDuration = 140;
+const checkBoxToggleOnAtPx = 47;
+const checkBoxToggleOffAtPx = 0;
 
-export function CheckBox({ style, setIsToggled, isToggled }: PropsType) {
-  const translateXAnim = useRef(new Animated.Value(0)).current;
+export function CheckBox({ style: checkboxStyle, setIsToggled, isToggled }: PropsType) {
+  const translateXAnim = useSharedValue(checkBoxToggleOffAtPx);
 
   const toggleOn = () => {
-    Animated.timing(translateXAnim, {
-      toValue: 47,
-      duration: 200,
-      useNativeDriver: false,
-      isInteraction: true,
-    }).start();
+    translateXAnim.value = checkBoxToggleOnAtPx;
   };
   const toggleOff = () => {
-    Animated.timing(translateXAnim, {
-      toValue: 0,
-      duration: 200,
-      useNativeDriver: false,
-      isInteraction: true,
-    }).start();
+    translateXAnim.value = checkBoxToggleOffAtPx;
   };
-  useEffect(() => {}, [translateXAnim]);
+  const toggleCheckBox = () => {
+    setIsToggled(!isToggled);
+    isToggled ? toggleOff() : toggleOn();
+  };
+
+  const animatedCheckerStyle = useAnimatedStyle(() => ({
+    transform: [
+      { translateY: -26 },
+      {
+        translateX: withTiming(translateXAnim.value, {
+          easing: Easing.ease,
+          duration: animationDuration,
+        }),
+      }],
+  }));
 
   return (
-    <Animated.View style={{ ...s.checkBox, ...style }}>
+    <Animated.View style={[s.checkBox, checkboxStyle]}>
       <TouchableWithoutFeedback
-        onPress={() => {
-          setIsToggled(!isToggled);
-          if (isToggled) {
-            toggleOff();
-          } else {
-            toggleOn();
-          }
-        }}>
+        onPress={toggleCheckBox}>
         <Animated.View style={s.checkBoxChecker}>
           <ImageBackground
             style={{ height: '100%' }}
             contentFit={'contain'}
             source={require('@/assets/images/gamecreationscreen/perekluchatel.webp')}>
             <Animated.Image
-              style={{
-                ...s.checkBoxImage,
-                transform: [{ translateY: -26 }, { translateX: translateXAnim }],
-              }}
+              style={[s.checkBoxImage, animatedCheckerStyle]}
               resizeMode={'contain'}
               source={require('@/assets/images/gamecreationscreen/perekluchatel_knopka.png')}
             />
@@ -67,26 +64,29 @@ const s: any = {
     display: 'flex',
     flexDirection: 'row',
     maxWidth: 170,
+    marginTop: 16,
+    marginBottom: 5,
+    marginLeft: 'auto',
   },
   checkBoxChecker: {
     position: 'relative',
     flex: 2,
-    height: 45,
     maxWidth: 100,
+    height: 45,
   },
   checkBoxImage: {
     position: 'absolute',
     top: '50%',
-    maxWidth: '100%',
     width: 53,
+    maxWidth: '100%',
   },
   checkBoxTitle: {
     flex: 1,
-    fontSize: adaptiveValue(18),
-    textAlign: 'center',
     alignSelf: 'end',
     marginLeft: 5,
     marginVertical: 'auto',
+    fontSize: adaptiveValue(18),
+    textAlign: 'center',
     fontFamily: 'RobotoSlabSemiBold',
   },
 };
