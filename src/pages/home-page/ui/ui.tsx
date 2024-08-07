@@ -1,20 +1,17 @@
-import { Alert, Dimensions, View, Text, StatusBar } from 'react-native';
+import { Alert, StyleSheet, View } from 'react-native';
 import React from 'react';
 import { ImageButton } from '@/src/shared/ui/image-button/ui';
 import { InfoButtonAndModal } from '@/src/pages/home-page/ui/info-button/ui';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Image, ImageBackground } from 'expo-image';
-import { databaseStore } from '@/src/shared/model/database-store';
-import { cardsStore } from '@/src/entities/characteristic-card/model/characteristic-card';
 
 type PropsType = {
   navigation: any;
 };
 
 export const HomePage = ({ navigation }: PropsType) => {
-
   return (
-    <SafeAreaView style={{ flex: 1 }} edges={['bottom', 'left', 'top', 'right']}>
+    <SafeAreaView style={{ flex: 1 }}>
       <View style={s.homePage}>
         <View style={s.mainContent}>
           <Image
@@ -22,24 +19,22 @@ export const HomePage = ({ navigation }: PropsType) => {
             source={require('../../../../assets/images/mainscreen/logo.webp')}
             contentFit={'contain'}
           />
-
           <ImageBackground
             style={s.buttonsBackground}
             contentFit="fill"
             source={require('../../../../assets/images/mainscreen/black_box_main_menu.webp')}>
             <View style={s.buttons}>
               <ImageButton
+                style={{ marginBottom: 5 }}
                 buttonImage={require('../../../../assets/images/mainscreen/connect_button.webp')}
                 shadowImage={require('../../../../assets/images/mainscreen/button_shadow_2.webp')}
-                width={'100%'}
-                style={{ marginBottom: 5 }}
                 onPress={() => navigation.navigate('connect-to-game-page')}
               />
               <View style={{ flex: 1, flexDirection: 'row' }}>
                 <ImageButton
+                  style={{ marginRight: 7 }}
                   buttonImage={require('../../../../assets/images/mainscreen/howtoplay_button.webp')}
                   shadowImage={require('../../../../assets/images/mainscreen/button_shadow_1.webp')}
-                  style={{ marginRight: 7 }}
                 />
                 <ImageButton
                   buttonImage={require('../../../../assets/images/mainscreen/create_button.webp')}
@@ -49,28 +44,19 @@ export const HomePage = ({ navigation }: PropsType) => {
               </View>
 
               <ImageButton
+                style={{ marginTop: 5 }}
                 buttonImage={require('../../../../assets/images/mainscreen/premium_button3.webp')}
                 shadowImage={require('../../../../assets/images/mainscreen/button_shadow_2.webp')}
-                width={'100%'}
-                style={{ marginTop: 5 }}
                 onPress={() => Alert.alert('Купи мне трюфель!')}
               />
             </View>
           </ImageBackground>
-          <View
-            style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              maxHeight: 80,
-              paddingTop: 5,
-              paddingBottom: 5,
-              flex: 1,
-            }}>
+          <View style={s.footer}>
             <InfoButtonAndModal />
             <ImageButton
+              style={{ marginLeft: 10, flex: 4 }}
               buttonImage={require('../../../../assets/images/mainscreen/zakazat_igru.webp')}
               shadowImage={require('../../../../assets/images/mainscreen/zakazat_igru_shadow.webp')}
-              style={{ marginLeft: 10, flex: 4 }}
             />
           </View>
         </View>
@@ -79,15 +65,23 @@ export const HomePage = ({ navigation }: PropsType) => {
   );
 };
 
-const s: any = {
+const s = StyleSheet.create({
+  footer: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    maxHeight: 80,
+    paddingTop: 5,
+    paddingBottom: 5,
+  },
   homePage: {
+    flex: 1,
     height: '100%',
     marginHorizontal: 40,
-    flex: 1,
   },
   mainContent: {
-    alignItems: 'center',
     flex: 1,
+    alignItems: 'center',
   },
   logo: {
     width: 240,
@@ -98,17 +92,16 @@ const s: any = {
   buttons: {
     flex: 1,
     flexDirection: 'column',
+    justifyContent: 'space-between',
     width: '100%',
     height: '100%',
-    justifyContent: 'space-between',
-    alignItems: 'end',
-    paddingLeft: 9,
-    paddingRight: 3,
     paddingTop: 7,
+    paddingRight: 3,
     paddingBottom: 1,
+    paddingLeft: 9,
   },
   buttonsBackground: {
     width: '100%',
     aspectRatio: 569 / 809, //TODO get aspect ratio from image
   },
-};
+});

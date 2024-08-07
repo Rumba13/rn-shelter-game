@@ -2,7 +2,7 @@ import { makeAutoObservable, runInAction } from 'mobx';
 import { SexualOrientation } from '@/src/shared/lib/types/sexual-orientation';
 import { GameSettings } from '@/src/shared/lib/types/game-settings';
 
-class GameSettingsStore {
+export class GameSettingsStore {
   public settings: GameSettings = {
     sexualOrientation: SexualOrientation.Random,
     hillbillyMode: false,
@@ -47,13 +47,6 @@ class GameSettingsStore {
     runInAction(() => callBack(this.settings));
   }
 
-  public setDifficulty(difficulty: number) {
-    this.settings.difficulty = difficulty;
-  }
-
-  public _writeOptions() {
-    return JSON.stringify(this.settings);
-  }
 
   constructor() {
     makeAutoObservable(this);

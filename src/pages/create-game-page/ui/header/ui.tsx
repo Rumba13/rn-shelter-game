@@ -4,9 +4,13 @@ import { gameSettingsStore } from '@/src/entities/game/model/game-settings';
 import { observer } from 'mobx-react';
 import { Image, ImageBackground } from 'expo-image';
 import { adaptiveValue } from '@/src/shared/ui/adaptive-value/adaptive-value';
+import { useEffect } from 'react';
 
 export const Header = observer(() => {
   const { playersCount } = gameSettingsStore.settings;
+
+  useEffect(() => {
+  }, []);
 
   return (
     <ImageBackground source={require('@/assets/images/gamecreationscreen/create_back.webp')} contentFit={'fill'}>
@@ -14,25 +18,21 @@ export const Header = observer(() => {
         <View style={{ flexDirection: 'row', marginBottom: 15 }}>
           <View style={s.headerImageWrapper}>
             <Image style={s.headerImage} source={require('@/assets/images/gamecreationscreen/igroki.webp')} />
-            <View style={{ ...s.playersCountWrapper, transform: [{ translateX: playersCount > 9 ? 20 : 32 }] }}>
+            <View style={[s.playersCountWrapper, { transform: [{ translateX: playersCount > 9 ? 20 : 32 }] }]}>
               <Text style={s.playersCount}>{playersCount}</Text>
             </View>
           </View>
-          <Text style={s.headerTitle}>
-            Выберите {'\n'}количество {'\n'}даунов(4)
-          </Text>
+          <Text style={s.headerTitle}>Выберите {'\n'}количество {'\n'}даунов(4)</Text>
         </View>
 
-        <View>
-          <Range
-            min={4}
-            max={22}
-            defaultValue={4}
-            onValueChanged={(playersCount: number) =>
-              gameSettingsStore.setSettings(options => (options.playersCount = playersCount))
-            }
-          />
-        </View>
+        <Range
+          min={4}
+          max={22}
+          defaultValue={4}
+          onValueChanged={(playersCount: number) =>
+            gameSettingsStore.setSettings(options => (options.playersCount = playersCount))
+          }
+        />
         <Text style={s.headerSubTitle}>Рекомендуемый IQ: 20-93</Text>
       </View>
     </ImageBackground>
@@ -43,42 +43,42 @@ const s: any = {
   modal: {
     position: 'absolute',
     margin: 20,
-    backgroundColor: 'white',
     padding: 20,
     paddingRight: 30,
     borderRadius: 15,
+    backgroundColor: 'white',
   },
   modalTitle: {
-    fontSize: adaptiveValue(20),
     marginBottom: 10,
+    fontSize: adaptiveValue(20),
   },
   modalClose: {
     position: 'absolute',
-    right: -10,
     top: 10,
+    right: -10,
     width: 30,
     height: 30,
   },
   headerImageWrapper: {
     position: 'relative',
+    marginRight: 10,
     width: 100,
     height: 100,
-    marginRight: 10,
   },
   playersCountWrapper: {
     position: 'absolute',
-    backgroundColor: 'white',
     zIndex: 100,
     width: '100%',
+    backgroundColor: 'white',
   },
   playersCount: {
     position: 'absolute',
-    fontSize: adaptiveValue(49),
     top: 0,
-    color: '#21272e',
+    fontSize: adaptiveValue(49),
     fontFamily: 'RobotoSlab',
     fontWeight: 600,
     textAlign: 'center',
+    color: '#21272e',
   },
   contentHeader: {
     display: 'flex',
@@ -88,20 +88,20 @@ const s: any = {
   headerTitle: {
     fontSize: adaptiveValue(18),
     lineHeight: adaptiveValue(25),
-    color: '#21272e',
     fontFamily: 'RobotoSlab',
     fontWeight: 600,
     letterSpacing: 1.5,
+    color: '#21272e',
   },
   headerImage: {
     width: '100%',
     height: '100%',
   },
   headerSubTitle: {
-    textAlign: 'center',
     marginTop: 15,
     marginBottom: 10,
-    color: '#6f586c',
     fontWeight: 600,
+    textAlign: 'center',
+    color: '#6f586c',
   },
 };

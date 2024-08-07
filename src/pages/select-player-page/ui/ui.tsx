@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet } from 'react-native';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ImageButton } from '@/src/shared/ui/image-button/ui';
 import { Footer } from '@/src/shared/ui/footer/ui';
 import { SelectPlayerSlider } from '@/src/pages/select-player-page/ui/select-player-slider/ui';
@@ -8,6 +8,7 @@ import { gameStore } from '@/src/entities/game';
 import Animated, { useAnimatedStyle, useSharedValue, withTiming, Easing } from 'react-native-reanimated';
 import { adaptiveValue } from '@/src/shared/ui/adaptive-value/adaptive-value';
 import { Image } from 'expo-image';
+import { createGameCodeStore } from '@/src/feature/create-game-code';
 
 type PropsType = {
   navigation: any;
@@ -18,9 +19,16 @@ const ticketHeight = 715; // TODO add real ticket height
 const ticketShowedAtPx = -20;
 
 export function SelectPlayerPage({ navigation }: PropsType) {
+  const [isPageFullLoadingStarted, setIsPageFullLoadingStarted] = useState<boolean>(false);
   const [selectedPlayerIndex, setSelectedPlayerIndex] = useState(0);
   const [isTicketShowed, setIsTicketShowed] = useState<boolean>(false);
   const translateYAnim = useSharedValue(ticketHiddenAtPx);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsPageFullLoadingStarted(true);
+    }, 200);
+  }, []);
 
   const showTicket = () => (translateYAnim.value = ticketShowedAtPx);
   const hideTicket = () => (translateYAnim.value = ticketHiddenAtPx);
@@ -41,6 +49,24 @@ export function SelectPlayerPage({ navigation }: PropsType) {
 
   return (
     <Animated.View style={s.selectPlayerPage}>
+      <View style={s.maxWidthWrapper}>
+        <View style={{ flex: 1 }}>
+          <Text style={s.selectPlayerPageTitle} adjustsFontSizeToFit>Выбери номер своего персонажа</Text>
+          <View style={s.separatorWrapper}>
+            <Image
+              style={s.separator}
+              contentFit={'contain'}
+              source={require('@/assets/images/playerselectionscreen/main/decal_vibor_igroka.webp')}
+            />
+          </View>
+          <Text style={s.selectPlayerPageSubTitle} adjustsFontSizeToFit>
+            Два дауна не могут иметь один и тот же номер</Text>
+          <SelectPlayerSlider
+            selectedPlayerIndex={selectedPlayerIndex}
+            setSelectedPlayerIndex={setSelectedPlayerIndex}
+          />
+        </View>
+      </View>
       <Animated.View style={[s.ticketWrapper, animatedStyles]}>
         <Image
           contentFit={'cover'}
@@ -48,7 +74,10 @@ export function SelectPlayerPage({ navigation }: PropsType) {
           source={require('@/assets/images/playerselectionscreen/ticket/ticket(gay_people).webp')}
         />
         <View style={s.QRCodeWrapper}>
-          <QRCode value={gameStore.createGameCode()} size={QRCodeSize} backgroundColor={'transparent'} />
+          {isPageFullLoadingStarted && (
+            <QRCode value={createGameCodeStore.createGameCode(gameStore.game)} size={QRCodeSize}
+                    backgroundColor={'transparent'} />
+          )}
         </View>
         <ImageButton
           width={100}
@@ -62,29 +91,6 @@ export function SelectPlayerPage({ navigation }: PropsType) {
           options={{ yOffset: -4, xOffset: -4, yOffsetOnPress: -2, xOffSetOnPress: -2 }}
         />
       </Animated.View>
-
-      <View style={s.maxWidthWrapper}>
-        <View style={{ flex: 1 }}>
-          <Text style={s.selectPlayerPageTitle} adjustsFontSizeToFit>
-            Выбери номер своего персонажа
-          </Text>
-          <View style={s.separatorWrapper}>
-            <Image
-              style={s.separator}
-              contentFit={'contain'}
-              source={require('@/assets/images/playerselectionscreen/main/decal_vibor_igroka.webp')}
-            />
-          </View>
-          <Text style={s.selectPlayerPageSubTitle} adjustsFontSizeToFit>
-            Два дауна не могут иметь один и тот же номер
-          </Text>
-          <SelectPlayerSlider
-            selectedPlayerIndex={selectedPlayerIndex}
-            setSelectedPlayerIndex={setSelectedPlayerIndex}
-          />
-        </View>
-      </View>
-
       <Footer
         style={{ marginHorizontal: 35 }}
         onButtonPress={() => {

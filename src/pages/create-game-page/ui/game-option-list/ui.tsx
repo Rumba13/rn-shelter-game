@@ -9,10 +9,9 @@ import { adaptiveValue } from '@/src/shared/ui/adaptive-value/adaptive-value';
 
 type PropsType<ItemsType> = {
   title: string;
-  descriptionHeight: number;
   description: string;
   renderSelectedText: (props: SectionedMultiSelectProps<ItemsType>) => void;
-  items: ItemsType[]; //TODOsadd
+  items: ItemsType[];
   uniqueKey: string;
   displayKey: string;
   selectText: string;
@@ -21,45 +20,43 @@ type PropsType<ItemsType> = {
   onValueChange: (selectedItems: string[]) => void;
   selectedByDefault?: string[];
 };
-
+//TODO refactoring
 export function GameOptionList<ItemsType>({
-  title,
-  descriptionHeight,
-  description,
-  renderSelectedText,
-  items,
-  selectText,
-  searchPlaceholderText,
-  uniqueKey,
-  displayKey,
-  onValueChange,
-  selectedByDefault = [],
-  subKey,
-}: PropsType<ItemsType>) {
+                                            title,
+                                            description,
+                                            renderSelectedText,
+                                            items,
+                                            selectText,
+                                            searchPlaceholderText,
+                                            uniqueKey,
+                                            displayKey,
+                                            onValueChange,
+                                            selectedByDefault = [],
+                                            subKey,
+                                          }: PropsType<ItemsType>) {
   const [selectedItems, setSelectedItems] = useState<string[]>(selectedByDefault);
 
   useEffect(() => {
     onValueChange(selectedByDefault);
   }, []);
 
-  function sortOffCategoriesNames(_sheltersNames: string[]) {
-    const sheltersNames: string[] = [];
-    _sheltersNames.forEach(listItemName => {
+  function sortOffCategoriesNames(_categoriesNames: string[]) {
+    const categoriesNames: string[] = [];
+    _categoriesNames.forEach(listItemName => {
       if (
         items.find(item => {
-          //TODO fix ts-ignore Ха-ха будто на эту хуйню ебанную всем не похуй?
           //@ts-ignore
           return item.children.find(shelter => shelter.name === listItemName);
         })
       )
-        sheltersNames.push(listItemName);
+        categoriesNames.push(listItemName);
     });
 
-    return sheltersNames;
+    return categoriesNames;
   }
 
   return (
-    <GameOptionBase title={title} descriptionHeight={descriptionHeight} description={description}>
+    <GameOptionBase title={title} description={description}>
       <SectionedMultiSelect
         items={items}
         //@ts-ignore

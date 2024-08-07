@@ -1,12 +1,12 @@
-import {  sheltersStore } from '@/src/entities/shelter/model/shelters';
+import { sheltersStore } from '@/src/entities/shelter/model/shelters';
 import { GameConnectionData } from '@/src/shared/lib/types/game-connection-data';
 import { GameType } from '@/src/shared/lib/types/game';
 import { Player } from '@/src/shared/lib/types/player';
 import { playerPropsShortNames } from '@/src/entities/characteristic-card/model/player-props-short-names';
-import { cardsStore } from '@/src/entities/characteristic-card/model/characteristic-card';
+import { cardsStore } from '@/src/entities/characteristic-card/model/cards-store';
 import { gameStore } from '@/src/entities/game';
 import { endings } from '@/src/entities/ending';
-import { apocalypsesStore } from '@/src/entities/apocalypse/model/apocalypses';
+import { apocalypsesStore } from '@/src/entities/apocalypse/model/apocalypses-store';
 import { professionsStore } from '@/src/entities/profession/model/professions';
 
 class ConnectToGameStore {
@@ -47,7 +47,7 @@ class ConnectToGameStore {
       ending: ending,
       currentPlayerNumber: -1,
     };
-    gameStore.setGame(game);
+    gameStore.game = game;
     navigation.navigate('select-player-page');
   }
 }

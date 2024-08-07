@@ -26,6 +26,8 @@ export const Range = observer(({ onValueChanged, options = defaultOptions, max, 
   const [minimalValue, setMinimalValue] = useState<number>(defaultValue); //Set slider default value through slider.min
 
   useEffect(() => {
+
+
   }, [min]);
 
   function _onValueChanged(value: number) { //Unset slider default value

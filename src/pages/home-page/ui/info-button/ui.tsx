@@ -59,19 +59,19 @@ export function InfoButtonAndModal() {
 const s = StyleSheet.create({
   privacyPolicyDescription: {
     padding: 5,
-    lineHeight: 18,
     fontSize: adaptiveValue(16),
     fontFamily: 'SpaceMono',
+    lineHeight: 18,
   },
   closeButton: {
     position: 'absolute',
     top: 0,
     right: 0,
-    marginTop: 30,
-    marginRight: 25,
+    width: 35,
     minWidth: 35,
     height: 35,
-    width: 35,
+    marginTop: 30,
+    marginRight: 25,
   },
   infoButtonIcon: {
     flex: 1,

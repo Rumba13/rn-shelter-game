@@ -12,7 +12,7 @@ type PropsType = {
 };
 
 export function SelectPlayerSlider({ selectedPlayerIndex, setSelectedPlayerIndex }: PropsType) {
-  const players = gameStore.getGame().players.map(player => player.number);
+  const players = gameStore.game.players.map(player => player.number);
   const observerPlayer = (
     <Image
       style={s.sliderObserver}

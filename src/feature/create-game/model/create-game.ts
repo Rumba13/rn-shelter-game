@@ -17,7 +17,7 @@ import { playersBalanceToBalanceChances } from '@/src/feature/create-game/model/
 import { SexualOrientation } from '@/src/shared/lib/types/sexual-orientation';
 import { genders } from '@/src/entities/gender/model/genders';
 import { Profession } from '@/src/shared/lib/types/profession';
-import { cardsStore } from '@/src/entities/characteristic-card/model/characteristic-card';
+import { cardsStore } from '@/src/entities/characteristic-card/model/cards-store';
 import { Ending } from '@/src/shared/lib/types/ending';
 import { endings } from '@/src/entities/ending';
 import { createSeedStore } from '@/src/feature/create-seed/model/create-seed';

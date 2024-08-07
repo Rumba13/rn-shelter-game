@@ -1,0 +1,1 @@
+export { professionsStore } from './model/professions';

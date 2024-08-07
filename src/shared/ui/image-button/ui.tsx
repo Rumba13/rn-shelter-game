@@ -18,7 +18,7 @@ type PropsType = {
   width?: number | string;
   minHeight?: number | string;
   onPress?: (event: GestureResponderEvent) => void;
-  options: ButtonOptionsType;
+  options?: ButtonOptionsType;
   title?: string;
   titleStyle?: StyleProp<TextStyle>;
   maxFontSizeMultiplier?: number;

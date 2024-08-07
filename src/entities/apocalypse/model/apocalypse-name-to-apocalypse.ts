@@ -1,4 +1,4 @@
-import {  apocalypsesStore } from './apocalypses';
+import {  apocalypsesStore } from './apocalypses-store';
 import { Apocalypse } from '@/src/shared/lib/types/apocalypse';
 
 export function apocalypseNameToApocalypse(apocalypseName: string): Apocalypse {

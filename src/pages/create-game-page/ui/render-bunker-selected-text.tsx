@@ -1,5 +1,4 @@
 import { SectionedMultiSelectProps } from 'react-native-sectioned-multi-select';
-import { Shelter } from '@/src/shared/lib/types/shelter';
 import { Text } from 'react-native';
 import { ShelterCategoryList } from '@/src/shared/lib/types/shelter-category-list';
 

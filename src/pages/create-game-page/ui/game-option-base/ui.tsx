@@ -4,16 +4,15 @@ import { QuestionButton } from '@/src/shared/ui/question-button/ui';
 import { Collapsible } from '@/src/shared/ui/collapsible/ui';
 import { Image } from 'expo-image';
 import { adaptiveValue } from '@/src/shared/ui/adaptive-value/adaptive-value';
+import { observer } from 'mobx-react';
 
 type PropsType = {
   children: any;
   title: string;
-  descriptionHeight: number;
   description: string;
 };
 
-//TODO fix background flash when toggle collapsible
-export function GameOptionBase({ title, children, description }: PropsType) {
+export const GameOptionBase = observer(({ title, children, description }: PropsType) => {
   const [isCollapsed, setIsCollapsed] = useState<boolean>(true);
 
   return (
@@ -21,12 +20,9 @@ export function GameOptionBase({ title, children, description }: PropsType) {
       <ImageBackground source={require('@/assets/images/gamecreationscreen/create_back.webp')} resizeMode={'stretch'}>
         <View style={{ margin: 10 }}>
           <QuestionButton onPress={() => setIsCollapsed(!isCollapsed)} />
-          <View>
-            <Text style={s.gameOptionTitle}>{title}</Text>
-          </View>
+          <Text style={s.gameOptionTitle}>{title}</Text>
           {children}
-
-          <Collapsible isCollapsed={isCollapsed} style={{ ...s.collapsible }}>
+          <Collapsible isCollapsed={isCollapsed} style={[s.collapsible]}>
             <View style={{ flex: 1, height: 'auto', padding: 10 }}>
               <Text style={s.gameOptionDescription}>{description}</Text>
             </View>
@@ -36,7 +32,7 @@ export function GameOptionBase({ title, children, description }: PropsType) {
       </ImageBackground>
     </View>
   );
-}
+});
 
 const helpButtonSize = 35;
 

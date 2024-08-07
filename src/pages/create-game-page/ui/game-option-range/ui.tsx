@@ -1,9 +1,10 @@
 import { View, Text } from 'react-native';
 import { ImageBackground } from 'expo-image';
-
 import { Range } from '@/src/shared/ui/range/ui';
 import { GameOptionBase } from '@/src/pages/create-game-page/ui/game-option-base/ui';
 import { adaptiveValue } from '@/src/shared/ui/adaptive-value/adaptive-value';
+import { observer } from 'mobx-react';
+import { useEffect } from 'react';
 
 type PropsType = {
   title: string;
@@ -12,22 +13,23 @@ type PropsType = {
   min: number;
   max: number;
   defaultValue: number;
-  descriptionHeight: number;
   description: string;
 };
 
-export function GameOptionRange({
-  title,
-  onValueChanged,
-  max,
-  min,
-  selectedTitle,
-  defaultValue,
-  descriptionHeight,
-  description,
-}: PropsType) {
+export const GameOptionRange = observer(({
+                                           title,
+                                           onValueChanged,
+                                           max,
+                                           min,
+                                           selectedTitle,
+                                           defaultValue,
+                                           description,
+                                         }: PropsType) => {
+  useEffect(() => {
+  }, []);
+
   return (
-    <GameOptionBase title={title} descriptionHeight={descriptionHeight} description={description}>
+    <GameOptionBase title={title} description={description}>
       <View style={s.selectedTitleWrapper}>
         <ImageBackground
           source={require('@/assets/images/gamecreationscreen/create_text_frame.webp')}
@@ -47,22 +49,22 @@ export function GameOptionRange({
       />
     </GameOptionBase>
   );
-}
+});
 
 const s: any = {
   selectedTitleWrapper: {
     width: '100%',
-    marginTop: 5,
     height: 40,
     maxHeight: 40,
+    marginTop: 5,
   },
   selectedTitle: {
+    paddingVertical: 8,
     fontSize: adaptiveValue(19),
     textAlign: 'center',
-    color: '#98795d',
     fontFamily: 'RobotoSlabSemiBold',
-    letterSpacing: 1,
-    paddingVertical: 8,
     lineHeight: 20,
+    letterSpacing: 1,
+    color: '#98795d',
   },
 };

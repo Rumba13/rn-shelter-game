@@ -4,12 +4,6 @@ import { Edition } from '@/src/shared/lib/types/edition';
 import { CardType } from '@/src/shared/lib/types/card-type';
 
 class CardsStore {
-
-
-  constructor() {
-
-  }
-
   public getCardsByEdition(edition: Edition): Card[] {
     return databaseStore.database.getAllSync<Card>(`SELECT * FROM cards WHERE edition = '${edition}';`);
   }
@@ -35,10 +29,7 @@ class CardsStore {
   }
 
   public getAllCards(): Card[] {
-    const a = Date.now();
-    const b = databaseStore.database.getAllSync<Card>(`SELECT * FROM cards;`);
-    console.log(Date.now() - a + ' ms');
-    return b;
+    return databaseStore.database.getAllSync<Card>(`SELECT * FROM cards;`);
   }
 
 }

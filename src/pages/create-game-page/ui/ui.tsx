@@ -1,16 +1,21 @@
-import { ImageBackground, SafeAreaView, ScrollView, Text, View } from 'react-native';
+import { ImageBackground, SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { Footer } from '@/src/shared/ui/footer/ui';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Header } from './header/ui';
 import { GameOptionCheckbox } from '@/src/pages/create-game-page/ui/game-option-checkbox/ui';
 import { GameOptionSelect } from '@/src/pages/create-game-page/ui/game-option-select/ui';
 import { SexualOrientation } from '@/src/shared/lib/types/sexual-orientation';
-import { gameSettingsStore } from '@/src/entities/game/model/game-settings';
+import { GameSettingsStore } from '@/src/entities/game/model/game-settings';
 import { GameOptionRange } from '@/src/pages/create-game-page/ui/game-option-range/ui';
-import { difficultyValueToTitle } from '@/src/pages/create-game-page/ui/difficulty-value-to-title';
+import { difficultyToTitleMap } from '@/src/pages/create-game-page/ui/difficulty-to-title-map';
 import { observer } from 'mobx-react';
-import { sexualOrientationValueToTitle } from '@/src/pages/create-game-page/ui/sexual-orientation-value-to-title';
-import { characterBalanceValueToTitle } from '@/src/pages/create-game-page/ui/character-balance-value-to-title';
+import {
+  sexualOrientationToTitleMap,
+  sexualOrientationValueToTitle,
+} from '@/src/pages/create-game-page/ui/sexual-orientation-to-title-map';
+import {
+  characterBalanceMap,
+} from '@/src/pages/create-game-page/ui/character-balance-to-title-map';
 import { GameOptionList } from '@/src/pages/create-game-page/ui/game-option-list/ui';
 import { renderBunkerSelectedText } from '@/src/pages/create-game-page/ui/render-bunker-selected-text';
 import { ShelterCategoryList } from '@/src/shared/lib/types/shelter-category-list';
@@ -20,33 +25,35 @@ import { renderApocalypseSelectedText } from '@/src/pages/create-game-page/ui/re
 import { apocalypseNameToApocalypse } from '@/src/entities/apocalypse/model/apocalypse-name-to-apocalypse';
 import {
   cardsStore,
-} from '@/src/entities/characteristic-card/model/characteristic-card';
+} from '@/src/entities/characteristic-card/model/cards-store';
 import {
   renderCharacteristicCardSelectedText,
 } from '@/src/pages/create-game-page/ui/render-characteristic-card-selected-text';
 import { CharacteristicCardsList } from '@/src/shared/lib/types/characteristic-cards-list';
 import {
-  characteristicBalanceValueToTitle,
-} from '@/src/pages/create-game-page/ui/characteristic-balance-value-to-title';
+  characteristicBalanceToTitleMap,
+} from '@/src/pages/create-game-page/ui/characteristic-balance-to-title-map';
 import { createGameStore } from '@/src/feature/create-game/model/create-game';
 import { gameStore } from '@/src/entities/game/model/game';
 import { OverlayModal } from '@/src/shared/ui/overlay-modal/ui';
 import { Image } from 'expo-image';
 import { adaptiveValue } from '@/src/shared/ui/adaptive-value/adaptive-value';
-import { apocalypsesStore } from '@/src/entities/apocalypse/model/apocalypses';
+import { apocalypsesStore } from '@/src/entities/apocalypse/model/apocalypses-store';
 import { sheltersStore } from '@/src/entities/shelter/model/shelters';
 
 //TODO refactoring
-//TODO fix font issues
-
 type PropsType = {
   navigation: any;
+  gameSettingsStore: GameSettingsStore
 };
 
-export const CreateGamePage = observer(({ navigation }: PropsType) => {
+export const CreateGamePage = observer(({ navigation, gameSettingsStore }: PropsType) => {
   const [isErrorModalOpened, setIsErrorModalOpened] = useState<boolean>(false);
   const [errorDescription, setErrorDescription] = useState<string | null>(null);
   const [isPageFullLoadingStarted, setIsPageFullLoadingStarted] = useState<boolean>(false);
+  const selectedByDefaultCards = useMemo(() => cardsStore.getAllCards().map(card => card.name), [cardsStore]);
+  const cardsStandartEdition = useMemo(() => cardsStore.getCardsByEdition('standart'), []);
+  const cardsBorovEdition = useMemo(() => cardsStore.getCardsByEdition('borov'), []);
 
   const { settings } = gameSettingsStore;
 
@@ -73,23 +80,22 @@ export const CreateGamePage = observer(({ navigation }: PropsType) => {
               <ScrollView decelerationRate={0.985}>
                 <Header />
                 <GameOptionCheckbox
+                  isEnable={settings.hillbillyMode}
                   title={`Проклятые деревенщины`}
-                  descriptionHeight={100}
                   description={'Параметр определяет будут ли задействованы деревенщины'}
                   onValueChange={isEnable =>
                     gameSettingsStore.setSettings(options => (options.hillbillyMode = isEnable))
                   }
                 />
                 <GameOptionCheckbox
+                  isEnable={settings.lotteryTicketMode}
                   title={'Режим лотереи'}
-                  descriptionHeight={80}
                   description={'Трудно объяснить, что этот режим делает...'}
                   onValueChange={value =>
                     gameSettingsStore.setSettings(settings => (settings.lotteryTicketMode = value))
                   }
                 />
                 <GameOptionSelect
-                  descriptionHeight={100}
                   description={'Параметр определяет кто пидр, кто не пидр и всё такое'}
                   title={'Сексуальная Ориентация'}
                   items={[
@@ -100,7 +106,7 @@ export const CreateGamePage = observer(({ navigation }: PropsType) => {
                   ].map(value => ({
                     value,
                     key: value,
-                    label: sexualOrientationValueToTitle(value),
+                    label: sexualOrientationToTitleMap[value],
                   }))}
                   onValueChange={orientation =>
                     gameSettingsStore.setSettings(options => (options.sexualOrientation = orientation))
@@ -113,8 +119,7 @@ export const CreateGamePage = observer(({ navigation }: PropsType) => {
                     title={'Уровень сложности'}
                     defaultValue={settings.difficulty}
                     description={'Параметр определяет насколько персонажи полезны и безопасны в среднем'}
-                    descriptionHeight={100}
-                    selectedTitle={difficultyValueToTitle(gameSettingsStore.settings.difficulty)}
+                    selectedTitle={difficultyToTitleMap[settings.difficulty]}
                     onValueChanged={difficulty =>
                       gameSettingsStore.setSettings(options => (options.difficulty = difficulty))
                     }
@@ -124,24 +129,22 @@ export const CreateGamePage = observer(({ navigation }: PropsType) => {
 
                   <GameOptionRange
                     title={'Баланс Персонажей'}
-                    descriptionHeight={100}
                     description={'Параметр определяет насколько различается полезность персонажей'}
                     onValueChanged={characterBalance =>
                       gameSettingsStore.setSettings(options => (options.balance = characterBalance))
                     }
-                    selectedTitle={characterBalanceValueToTitle(settings.balance)}
+                    selectedTitle={characterBalanceMap[settings.balance]}
                     min={gameSettingsStore.settingsLimits.balance.min}
                     max={gameSettingsStore.settingsLimits.balance.max}
                     defaultValue={settings.balance}
                   />
                   <GameOptionRange
                     title={'Баланс характеристик'}
-                    descriptionHeight={70}
                     description={'Параметр определяет разброс характеристик'}
                     onValueChanged={characteristicBalance =>
                       gameSettingsStore.setSettings(settings => (settings.characteristicBalance = characteristicBalance))
                     }
-                    selectedTitle={characteristicBalanceValueToTitle(settings.characteristicBalance)}
+                    selectedTitle={characteristicBalanceToTitleMap[settings.characteristicBalance]}
                     min={gameSettingsStore.settingsLimits.characteristicBalance.min}
                     max={gameSettingsStore.settingsLimits.characteristicBalance.max}
                     defaultValue={settings.characteristicBalance}
@@ -149,7 +152,6 @@ export const CreateGamePage = observer(({ navigation }: PropsType) => {
 
                   <GameOptionList<ShelterCategoryList>
                     title={'Список бункеров'}
-                    descriptionHeight={100}
                     description={'Выберите из списка, с какими бункерами вы хотите играть'}
                     renderSelectedText={renderBunkerSelectedText}
                     items={[
@@ -174,9 +176,9 @@ export const CreateGamePage = observer(({ navigation }: PropsType) => {
                       })
                     }
                   />
+
                   <GameOptionList<ApocalypseCategories>
                     title={'Список апокалипсисов'}
-                    descriptionHeight={100}
                     description={'Выберите из списка, с какими апокалипсисами вы хотите играть'}
                     renderSelectedText={renderApocalypseSelectedText}
                     items={[
@@ -203,22 +205,20 @@ export const CreateGamePage = observer(({ navigation }: PropsType) => {
                   />
                   <GameOptionList<CharacteristicCardsList>
                     title={'Список используемых карточек'}
-                    descriptionHeight={100}
                     description={'Выберите из списка, с какими карточками вы хотите играть'}
                     renderSelectedText={renderCharacteristicCardSelectedText}
                     items={[
-                      { name: 'Карточки Стандартного Издания', children: cardsStore.getCardsByEdition('standart') },
-                      { name: 'Карточки Издания "Боров"', children: cardsStore.getCardsByEdition('borov') },
+                      { name: 'Карточки Стандартного Издания', children: cardsStandartEdition },
+                      { name: 'Карточки Издания "Боров"', children: cardsBorovEdition },
                     ]}
                     uniqueKey={'name'}
                     displayKey={'name'}
                     selectText={'Выбрать карточки'}
                     subKey={'children'}
-                    selectedByDefault={cardsStore.getAllCards().map(card => card.name)}
+                    selectedByDefault={selectedByDefaultCards}
                     searchPlaceholderText={'Искать карточки'}
                     onValueChange={characteristicCardsNames =>
                       gameSettingsStore.setSettings(options => options.cardsKit = characteristicCardsNames.map(cardsStore.getCardByName))
-
                     }
                   />
                 </>}
@@ -243,7 +243,7 @@ export const CreateGamePage = observer(({ navigation }: PropsType) => {
         style={{ marginHorizontal: 35 }}
         onButtonPress={() => {
           try {
-            gameStore.setGame(createGameStore.createGame(gameSettingsStore.settings));
+            gameStore.game = createGameStore.createGame(gameSettingsStore.settings);
             navigation.navigate('select-player-page');
           } catch (err) {
             setIsErrorModalOpened(true);
@@ -255,7 +255,7 @@ export const CreateGamePage = observer(({ navigation }: PropsType) => {
   );
 });
 
-const s: any = {
+const s = StyleSheet.create({
   errorModalTitle: {
     position: 'absolute',
     top: -36,
@@ -300,4 +300,4 @@ const s: any = {
     aspectRatio: 549 / 934,
   },
   mainContent: {},
-};
+});
