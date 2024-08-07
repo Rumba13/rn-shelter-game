@@ -9,8 +9,9 @@ import { ConnectToGamePage } from '@/src/pages/connect-to-game-page';
 import { gameStore } from '@/src/entities/game/model/game';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { GamePage } from '@/src/pages/game-page';
-import { SQLiteProvider } from 'expo-sqlite/next';
+import { SQLiteProvider, useSQLiteContext } from 'expo-sqlite/next';
 import { createStackNavigator } from '@react-navigation/stack';
+import { databaseStore } from '@/src/shared/model/database-store';
 
 //@ts-ignore
 Text.defaultProps = Text.defaultProps || {};
@@ -55,6 +56,7 @@ export default function App() {
     );
   };
   const GamePageRoute = ({ navigation }: any) => {
+
     return (
       <AppLayout>
         <GamePage />
@@ -63,7 +65,6 @@ export default function App() {
   };
   const DevPageRoute = ({ navigation }: any) => {
     const game = gameStore.getGame();
-
     return (
       <AppLayout>
         <ScrollView>

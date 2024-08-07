@@ -82,13 +82,13 @@ export function SelectPlayerSlider({ selectedPlayerIndex, setSelectedPlayerIndex
       </View>
       <ImageButton
         width={'100%'}
-        height={65}
+        minHeight={65}
         style={s.shareButton}
         buttonImage={require('@/assets/images/playerselectionscreen/main/podelitsa_pers_knopka.webp')}
         shadowImage={require('@/assets/images/playerselectionscreen/main/podelitsa_pers_knopka_shadow.webp')}
         options={{ xOffset: -3, yOffset: -4, xOffSetOnPress: -1, yOffsetOnPress: -2 }}
         title={selectedPlayerIndex === 0 ? 'Поделиться игрой' : 'Поделиться персонажем'}
-        styleTitle={{
+        titleStyle={{
           textAlign: 'center',
           fontSize: adaptiveValue(19),
           fontFamily: 'RobotoSlabSemiBold',

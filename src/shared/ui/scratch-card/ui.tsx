@@ -4,24 +4,26 @@ import { StyleProp, View, ViewStyle, StyleSheet } from 'react-native';
 
 type Props = {
   style: StyleProp<ViewStyle>;
-  image: any;
+  scratchImage: any;
   children?: React.ReactNode;
 };
-export const ScratchCard: React.FC<Props> = ({ style, children, image }) => {
-  const [[width, height], setSize] = useState([0, 0]);
+export const ScratchCard: React.FC<Props> = ({ style: scratchCardStyle, children, scratchImage }) => {
+  const [scratchImageHeight, setScratchImageHeight] = useState(0);
+  const [scratchImageWidth, setScratchImageWidth] = useState(0);
   const path = useRef(Skia.Path.Make());
 
   return (
     <View
       onLayout={e => {
-        setSize([e.nativeEvent.layout.width, e.nativeEvent.layout.height]);
+        setScratchImageHeight(e.nativeEvent.layout.height);
+        setScratchImageWidth(e.nativeEvent.layout.width);
       }}
-      style={[styles.container, style]}>
-      {Boolean(image && width && height) && (
+      style={[s.container, scratchCardStyle]}>
+      {Boolean(scratchImage && scratchImageWidth && scratchImageHeight) && (
         <>
-          <View style={styles.content}>{children}</View>
+          <View style={s.content}>{children}</View>
           <Canvas
-            style={styles.canvas}
+            style={s.canvas}
             onTouchStart={({ nativeEvent }) => {
               path.current.moveTo(nativeEvent.locationX, nativeEvent.locationY);
             }}
@@ -43,7 +45,8 @@ export const ScratchCard: React.FC<Props> = ({ style, children, image }) => {
                   />
                 </Group>
               }>
-              <Image image={image} fit="cover" x={0} y={0} width={width} height={height} />
+              <Image image={scratchImage} fit="cover" x={0} y={0} width={scratchImageWidth}
+                     height={scratchImageHeight} />
             </Mask>
           </Canvas>
         </>
@@ -51,7 +54,7 @@ export const ScratchCard: React.FC<Props> = ({ style, children, image }) => {
     </View>
   );
 };
-const styles = StyleSheet.create({
+const s = StyleSheet.create({
   container: {
     position: 'relative',
     width: 300,

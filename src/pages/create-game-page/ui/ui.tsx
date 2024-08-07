@@ -238,8 +238,8 @@ export const CreateGamePage = observer(({ navigation }: PropsType) => {
       </View>
 
       <Footer
-        styles={{ marginHorizontal: 35 }}
-        onNextButtonPress={() => {
+        style={{ marginHorizontal: 35 }}
+        onButtonPress={() => {
           try {
             gameStore.setGame(createGameStore.createGame(gameSettingsStore.settings));
             navigation.navigate('select-player-page');

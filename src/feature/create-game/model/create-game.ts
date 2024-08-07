@@ -29,12 +29,12 @@ class CreateGameStore {
 
   private selectRandomApocalypse(apocalypses: Apocalypse[]): Apocalypse {
     return apocalypses[
-      Math.trunc(this.pseudoRandomGenerator.generateFrom(createSeedStore.seed, 0, apocalypses.length))
+      Math.trunc(this.pseudoRandomGenerator.generateInRangeFromSeed( 0, apocalypses.length))
       ];
   }
 
   private selectRandomShelter(shelters: Shelter[]): Shelter {
-    return shelters[Math.trunc(this.pseudoRandomGenerator.generateFrom(createSeedStore.seed, 0, shelters.length))];
+    return shelters[Math.trunc(this.pseudoRandomGenerator.generateInRangeFromSeed(0, shelters.length))];
   }
 
   private selectRandomProfession(professions: Profession[]): Profession {
@@ -215,7 +215,7 @@ class CreateGameStore {
   }
 
   private selectRandomEnding(endings: Ending[]): Ending {
-    return endings[Math.trunc(this.pseudoRandomGenerator.generateFrom(createSeedStore.seed, 0, endings.length))];
+    return endings[Math.trunc(this.pseudoRandomGenerator.generateInRangeFromSeed( 0, endings.length))];
   }
 
   public createGame(gameSettings: GameSettings): GameType {

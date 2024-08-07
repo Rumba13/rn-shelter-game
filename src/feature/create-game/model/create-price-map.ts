@@ -90,7 +90,7 @@ export class CreatePriceMap {
       }
     }
 
-    const shuffleTimes: number = Math.trunc(this.pseudoRandomGenerator.generateFrom(this.seed, 1, maxShuffleTimes)); //TODO
+    const shuffleTimes: number = Math.trunc(this.pseudoRandomGenerator.generateInRangeFromSeed(1, maxShuffleTimes)); //TODO
 
     for (let i = 0; i < shuffleTimes; i++) {
       this._shuffle(priceMap);

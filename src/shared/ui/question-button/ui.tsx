@@ -1,4 +1,4 @@
-import { ImageButton, ImageButtonProps } from '@/src/shared/ui/image-button/ui';
+import { ImageButton } from '@/src/shared/ui/image-button/ui';
 import { StyleSheet } from 'react-native';
 
 type PropsType = {
@@ -12,18 +12,18 @@ const helpButtonSize = 35;
 export function QuestionButton({ onPress, height, width }: PropsType) {
   return (
     <ImageButton
-      height={height}
-      width={width}
-      onPress={onPress}
       style={s.optionHelpButton}
+      buttonImage={require('@/assets/images/core/vopros_icon.webp')}
+      shadowImage={require('@/assets/images/gameconnectionscreen/info_icon_shadow.webp')}
+      width={width}
+      minHeight={height}
+      onPress={onPress}
       options={{
         yOffset: -3,
         xOffset: -2,
         yOffsetOnPress: -1,
         xOffSetOnPress: -1,
       }}
-      buttonImage={require('@/assets/images/core/vopros_icon.webp')}
-      shadowImage={require('@/assets/images/gameconnectionscreen/info_icon_shadow.webp')}
     />
   );
 }
@@ -31,10 +31,10 @@ export function QuestionButton({ onPress, height, width }: PropsType) {
 const s = StyleSheet.create({
   optionHelpButton: {
     position: 'absolute',
+    top: 0,
+    right: 0,
+    zIndex: 1000,
     minWidth: helpButtonSize,
     height: helpButtonSize,
-    zIndex: 1000,
-    right: 0,
-    top: 0,
   },
 });

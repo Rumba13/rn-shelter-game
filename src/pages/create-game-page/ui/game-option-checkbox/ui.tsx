@@ -16,7 +16,7 @@ export function GameOptionCheckbox({ title, onValueChange, descriptionHeight, de
   return (
     <GameOptionBase title={title} descriptionHeight={descriptionHeight} description={description}>
       <CheckBox
-        style={s.gameOptionCheckBox}
+        checkboxStyle={s.gameOptionCheckBox}
         isToggled={isOptionEnabled}
         setIsToggled={isEnable => {
           if (onValueChange) {
