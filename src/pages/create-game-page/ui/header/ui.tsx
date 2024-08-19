@@ -1,6 +1,6 @@
 import { Text, View } from 'react-native';
 import { Range } from '@/src/shared/ui/range/ui';
-import { gameSettingsStore } from '@/src/entities/game/model/game-settings';
+import { gameSettingsStore } from '@/src/entities/game/model/game-settings-store';
 import { observer } from 'mobx-react';
 import { Image, ImageBackground } from 'expo-image';
 import { adaptiveValue } from '@/src/shared/ui/adaptive-value/adaptive-value';
@@ -13,11 +13,11 @@ export const Header = observer(() => {
   }, []);
 
   return (
-    <ImageBackground source={require('@/assets/images/gamecreationscreen/create_back.webp')} contentFit={'fill'}>
+    <ImageBackground source={require('@/assets/images/gamecreationscreen/create-background.webp')} contentFit={'fill'}>
       <View style={s.contentHeader}>
         <View style={{ flexDirection: 'row', marginBottom: 15 }}>
           <View style={s.headerImageWrapper}>
-            <Image style={s.headerImage} source={require('@/assets/images/gamecreationscreen/igroki.webp')} />
+            <Image style={s.headerImage} source={require('@/assets/images/gamecreationscreen/players-icon.webp')} />
             <View style={[s.playersCountWrapper, { transform: [{ translateX: playersCount > 9 ? 20 : 32 }] }]}>
               <Text style={s.playersCount}>{playersCount}</Text>
             </View>

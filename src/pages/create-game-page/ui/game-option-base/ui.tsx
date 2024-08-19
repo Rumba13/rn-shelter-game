@@ -17,7 +17,7 @@ export const GameOptionBase = observer(({ title, children, description }: PropsT
 
   return (
     <View style={s.gameOption}>
-      <ImageBackground source={require('@/assets/images/gamecreationscreen/create_back.webp')} resizeMode={'stretch'}>
+      <ImageBackground source={require('@/assets/images/gamecreationscreen/create-background.webp')} resizeMode={'stretch'}>
         <View style={{ margin: 10 }}>
           <QuestionButton onPress={() => setIsCollapsed(!isCollapsed)} />
           <Text style={s.gameOptionTitle}>{title}</Text>
@@ -28,7 +28,7 @@ export const GameOptionBase = observer(({ title, children, description }: PropsT
             </View>
           </Collapsible>
         </View>
-        <Image style={s.separator} source={require('@/assets/images/gamecreationscreen/razdelenije.webp')} />
+        <Image style={s.separator} source={require('@/assets/images/gamecreationscreen/separator.webp')} />
       </ImageBackground>
     </View>
   );

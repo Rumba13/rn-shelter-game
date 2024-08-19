@@ -15,15 +15,12 @@ const checkBoxToggleOffAtPx = 0;
 export function CheckBox({ style: checkboxStyle, setIsToggled, isToggled }: PropsType) {
   const translateXAnim = useSharedValue(checkBoxToggleOffAtPx);
 
-  const toggleOn = () => {
-    translateXAnim.value = checkBoxToggleOnAtPx;
-  };
-  const toggleOff = () => {
-    translateXAnim.value = checkBoxToggleOffAtPx;
-  };
+  const animateCheckBoxOn = () => translateXAnim.value = checkBoxToggleOnAtPx;
+  const animateCheckBoxOff = () => translateXAnim.value = checkBoxToggleOffAtPx;
+
   const toggleCheckBox = () => {
     setIsToggled(!isToggled);
-    isToggled ? toggleOff() : toggleOn();
+    isToggled ? animateCheckBoxOff() : animateCheckBoxOn();
   };
 
   const animatedCheckerStyle = useAnimatedStyle(() => ({
@@ -39,17 +36,16 @@ export function CheckBox({ style: checkboxStyle, setIsToggled, isToggled }: Prop
 
   return (
     <Animated.View style={[s.checkBox, checkboxStyle]}>
-      <TouchableWithoutFeedback
-        onPress={toggleCheckBox}>
+      <TouchableWithoutFeedback onPress={toggleCheckBox}>
         <Animated.View style={s.checkBoxChecker}>
           <ImageBackground
             style={{ height: '100%' }}
             contentFit={'contain'}
-            source={require('@/assets/images/gamecreationscreen/perekluchatel.webp')}>
+            source={require('@/assets/images/gamecreationscreen/checkbox-background.webp')}>
             <Animated.Image
               style={[s.checkBoxImage, animatedCheckerStyle]}
               resizeMode={'contain'}
-              source={require('@/assets/images/gamecreationscreen/perekluchatel_knopka.png')}
+              source={require('@/assets/images/gamecreationscreen/checkbox-icon.png')}
             />
           </ImageBackground>
         </Animated.View>

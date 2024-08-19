@@ -12,8 +12,9 @@ import { adaptiveValue } from '@/src/shared/ui/adaptive-value/adaptive-value';
 import { ImageBackground } from 'expo-image';
 
 type PropsType = {};
-const sidebarAnimationDuration = 270;
-const sidebarAnimationEasing: EasingFunction | EasingFunctionFactory = Easing.out(Easing.sin);
+
+const sidebarsAnimationDuration = 270;
+const sidebarsAnimationEasing: EasingFunction | EasingFunctionFactory = Easing.out(Easing.sin);
 const sliderRation = 1049 / 593;
 const sliderWidth = Dimensions.get('window').width - 84;
 const sliderHeight = sliderWidth * sliderRation;
@@ -23,13 +24,13 @@ export const GamePage = observer(({}: PropsType) => {
   const selectPlayersThumbsRef = React.createRef<ScrollView>();
   const [isLeftSidebarOpened, setIsLeftSidebarOpened] = React.useState<boolean>(true);
   const [isRightSidebarOpened, setIsRightSidebarOpened] = React.useState<boolean>(false);
+  const [thumbsScrollPositionX, setThumbsScrollPositionX] = useState(0);
 
   const game = gameStore.game;
   if (!game) throw new Error('Game is undefined');
   const [selectedPlayerIndex, setSelectedPlayerIndex] = useState<number>(
     game.currentPlayerNumber === 0 ? 0 : game.currentPlayerNumber - 1,
   );
-  const [thumbsScrollPositionX, setThumbsScrollPositionX] = useState(0);
 
   return (
     <View style={s.gamePage}>
@@ -50,7 +51,7 @@ export const GamePage = observer(({}: PropsType) => {
             const currentItemOnScreen = Math.round(thumbsScrollPositionX / selectPlayerThumbsWidth);
 
             if (currentItemOnScreen <= index - 4) {
-              //auto scroll
+              //Scroll to player when he out of screen
               selectPlayersThumbsRef.current?.scrollTo({
                 x: thumbsScrollPositionX + selectPlayerThumbsWidth * 4,
                 animated: true,
@@ -64,23 +65,21 @@ export const GamePage = observer(({}: PropsType) => {
 
             setSelectedPlayerIndex(index);
           }}
-          renderItem={item => {
-            return (
-              <PlayerDetails
-                key={item.index}
-                isObserver={game.currentPlayerNumber === 0}
-                isCurrentPlayer={game.currentPlayerNumber === item.index + 1}
-                style={{ marginLeft: 18 }}
-                playerNumber={item.index + 1}
-                player={item.item}
-              />
-            );
-          }}
+          renderItem={item =>
+            <PlayerDetails
+              key={item.index}
+              isObserver={game.currentPlayerNumber === 0}
+              isCurrentPlayer={game.currentPlayerNumber === item.index + 1}
+              style={{ marginLeft: 18 }}
+              playerNumber={item.index + 1}
+              player={item.item}
+            />
+          }
         />
       </View>
 
       <View style={{ width: (sliderWidth / 100) * 95, marginHorizontal: 'auto' }}>
-        <ImageBackground contentFit={'fill'} source={require('@/assets/images/gamescreen/box.webp')}>
+        <ImageBackground contentFit={'fill'} source={require('@/assets/images/gamescreen/box-icon.webp')}>
           <ScrollView
             showsHorizontalScrollIndicator={false}
             onScroll={e => setThumbsScrollPositionX(Math.round(e.nativeEvent.contentOffset.x))}
@@ -104,7 +103,7 @@ export const GamePage = observer(({}: PropsType) => {
                       selectPlayerSliderRef.current?.scrollTo({ index, animated: true });
                     }}>
                     {isThumbSelected ? (
-                      <ImageBackground resizeMode={'cover'} source={require('@/assets/images/gamescreen/frame.webp')}>
+                      <ImageBackground contentFit={'cover'} source={require('@/assets/images/gamescreen/frame-icon.webp')}>
                         <Text
                           style={{
                             ...s.selectPlayerThumbTitle,
@@ -140,8 +139,8 @@ export const GamePage = observer(({}: PropsType) => {
         </ImageBackground>
       </View>
       <LeftSidebar
-        animationEasing={sidebarAnimationEasing}
-        animationDuration={sidebarAnimationDuration}
+        animationEasing={sidebarsAnimationEasing}
+        animationDuration={sidebarsAnimationDuration}
         isCompletelyHidden={isRightSidebarOpened}
         shelterCapacity={Math.floor(game.players.length / 2)}
         apocalypse={game.apocalypse}
@@ -150,10 +149,10 @@ export const GamePage = observer(({}: PropsType) => {
         setIsOpened={setIsLeftSidebarOpened}
       />
       <RightSidebar
-        animationEasing={sidebarAnimationEasing}
+        animationEasing={sidebarsAnimationEasing}
         ending={game.ending.description}
         unKickedOutPlayers={game.players.filter(player => !player.isKicked)}
-        animationDuration={sidebarAnimationDuration}
+        animationDuration={sidebarsAnimationDuration}
         isHidden={isLeftSidebarOpened}
         isOpened={isRightSidebarOpened}
         setIsOpened={setIsRightSidebarOpened}

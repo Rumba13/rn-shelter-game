@@ -1,1 +1,1 @@
-export { createGameCodeStore } from './model/create-game-code-store';
+export { createGameCodeStore } from './model/create-game-code';

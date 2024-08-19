@@ -32,7 +32,7 @@ export const GameOptionRange = observer(({
     <GameOptionBase title={title} description={description}>
       <View style={s.selectedTitleWrapper}>
         <ImageBackground
-          source={require('@/assets/images/gamecreationscreen/create_text_frame.webp')}
+          source={require('@/assets/images/gamecreationscreen/create-text-frame.webp')}
           contentFit={'fill'}>
           <Text style={s.selectedTitle}>{selectedTitle}</Text>
         </ImageBackground>
@@ -43,8 +43,8 @@ export const GameOptionRange = observer(({
         max={max}
         min={min}
         options={{
-          trackImage: require('@/assets/images/gamecreationscreen/picker_line_2_gradient.webp'),
-          pickerImage: require('@/assets/images/gamecreationscreen/picker1.webp'),
+          trackImage: require('@/assets/images/gamecreationscreen/picker-track-gradient.webp'),
+          pickerImage: require('@/assets/images/gamecreationscreen/picker-icon-inactive.webp'),
         }}
       />
     </GameOptionBase>

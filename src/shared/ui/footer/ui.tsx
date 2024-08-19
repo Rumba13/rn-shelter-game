@@ -13,20 +13,20 @@ export function Footer({ style: footerStyle, onButtonPress }: PropsType) {
       <View style={s.buttonWrapper}>
         <Image
           style={s.buttonDetail}
-          source={require('@/assets/images/gamecreationscreen/next_dec.webp')}
+          source={require('@/assets/images/gamecreationscreen/footer-detail.webp')}
           contentFit={'contain'}
         />
         <ImageButton
           style={s.button}
-          buttonImage={require('@/assets/images/gamecreationscreen/next_button.webp')}
-          shadowImage={require('@/assets/images/gamecreationscreen/next_button_shadow.webp')}
+          buttonImage={require('@/assets/images/gamecreationscreen/next-button.webp')}
+          shadowImage={require('@/assets/images/gamecreationscreen/next-button-shadow.webp')}
           onPress={onButtonPress}
         />
       </View>
 
       <Image
         style={s.footerDetail}
-        source={require('@/assets/images/gamecreationscreen/cloud.webp')}
+        source={require('@/assets/images/gamecreationscreen/cloud-icon.webp')}
         contentFit={'contain'}
         contentPosition={'bottom'}
       />

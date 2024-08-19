@@ -62,7 +62,7 @@ export const PlayerCard = observer(({ card, cardDisplayStatus, onPress, canBePin
           source={
             isCardShowed || isCardPinned
               ? cardTypeToCardBackgroundMap[card.type]
-              : require('@/assets/images/gamescreen/phobia_bg.webp')
+              : require('@/assets/images/gamescreen/phobia-background.webp')
           }
           contentFit={isCardShowed || isCardPinned ? 'contain' : 'fill'}>
           {}
@@ -78,7 +78,7 @@ export const PlayerCard = observer(({ card, cardDisplayStatus, onPress, canBePin
               <Animated.Image
                 style={{ ...s.pinnedImage, transform: [{ translateY: translateYAnim }], opacity: opacityAnim }}
                 resizeMode={'contain'}
-                source={require('@/assets/images/gamescreen/Pin.png')}
+                source={require('@/assets/images/gamescreen/pin-icon.png')}
               />
 
               <Text
@@ -103,7 +103,7 @@ export const PlayerCard = observer(({ card, cardDisplayStatus, onPress, canBePin
                   style={s.playerCardHint_BigCart}
                   contentFit={'contain'}
                   tintColor={'rgba(0,0,0,0.15)'}
-                  source={require('@/assets/images/gamescreen/gleb_hand.webp')}
+                  source={require('@/assets/images/gamescreen/hand-pointer.webp')}
                 />
               ) : (
                 void 0
@@ -123,7 +123,7 @@ export const PlayerCard = observer(({ card, cardDisplayStatus, onPress, canBePin
         source={
           cardDisplayStatus
             ? cardTypeToCardBackgroundMap[card.type]
-            : require('@/assets/images/gamescreen/phobia_bg.webp')
+            : require('@/assets/images/gamescreen/phobia-background.webp')
         }
         contentFit={'contain'}>
         <TouchableWithoutFeedback
@@ -137,7 +137,7 @@ export const PlayerCard = observer(({ card, cardDisplayStatus, onPress, canBePin
             <Animated.Image
               style={{ ...s.pinnedImage, transform: [{ translateY: translateYAnim }], opacity: opacityAnim }}
               resizeMode={'contain'}
-              source={require('@/assets/images/gamescreen/Pin.png')}
+              source={require('@/assets/images/gamescreen/pin-icon.png')}
             />
 
             <Image
@@ -160,7 +160,7 @@ export const PlayerCard = observer(({ card, cardDisplayStatus, onPress, canBePin
                 style={s.playerCardHint}
                 contentFit={'contain'}
                 tintColor={'rgba(0,0,0,0.15)'}
-                source={require('@/assets/images/gamescreen/gleb_hand.webp')}
+                source={require('@/assets/images/gamescreen/hand-pointer.webp')}
               />
             ) : (
               void 0

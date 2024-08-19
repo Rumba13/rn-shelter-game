@@ -1,2 +1,2 @@
-export { gameSettingsStore } from './model/game-settings';
-export { gameStore } from './model/game';
+export { gameSettingsStore } from './model/game-settings-store';
+export { gameStore } from './model/game-store';

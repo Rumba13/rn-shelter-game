@@ -18,19 +18,17 @@ type OptionsType = {
 };
 
 const defaultOptions: OptionsType = {
-  trackImage: require('@/assets/images/gamecreationscreen/picker_line.webp'),
-  pickerImage: require('@/assets/images/gamecreationscreen/picker.webp'),
+  trackImage: require('@/assets/images/gamecreationscreen/picker-track.webp'),
+  pickerImage: require('@/assets/images/gamecreationscreen/picker-icon.webp'),
 };
 
 export const Range = observer(({ onValueChanged, options = defaultOptions, max, min, defaultValue }: PropsType) => {
   const [minimalValue, setMinimalValue] = useState<number>(defaultValue); //Set slider default value through slider.min
 
   useEffect(() => {
-
-
   }, [min]);
 
-  function _onValueChanged(value: number) { //Unset slider default value
+  function _onValueChanged(value: number) { //Unset range default value
     setMinimalValue(min);
     onValueChanged(value);
   }

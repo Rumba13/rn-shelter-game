@@ -6,7 +6,7 @@ class DatabaseStore {
 
   get database() {
     if (!this._database) {
-      throw Error('Database wasn\'t added');
+      throw Error('Database wasn\'t added yet');
     }
 
     return this._database;

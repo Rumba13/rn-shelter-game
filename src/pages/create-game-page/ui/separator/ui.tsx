@@ -8,7 +8,7 @@ export function Separator() {
       <Image
         style={s.separatorDetail}
         contentFit={'contain'}
-        source={require('@/assets/images/gamecreationscreen/razdelenije_premium.webp')}
+        source={require('@/assets/images/gamecreationscreen/separator-premium.webp')}
       />
       <TouchableWithoutFeedback onPress={() => Alert.alert('Я такая толстая!')}>
         <Image style={s.separatorImage} contentFit={'cover'} source={require('@/assets/images/cook.webp')} />

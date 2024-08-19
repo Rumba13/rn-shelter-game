@@ -1,0 +1,1 @@
+export { createGameStore } from './model/create-game';

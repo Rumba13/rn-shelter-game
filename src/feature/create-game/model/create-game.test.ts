@@ -1,7 +1,7 @@
 import { createGameStore } from '@/src/feature/create-game/model/create-game';
 import { GameSettings } from '@/src/shared/lib/types/game-settings';
 import { SexualOrientation } from '@/src/shared/lib/types/sexual-orientation';
-import { sheltersStore } from '@/src/entities/shelter/model/shelters';
+import { sheltersStore } from '@/src/entities/shelter/model/shelters-store';
 import { cardsStore } from '@/src/entities/characteristic-card/model/cards-store';
 import { Card } from '@/src/shared/lib/types/card';
 import { apocalypsesStore } from '@/src/entities/apocalypse/model/apocalypses-store';

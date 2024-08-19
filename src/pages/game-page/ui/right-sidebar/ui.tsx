@@ -4,7 +4,7 @@ import { Image, ImageBackground } from 'expo-image';
 import { Player } from '@/src/shared/lib/types/player';
 import { ScratchCard } from '@/src/shared/ui/scratch-card/ui';
 //@ts-ignore
-import ScratchImage from '@/assets/images/gamescreen/skresti.webp';
+import ScratchImage from '@/assets/images/gamescreen/scratch-card-background.webp';
 import { useImage } from '@shopify/react-native-skia';
 import { gameSettingsStore } from '@/src/entities/game';
 import Animated, {
@@ -76,13 +76,13 @@ export function RightSidebar({
         <ImageBackground
           style={{ width: '100%', height: '100%' }}
           contentFit={'contain'}
-          source={require('@/assets/images/gamescreen/right_final.webp')}>
+          source={require('@/assets/images/gamescreen/sidebar-right.webp')}>
           <TouchableWithoutFeedback onPress={() => setIsOpened(!isOpened)}>
             <View style={s.rightSideBarIconWrapper}>
               <Image
                 style={s.rightSideBarIcon}
                 contentFit={'contain'}
-                source={require('@/assets/images/gamescreen/end_icon.webp')}
+                source={require('@/assets/images/gamescreen/end-icon.webp')}
               />
             </View>
           </TouchableWithoutFeedback>
@@ -98,12 +98,12 @@ export function RightSidebar({
             </ScrollView>
             <View style={s.endingWrapper}>
               <Image
-                source={require('@/assets/images/gamescreen/koncovka.webp')}
+                source={require('@/assets/images/gamescreen/ending-icon.webp')}
                 contentFit={'contain'}
                 style={s.endingImage}
               />
               <ScratchCard style={s.ending} scratchImage={scratchImage}>
-                <ImageBackground contentFit={'contain'} source={require('@/assets/images/gamescreen/text_frame.webp')}>
+                <ImageBackground contentFit={'contain'} source={require('@/assets/images/gamescreen/text-box-small-background.webp')}>
                   <View style={{ height: '100%' }}>
                     <ScrollView style={s.endingDescriptionWrapper}>
                       {gameSettingsStore.settings.lotteryTicketMode ? (

@@ -30,8 +30,8 @@ export function SelectPlayerPage({ navigation }: PropsType) {
     }, 200);
   }, []);
 
-  const showTicket = () => (translateYAnim.value = ticketShowedAtPx);
-  const hideTicket = () => (translateYAnim.value = ticketHiddenAtPx);
+  const showTicket = () => translateYAnim.value = ticketShowedAtPx;
+  const hideTicket = () => translateYAnim.value = ticketHiddenAtPx;
 
   const animatedStyles = useAnimatedStyle(() => ({
     transform: [
@@ -56,7 +56,7 @@ export function SelectPlayerPage({ navigation }: PropsType) {
             <Image
               style={s.separator}
               contentFit={'contain'}
-              source={require('@/assets/images/playerselectionscreen/main/decal_vibor_igroka.webp')}
+              source={require('@/assets/images/playerselectionscreen/main/detail-select-player.webp')}
             />
           </View>
           <Text style={s.selectPlayerPageSubTitle} adjustsFontSizeToFit>
@@ -71,7 +71,7 @@ export function SelectPlayerPage({ navigation }: PropsType) {
         <Image
           contentFit={'cover'}
           style={s.ticket}
-          source={require('@/assets/images/playerselectionscreen/ticket/ticket(gay_people).webp')}
+          source={require('@/assets/images/playerselectionscreen/ticket/ticket.webp')}
         />
         <View style={s.QRCodeWrapper}>
           {isPageFullLoadingStarted && (
@@ -82,8 +82,8 @@ export function SelectPlayerPage({ navigation }: PropsType) {
         <ImageButton
           width={100}
           style={s.ticketButton}
-          buttonImage={require('@/assets/images/playerselectionscreen/ticket/arrow_ticket.webp')}
-          shadowImage={require('@/assets/images/playerselectionscreen/ticket/arrow_ticket(shadow).webp')}
+          buttonImage={require('@/assets/images/playerselectionscreen/ticket/arrow.webp')}
+          shadowImage={require('@/assets/images/playerselectionscreen/ticket/arrow-shadow.webp')}
           onPress={() => {
             setIsTicketShowed(!isTicketShowed);
             isTicketShowed ? hideTicket() : showTicket();

@@ -22,16 +22,15 @@ export function AppLayout({ children }: PropsType) {
   });
 
   databaseStore.database = useSQLiteContext();
+
   useEffect(() => {
     setTimeout(() => {
-      StatusBar.setTranslucent(true); //TODO find component that overriding the properties
+      StatusBar.setTranslucent(true); //TODO find component that overriding this properties
       StatusBar.setBackgroundColor('#c3b5a8');
     }, 100);
   }, [fontsLoaded, fontsError]);
 
-  if (!fontsLoaded && !fontsError) {
-    return;
-  }
+  if (!fontsLoaded && !fontsError) return;
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -61,6 +60,3 @@ const s = StyleSheet.create({
     padding: 0,
   },
 });
-
-//borderWidth:3,
-//borderColor: "#000000",

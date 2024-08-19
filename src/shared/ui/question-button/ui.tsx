@@ -13,8 +13,8 @@ export function QuestionButton({ onPress, height, width }: PropsType) {
   return (
     <ImageButton
       style={s.optionHelpButton}
-      buttonImage={require('@/assets/images/core/vopros_icon.webp')}
-      shadowImage={require('@/assets/images/gameconnectionscreen/info_icon_shadow.webp')}
+      buttonImage={require('@/assets/images/core/question-icon.webp')}
+      shadowImage={require('@/assets/images/gameconnectionscreen/info-icon-shadow.webp')}
       width={width}
       minHeight={height}
       onPress={onPress}

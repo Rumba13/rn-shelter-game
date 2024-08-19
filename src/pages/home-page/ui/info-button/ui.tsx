@@ -2,9 +2,9 @@ import { TouchableWithoutFeedback, View, Text, ScrollView, TouchableOpacity, Sty
 import { OverlayModal } from '@/src/shared/ui/overlay-modal/ui';
 import { ImageButton } from '@/src/shared/ui/image-button/ui';
 import { useState } from 'react';
-import { createSeedStore } from '@/src/feature/create-seed/model/create-seed';
 import { adaptiveValue } from '@/src/shared/ui/adaptive-value/adaptive-value';
 import { Image, ImageBackground } from 'expo-image';
+import { createSeedStore } from '@/src/entities/seed/model/seed-store';
 
 //TODO separate info button and modal
 export function InfoButtonAndModal() {
@@ -21,13 +21,13 @@ export function InfoButtonAndModal() {
       </TouchableWithoutFeedback>
       <OverlayModal isModalOpened={isModalOpened} setIsModalOpened={setIsModalOpened}>
         <ImageBackground
-          source={require('../../../../../assets/images/popup/additional_info_background.webp')}
+          source={require('../../../../../assets/images/popup/additional-info-background.webp')}
           contentFit={'contain'}>
           <View style={s.modalContent}>
             <ImageButton
               style={s.closeButton}
               buttonImage={require('../../../../../assets/images/popup/close.webp')}
-              shadowImage={require('../../../../../assets/images/popup/close_shadow.webp')}
+              shadowImage={require('../../../../../assets/images/popup/close-shadow.webp')}
               options={{ xOffset: -3, yOffset: -3, xOffSetOnPress: -1, yOffsetOnPress: -1 }}
               onPress={() => setIsModalOpened(false)}
             />

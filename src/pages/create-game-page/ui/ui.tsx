@@ -5,13 +5,12 @@ import { Header } from './header/ui';
 import { GameOptionCheckbox } from '@/src/pages/create-game-page/ui/game-option-checkbox/ui';
 import { GameOptionSelect } from '@/src/pages/create-game-page/ui/game-option-select/ui';
 import { SexualOrientation } from '@/src/shared/lib/types/sexual-orientation';
-import { GameSettingsStore } from '@/src/entities/game/model/game-settings';
+import { GameSettingsStore } from '@/src/entities/game/model/game-settings-store';
 import { GameOptionRange } from '@/src/pages/create-game-page/ui/game-option-range/ui';
 import { difficultyToTitleMap } from '@/src/pages/create-game-page/ui/difficulty-to-title-map';
 import { observer } from 'mobx-react';
 import {
   sexualOrientationToTitleMap,
-  sexualOrientationValueToTitle,
 } from '@/src/pages/create-game-page/ui/sexual-orientation-to-title-map';
 import {
   characterBalanceMap,
@@ -34,12 +33,12 @@ import {
   characteristicBalanceToTitleMap,
 } from '@/src/pages/create-game-page/ui/characteristic-balance-to-title-map';
 import { createGameStore } from '@/src/feature/create-game/model/create-game';
-import { gameStore } from '@/src/entities/game/model/game';
+import { gameStore } from '@/src/entities/game/model/game-store';
 import { OverlayModal } from '@/src/shared/ui/overlay-modal/ui';
 import { Image } from 'expo-image';
 import { adaptiveValue } from '@/src/shared/ui/adaptive-value/adaptive-value';
 import { apocalypsesStore } from '@/src/entities/apocalypse/model/apocalypses-store';
-import { sheltersStore } from '@/src/entities/shelter/model/shelters';
+import { sheltersStore } from '@/src/entities/shelter/model/shelters-store';
 
 //TODO refactoring
 type PropsType = {
@@ -68,11 +67,11 @@ export const CreateGamePage = observer(({ navigation, gameSettingsStore }: Props
       <Image
         style={s.pageTitle}
         contentFit={'contain'}
-        source={require('../../../../assets/images/gamecreationscreen/create.webp')}
+        source={require('../../../../assets/images/gamecreationscreen/create-icon.webp')}
       />
       <View style={{ width: '80%', marginHorizontal: 'auto' }}>
         <ImageBackground
-          source={require('../../../../assets/images/gamecreationscreen/frame_back.webp')}
+          source={require('../../../../assets/images/gamecreationscreen/frame-background.webp')}
           resizeMode={'contain'}
           style={s.mainContentBackground}>
           <View style={s.mainContentWrapper}>

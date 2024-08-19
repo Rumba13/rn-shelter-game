@@ -1,7 +1,7 @@
 import { ScrollView, StyleSheet, Text, View, ViewStyle } from 'react-native';
 import { PlayerCard } from '@/src/pages/game-page/ui/player-card/ui';
 import { Player } from '@/src/shared/lib/types/player';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { CardsOpenedState } from '@/src/pages/game-page/model/cards-opened-state';
 import { observer } from 'mobx-react';
 import { CardDisplayStatus } from '@/src/shared/lib/types/card-display-status';
@@ -26,9 +26,13 @@ const animationDuration = 110;
 
 export const PlayerDetails = observer(({ player, playerNumber, style, isCurrentPlayer, isObserver }: PropsType) => {
   const allCardsDisplayStatus = isObserver || isCurrentPlayer ? CardDisplayStatus.Showed : CardDisplayStatus.Hidden;
-  const [cardsOpenedState] = useState(new CardsOpenedState(allCardsDisplayStatus));
+  let [cardsOpenedState] = useState(new CardsOpenedState(allCardsDisplayStatus));
   const kickOutImageTranslateYAnim = useSharedValue(player.isKicked ? 0 : kickOutImageHiddenAtPx);
   const kickOutImageScaleAnim = useSharedValue(player.isKicked ? 1 : kickOutImageHiddenScale);
+
+  useEffect(() => {
+
+  }, []);
 
   const showKickOutImage = () => {
     kickOutImageTranslateYAnim.value = kickOutImageShowedAtPx;
@@ -55,12 +59,16 @@ export const PlayerDetails = observer(({ player, playerNumber, style, isCurrentP
     ],
   }));
 
+  useEffect(() => {
+    console.log('rerender');
+  }, []);
+
   return (
-    <View style={{ ...s.mainContentWrapper, ...style }}>
+    <View style={[s.mainContentWrapper, style]}>
       <ImageBackground
         style={s.mainContentBackground}
         contentFit={'contain'}
-        source={require('@/assets/images/gamescreen/igra.webp')}>
+        source={require('@/assets/images/gamescreen/game-icon.webp')}>
         <View style={s.mainContent}>
           <Text ellipsizeMode={'head'} numberOfLines={1} style={s.mainContentTitle}>
             Игрок {playerNumber}
@@ -72,13 +80,13 @@ export const PlayerDetails = observer(({ player, playerNumber, style, isCurrentP
 
           <Animated.Image
             style={[s.kickOutImage, animatedStyles]}
-            source={require('@/assets/images/gamescreen/negoden.webp')}
+            source={require('@/assets/images/gamescreen/kick-out-icon.webp')}
             resizeMode={'contain'}
           />
 
           <View style={s.playerCardsWrapper}>
             <ImageBackground
-              source={require('@/assets/images/gamescreen/text_box.webp')}
+              source={require('@/assets/images/gamescreen/text-box-background.webp')}
               contentFit={'contain'}
               style={s.playerCardsBackground}>
               <ScrollView style={s.playerCards} showsVerticalScrollIndicator={false}>

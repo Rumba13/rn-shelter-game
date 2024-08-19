@@ -29,7 +29,6 @@ type ButtonOptionsType = {
   xOffset: number;
   yOffset: number;
 }
-export { PropsType as ImageButtonProps };
 
 const defaultOptions: ButtonOptionsType = {
   xOffset: -5,
@@ -54,11 +53,11 @@ export function ImageButton({
   const buttonTranslateXAnim = useSharedValue(options.xOffset);
   const buttonTranslateYAnim = useSharedValue(options.yOffset);
 
-  const unPressButton = () => {
+  const animateButtonUnpress = () => {
     buttonTranslateXAnim.value = options.xOffset;
     buttonTranslateYAnim.value = options.yOffset;
   };
-  const pressButton = () => {
+  const animateButtonPress = () => {
     buttonTranslateXAnim.value = options.xOffSetOnPress;
     buttonTranslateYAnim.value = options.yOffsetOnPress;
   };
@@ -91,8 +90,8 @@ export function ImageButton({
         </Animated.View>
       </ImageBackground>
 
-      <TouchableWithoutFeedback style={s.buttonWrapper} onPress={onPress} onPressIn={pressButton}
-                                onPressOut={unPressButton}>
+      <TouchableWithoutFeedback style={s.buttonWrapper} onPress={onPress} onPressIn={animateButtonPress}
+                                onPressOut={animateButtonUnpress}>
         <View style={s.button}></View>
       </TouchableWithoutFeedback>
     </Animated.View>

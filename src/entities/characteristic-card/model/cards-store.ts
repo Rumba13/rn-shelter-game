@@ -25,6 +25,7 @@ class CardsStore {
   }
 
   public getCardsByType(cardType: CardType): Card[] {
+
     return databaseStore.database.getAllSync(`SELECT * FROM cards WHERE type = '${cardType}';`);
   }
 

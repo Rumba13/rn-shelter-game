@@ -14,20 +14,20 @@ export const KickOutButton = observer(({ player, onPress }: PropsType) => {
     <View style={s.kickOutButtonWrapper}>
       <TouchableWithoutFeedback
         onPress={() => {
-          gameStore.togglePlayerKickOut(player.number);
+          gameStore.toggleIsPlayerKickedOut(player.number);
           onPress();
         }}>
         {player.isKicked ? (
           <Image
             style={s.kickOutButton}
             contentFit={'contain'}
-            source={require('@/assets/images/gamescreen/vernutj.webp')}
+            source={require('@/assets/images/gamescreen/return-icon.webp')}
           />
         ) : (
           <Image
             style={s.kickOutButton}
             contentFit={'contain'}
-            source={require('@/assets/images/gamescreen/vignatj.webp')}
+            source={require('@/assets/images/gamescreen/kick-out.webp')}
           />
         )}
       </TouchableWithoutFeedback>

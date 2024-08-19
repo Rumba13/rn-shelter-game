@@ -1,4 +1,4 @@
-import { sheltersStore } from '@/src/entities/shelter/model/shelters';
+import { sheltersStore } from '@/src/entities/shelter/model/shelters-store';
 import { GameConnectionData } from '@/src/shared/lib/types/game-connection-data';
 import { GameType } from '@/src/shared/lib/types/game';
 import { Player } from '@/src/shared/lib/types/player';
@@ -9,10 +9,7 @@ import { endings } from '@/src/entities/ending';
 import { apocalypsesStore } from '@/src/entities/apocalypse/model/apocalypses-store';
 import { professionsStore } from '@/src/entities/profession/model/professions';
 
-class ConnectToGameStore {
-  constructor() {
-  }
-
+class ConnectToGame {
   public connectToGame(gameCode: string, navigation: any) {
     const gameLoadingData: GameConnectionData = JSON.parse(gameCode);
     const shelter = sheltersStore.getShelterById(gameLoadingData.shelterId);
@@ -40,16 +37,15 @@ class ConnectToGameStore {
       };
     });
 
-    const game: GameType = {
+    gameStore.game = {
       shelter,
       apocalypse,
       players: players,
       ending: ending,
       currentPlayerNumber: -1,
     };
-    gameStore.game = game;
     navigation.navigate('select-player-page');
   }
 }
 
-export const connectToGameStore = new ConnectToGameStore();
+export const connectToGameStore = new ConnectToGame();

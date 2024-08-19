@@ -5,8 +5,6 @@ import {
   Text,
   TouchableWithoutFeedback,
   ScrollView,
-  Alert,
-  PixelRatio,
 } from 'react-native';
 import { Apocalypse } from '@/src/shared/lib/types/apocalypse';
 import { Shelter } from '@/src/shared/lib/types/shelter';
@@ -15,7 +13,6 @@ import Animated, {
   useAnimatedStyle,
   useSharedValue,
   withTiming,
-  Easing,
   EasingFunction,
   EasingFunctionFactory,
 } from 'react-native-reanimated';
@@ -82,7 +79,7 @@ export function LeftSidebar({
       <ImageBackground
         style={{ width: '100%', height: '100%' }}
         contentFit={'contain'}
-        source={require('@/assets/images/gamescreen/left_final.webp')}>
+        source={require('@/assets/images/gamescreen/sidebar-left.webp')}>
         <View style={s.leftSideBar}>
           <View
             style={{
@@ -97,10 +94,10 @@ export function LeftSidebar({
               <Image
                 style={s.apocalypseMainImage}
                 contentFit={'contain'}
-                source={require('@/assets/images/gamescreen/apok.webp')}
+                source={require('@/assets/images/gamescreen/apocalypse-icon.webp')}
               />
 
-              <ImageBackground contentFit={'contain'} source={require('@/assets/images/gamescreen/text_frame.webp')}>
+              <ImageBackground contentFit={'contain'} source={require('@/assets/images/gamescreen/text-box-small-background.webp')}>
                 <View style={{ width: '100%', aspectRatio: 441 / 343 }}>
                   <ScrollView style={s.apocalypseDescriptionWrapper}>
                     <Text style={s.apocalypseDescription}>{apocalypse.description}</Text>
@@ -113,10 +110,10 @@ export function LeftSidebar({
               <Image
                 style={s.shelterMainImage}
                 contentFit={'contain'}
-                source={require('@/assets/images/gamescreen/bunker.webp')}
+                source={require('@/assets/images/gamescreen/bunker-icon.webp')}
               />
 
-              <ImageBackground contentFit={'contain'} source={require('@/assets/images/gamescreen/shelter_info.webp')}>
+              <ImageBackground contentFit={'contain'} source={require('@/assets/images/gamescreen/shelter-info.webp')}>
                 <View style={s.shelterInfo}>
                   <Text style={s.shelterName} adjustsFontSizeToFit>
                     {shelter.name}
@@ -136,7 +133,7 @@ export function LeftSidebar({
               <ImageBackground
                 style={{ marginTop: 20 }}
                 contentFit={'contain'}
-                source={require('@/assets/images/gamescreen/text_frame.webp')}>
+                source={require('@/assets/images/gamescreen/text-box-small-background.webp')}>
                 <View style={{ width: '100%', aspectRatio: 441 / 343 }}>
                   <ScrollView style={s.shelterDescriptionWrapper}>
                     <Text style={s.shelterDescription}>
@@ -160,7 +157,7 @@ export function LeftSidebar({
               <Image
                 style={s.leftSideBarDetail}
                 contentFit={'contain'}
-                source={require('@/assets/images/gamescreen/apoc_bunker_icon.webp')}
+                source={require('@/assets/images/gamescreen/apocalypse-bunker-icon.webp')}
               />
             </View>
           </TouchableWithoutFeedback>
