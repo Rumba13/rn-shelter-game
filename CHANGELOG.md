@@ -1,3 +1,7 @@
+## 1.2.1 (August 22, 2024)
+- Move all cards, profession, shelters, apocalypses to database
+- Fix lagging navigation between screens
+
 ## 1.2.0 (August 1, 2024)
 - Change images format to `.webp`
 - Replace react-native images with `expo-image`

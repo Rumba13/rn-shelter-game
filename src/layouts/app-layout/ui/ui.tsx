@@ -25,7 +25,7 @@ export function AppLayout({ children }: PropsType) {
 
   useEffect(() => {
     setTimeout(() => {
-      StatusBar.setTranslucent(true); //TODO find component that overriding this properties
+      StatusBar.setTranslucent(true); //TODO find component that overriding this property
       StatusBar.setBackgroundColor('#c3b5a8');
     }, 100);
   }, [fontsLoaded, fontsError]);

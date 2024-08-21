@@ -18,7 +18,7 @@ class GameStore {
   }
 
   public toggleIsPlayerKickedOut(playerId: number) {
-    const playerToToggleKickOut = game.players.find(player => player.number === playerId);
+    const playerToToggleKickOut = this.game.players.find(player => player.number === playerId);
 
     if (!playerToToggleKickOut) {
       throw new Error('togglePlayerKickOut: Player is undefined');

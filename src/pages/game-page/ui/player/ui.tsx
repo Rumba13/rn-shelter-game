@@ -60,7 +60,6 @@ export const PlayerDetails = observer(({ player, playerNumber, style, isCurrentP
   }));
 
   useEffect(() => {
-    console.log('rerender');
   }, []);
 
   return (
@@ -287,7 +286,8 @@ const s = StyleSheet.create({
     width: '100%',
     fontFamily: 'RobotoSlabSemiBold',
     textAlign: 'center',
-    height: 45,
+    height: 65,
+    marginBottom: -20,
     fontSize: adaptiveValue(20),
     marginTop: '2%',
   },

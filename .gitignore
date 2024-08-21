@@ -13,6 +13,7 @@ npm-debug.*
 web-build/
 android
 temp/
+todo.md/
 # macOS
 .DS_Store
 

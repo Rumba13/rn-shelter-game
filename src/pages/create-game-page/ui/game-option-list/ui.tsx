@@ -7,7 +7,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import { StyleSheet } from 'react-native';
 import { adaptiveValue } from '@/src/shared/ui/adaptive-value/adaptive-value';
 
-type PropsType<ItemsType> = {
+type PropsType<ItemsType, SelectedItemsType> = {
   title: string;
   description: string;
   renderSelectedText: (props: SectionedMultiSelectProps<ItemsType>) => void;
@@ -17,11 +17,11 @@ type PropsType<ItemsType> = {
   selectText: string;
   searchPlaceholderText: string;
   subKey?: string;
-  onValueChange: (selectedItems: string[]) => void;
-  selectedByDefault?: string[];
+  onValueChange: (selectedItems: SelectedItemsType[]) => void;
+  selectedByDefault?: SelectedItemsType[];
 };
 //TODO refactoring
-export function GameOptionList<ItemsType>({
+export function GameOptionList<ItemsType, SelectedItemsType = string>({
                                             title,
                                             description,
                                             renderSelectedText,
@@ -33,20 +33,20 @@ export function GameOptionList<ItemsType>({
                                             onValueChange,
                                             selectedByDefault = [],
                                             subKey,
-                                          }: PropsType<ItemsType>) {
-  const [selectedItems, setSelectedItems] = useState<string[]>(selectedByDefault);
+                                          }: PropsType<ItemsType,SelectedItemsType>) {
+  const [selectedItems, setSelectedItems] = useState<SelectedItemsType[]>(selectedByDefault);
 
   useEffect(() => {
     onValueChange(selectedByDefault);
   }, []);
 
-  function sortOffCategoriesNames(_categoriesNames: string[]) {
-    const categoriesNames: string[] = [];
+  function sortOffCategoriesNames(_categoriesNames: SelectedItemsType[]) {
+    const categoriesNames: SelectedItemsType[] = [];
     _categoriesNames.forEach(listItemName => {
       if (
         items.find(item => {
           //@ts-ignore
-          return item.children.find(shelter => shelter.name === listItemName);
+          return item.children.find(shelter => shelter[uniqueKey] === listItemName);
         })
       )
         categoriesNames.push(listItemName);
@@ -63,6 +63,7 @@ export function GameOptionList<ItemsType>({
         IconRenderer={Icon}
         uniqueKey={uniqueKey}
         displayKey={displayKey}
+        subKey={subKey}
         selectText={selectText}
         alwaysShowSelectText={false}
         renderSelectText={renderSelectedText}
@@ -73,7 +74,6 @@ export function GameOptionList<ItemsType>({
         highlightChildren
         expandDropDowns
         showDropDowns
-        subKey={subKey}
         showChips={false}
         confirmText={'Окей'}
         searchPlaceholderText={searchPlaceholderText}

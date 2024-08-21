@@ -39,6 +39,7 @@ import { Image } from 'expo-image';
 import { adaptiveValue } from '@/src/shared/ui/adaptive-value/adaptive-value';
 import { apocalypsesStore } from '@/src/entities/apocalypse/model/apocalypses-store';
 import { sheltersStore } from '@/src/entities/shelter/model/shelters-store';
+import { databaseStore } from '@/src/shared/model/database-store';
 
 //TODO refactoring
 type PropsType = {
@@ -50,7 +51,7 @@ export const CreateGamePage = observer(({ navigation, gameSettingsStore }: Props
   const [isErrorModalOpened, setIsErrorModalOpened] = useState<boolean>(false);
   const [errorDescription, setErrorDescription] = useState<string | null>(null);
   const [isPageFullLoadingStarted, setIsPageFullLoadingStarted] = useState<boolean>(false);
-  const selectedByDefaultCards = useMemo(() => cardsStore.getAllCards().map(card => card.name), [cardsStore]);
+  const selectedByDefaultCards = useMemo(() => cardsStore.getAllCards().map(card => card.id), [cardsStore]);
   const cardsStandartEdition = useMemo(() => cardsStore.getCardsByEdition('standart'), []);
   const cardsBorovEdition = useMemo(() => cardsStore.getCardsByEdition('borov'), []);
 
@@ -202,22 +203,21 @@ export const CreateGamePage = observer(({ navigation, gameSettingsStore }: Props
                     }
                     subKey={'children'}
                   />
-                  <GameOptionList<CharacteristicCardsList>
+                  <GameOptionList<CharacteristicCardsList, number>
                     title={'Список используемых карточек'}
                     description={'Выберите из списка, с какими карточками вы хотите играть'}
                     renderSelectedText={renderCharacteristicCardSelectedText}
                     items={[
-                      { name: 'Карточки Стандартного Издания', children: cardsStandartEdition },
-                      { name: 'Карточки Издания "Боров"', children: cardsBorovEdition },
+                      { id: 'Карточки Стандартного Издания', children: cardsStandartEdition },
+                      { id: 'Карточки Издания "Боров"', children: cardsBorovEdition },
                     ]}
-                    uniqueKey={'name'}
+                    uniqueKey={'id'}
                     displayKey={'name'}
                     selectText={'Выбрать карточки'}
                     subKey={'children'}
                     selectedByDefault={selectedByDefaultCards}
                     searchPlaceholderText={'Искать карточки'}
-                    onValueChange={characteristicCardsNames =>
-                      gameSettingsStore.setSettings(options => options.cardsKit = characteristicCardsNames.map(cardsStore.getCardByName))
+                    onValueChange={characteristicCardsIds => gameSettingsStore.setSettings(options => options.cardsKit = characteristicCardsIds.map(cardsStore.getCardById))
                     }
                   />
                 </>}

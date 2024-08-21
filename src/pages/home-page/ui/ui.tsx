@@ -45,7 +45,7 @@ export const HomePage = ({ navigation }: PropsType) => {
 
               <ImageButton
                 style={{ marginTop: 5 }}
-                buttonImage={require('../../../../assets/images/mainscreen/premium_button3.webp')}
+                buttonImage={require('../../../../assets/images/mainscreen/premium_button2.png')}
                 shadowImage={require('../../../../assets/images/mainscreen/button_shadow_2.webp')}
                 onPress={() => Alert.alert('Купи мне трюфель!')}
               />
